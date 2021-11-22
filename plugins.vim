@@ -6,7 +6,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'ghifarit53/tokyonight-vim'
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'ryanoasis/vim-devicons'
-	Plug 'ycm-core/YouCompleteMe'
 	Plug 'bling/vim-airline'
 	Plug 'gleam-lang/gleam.vim'
 	Plug 'puremourning/vimspector'
@@ -20,5 +19,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'kyazdani42/nvim-web-devicons'
 	Plug 'akinsho/toggleterm.nvim'
 	Plug 'preservim/tagbar'
-
+	Plug 'tomasiser/vim-code-dark'
+	Plug 'kien/ctrlp.vim'
+	Plug 'kyazdani42/nvim-web-devicons'
+	Plug 'pbondoer/vim-42header'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'luochen1990/rainbow'
+	Plug 'lukas-reineke/indent-blankline.nvim'
+ 
 call plug#end()
