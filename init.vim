@@ -8,8 +8,8 @@ set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
-set visualbell                  "No sounds
+" set gcr=a:blinkon0              "Disable cursor blink
+" set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 set encoding=UTF-8
 
@@ -38,6 +38,8 @@ nnoremap <PageDown> :m .+<cr>==
 nnoremap <PageUp> :m .-2<cr>==
 nnoremap <Leader>tf :Telescope find_files<cr>
 nmap <F8> :TagbarToggle<cr>
+nnoremap <Leader>rn :set relativenumber <cr>
+
 " =============== Vundle Initialization ===============
 " This loads all the plugins specified in ~/.vim/vundles.vim
 " Use Vundle plugin to manage all other plugins
@@ -135,24 +137,33 @@ nnoremap <Leader>rc :call vimspector#Reset()<cr>
 nnoremap <Leader>dc :call vimspector#Continue()<cr>
 nnoremap <Leader>dw :call vimspector#OmniFuncWatch()<cr>
 nnoremap <Leader>re :call vimspector#Restart()<cr>
+nnoremap <Leader>db :packadd termdebug
+nnoremap <Leader>Te :Termdebug
 nnoremap <Leader>u  :VimspectorUpdate<cr>
 nnoremap <Leader>c :!gcc -Wall -Werror -Wextra -g <C-r>% -o test
 nnoremap <Leader>ca :!gcc -Wall -Werror -Wextra -g <C-r>% libft.a -o test
+nnoremap <Leader>cd :!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test
 
 "================ Font ==========================
 let g:airline_powerline_fonts = 1
 " let g:airline_left_sep = " ", "\uE0CE"
-" let g:airline_right_sep = "\uE0D2"
- set t_Co=256
+let g:airline_left_sep = "\uE0C6 "
+let g:airline_right_sep = "\uE0D1"
+set clipboard=unnamed
+set t_Co=256
 
 " ================= Airline =====================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#left_sep = ("\uE0CE  ") "' '
+let g:airline#extensions#tabline#left_sep = ("\uE0B1  ") "' '
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#left_alt_sep = ("\uE0CE")
+let g:airline#extensions#tabline#left_alt_sep = ("\uE0B0")
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:vim_debug_disable_mappings = 1
+let g:airline_theme = 'codedark'
+let g:rainbow_active = 1
+let g:termdebug_popup = 0
+let g:termdebug_wide = 163
 
 " ========================== Cursor config ========================
 let &t_SI = "\<esc>[5 q"  " blinking I-beam in insert mode
