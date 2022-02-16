@@ -42,9 +42,6 @@ vim.cmd([[
     nnoremap <Leader>db :packadd termdebug
     nnoremap <Leader>Te :Termdebug test
     nnoremap <Leader>u  :VimspectorUpdate<cr>
-    nnoremap <Leader>c :!gcc -Wall -Werror -Wextra -g <C-r>% -o test
-    nnoremap <Leader>ca :!gcc -Wall -Werror -Wextra -g <C-r>% libft.a -o test
-    nnoremap <Leader>cd :!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test
 
     "let g:vimspector_enable_mappings = 'HUMAN'"
     "let g:vimspector+enable_mappings = 'VISUAL_STUDIO'"
@@ -66,7 +63,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.telescope.defaults.mappings = {
 --   -- for input mode
 --   i = {
---     ["<C-j>"] = actions.move_selection_next,
+--   j  ["<C-j>"] = actions.move_selection_next,
 --     ["<C-k>"] = actions.move_selection_previous,
 --     ["<C-n>"] = actions.cycle_history_next,
 --     ["<C-p>"] = actions.cycle_history_prev,
@@ -80,15 +77,20 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["T"] = {
+name = "Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+}
+
+lvim.builtin.which_key.mappings["C"] = {
+    name = "Compiling",
+    c = {":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test", "D flag"},
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
