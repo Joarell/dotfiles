@@ -47,6 +47,8 @@ vim.cmd([[
     "let g:vimspector+enable_mappings = 'VISUAL_STUDIO'"
     "let g:maximizer_set_default_mapping = 1"
     "let g:codedark_term256 = 1"
+    "let g:termdebug_wide = 100"
+    "let g:termdebug_popup = 0"
 ]])
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -90,6 +92,8 @@ name = "Trouble",
 lvim.builtin.which_key.mappings["C"] = {
     name = "Compiling",
     c = {":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test", "D flag"},
+    p = {"<cmd>:packadd termdebug<cr>", "adding termdebug"},
+    t = {":Termdebug test", "Termdebug"},
 }
 
 -- TODO: User Config for predefined plugins
