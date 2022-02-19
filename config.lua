@@ -1,3 +1,4 @@
+--Testando
 --[[
 lvim is the global options object
 
@@ -11,9 +12,9 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "base16-helios"
+-- lvim.colorscheme = "base16-helios"
 -- lvim.colorscheme = "codedark"
---lvim.colorscheme = "onedarker"
+lvim.colorscheme = "onedarker"
 
 vim.cmd([[
     set relativenumber
@@ -33,18 +34,12 @@ vim.cmd([[
     set shiftwidth=4
     set softtabstop=4
     set tabstop=4
-    "so ~/.yadr/vim/settings.vim"
-
-    nnoremap <Leader>rc :call vimspector#Reset()<cr>
-    nnoremap <Leader>dc :call vimspector#Continue()<cr>
-    nnoremap <Leader>dw :call vimspector#OmniFuncWatch()<cr>
-    nnoremap <Leader>re :call vimspector#Restart()<cr>
     nnoremap <Leader>db :packadd termdebug
     nnoremap <Leader>Te :Termdebug test
     nnoremap <Leader>u  :VimspectorUpdate<cr>
 
     "let g:vimspector_enable_mappings = 'HUMAN'"
-    "let g:vimspector+enable_mappings = 'VISUAL_STUDIO'"
+    "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'"
     "let g:maximizer_set_default_mapping = 1"
     "let g:codedark_term256 = 1"
     "let g:termdebug_wide = 100"
@@ -54,6 +49,13 @@ vim.cmd([[
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<F5>"] = ":call vimspector#Continue()<cr>"
+lvim.keys.normal_mode["<F4>"] = ":call vimspector#Reset()<cr>"
+lvim.keys.normal_mode["<F3>"] = ":call vimspector#Restart()<cr>"
+lvim.keys.normal_mode["<F2>"] = ":call vimspector#ClearLineBreakpoint()<cr>"
+lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
+lvim.keys.normal_mode["<F7>"] = ":call vimspector#StepOver()<cr>"
+lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepInto()<cr>"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -64,7 +66,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- local _, actions = pcall(require, "telescope.actions")
 -- lvim.builtin.telescope.defaults.mappings = {
 --   -- for input mode
---   i = {
+    --   i = {
 --   j  ["<C-j>"] = actions.move_selection_next,
 --     ["<C-k>"] = actions.move_selection_previous,
 --     ["<C-n>"] = actions.cycle_history_next,
@@ -89,11 +91,12 @@ name = "Trouble",
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
 
-lvim.builtin.which_key.mappings["C"] = {
-    name = "Compiling",
+lvim.builtin.which_key.mappings["D"] = {
+    name = "Debugin",
     c = {":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test", "D flag"},
     p = {"<cmd>:packadd termdebug<cr>", "adding termdebug"},
     t = {":Termdebug test", "Termdebug"},
+    P = {"<cmd> :call vimspector#Restart()<cr>", "Debugin Python"},
 }
 
 -- TODO: User Config for predefined plugins
@@ -194,6 +197,7 @@ lvim.builtin.treesitter.highlight.enabled = true
      {"puremourning/vimspector"},
      {"chriskempson/base16-vim"},
      {"tomtom/tcomment_vim"},
+     {"tpope/vim-fugitive"},
  }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
