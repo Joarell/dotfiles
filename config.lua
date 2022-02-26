@@ -7,20 +7,21 @@ filled in as strings with either
 a global executable or a path to
 an executable
 ]]
+--File path
+-- ~/.local/share/lunarvim/lvim/lua/lvim/config/settings.lua
+--~/.local/share/lunarvim/lvim/lua/lvim/plugins.lua
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
+vim.opt.showtabline = 2
 -- lvim.colorscheme = "base16-helios"
--- lvim.colorscheme = "codedark"
+-- lvim.colorscheme = "darkplus"
 lvim.colorscheme = "onedarker"
 
+
 vim.cmd([[
-    set relativenumber
-    set encoding=UTF-8
-    set t_Co=256
-    set t_ut=
     nnoremap <Leader>h :Stdheader<cr>
     "<silent><F3> :MaximizerToggle<cr>"
     nnoremap <Leader>m :mksession!
@@ -29,13 +30,10 @@ vim.cmd([[
     nnoremap <PageDown> :m .+<cr>==
     nnoremap <PageUp> :m .-2<cr>==
     nmap <F8> :TagbarToggle<cr>"
-    nnoremap <Leader>rn :set relativenumber <cr>
 
     set shiftwidth=4
     set softtabstop=4
     set tabstop=4
-    nnoremap <Leader>db :packadd termdebug
-    nnoremap <Leader>Te :Termdebug test
     nnoremap <Leader>u  :VimspectorUpdate<cr>
 
     "let g:vimspector_enable_mappings = 'HUMAN'"
@@ -81,7 +79,7 @@ lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepInto()<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["T"] = {
+lvim.builtin.which_key.mappings["t"] = {
 name = "Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
@@ -92,13 +90,19 @@ name = "Trouble",
 }
 
 lvim.builtin.which_key.mappings["D"] = {
-    name = "Debugin",
+    name = "Debuging",
     c = {":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test", "D flag"},
     p = {"<cmd>:packadd termdebug<cr>", "adding termdebug"},
     t = {":Termdebug test", "Termdebug"},
     P = {"<cmd> :call vimspector#Restart()<cr>", "Debugin Python"},
 }
 
+lvim.builtin.which_key.mappings["G"] = {
+    name = "GitHub",
+    g = {"<cmd>:G<cr>", "Git status"},
+    c = {"<cmd>:G commit<cr>", "Commit"},
+    p = {"<cmd>:G push<cr>", "Push"},
+}
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
@@ -198,10 +202,11 @@ lvim.builtin.treesitter.highlight.enabled = true
      {"chriskempson/base16-vim"},
      {"tomtom/tcomment_vim"},
      {"tpope/vim-fugitive"},
+	 -- {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
  }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 400
