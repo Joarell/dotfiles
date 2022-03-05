@@ -9,16 +9,17 @@ an executable
 ]]
 --File path
 -- ~/.local/share/lunarvim/lvim/lua/lvim/config/settings.lua
---~/.local/share/lunarvim/lvim/lua/lvim/plugins.lua
+-- ~/.local/share/lunarvim/lvim/lua/lvim/plugins.lua
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
+lvim.format_on_save = false
 vim.opt.showtabline = 2
--- lvim.colorscheme = "base16-helios"
--- lvim.colorscheme = "darkplus"
 lvim.colorscheme = "onedarker"
+-- lvim.colorscheme = "base16-brewer"
+-- lvim.colorscheme = "darkplus"
+lvim.lsp.diagnostics.virtual_text = false
 
 
 vim.cmd([[
@@ -42,18 +43,23 @@ vim.cmd([[
     "let g:codedark_term256 = 1"
     "let g:termdebug_wide = 100"
     "let g:termdebug_popup = 0"
+	"let g:rainbow_active = 1"
+	"let g:neovide_cursor_antialiasing=v:true"
 ]])
+
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<F5>"] = ":call vimspector#Continue()<cr>"
-lvim.keys.normal_mode["<F4>"] = ":call vimspector#Reset()<cr>"
-lvim.keys.normal_mode["<F3>"] = ":call vimspector#Restart()<cr>"
 lvim.keys.normal_mode["<F2>"] = ":call vimspector#ClearLineBreakpoint()<cr>"
-lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
+lvim.keys.normal_mode["<F4>"] = ":call vimspector#Reset()<cr>"
+lvim.keys.normal_mode["<F5>"] = ":call vimspector#Continue()<cr>"
+lvim.keys.normal_mode["<F6>"] = ":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test"
 lvim.keys.normal_mode["<F7>"] = ":call vimspector#StepOver()<cr>"
+lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
 lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepInto()<cr>"
+lvim.keys.normal_mode["<F12>"] = ":call vimspector#Restart()<cr>"
+lvim.keys.normal_mode["<leader>m"] = ":mksession!"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -94,7 +100,6 @@ lvim.builtin.which_key.mappings["D"] = {
     c = {":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test", "D flag"},
     p = {"<cmd>:packadd termdebug<cr>", "adding termdebug"},
     t = {":Termdebug test", "Termdebug"},
-    P = {"<cmd> :call vimspector#Restart()<cr>", "Debugin Python"},
 }
 
 lvim.builtin.which_key.mappings["G"] = {
@@ -157,7 +162,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- local formatters = require "lvim.lsp.null-ls.formatters"
 -- formatters.setup {
 --   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
+--   -- { command = "isort", filetypes = { "python" } },
 --   {
 --     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
 --     command = "prettier",
@@ -170,29 +175,36 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- }
 
 -- -- set additional linters
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
---   { command = "flake8", filetypes = { "python" } },
---   {
---     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "shellcheck",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--severity", "warning" },
---   },
---   {
---     command = "codespell",
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "javascript", "python" },
---   },
--- }
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "flake8", filetypes = { "python" } },
+  {
+    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "shellcheck",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--severity", "warning" },
+  },
+  {
+    command = "codespell",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = {"javascript", "python" },
+  },
+}
 
 -- Additional Plugins
  lvim.plugins = {
      {"folke/tokyonight.nvim"},
      {
        "folke/trouble.nvim",
-       cmd = "TroubleToggle",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+		require("trouble").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+		}
+	  end
      },
      {"lukas-reineke/indent-blankline.nvim"},
      {"tomasiser/vim-code-dark"},
@@ -202,6 +214,8 @@ lvim.builtin.treesitter.highlight.enabled = true
      {"chriskempson/base16-vim"},
      {"tomtom/tcomment_vim"},
      {"tpope/vim-fugitive"},
+	 {"luochen1990/rainbow"},
+	 {"neovide/neovide"},
 	 -- {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
  }
 
@@ -209,4 +223,4 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
-vim.opt.timeoutlen = 400
+vim.opt.timeoutlen = 200
