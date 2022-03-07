@@ -16,9 +16,9 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = false
 vim.opt.showtabline = 2
+-- lvim.colorscheme = "base16-helios"
 lvim.colorscheme = "onedarker"
--- lvim.colorscheme = "base16-brewer"
--- lvim.colorscheme = "darkplus"
+-- Lua
 lvim.lsp.diagnostics.virtual_text = false
 
 
@@ -54,12 +54,14 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<F2>"] = ":call vimspector#ClearLineBreakpoint()<cr>"
 lvim.keys.normal_mode["<F4>"] = ":call vimspector#Reset()<cr>"
 lvim.keys.normal_mode["<F5>"] = ":call vimspector#Continue()<cr>"
-lvim.keys.normal_mode["<F6>"] = ":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test"
+lvim.keys.normal_mode["<F6>"] = ":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test <Up>"
 lvim.keys.normal_mode["<F7>"] = ":call vimspector#StepOver()<cr>"
 lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
 lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepInto()<cr>"
 lvim.keys.normal_mode["<F12>"] = ":call vimspector#Restart()<cr>"
 lvim.keys.normal_mode["<leader>m"] = ":mksession!"
+lvim.keys.normal_mode["<leader>ss"] = ":split <CR>"
+lvim.keys.normal_mode["<leader>vv"] = ":vsplit <CR>"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -85,6 +87,7 @@ lvim.keys.normal_mode["<leader>m"] = ":mksession!"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+require("telescope").load_extension "media_files"
 lvim.builtin.which_key.mappings["t"] = {
 name = "Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -97,9 +100,9 @@ name = "Trouble",
 
 lvim.builtin.which_key.mappings["D"] = {
     name = "Debuging",
-    c = {":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test", "D flag"},
+    n = {":!norminette <C-r>% <cr>", "Norminette"},
     p = {"<cmd>:packadd termdebug<cr>", "adding termdebug"},
-    t = {":Termdebug test", "Termdebug"},
+    t = {":Termdebug test", "Termdebug <CR>"},
 }
 
 lvim.builtin.which_key.mappings["G"] = {
@@ -216,7 +219,10 @@ linters.setup {
      {"tpope/vim-fugitive"},
 	 {"luochen1990/rainbow"},
 	 {"neovide/neovide"},
-	 -- {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
+	 {"ap/vim-css-color"},
+	 {"nvim-treesitter/playground"},
+	 {"LunarVim/Colorschemes"},
+	 {"nvim-telescope/telescope-media-files.nvim"},
  }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
