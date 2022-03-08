@@ -20,6 +20,7 @@ vim.opt.showtabline = 2
 lvim.colorscheme = "onedarker"
 -- Lua
 lvim.lsp.diagnostics.virtual_text = false
+-- separator_style = "slant", {'any', 'any'},
 
 
 vim.cmd([[
@@ -137,6 +138,7 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+require('neoscroll').setup()
 
 -- generic LSP settings
 
@@ -223,6 +225,7 @@ linters.setup {
 	 {"nvim-treesitter/playground"},
 	 {"LunarVim/Colorschemes"},
 	 {"nvim-telescope/telescope-media-files.nvim"},
+	 {"karb94/neoscroll.nvim"},
  }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
