@@ -1,7 +1,6 @@
 --Testando
 --[[
 lvim is the global options object
-
 Linters should be
 filled in as strings with either
 a global executable or a path to
@@ -32,12 +31,10 @@ vim.cmd([[
     nnoremap <PageDown> :m .+<cr>==
     nnoremap <PageUp> :m .-2<cr>==
     nmap <F8> :TagbarToggle<cr>"
-
     set shiftwidth=4
     set softtabstop=4
     set tabstop=4
     nnoremap <Leader>u  :VimspectorUpdate<cr>
-
     "let g:vimspector_enable_mappings = 'HUMAN'"
     "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'"
     "let g:maximizer_set_default_mapping = 1"
@@ -220,10 +217,8 @@ linters.setup {
      {"tomtom/tcomment_vim"},
      {"tpope/vim-fugitive"},
 	 {"luochen1990/rainbow"},
-	 {"neovide/neovide"},
 	 {"ap/vim-css-color"},
 	 {"nvim-treesitter/playground"},
-	 {"LunarVim/Colorschemes"},
 	 {"nvim-telescope/telescope-media-files.nvim"},
 	 {"karb94/neoscroll.nvim"},
  }
