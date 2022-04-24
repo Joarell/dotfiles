@@ -19,6 +19,7 @@ vim.opt.showtabline = 2
 lvim.colorscheme = "onedarker"
 -- Lua
 lvim.lsp.diagnostics.virtual_text = false
+lvim.transparent_window = true
 -- separator_style = "slant", {'any', 'any'},
 
 
@@ -85,7 +86,7 @@ lvim.keys.normal_mode["<leader>vv"] = ":vsplit <CR>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-require("telescope").load_extension "media_files"
+require('telescope').load_extension('media_files')
 lvim.builtin.which_key.mappings["t"] = {
 name = "Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
