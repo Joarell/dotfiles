@@ -68,7 +68,7 @@ env:
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
 window:
-    opacity: 0.8
+    opacity: 0.9
 
   # Startup Mode (changes require restart)
   #
@@ -122,7 +122,7 @@ font:
     family: CodeNewRoman Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Regular
+    style: Bold
 
   # Bold font face
   bold:
@@ -130,6 +130,7 @@ font:
     # family: MesloLGL Nerd Font Mono
     family: CodeNewRoman Nerd Font
     style: Bold
+    size: 1000
 
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
@@ -214,7 +215,7 @@ colors:
     black:   '#181818'
     red:     '#ab4642'
     green:   '#4FFF33'
-    yellow:  '#f7ca88'
+    yellow:  '#EB9D00'
     blue:    '#7cafc2'
     magenta: '#ba8baf'
     cyan:    '#86c1b9'
@@ -414,24 +415,24 @@ colors:
   #
   #command: None
 
-#selection:
+selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
-  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
-#cursor:
+cursor:
   # Cursor style
-  #style:
+  style:
     # Cursor shape
     #
     # Values for `shape`:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    #shape: Block
+    shape: Underline
 
     # Cursor blinking state
     #
@@ -440,7 +441,11 @@ colors:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    #blinking: Off
+    blinking: Always
+
+    unfocused_hollow: true
+
+  live_config_reload: true
 
   # Vi mode cursor style
   #

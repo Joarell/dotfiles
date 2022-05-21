@@ -56,11 +56,14 @@ lvim.keys.normal_mode["<F5>"] = ":call vimspector#Continue()<cr>"
 lvim.keys.normal_mode["<F6>"] = ":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test <Up>"
 lvim.keys.normal_mode["<F7>"] = ":call vimspector#StepOver()<cr>"
 lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
-lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepInto()<cr>"
-lvim.keys.normal_mode["<F12>"] = ":call vimspector#Restart()<cr>"
+lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepOver()<cr>"
+lvim.keys.normal_mode["<F11>"] = ":call vimspector#Continue()<cr>"
+lvim.keys.normal_mode["<leader>r"] = ":call vimspector#Restart()<cr>"
+lvim.keys.normal_mode["<leader>d"] = ":call vimspector#ClearBreakpoints()<cr>"
 lvim.keys.normal_mode["<leader>m"] = ":mksession!"
 lvim.keys.normal_mode["<leader>ss"] = ":split <CR>"
 lvim.keys.normal_mode["<leader>vv"] = ":vsplit <CR>"
+lvim.keys.normal_mode["<leader>p"] = ":!vivaldi-stable % &<CR>"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -222,7 +225,10 @@ linters.setup {
 	 {"nvim-treesitter/playground"},
 	 {"nvim-telescope/telescope-media-files.nvim"},
 	 {"karb94/neoscroll.nvim"},
+	 {"sainnhe/everforest"},
+	 {"alvan/vim-closetag"},
  }
+
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
