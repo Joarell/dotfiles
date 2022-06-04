@@ -43,10 +43,6 @@ nnoremap <Leader>rn :set relativenumber <cr>
 " =============== Vundle Initialization ===============
 " This loads all the plugins specified in ~/.vim/vundles.vim
 " Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/.vim/vundles.vim"))
-  source ~/.vim/vundles.vim
-endif
-au BufNewFile,BufRead *.vundle set filetype=vim
 
 " ================ Turn Off Swap Files ==============
 
@@ -124,8 +120,6 @@ set smartcase       " ...unless we type a capital
 set modelines=0
 set nomodeline
 
-" ================ Custom Settings ========================
-so ~/.yadr/vim/settings.vim
 
 "++++++++++++++++++VimSpector++++++++++++++++++++++++
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -169,3 +163,16 @@ let g:termdebug_wide = 100
 let &t_SI = "\<esc>[5 q"  " blinking I-beam in insert mode
 let &t_SR = "\<esc>[3 q"  " blinking underline in replace mode
 let &t_EI = "\<esc>[ q"  " default cursor (usually blinking block) otherwise]]]"
+
+"====================== Neovide settings =========================
+set guifont=CodeNewRoman\ NF:h10
+let g:neovide_transparency=0.8
+let g:neovide_fullstreen=v:true
+let g:neovide_input_use_logo = v:true
+let g:neovide_cursor_vfx_mode = "sonicboom"
+let g:neovide_touch_drag_timeout = 0.17
+let g:neovide_touch_deadzone = 6.0
+lua require('neoscroll').setup()
+let g:base16colorspace=256
+set termguicolors
+lua require('lspconfig').pyright.setup{}

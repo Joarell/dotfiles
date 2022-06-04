@@ -26,5 +26,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'luochen1990/rainbow'
 	Plug 'lukas-reineke/indent-blankline.nvim'
+	Plug 'chriskempson/base16'
+	Plug 'alvan/vim-closetag'
+	Plug 'ap/vim-css-color'
+	Plug 'nvim-telescope/telescope-media-files.nvim'
+	Plug 'karb94/neoscroll.nvim'
+	Plug 'neovim/nvim-lspconfig'
  
 call plug#end()

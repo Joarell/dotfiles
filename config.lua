@@ -23,28 +23,28 @@ lvim.transparent_window = true
 -- separator_style = "slant", {'any', 'any'},
 
 
-vim.cmd([[
-    nnoremap <Leader>h :Stdheader<cr>
-    "<silent><F3> :MaximizerToggle<cr>"
-    nnoremap <Leader>m :mksession!
-    nnoremap <Leader>gj :diffget //3<cr>
-    nnoremap <Leader>gf :diffget //2<cr>
-    nnoremap <PageDown> :m .+<cr>==
-    nnoremap <PageUp> :m .-2<cr>==
-    nmap <F8> :TagbarToggle<cr>"
-    set shiftwidth=4
-    set softtabstop=4
-    set tabstop=4
-    nnoremap <Leader>u  :VimspectorUpdate<cr>
-    "let g:vimspector_enable_mappings = 'HUMAN'"
-    "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'"
-    "let g:maximizer_set_default_mapping = 1"
-    "let g:codedark_term256 = 1"
-    "let g:termdebug_wide = 100"
-    "let g:termdebug_popup = 0"
-	"let g:rainbow_active = 1"
-	"let g:neovide_cursor_antialiasing=v:true"
-]])
+-- vim.cmd([[
+--     nnoremap <Leader>h :Stdheader<cr>
+--     "<silent><F3> :MaximizerToggle<cr>"
+--     nnoremap <Leader>m :mksession!
+--     nnoremap <Leader>gj :diffget //3<cr>
+--     nnoremap <Leader>gf :diffget //2<cr>
+--     nnoremap <PageDown> :m .+<cr>==
+--     nnoremap <PageUp> :m .-2<cr>==
+--     nmap <F8> :TagbarToggle<cr>"
+--     set shiftwidth=4
+--     set softtabstop=4
+--     set tabstop=4
+--     nnoremap <Leader>u  :VimspectorUpdate<cr>
+--     "let g:vimspector_enable_mappings = 'HUMAN'"
+--     "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'"
+--     "let g:maximizer_set_default_mapping = 1"
+--     "let g:codedark_term256 = 1"
+--     "let g:termdebug_wide = 100"
+--     "let g:termdebug_popup = 0"
+-- 	"let g:rainbow_active = 1"
+-- 	"let g:neovide_cursor_antialiasing=v:true"
+-- ]])
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -55,6 +55,7 @@ lvim.keys.normal_mode["<F4>"] = ":call vimspector#Reset()<cr>"
 lvim.keys.normal_mode["<F5>"] = ":call vimspector#Continue()<cr>"
 lvim.keys.normal_mode["<F6>"] = ":!gcc -Wall -Werror -Wextra -g -D BUFFER_SIZE= <C-r>% -o test <Up>"
 lvim.keys.normal_mode["<F7>"] = ":call vimspector#StepOver()<cr>"
+lvim.keys.normal_mode["<F8>"] = ":TagbarToggle<cr>"
 lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
 lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepOver()<cr>"
 lvim.keys.normal_mode["<F11>"] = ":call vimspector#Continue()<cr>"
@@ -64,6 +65,8 @@ lvim.keys.normal_mode["<leader>m"] = ":mksession!"
 lvim.keys.normal_mode["<leader>ss"] = ":split <CR>"
 lvim.keys.normal_mode["<leader>vv"] = ":vsplit <CR>"
 lvim.keys.normal_mode["<leader>p"] = ":!vivaldi-stable % &<CR>"
+lvim.keys.normal_mode["<PageUp>"] = ":m .-2<cr>=="
+lvim.keys.normal_mode["<PageDown>"] = ":m .+<cr>=="
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -74,7 +77,7 @@ lvim.keys.normal_mode["<leader>p"] = ":!vivaldi-stable % &<CR>"
 -- local _, actions = pcall(require, "telescope.actions")
 -- lvim.builtin.telescope.defaults.mappings = {
 --   -- for input mode
-    --   i = {
+--   i = {
 --   j  ["<C-j>"] = actions.move_selection_next,
 --     ["<C-k>"] = actions.move_selection_previous,
 --     ["<C-n>"] = actions.cycle_history_next,
@@ -91,27 +94,27 @@ lvim.keys.normal_mode["<leader>p"] = ":!vivaldi-stable % &<CR>"
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 require('telescope').load_extension('media_files')
 lvim.builtin.which_key.mappings["t"] = {
-name = "Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+	name = "Trouble",
+	r = { "<cmd>Trouble lsp_references<cr>", "References" },
+	f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+	d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
+	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+	w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
 
 lvim.builtin.which_key.mappings["D"] = {
-    name = "Debuging",
-    n = {":!norminette <C-r>% <cr>", "Norminette"},
-    p = {"<cmd>:packadd termdebug<cr>", "adding termdebug"},
-    t = {":Termdebug test", "Termdebug <CR>"},
+	name = "Debuging",
+	n = { ":!norminette <C-r>% <cr>", "Norminette" },
+	p = { "<cmd>:packadd termdebug<cr>", "adding termdebug" },
+	t = { ":Termdebug test", "Termdebug <CR>" },
 }
 
 lvim.builtin.which_key.mappings["G"] = {
-    name = "GitHub",
-    g = {"<cmd>:G<cr>", "Git status"},
-    c = {"<cmd>:G commit<cr>", "Commit"},
-    p = {"<cmd>:G push<cr>", "Push"},
+	name = "GitHub",
+	g = { "<cmd>:G<cr>", "Git status" },
+	c = { "<cmd>:G commit<cr>", "Commit" },
+	p = { "<cmd>:G push<cr>", "Push" },
 }
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -123,18 +126,18 @@ lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
+	"bash",
+	"c",
+	"javascript",
+	"json",
+	"lua",
+	"python",
+	"typescript",
+	"tsx",
+	"css",
+	"rust",
+	"java",
+	"yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -183,51 +186,51 @@ require('neoscroll').setup()
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "flake8", filetypes = { "python" } },
-  {
-    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-    command = "shellcheck",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    extra_args = { "--severity", "warning" },
-  },
-  {
-    command = "codespell",
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = {"javascript", "python" },
-  },
+	{ command = "flake8", filetypes = { "python" } },
+	{
+		-- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+		command = "shellcheck",
+		---@usage arguments to pass to the formatter
+		-- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+		extra_args = { "--severity", "warning" },
+	},
+	{
+		command = "codespell",
+		---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+		filetypes = { "javascript", "python" },
+	},
 }
 
 -- Additional Plugins
- lvim.plugins = {
-     {"folke/tokyonight.nvim"},
-     {
-       "folke/trouble.nvim",
+lvim.plugins = {
+	{ "folke/tokyonight.nvim" },
+	{
+		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
-		require("trouble").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-		}
-	  end
-     },
-     {"lukas-reineke/indent-blankline.nvim"},
-     {"tomasiser/vim-code-dark"},
-     {"preservim/tagbar"},
-     {"szw/vim-maximizer"},
-     {"puremourning/vimspector"},
-     {"chriskempson/base16-vim"},
-     {"tomtom/tcomment_vim"},
-     {"tpope/vim-fugitive"},
-	 {"luochen1990/rainbow"},
-	 {"ap/vim-css-color"},
-	 {"nvim-treesitter/playground"},
-	 {"nvim-telescope/telescope-media-files.nvim"},
-	 {"karb94/neoscroll.nvim"},
-	 {"sainnhe/everforest"},
-	 {"alvan/vim-closetag"},
- }
+			require("trouble").setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	},
+	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "tomasiser/vim-code-dark" },
+	{ "preservim/tagbar" },
+	{ "szw/vim-maximizer" },
+	{ "puremourning/vimspector" },
+	{ "chriskempson/base16-vim" },
+	{ "tomtom/tcomment_vim" },
+	{ "tpope/vim-fugitive" },
+	{ "luochen1990/rainbow" },
+	{ "ap/vim-css-color" },
+	{ "nvim-treesitter/playground" },
+	{ "nvim-telescope/telescope-media-files.nvim" },
+	{ "karb94/neoscroll.nvim" },
+	{ "sainnhe/everforest" },
+	{ "alvan/vim-closetag" },
+}
 
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
