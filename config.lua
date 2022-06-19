@@ -23,28 +23,9 @@ lvim.transparent_window = true
 -- separator_style = "slant", {'any', 'any'},
 
 
--- vim.cmd([[
---     nnoremap <Leader>h :Stdheader<cr>
---     "<silent><F3> :MaximizerToggle<cr>"
---     nnoremap <Leader>m :mksession!
---     nnoremap <Leader>gj :diffget //3<cr>
---     nnoremap <Leader>gf :diffget //2<cr>
---     nnoremap <PageDown> :m .+<cr>==
---     nnoremap <PageUp> :m .-2<cr>==
---     nmap <F8> :TagbarToggle<cr>"
---     set shiftwidth=4
---     set softtabstop=4
---     set tabstop=4
---     nnoremap <Leader>u  :VimspectorUpdate<cr>
---     "let g:vimspector_enable_mappings = 'HUMAN'"
---     "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'"
---     "let g:maximizer_set_default_mapping = 1"
---     "let g:codedark_term256 = 1"
---     "let g:termdebug_wide = 100"
---     "let g:termdebug_popup = 0"
--- 	"let g:rainbow_active = 1"
--- 	"let g:neovide_cursor_antialiasing=v:true"
--- ]])
+vim.cmd([[
+	"let g:rainbow_active = 1"
+]])
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -144,6 +125,7 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 require('neoscroll').setup()
 
+
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
@@ -201,6 +183,22 @@ linters.setup {
 	},
 }
 
+-- Rainbow settings
+require('nvim-treesitter.configs').setup {
+  highlight = {
+      -- ...
+  },
+  -- ...
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  }
+}
+
 -- Additional Plugins
 lvim.plugins = {
 	{ "folke/tokyonight.nvim" },
@@ -223,13 +221,14 @@ lvim.plugins = {
 	{ "chriskempson/base16-vim" },
 	{ "tomtom/tcomment_vim" },
 	{ "tpope/vim-fugitive" },
-	{ "luochen1990/rainbow" },
 	{ "ap/vim-css-color" },
 	{ "nvim-treesitter/playground" },
 	{ "nvim-telescope/telescope-media-files.nvim" },
 	{ "karb94/neoscroll.nvim" },
 	{ "sainnhe/everforest" },
 	{ "alvan/vim-closetag" },
+	{ "p00f/nvim-ts-rainbow" },
+	-- { "luochen1990/rainbow" },
 }
 
 
