@@ -32,5 +32,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'nvim-telescope/telescope-media-files.nvim'
 	Plug 'karb94/neoscroll.nvim'
 	Plug 'neovim/nvim-lspconfig'
+	Plug 'andweeb/presence.nvim'
  
 call plug#end()

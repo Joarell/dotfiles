@@ -30,6 +30,8 @@ vim.cmd([[
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
+lvim.keys.normal_mode["<leader>bl"] = ":EnableBlameLine<cr>"
+lvim.keys.normal_mode["<leader>bd"] = ":DisableBlameLine<cr>"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<F2>"] = ":call vimspector#ClearLineBreakpoint()<cr>"
 lvim.keys.normal_mode["<F4>"] = ":call vimspector#Reset()<cr>"
@@ -41,6 +43,7 @@ lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
 lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepOver()<cr>"
 lvim.keys.normal_mode["<F11>"] = ":call vimspector#Continue()<cr>"
 lvim.keys.normal_mode["<leader>r"] = ":call vimspector#Restart()<cr>"
+lvim.keys.normal_mode["<leader>R"] = ":TSBufEnable rainbow<cr>"
 lvim.keys.normal_mode["<leader>d"] = ":call vimspector#ClearBreakpoints()<cr>"
 lvim.keys.normal_mode["<leader>m"] = ":mksession!"
 lvim.keys.normal_mode["<leader>ss"] = ":split <CR>"
@@ -124,6 +127,7 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 require('neoscroll').setup()
+require('scrollbar').setup()
 
 
 -- generic LSP settings
@@ -165,11 +169,35 @@ require('neoscroll').setup()
 --   },
 -- }
 
--- -- set additional linters
+-- The setup config table shows all available config options with their default values:
+require("presence"):setup({
+    -- General options
+    auto_update         = true,                       -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
+    neovim_image_text   = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
+    main_image          = "lvim",                     -- Main image display (either "neovim" or "file")
+    client_id           = "793271441293967371",       -- Use your own Discord application client id (not recommended)
+    log_level           = nil,                        -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
+    debounce_timeout    = 10,                         -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
+    enable_line_number  = false,                      -- Displays the current line number instead of the current project
+    blacklist           = {},                         -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
+    buttons             = true,                       -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
+    file_assets         = {},                         -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+
+    -- Rich Presence text options
+    editing_text        = "Editing %s",               -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+    file_explorer_text  = "Browsing %s",              -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
+    git_commit_text     = "Committing changes",       -- Format string rendered when committing changes in git (either string or function(filename: string): string)
+    plugin_manager_text = "Managing plugins",         -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
+    reading_text        = "Reading %s",               -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
+    workspace_text      = "Working on %s",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
+    line_number_text    = "Line %s out of %s",        -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
+})
+
+-- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
 	{ command = "flake8", filetypes = { "python" } },
-	{
+{
 		-- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
 		command = "shellcheck",
 		---@usage arguments to pass to the formatter
@@ -217,6 +245,7 @@ lvim.plugins = {
 	{ "tomasiser/vim-code-dark" },
 	{ "preservim/tagbar" },
 	{ "szw/vim-maximizer" },
+	{ "karb94/neoscroll.nvim" },
 	{ "puremourning/vimspector" },
 	{ "chriskempson/base16-vim" },
 	{ "tomtom/tcomment_vim" },
@@ -224,11 +253,13 @@ lvim.plugins = {
 	{ "ap/vim-css-color" },
 	{ "nvim-treesitter/playground" },
 	{ "nvim-telescope/telescope-media-files.nvim" },
-	{ "karb94/neoscroll.nvim" },
 	{ "sainnhe/everforest" },
 	{ "alvan/vim-closetag" },
+	{ "tveskag/nvim-blame-line" },
+	{ "nvim-treesitter/nvim-treesitter" },
 	{ "p00f/nvim-ts-rainbow" },
-	-- { "luochen1990/rainbow" },
+	{ "petertriho/nvim-scrollbar" },
+	{ "andweeb/presence.nvim" },
 }
 
 
