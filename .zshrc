@@ -1,7 +1,6 @@
 clear && neofetch
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_jev
-
+# eval "$(ssh-agent -s)"
+# ssh-add ~/.ssh/id_jev
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
