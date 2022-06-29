@@ -1,8 +1,6 @@
 clear && neofetch
-if git push; then
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_jev
-fi
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_jev
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
