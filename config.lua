@@ -23,8 +23,8 @@ lvim.transparent_window = true
 -- separator_style = "slant", {'any', 'any'},
 
 
-vim.cmd([[
-	"let g:rainbow_active = 1"
+vim.cmd ([[
+	
 ]])
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
