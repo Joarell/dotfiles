@@ -175,4 +175,3 @@ let g:neovide_touch_deadzone = 6.0
 lua require('neoscroll').setup()
 let g:base16colorspace=256
 set termguicolors
-lua require('lspconfig').pyright.setup{}

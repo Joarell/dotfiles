@@ -23,7 +23,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'kien/ctrlp.vim'
 	Plug 'kyazdani42/nvim-web-devicons'
 	Plug 'pbondoer/vim-42header'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'luochen1990/rainbow'
 	Plug 'lukas-reineke/indent-blankline.nvim'
 	Plug 'chriskempson/base16'

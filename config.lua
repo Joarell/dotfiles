@@ -23,10 +23,6 @@ lvim.transparent_window = true
 -- separator_style = "slant", {'any', 'any'},
 
 
-vim.cmd ([[
-	
-]])
-
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -103,6 +99,7 @@ lvim.builtin.which_key.mappings["G"] = {
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -119,9 +116,11 @@ lvim.builtin.treesitter.ensure_installed = {
 	"typescript",
 	"tsx",
 	"css",
+	"html",
 	"rust",
 	"java",
 	"yaml",
+	"markdown",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -171,33 +170,44 @@ require('scrollbar').setup()
 
 -- The setup config table shows all available config options with their default values:
 require("presence"):setup({
-    -- General options
-    auto_update         = true,                       -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
-    neovim_image_text   = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-    main_image          = "lvim",                     -- Main image display (either "neovim" or "file")
-    client_id           = "793271441293967371",       -- Use your own Discord application client id (not recommended)
-    log_level           = nil,                        -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-    debounce_timeout    = 10,                         -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-    enable_line_number  = false,                      -- Displays the current line number instead of the current project
-    blacklist           = {},                         -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-    buttons             = true,                       -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
-    file_assets         = {},                         -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+	-- General options
+	auto_update        = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
+	neovim_image_text  = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
+	main_image         = "lvim", -- Main image display (either "neovim" or "file")
+	client_id          = "793271441293967371", -- Use your own Discord application client id (not recommended)
+	log_level          = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
+	debounce_timeout   = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
+	enable_line_number = false, -- Displays the current line number instead of the current project
+	blacklist          = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
+	buttons            = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
+	file_assets        = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
 
-    -- Rich Presence text options
-    editing_text        = "Editing %s",               -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
-    file_explorer_text  = "Browsing %s",              -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
-    git_commit_text     = "Committing changes",       -- Format string rendered when committing changes in git (either string or function(filename: string): string)
-    plugin_manager_text = "Managing plugins",         -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
-    reading_text        = "Reading %s",               -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
-    workspace_text      = "Working on %s",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
-    line_number_text    = "Line %s out of %s",        -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
+	-- Rich Presence text options
+	editing_text        = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+	file_explorer_text  = "Browsing %s", -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
+	git_commit_text     = "Committing changes", -- Format string rendered when committing changes in git (either string or function(filename: string): string)
+	plugin_manager_text = "Managing plugins", -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
+	reading_text        = "Reading %s", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
+	workspace_text      = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
+	line_number_text    = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
+
+--Lps-Installjr
+-- require("mason").setup({
+--     ui = {
+--         icons = {
+--             package_installed = "✓",
+--             package_pending = "➜",
+--             package_uninstalled = "✗"
+--         }
+--     }
+-- })
 
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
 	{ command = "flake8", filetypes = { "python" } },
-{
+	{
 		-- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
 		command = "shellcheck",
 		---@usage arguments to pass to the formatter
@@ -213,18 +223,18 @@ linters.setup {
 
 -- Rainbow settings
 require('nvim-treesitter.configs').setup {
-  highlight = {
-      -- ...
-  },
-  -- ...
-  rainbow = {
-    enable = true,
-    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    -- colors = {}, -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
-  }
+	highlight = {
+		-- ...
+	},
+	-- ...
+	rainbow = {
+		enable = true,
+		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+		max_file_lines = nil, -- Do not enable for files with more than n lines, int
+		-- colors = {}, -- table of hex strings
+		-- termcolors = {} -- table of colour name strings
+	}
 }
 
 -- Additional Plugins
@@ -248,7 +258,6 @@ lvim.plugins = {
 	{ "karb94/neoscroll.nvim" },
 	{ "puremourning/vimspector" },
 	{ "chriskempson/base16-vim" },
-	{ "tomtom/tcomment_vim" },
 	{ "tpope/vim-fugitive" },
 	{ "ap/vim-css-color" },
 	{ "nvim-treesitter/playground" },
@@ -262,6 +271,24 @@ lvim.plugins = {
 	{ "andweeb/presence.nvim" },
 }
 
+
+vim.cmd([[
+
+	noremap <yy> "ay
+	nmap <p> "ap
+
+	set guifont=CodeNewRoman\ NF:h10
+	let g:neovide_transparency=0.8
+	set number
+	set relativenumber
+	let g:neovide_fullscreen= v:true
+	let g:neovide_no_idle=v:true
+	let g:neovide_input_use_logo = v:true
+	let g:neovide_cursor_vfx_mode = "sonicboom"
+	let g:neovide_touch_drag_timeout = 0.17
+	let g:neovide_touch_deadzone = 6.0
+
+]])
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {

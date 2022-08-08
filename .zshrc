@@ -1,4 +1,8 @@
 clear && neofetch
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
+
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
@@ -35,10 +39,13 @@ export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/platform-tools:$PATH
 export PATH=$HOME/gitahead/build/release:$PATH
+# export PATH=$HOME/node-v16.16.0-linux-x64/bin:$PATH
 # export PATH=/var/lib/postgres/data:$PATH
 . $HOME/.asdf/asdf.sh
 
-
+alias lv="lvim --headless --listen localhost:6666"
+alias nv="neovide --neovim-bin ~/.local/bin/lvim"
+alias neo="neovide --remote-tcp=localhost:6666"
 alias zi="zoxide query --interactive"
 alias val="valgrind -q --leak-check=full --show-leak-kinds=all -s --error-exitcode=1 --track-origins=yes --tool=memcheck --vgdb=yes --vgdb-error=0 ./test"
 alias psql="psql -U postgres"
@@ -53,6 +60,13 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
+
+######################## Waydroid settings ###################################
+CONFIG_ASHMEM=m
+CONFIG_ANDROID=y
+CONFIG_ANDROID_BINDER_IPC=m
+CONFIG_ANDROID_BINDERFS=n
+CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -155,11 +169,11 @@ alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
 alias probe="sudo -E hw-probe -all -upload"
 
 # Replace ls with exa
-alias ls='exa -al --color=always --group-directories-first --icons' # preferred listing
+alias ls='exa -al --header --color=always --group-directories-first --icons' # preferred listing
 alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
-alias l='exa -lah --color=always --group-directories-first --icons' # tree listing
+alias ll='exa -l --header --color=always --group-directories-first --icons'  # long format
+alias lt='exa -aT --header --color=always --group-directories-first --icons' # tree listing
+alias l='exa -lah --header --color=always --group-directories-first --icons' # tree listing
 
 ## Fixes
 alias xero-mirrors='cd /etc/pacman.d/ && sudo rm xero-mirrorlist && sudo wget https://raw.githubusercontent.com/TechXero/Store/master/scripts/xero-mirrorlist'
@@ -433,4 +447,6 @@ fi
 # To initialize zoxide, add this to your configuration (usually ~/.zshrc):
 #
 # eval "$(zoxide init zsh)"
-source /usr/share/nvm//init-nvm.sh
+# source /usr/share/nvm//init-nvm.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
