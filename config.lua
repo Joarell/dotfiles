@@ -269,6 +269,7 @@ lvim.plugins = {
 	{ "p00f/nvim-ts-rainbow" },
 	{ "petertriho/nvim-scrollbar" },
 	{ "andweeb/presence.nvim" },
+	{ "Lokaltog/neoranger" },
 }
 
 

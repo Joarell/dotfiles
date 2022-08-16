@@ -39,10 +39,14 @@ export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/platform-tools:$PATH
 export PATH=$HOME/gitahead/build/release:$PATH
-# export PATH=$HOME/node-v16.16.0-linux-x64/bin:$PATH
+export PATH=$HOME/balena-etcher:$PATH
+# export PATH=$HOME/node-vimspector/bin:$PATH
 # export PATH=/var/lib/postgres/data:$PATH
 . $HOME/.asdf/asdf.sh
 
+alias rr="ranger"
+alias c="clear"
+alias up="source ~/.zshrc"
 alias lv="lvim --headless --listen localhost:6666"
 alias nv="neovide --neovim-bin ~/.local/bin/lvim"
 alias neo="neovide --remote-tcp=localhost:6666"
@@ -140,11 +144,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='lvim'
+else
+  export EDITOR='lvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -253,15 +257,15 @@ alias cpd='cp -R'
 alias scp='sudo cp'
 alias scpd='sudo cp -R'
 
-#nano
-alias bashrc='sudo nano ~/.bashrc'
-alias zshrc='sudo nano ~/.zshrc'
-alias nsddm='sudo nano /etc/sddm.conf'
-alias pconf='sudo nano /etc/pacman.conf'
-alias mkpkg='sudo nano /etc/makepkg.conf'
-alias ngrub='sudo nano /etc/default/grub'
-alias smbconf='sudo nano /etc/samba/smb.conf'
-alias nmirrorlist='sudo nano /etc/pacman.d/mirrorlist'
+#lvim
+alias bashrc='sudo lvim ~/.bashrc'
+alias zshrc='sudo lvim ~/.zshrc'
+alias nsddm='sudo lvim /etc/sddm.conf'
+alias pconf='sudo lvim /etc/pacman.conf'
+alias mkpkg='sudo lvim /etc/makepkg.conf'
+alias ngrub='sudo lvim /etc/default/grub'
+alias smbconf='sudo lvim /etc/samba/smb.conf'
+alias nmirrorlist='sudo lvim /etc/pacman.d/mirrorlist'
 
 #cd/ aliases
 alias home='cd ~'
@@ -447,6 +451,5 @@ fi
 # To initialize zoxide, add this to your configuration (usually ~/.zshrc):
 #
 # eval "$(zoxide init zsh)"
-# source /usr/share/nvm//init-nvm.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
