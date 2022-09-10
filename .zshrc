@@ -1,8 +1,16 @@
+# Browserslist: caniuse-lite is outdated. Please run:
+# npx browserslist@latest --update-db
+
+# Why you should do it regularly:
+# https://github.com/browserslist/browserslist#browsers-data-updating
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx browserslist@latest --update-db
 clear && neofetch
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux
 fi
 
+cal
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
@@ -33,6 +41,7 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 #################### Source ######################
+source /usr/share/nvm/init-nvm.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH=$HOME/.cargo/bin:$PATH
@@ -40,10 +49,13 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/platform-tools:$PATH
 export PATH=$HOME/gitahead/build/release:$PATH
 export PATH=$HOME/balena-etcher:$PATH
-# export PATH=$HOME/node-vimspector/bin:$PATH
-# export PATH=/var/lib/postgres/data:$PATH
+export PATH=$HOME/nvim/bin:$PATH
+export PATH=$HOME/neovide/bin:$PATH
+export PATH=/var/lib/snapd/snap/bin:$PATH
+ export PATH=$HOME/Alacritty/target/release:$PATH
 . $HOME/.asdf/asdf.sh
 
+alias android="ssh -p 8022 192.168.0.2"
 alias rr="ranger"
 alias c="clear"
 alias up="source ~/.zshrc"
@@ -134,7 +146,7 @@ CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -452,4 +464,14 @@ fi
 #
 # eval "$(zoxide init zsh)"
 
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+export HISTFILE=~/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=50000
+setopt histignorealldups sharehistory
+
+export EDITOR=lvim
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -7,7 +7,7 @@ a global executable or a path to
 an executable
 ]]
 --File path
--- ~/.local/share/lunarvim/lvim/lua/lvim/config/settings.lua
+
 -- ~/.local/share/lunarvim/lvim/lua/lvim/plugins.lua
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
@@ -47,6 +47,10 @@ lvim.keys.normal_mode["<leader>vv"] = ":vsplit <CR>"
 lvim.keys.normal_mode["<leader>p"] = ":!vivaldi-stable % &<CR>"
 lvim.keys.normal_mode["<PageUp>"] = ":m .-2<cr>=="
 lvim.keys.normal_mode["<PageDown>"] = ":m .+<cr>=="
+
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -192,17 +196,6 @@ require("presence"):setup({
 	line_number_text    = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
 
---Lps-Installjr
--- require("mason").setup({
---     ui = {
---         icons = {
---             package_installed = "✓",
---             package_pending = "➜",
---             package_uninstalled = "✗"
---         }
---     }
--- })
-
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
@@ -278,11 +271,10 @@ vim.cmd([[
 	noremap <yy> "ay
 	nmap <p> "ap
 
-	set guifont=CodeNewRoman\ NF:h10
+	set guifont=CodeNewRoman\ NF:h09
 	let g:neovide_transparency=0.8
 	set number
 	set relativenumber
-	let g:neovide_fullscreen= v:true
 	let g:neovide_no_idle=v:true
 	let g:neovide_input_use_logo = v:true
 	let g:neovide_cursor_vfx_mode = "sonicboom"
