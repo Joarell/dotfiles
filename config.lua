@@ -29,6 +29,7 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<leader>bl"] = ":EnableBlameLine<cr>"
 lvim.keys.normal_mode["<leader>bd"] = ":DisableBlameLine<cr>"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<F1>"] = ":RnvimrToggle<cr>"
 lvim.keys.normal_mode["<F2>"] = ":call vimspector#ClearLineBreakpoint()<cr>"
 lvim.keys.normal_mode["<F4>"] = ":call vimspector#Reset()<cr>"
 lvim.keys.normal_mode["<F5>"] = ":call vimspector#Continue()<cr>"
@@ -38,6 +39,7 @@ lvim.keys.normal_mode["<F8>"] = ":TagbarToggle<cr>"
 lvim.keys.normal_mode["<F9>"] = ":call vimspector#ToggleBreakpoint()<cr>"
 lvim.keys.normal_mode["<F10>"] = ":call vimspector#StepOver()<cr>"
 lvim.keys.normal_mode["<F11>"] = ":call vimspector#Continue()<cr>"
+lvim.keys.normal_mode["<F12>"] = ":lua vim.lsp.buf.format()<CR>"
 lvim.keys.normal_mode["<leader>r"] = ":call vimspector#Restart()<cr>"
 lvim.keys.normal_mode["<leader>R"] = ":TSBufEnable rainbow<cr>"
 lvim.keys.normal_mode["<leader>d"] = ":call vimspector#ClearBreakpoints()<cr>"
@@ -58,21 +60,21 @@ lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- local _, actions = pcall(require, "telescope.actions")
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---   j  ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.mappings = {
+	-- for input mode
+	i = {
+		["<C-j>"] = actions.move_selection_next,
+		["<C-k>"] = actions.move_selection_previous,
+		["<C-n>"] = actions.cycle_history_next,
+		["<C-p>"] = actions.cycle_history_prev,
+	},
+	-- for normal mode
+	n = {
+		["<C-j>"] = actions.move_selection_next,
+		["<C-k>"] = actions.move_selection_previous,
+	},
+}
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -125,6 +127,8 @@ lvim.builtin.treesitter.ensure_installed = {
 	"java",
 	"yaml",
 	"markdown",
+	"kotlin",
+	"rust",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -196,6 +200,85 @@ require("presence"):setup({
 	line_number_text    = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
 
+--Treesitter Context
+require'treesitter-context'.setup{
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+    min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+    patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        -- For all filetypes
+        -- Note that setting an entry here replaces all other patterns for this entry.
+        -- By setting the 'default' entry below, you can control which nodes you want to
+        -- appear in the context window.
+        default = {
+            'class',
+            'function',
+            'method',
+            'for',
+            'while',
+            'if',
+            'switch',
+            'case',
+        },
+        -- Patterns for specific filetypes
+        -- If a pattern is missing, *open a PR* so everyone can benefit.
+        tex = {
+            'chapter',
+            'section',
+            'subsection',
+            'subsubsection',
+        },
+        rust = {
+            'impl_item',
+            'struct',
+            'enum',
+        },
+        scala = {
+            'object_definition',
+        },
+        vhdl = {
+            'process_statement',
+            'architecture_body',
+            'entity_declaration',
+        },
+        markdown = {
+            'section',
+        },
+        elixir = {
+            'anonymous_function',
+            'arguments',
+            'block',
+            'do_block',
+            'list',
+            'map',
+            'tuple',
+            'quoted_content',
+        },
+        json = {
+            'pair',
+        },
+        yaml = {
+            'block_mapping_pair',
+        },
+    },
+    exact_patterns = {
+        -- Example for a specific filetype with Lua patterns
+        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+        -- exactly match "impl_item" only)
+        -- rust = true,
+    },
+
+    -- [!] The options below are exposed but shouldn't require your attention,
+    --     you can safely ignore them.
+
+    zindex = 20, -- The Z-index of the context window
+    mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+    -- Separator between context and content. Should be a single character string, like '-'.
+    -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+    separator = nil,
+}
+
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
@@ -212,22 +295,6 @@ linters.setup {
 		---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
 		filetypes = { "javascript", "python" },
 	},
-}
-
--- Rainbow settings
-require('nvim-treesitter.configs').setup {
-	highlight = {
-		-- ...
-	},
-	-- ...
-	rainbow = {
-		enable = true,
-		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-		max_file_lines = nil, -- Do not enable for files with more than n lines, int
-		-- colors = {}, -- table of hex strings
-		-- termcolors = {} -- table of colour name strings
-	}
 }
 
 -- Additional Plugins
@@ -263,6 +330,9 @@ lvim.plugins = {
 	{ "petertriho/nvim-scrollbar" },
 	{ "andweeb/presence.nvim" },
 	{ "Lokaltog/neoranger" },
+	{ "shime/vim-livedown" },
+	{ "kevinhwang91/rnvimr" },
+	{ "nvim-treesitter/nvim-treesitter-context" },
 }
 
 
@@ -280,11 +350,13 @@ vim.cmd([[
 	let g:neovide_cursor_vfx_mode = "sonicboom"
 	let g:neovide_touch_drag_timeout = 0.17
 	let g:neovide_touch_deadzone = 6.0
-
+	let g:neovide_underline_automatic_scaling = v:true
+	let g:neovide_hide_mouse_when_typing = v:false
+	let g:neovide_cursor_vfx_mode = "pixiedust"
 ]])
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
-vim.opt.timeoutlen = 200
+vim.opt.timeoutlen = 50
