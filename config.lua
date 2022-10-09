@@ -297,6 +297,44 @@ linters.setup {
 	},
 }
 
+-- Attaches to every FileType mode
+require 'colorizer'.setup()
+
+-- Attach to certain Filetypes, add special configuration for `html`
+-- Use `background` for everything else.
+require 'colorizer'.setup {
+  'css';
+  'javascript';
+  html = {
+    mode = 'foreground';
+  }
+}
+
+-- Use the `default_options` as the second parameter, which uses
+-- `foreground` for every mode. This is the inverse of the previous
+-- setup configuration.
+require 'colorizer'.setup({
+  'css';
+  'javascript';
+  html = { mode = 'background' };
+}, { mode = 'foreground' })
+
+-- Use the `default_options` as the second parameter, which uses
+-- `foreground` for every mode. This is the inverse of the previous
+-- setup configuration.
+require 'colorizer'.setup {
+  '*'; -- Highlight all files, but customize some others.
+  css = { rgb_fn = true; }; -- Enable parsing rgb(...) functions in css.
+  html = { names = false; } -- Disable parsing "names" like Blue or Gray
+}
+
+-- Exclude some filetypes from highlighting by using `!`
+require 'colorizer'.setup {
+  '*'; -- Highlight all files, but customize some others.
+  '!vim'; -- Exclude vim from highlighting.
+  -- Exclusion Only makes sense if '*' is specified!
+}
+
 -- Additional Plugins
 lvim.plugins = {
 	{ "folke/tokyonight.nvim" },
@@ -319,7 +357,6 @@ lvim.plugins = {
 	{ "puremourning/vimspector" },
 	{ "chriskempson/base16-vim" },
 	{ "tpope/vim-fugitive" },
-	{ "ap/vim-css-color" },
 	{ "nvim-treesitter/playground" },
 	{ "nvim-telescope/telescope-media-files.nvim" },
 	{ "sainnhe/everforest" },
@@ -333,6 +370,7 @@ lvim.plugins = {
 	{ "shime/vim-livedown" },
 	{ "kevinhwang91/rnvimr" },
 	{ "nvim-treesitter/nvim-treesitter-context" },
+	{ "norcalli/nvim-colorizer.lua" },
 }
 
 
