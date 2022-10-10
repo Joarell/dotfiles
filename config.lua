@@ -20,6 +20,11 @@ lvim.colorscheme = "onedarker"
 -- Lua
 lvim.lsp.diagnostics.virtual_text = false
 lvim.transparent_window = true
+-- lvim.autocommands = {
+-- 	set guicursor = n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+-- 	  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+-- 	  \,sm:block-blinkwait175-blinkoff150-blinkon175,
+-- },
 -- separator_style = "slant", {'any', 'any'},
 
 
@@ -201,82 +206,82 @@ require("presence"):setup({
 })
 
 --Treesitter Context
-require'treesitter-context'.setup{
-    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-    trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-    min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-    patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-        -- For all filetypes
-        -- Note that setting an entry here replaces all other patterns for this entry.
-        -- By setting the 'default' entry below, you can control which nodes you want to
-        -- appear in the context window.
-        default = {
-            'class',
-            'function',
-            'method',
-            'for',
-            'while',
-            'if',
-            'switch',
-            'case',
-        },
-        -- Patterns for specific filetypes
-        -- If a pattern is missing, *open a PR* so everyone can benefit.
-        tex = {
-            'chapter',
-            'section',
-            'subsection',
-            'subsubsection',
-        },
-        rust = {
-            'impl_item',
-            'struct',
-            'enum',
-        },
-        scala = {
-            'object_definition',
-        },
-        vhdl = {
-            'process_statement',
-            'architecture_body',
-            'entity_declaration',
-        },
-        markdown = {
-            'section',
-        },
-        elixir = {
-            'anonymous_function',
-            'arguments',
-            'block',
-            'do_block',
-            'list',
-            'map',
-            'tuple',
-            'quoted_content',
-        },
-        json = {
-            'pair',
-        },
-        yaml = {
-            'block_mapping_pair',
-        },
-    },
-    exact_patterns = {
-        -- Example for a specific filetype with Lua patterns
-        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
-        -- exactly match "impl_item" only)
-        -- rust = true,
-    },
+require 'treesitter-context'.setup {
+	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+	max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+	trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+	min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+	patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+		-- For all filetypes
+		-- Note that setting an entry here replaces all other patterns for this entry.
+		-- By setting the 'default' entry below, you can control which nodes you want to
+		-- appear in the context window.
+		default = {
+			'class',
+			'function',
+			'method',
+			'for',
+			'while',
+			'if',
+			'switch',
+			'case',
+		},
+		-- Patterns for specific filetypes
+		-- If a pattern is missing, *open a PR* so everyone can benefit.
+		tex = {
+			'chapter',
+			'section',
+			'subsection',
+			'subsubsection',
+		},
+		rust = {
+			'impl_item',
+			'struct',
+			'enum',
+		},
+		scala = {
+			'object_definition',
+		},
+		vhdl = {
+			'process_statement',
+			'architecture_body',
+			'entity_declaration',
+		},
+		markdown = {
+			'section',
+		},
+		elixir = {
+			'anonymous_function',
+			'arguments',
+			'block',
+			'do_block',
+			'list',
+			'map',
+			'tuple',
+			'quoted_content',
+		},
+		json = {
+			'pair',
+		},
+		yaml = {
+			'block_mapping_pair',
+		},
+	},
+	exact_patterns = {
+		-- Example for a specific filetype with Lua patterns
+		-- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+		-- exactly match "impl_item" only)
+		-- rust = true,
+	},
 
-    -- [!] The options below are exposed but shouldn't require your attention,
-    --     you can safely ignore them.
+	-- [!] The options below are exposed but shouldn't require your attention,
+	--     you can safely ignore them.
 
-    zindex = 20, -- The Z-index of the context window
-    mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-    -- Separator between context and content. Should be a single character string, like '-'.
-    -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-    separator = nil,
+	zindex = 20, -- The Z-index of the context window
+	mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
+	-- Separator between context and content. Should be a single character string, like '-'.
+	-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+	separator = nil,
 }
 
 -- set additional linters
@@ -303,36 +308,36 @@ require 'colorizer'.setup()
 -- Attach to certain Filetypes, add special configuration for `html`
 -- Use `background` for everything else.
 require 'colorizer'.setup {
-  'css';
-  'javascript';
-  html = {
-    mode = 'foreground';
-  }
+	'css';
+	'javascript';
+	html = {
+		mode = 'foreground';
+	}
 }
 
 -- Use the `default_options` as the second parameter, which uses
 -- `foreground` for every mode. This is the inverse of the previous
 -- setup configuration.
 require 'colorizer'.setup({
-  'css';
-  'javascript';
-  html = { mode = 'background' };
+	'css';
+	'javascript';
+	html = { mode = 'background' };
 }, { mode = 'foreground' })
 
 -- Use the `default_options` as the second parameter, which uses
 -- `foreground` for every mode. This is the inverse of the previous
 -- setup configuration.
 require 'colorizer'.setup {
-  '*'; -- Highlight all files, but customize some others.
-  css = { rgb_fn = true; }; -- Enable parsing rgb(...) functions in css.
-  html = { names = false; } -- Disable parsing "names" like Blue or Gray
+	'*'; -- Highlight all files, but customize some others.
+	css = { rgb_fn = true; }; -- Enable parsing rgb(...) functions in css.
+	html = { names = false; } -- Disable parsing "names" like Blue or Gray
 }
 
 -- Exclude some filetypes from highlighting by using `!`
 require 'colorizer'.setup {
-  '*'; -- Highlight all files, but customize some others.
-  '!vim'; -- Exclude vim from highlighting.
-  -- Exclusion Only makes sense if '*' is specified!
+	'*'; -- Highlight all files, but customize some others.
+	'!vim'; -- Exclude vim from highlighting.
+	-- Exclusion Only makes sense if '*' is specified!
 }
 
 -- Additional Plugins
@@ -391,8 +396,15 @@ vim.cmd([[
 	let g:neovide_underline_automatic_scaling = v:true
 	let g:neovide_hide_mouse_when_typing = v:false
 	let g:neovide_cursor_vfx_mode = "pixiedust"
+	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+	  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+	  \,sm:block-blinkwait175-blinkoff150-blinkon175,
 ]])
 
+vim.opt.guicursor="n-v-c:block,i-ci-ve:ver25,r-cr-0:hor01"
+		-- :set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		--   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		--   \,sm:block-blinkwait175-blinkoff150-blinkon175
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
