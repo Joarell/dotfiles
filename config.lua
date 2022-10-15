@@ -18,7 +18,7 @@ vim.opt.showtabline = 2
 -- lvim.colorscheme = "base16-helios"
 lvim.colorscheme = "onedarker"
 -- Lua
-lvim.lsp.diagnostics.virtual_text = false
+lvim.lsp.diagnostics.virtual_text = true
 lvim.transparent_window = true
 -- lvim.autocommands = {
 -- 	set guicursor = n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -340,6 +340,7 @@ require 'colorizer'.setup {
 	-- Exclusion Only makes sense if '*' is specified!
 }
 
+
 -- Additional Plugins
 lvim.plugins = {
 	{ "folke/tokyonight.nvim" },
@@ -401,10 +402,6 @@ vim.cmd([[
 	  \,sm:block-blinkwait175-blinkoff150-blinkon175,
 ]])
 
-vim.opt.guicursor="n-v-c:block,i-ci-ve:ver25,r-cr-0:hor01"
-		-- :set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-		--   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-		--   \,sm:block-blinkwait175-blinkoff150-blinkon175
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },

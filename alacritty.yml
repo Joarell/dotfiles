@@ -149,7 +149,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 8.0
+  size: 7.0
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
@@ -247,7 +247,7 @@ cursor:
   # See `cursor.style` for available options.
   #vi_mode_style: None
   # Cursor blinking interval in milliseconds.
-  blink_interval: 200
+  blink_interval: 150
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.

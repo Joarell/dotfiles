@@ -584,6 +584,7 @@ alias l = exa -lah --color=always --group-directories-first --icons  # tree list
 alias lt = exa -aT --color=always --group-directories-first --icons  # tree listing
 alias ll = exa -l --color=always --group-directories-first --icons   # long format
 alias la = exa -a --color=always --group-directories-first --icons   # all files and dirs
+alias neovide = neovide --neovim-bin nvim
 
 #Pacman for software managment
 alias upall = topgrade 
