@@ -368,7 +368,6 @@ lvim.plugins = {
 	{ "sainnhe/everforest" },
 	{ "alvan/vim-closetag" },
 	{ "tveskag/nvim-blame-line" },
-	{ "nvim-treesitter/nvim-treesitter" },
 	{ "p00f/nvim-ts-rainbow" },
 	{ "petertriho/nvim-scrollbar" },
 	{ "andweeb/presence.nvim" },
@@ -377,6 +376,7 @@ lvim.plugins = {
 	{ "kevinhwang91/rnvimr" },
 	{ "nvim-treesitter/nvim-treesitter-context" },
 	{ "norcalli/nvim-colorizer.lua" },
+	{ "azabiong/vim-highlighter" },
 }
 
 
