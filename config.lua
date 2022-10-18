@@ -406,4 +406,3 @@ vim.cmd([[
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
-vim.opt.timeoutlen = 50
