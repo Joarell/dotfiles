@@ -25,6 +25,7 @@ cmp.setup {
 		{ name = 'treesitter'},
 		{ name = 'crates'},
 		{ name = 'tmux'},
+		{ name = 'Method'},
 	},
 
 	window = { documentation = cmp.config.window.bordered() },
