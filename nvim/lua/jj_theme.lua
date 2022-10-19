@@ -12,7 +12,7 @@ local lualine = require("lualine")
 local colors = {
 	bg       = '#202328',
 	fg       = '#bbc2cf',
-	yellow   = '#ECBE7B',
+	yellow   = 'Yellow',
 	cyan     = '#008080',
 	darkblue = '#33cccc',
 	green    = '#33cc33',
@@ -22,6 +22,7 @@ local colors = {
 	blue     = '#51afef',
 	red      = '#ec5f67',
 	pink     = '#c90076',
+	purple   = 'Purple',
 }
 
 local conditions = {
@@ -93,7 +94,7 @@ local function change_colors(component, side)
 				local mode_color = {
 					n = colors.darkblue,
 					i = colors.green,
-					v = colors.pink,
+					v = colors.purple,
 					["␖"] = colors.blue,
 					V = colors.blue,
 					c = colors.magenta,
@@ -124,7 +125,7 @@ local function change_colors(component, side)
 				local mode_color = {
 					n = colors.darkblue,
 					i = colors.green,
-					v = colors.pink,
+					v = colors.purple,
 					["␖"] = colors.blue,
 					V = colors.blue,
 					c = colors.magenta,
@@ -219,14 +220,7 @@ change_colors(comp, "left")
 
 ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
-local comp = function()
-	--return ''
-	-- return '   '
-	return "  "
-end
-change_colors(comp, "left")
-
-ins_left({
+ins_right({
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
 	symbols = { error = " ", warn = " ", info = " " },
@@ -267,7 +261,7 @@ ins_right({
 	-- icon = ' LSP  ',
 	-- icon = ' LSP  ',
 	icon = "  LSP ",
-	color = { fg = "#f5b505", gui = "bold" },
+	color = { fg = colors.pink, gui = "bold" },
 })
 
 -- Add components to right sections
@@ -300,7 +294,7 @@ change_colors(comp, "right")
 ins_right({ "filetype" })
 
 local comp = function()
-	return "   "
+	return "  "
 end
 change_colors(comp, "right")
 
