@@ -182,6 +182,19 @@ ins_left({
 	color = { fg = colors.violet, gui = "bold" },
 })
 
+ins_left({
+	"diff",
+	-- Is it me or the symbol for modified us really weird
+	symbols = { added = " ", modified = "柳 ", removed = " " },
+	diff_color = {
+		added = { fg = colors.green },
+		modified = { fg = colors.orange },
+		removed = { fg = colors.red },
+	},
+	cond = conditions.hide_in_width,
+})
+
+
 local comp = function()
 	--return ''
 	-- return '   '
@@ -253,7 +266,7 @@ ins_right({
 	-- icon = 'ﳋ LSP  ',
 	-- icon = ' LSP  ',
 	-- icon = ' LSP  ',
-	icon = " LSP ",
+	icon = "  LSP ",
 	color = { fg = "#f5b505", gui = "bold" },
 })
 
@@ -292,18 +305,6 @@ end
 change_colors(comp, "right")
 
 ins_right({ "location" })
-
-ins_right({
-	"diff",
-	-- Is it me or the symbol for modified us really weird
-	symbols = { added = " ", modified = "柳 ", removed = " " },
-	diff_color = {
-		added = { fg = colors.green },
-		modified = { fg = colors.orange },
-		removed = { fg = colors.red },
-	},
-	cond = conditions.hide_in_width,
-})
 
 local comp = function()
 	return ""
