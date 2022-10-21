@@ -1,15 +1,6 @@
 --###########################################################################--
 --						   Appearance settings				 				 --
 --###########################################################################--
-vim.g.mapleader = " "
--- vim.o.background = "light"
-vim.wo.colorcolumn = "80"
-vim.bo.filetype = "lua"
-vim.g["zoom#statustext"] = "Z"
-vim.wo.fillchars = "eob: "
-vim.bo.commentstring = "//%s"
-vim.diagnostic.config({ virtual_text = false })
-
 -- Packer settings.
 vim.cmd([[
   augroup packer_user_config
@@ -19,8 +10,7 @@ vim.cmd([[
 ]])
 
 -- Lua:
--- For dark theme (neovim's default)
-
+-- This is the theme for evential contention on neovim behavior. (Just in case!)
 local c = require("vscode.colors")
 require("vscode").setup({
 
@@ -46,9 +36,36 @@ require("vscode").setup({
 	},
 })
 
+	-- Example config in Lua
+require("github-theme").setup({
+	transparent = true,
+	dark_float = true,
+	hide_end_of_buffer = true,
+	dark_sidebar = true,
+	variable_style = "NONE",
+	keyword_style = "bold",
+	theme_style = "dark",
+	function_style = "italic",
+
+	-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+	colors = { hint = "#33cccc", error = "#ff0000" },
+
+	-- Overwrite the highlight groups
+	overrides = function(c)
+		return {
+			htmlTag = { fg = c.red, bg = "#282c34", sp = c.hint, style = "underline" },
+			DiagnosticHint = { link = "LspDiagnosticsDefaultHint" },
+			-- this will remove the highlight groups
+			TSField = {},
+		}
+	end,
+})
+
+
 --Colorscheme
 require("lualine").setup()
-require("jj_theme")
+require("jj_neon_theme")
+require("treesitter")
 
 require("bufferline").setup({
 	options = {
@@ -58,15 +75,17 @@ require("bufferline").setup({
 		right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
 		left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
 		middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
-		indicator = {
-			icon = "▎", -- this should be omitted if indicator style is not 'icon'
-			style = "icon", -- can also be 'underline'|'none',
-		},
-		buffer_close_icon = "",
+		buffer_close_icon = " ",
 		modified_icon = "●",
 		close_icon = "",
 		left_trunc_marker = "",
 		right_trunc_marker = "",
+		indicator = {
+			-- icon = "▎", -- this should be omitted if indicator style is not 'icon'
+			-- style = "icon", -- can also be 'underline'|'none',
+			icon = "    ", -- this should be omitted if indicator style is not 'icon'
+			style = "icon", -- can also be 'underline'|'none',
+		},
 		--- name_formatter can be used to change the buffer's label in the bufferline.
 		--- Please note some names can/will break the
 		--- bufferline so use this at your discretion knowing that it has

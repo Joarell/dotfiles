@@ -97,7 +97,7 @@ local function change_colors(component, side)
 					v = colors.purple,
 					["␖"] = colors.blue,
 					V = colors.blue,
-					c = colors.magenta,
+					c = colors.orange,
 					no = colors.red,
 					s = colors.orange,
 					S = colors.orange,
@@ -151,6 +151,18 @@ local function change_colors(component, side)
 	end
 end
 
+-- local function seprator(comp , side)
+-- 	if comp == nil and side == "left" then
+-- 		return "    "
+-- 	elseif comp ~= nil and side == "left" then
+-- 		return comp
+-- 	elseif comp == nil and side == "right" then
+-- 		return "   "
+-- 	elseif comp ~= nil and side == "right" then
+-- 		return comp
+-- 	end
+-- end
+
 -- ins_left({
 -- 	function()
 -- 		return "▊"
@@ -159,18 +171,18 @@ end
 -- 	padding = { left = 0, right = 1 }, -- We don't need space before this
 -- })
 
+-- change_colors(seprator( "  ", "left"), "left")
 
 local comp = function()
-	return "  "
+	return "|  "
 end
 change_colors(comp, "left")
+
+
 
 change_colors("mode", "left")
 
 local comp = function()
-	--return ''
-	-- return '   '
-	-- return " 喝"
 	return "  "
 end
 change_colors(comp, "left")
@@ -182,6 +194,7 @@ ins_left({
 	-- icon = 'ﳎ ',
 	color = { fg = colors.violet, gui = "bold" },
 })
+
 
 ins_left({
 	"diff",
@@ -195,25 +208,22 @@ ins_left({
 	cond = conditions.hide_in_width,
 })
 
+local getpath = vim.fn.expand("%:p:h")
+local getgit = (vim.fn.finddir(".git", getpath .. ";"))
+print(getgit)
+if (#getgit > 0) then
+	local comp = function ()
+		return "    "
+	end
+	change_colors(comp, "left")
+end
+
 
 local comp = function()
 	return " 喝 ﬧ       "
 end
 change_colors(comp, "left")
 
-ins_left({
-	-- filesize component
-	"filesize",
-	padding = { left = 2 },
-	cond = conditions.buffer_not_empty,
-})
-
-local comp = function()
-	return "    "
-end
-change_colors(comp, "left")
-
-ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
 local comp = function()
 	return " "
@@ -221,19 +231,47 @@ end
 change_colors(comp, "left")
 
 
--- Insert mid section. You can make any number of sections in neovim :)
--- for lualine it's any number greater then 2
--- ins_left {
+-- Add components to right sections
+-- ins_right {
+-- 	'o:encoding', -- option component same as &encoding in viml
+-- 	fmt = string.upper, -- I'm not sure why it's upper case either ;)
+-- 	cond = conditions.hide_in_width,
+-- 	color = { fg = colors.green, gui = 'bold' },
+-- }
+
+
+local comp = function()
+	return ""
+end
+change_colors(comp, "right")
+
+
+ins_right({
+	-- filesize component
+	"filesize",
+	padding = { left = 1 },
+	cond = conditions.buffer_not_empty,
+	icon =  "size:",
+})
+
+
+local comp = function()
+	return " "
+end
+change_colors(comp, "right")
+
+-- -- Insert mid section. You can make any number of sections in neovim :)
+-- -- for lualine it's any number greater then 2
+-- ins_right {
 -- 	function()
 -- 		return '%='
 -- 	end,
 -- }
 
-
-local comp = function()
-	return " "
-end
-change_colors(comp, "right")
+-- local comp = function()
+-- 	return "« "
+-- end
+-- change_colors(comp, "right")
 
 ins_right({
 	"diagnostics",
@@ -241,7 +279,7 @@ ins_right({
 	symbols = { error = " ", warn = " ", info = " " },
 	diagnostics_color = {
 		color_error = { fg = colors.red },
-		color_warn = { fg = colors.yellow },
+		color_warn = { fg = colors.orange },
 		color_info = { fg = colors.cyan },
 	},
 })
@@ -267,18 +305,10 @@ ins_right({
 	end,
 	-- icon = ' LSP  ',
 	-- icon = ' LSP  ',
-	-- icon = "  LSP ",
-	icon = "﨧 LSP ",
+	icon = "ﮧ LSP ",
 	color = { fg = colors.pink, gui = "bold" },
 })
 
--- Add components to right sections
--- ins_right {
--- 	'o:encoding', -- option component same as &encoding in viml
--- 	fmt = string.upper, -- I'm not sure why it's upper case either ;)
--- 	cond = conditions.hide_in_width,
--- 	color = { fg = colors.green, gui = 'bold' },
--- }
 
 local comp = function()
 	return "   "
@@ -288,28 +318,35 @@ change_colors(comp, "right")
 ins_right({
 	"fileformat",
 	fmt = string.upper,
-	icon = "",
+	-- icon = "",
 	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.green, gui = "bold" },
+	color = { fg = colors.blue, gui = "bold" },
 })
 
 local comp = function()
 change_colors(comp, "right")
-	return "   "
+	return "    "
 end
 change_colors(comp, "right")
 
 ins_right({ "filetype" })
 
 local comp = function()
-	return "  "
+	return "    "
 end
 change_colors(comp, "right")
 
 ins_right({ "location" })
 
 local comp = function()
-	return ""
+	return "  "
+end
+change_colors(comp, "right")
+
+ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
+
+local comp = function()
+	return "|"
 end
 change_colors(comp, "right")
 

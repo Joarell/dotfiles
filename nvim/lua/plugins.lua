@@ -50,6 +50,8 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use({ "nvim-telescope/telescope-media-files.nvim" })
+	use({ "nvim-telescope/telescope-symbols.nvim" })
+	use({ "nvim-lua/popup.nvim" })
 
 	--IndentBlankline
 	use({ "lukas-reineke/indent-blankline.nvim" })
@@ -60,22 +62,27 @@ return require("packer").startup(function(use)
 	--Debugger
 	use("puremourning/vimspector")
 
-	--Explorer
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional, for file icons
-		},
-		tag = "nightly", -- optional, updated every week. (see issue #1193)
-	})
-
-	--LSP
+	--LSP and autocomplitions.
 	use({
 		"williamboman/mason.nvim",
 		"williamboman/nvim-lsp-installer",
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
 	})
+	use({ "dcampos/cmp-snippy" }) --x
+	use({ "dcampos/nvim-snippy" })
+	use({ "quangnguyen30192/cmp-nvim-ultisnips" })
+	use({ "SirVer/ultisnips" })
+	use({ "hrsh7th/vim-vsnip" })
+	use({ "hrsh7th/cmp-vsnip" })
+	use({ "hrsh7th/cmp-cmdline" }) -- added recently
+	use({ "hrsh7th/nvim-cmp" })
+	use({ "hrsh7th/cmp-buffer" })
+	use({ "hrsh7th/cmp-path" })
+	use({ "saadparwaiz1/cmp_luasnip" })
+	use({ "hrsh7th/cmp-nvim-lsp" })
+	use({ "L3MON4D3/LuaSnip" })
+	use({ "rafamadriz/friendly-snippets" })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = function()
@@ -101,15 +108,6 @@ return require("packer").startup(function(use)
 		},
 	})
 	use({ "rhysd/git-messenger.vim" })
-
-	--AutoComplition
-	use({ "hrsh7th/nvim-cmp" })
-	use({ "hrsh7th/cmp-buffer" })
-	use({ "hrsh7th/cmp-path" })
-	use({ "saadparwaiz1/cmp_luasnip" })
-	use({ "hrsh7th/cmp-nvim-lsp" })
-	use({ "L3MON4D3/LuaSnip" })
-	use({ "rafamadriz/friendly-snippets" })
 
 	--Trouble
 	-- Lua
@@ -139,4 +137,23 @@ return require("packer").startup(function(use)
 	-- Definitive git info
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 	use({ "preservim/tagbar" })
+
+	--Window animations
+	use({
+		"anuvyklack/windows.nvim",
+		requires = {
+			"anuvyklack/middleclass",
+			"anuvyklack/animation.nvim",
+		},
+		config = function()
+			vim.o.winwidth = 10
+			vim.o.winminwidth = 10
+			vim.o.equalalways = false
+			require("windows").setup()
+		end,
+	})
+
+	-- Themes
+	-- Install without configuration
+	use({ "projekt0n/github-nvim-theme" })
 end)

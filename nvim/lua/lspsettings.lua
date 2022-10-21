@@ -1,9 +1,7 @@
-
 --###########################################################################--
 --								 LSP settings								 --
 --###########################################################################--
-require('complitions')
-require('null_ls')
+require('complitions') -- ./complitions.lua
 require('mason-lspconfig').setup()
 
 local signs = {
@@ -31,13 +29,22 @@ local lsp_defaults = {
 }
 
 local lspconfig = require('lspconfig')
-lspconfig.util.default_config = vim.tbl_deep_extend(
+local lsp_defaults = lspconfig.util.default_config
+
+lsp_defaults.capabilities = vim.tbl_deep_extend(
 	'force',
-	lspconfig.util.default_config,
-	lsp_defaults
+	lsp_defaults.capabilities,
+	require('cmp_nvim_lsp').default_capabilities()
 )
 
+-- lspconfig.util.default_config = vim.tbl_deep_extend(
+-- 	'force',
+-- 	lspconfig.util.default_config,
+-- 	lsp_defaults
+-- )
+
 local servers = {
+	'cmake',
 	'sumneko_lua',
 	'tsserver', --npm i -g typescript typescript-language-server
 	'clangd',
@@ -47,33 +54,14 @@ local servers = {
 	'pyright',
 }
 
+
 for _, lsp in pairs(servers) do
-	require('lspconfig')[lsp].setup {}
+	require('lspconfig')[lsp].setup {
+		single_file_support = true,
+		flags = {
+			debounce_text_changes = 150,
+		},
+	}
 end
 
-vim.api.nvim_create_autocmd('User', {
-	pattern = 'LspAttached',
-	desc = 'LSP actions',
-	callback = function()
-		local bufmap = function(mode, lhs, rhs)
-			local opts = { buffer = true }
-			vim.keymap.set(mode, lhs, rhs, opts)
-		end
-		-- Displays hover information about the symbol under the cursor
-		bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-		-- Jump to the definition
-		bufmap('n', '<Leader>d', '<cmd>lua vim.lsp.buf.definition()<CR>')
-		-- Lists all the implementations for the symbol under the cursos
-		bufmap('n', '<Leader>i', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-		-- Jumps to the definition of the type symbol
-		bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-		-- Lists all the references
-		bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-		-- Display a function's signature information
-		bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-		-- Move to the previous diagnostic
-		bufmap('n', '[d', '<cmd>lua vim.lsp.buf.diagnostic.goto_prev()<CR>')
-		-- Move to the next diagnostic
-		bufmap('n', ']d', '<cmd>lua vim.lsp.buf.diagnostic.goto_next()<CR>')
-	end
-})
+require('null_ls')
