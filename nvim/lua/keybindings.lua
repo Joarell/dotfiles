@@ -5,6 +5,7 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
+-- Basic mapping
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "q", ":wq!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
@@ -42,6 +43,8 @@ keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap("n", "<Leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
 
 -- Plugins commnnds
+keymap("v", "<", "<gv")
+keymap("v", ">", ">gv")
 keymap("n", "<Leader>/", ":CommentToggle<CR>")
 keymap("v", "<Leader>/", ":CommentToggle<CR>")
 keymap("v", "<Leader>h", ":<C-H><C-H><C-H><C-H><C-H>HI +<CR>")
@@ -83,16 +86,6 @@ end, { desc = "Say hello" })
 -- Telescope mappins
 local builtin = require("telescope.builtin")
 require("telescope").load_extension("media_files")
-require("telescope").setup({
-	extensions = {
-		media_files = {
-			-- filetypes whitelist
-			-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-			filetypes = { "png", "webp", "jpg", "jpeg" },
-			find_cmd = "rg", -- find command (defaults to `fd`)
-		},
-	},
-})
 require("telescope").setup({
 	extensions = {
 		media_files = {

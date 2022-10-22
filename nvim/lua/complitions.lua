@@ -41,7 +41,7 @@ cmp.setup({
 		fields = { "menu", "abbr", "kind" },
 		format = function(entry, item)
 			local menu_icon = {
-				cmdline = "ﮧ  ",
+				cmdline = "  ",
 				nvim_lsp = " ",
 				luasnip = " ",
 				buffer = "",

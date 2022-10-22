@@ -1,6 +1,7 @@
 --###########################################################################--
 -- 							Settings		 								 --
 --###########################################################################--
+--
 require("keybindings")
 require("starter")
 require("appearance")
@@ -10,11 +11,10 @@ require("lspsettings")
 require("plugins")
 require("neoscroll").setup()
 require("nvim_comment").setup()
-require("bufferline").setup({})
-require("vgit").setup()
+-- require("bufferline").setup({})
 require("mason").setup({
 	ui = {
-		icons = {
+	icons = {
 			package_installed = "✓",
 			package_pending = "➜",
 			package_uninstalled = "✗",
@@ -31,10 +31,11 @@ vim.g.loaded_netrwPlugin = 1
 --###########################################################################--
 local set = vim.opt
 
+set.updatetime = 300
 set.signcolumn = "yes"
 set.guifont = "monospace:h17"
 set.completeopt = { "menu", "menuone", "noselect" }
-set.pumheight = 20
+set.pumheight = 10
 set.showmode = false
 set.timeoutlen = 200
 set.shiftwidth = 4
@@ -50,7 +51,6 @@ set.autoindent = true
 set.smartindent = true
 set.autowrite = true
 set.swapfile = false
-set.pumheight = 10
 set.title = true
 set.undofile = true
 set.termguicolors = true
@@ -62,7 +62,6 @@ vim.bo.filetype = "lua"
 vim.g["zoom#statustext"] = "Z"
 vim.wo.fillchars = "eob: "
 vim.diagnostic.config({ virtual_text = false }) -- disable all notifications on the code field.
-
 
 --###########################################################################--
 -- 							Commands setup									 --
@@ -91,6 +90,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		} })
 	end,
 })
+
+-- vim.api.nvim_create_augroup("lsp_document_highlight", {})
+-- vim.api.nvim_create_autocmd({ "CursorHold" }, {
+-- 	group = "lsp_document_highlight",
+-- 	buffer = bufnr,
+-- 	callback = function()
+-- 		vim.lsp.buf.document_highlight()
+-- 	end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("CursorMoved", {
+-- 	group = "lsp_document_highlight",
+-- 	buffer = bufnr,
+-- 	callback = function()
+-- 		vim.lsp.buf.clear_reference()
+-- 	end,
+-- })
 
 --###########################################################################--
 -- 							Neovide settings 								 --

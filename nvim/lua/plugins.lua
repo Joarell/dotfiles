@@ -22,6 +22,7 @@ return require("packer").startup(function(use)
 	})
 	use({ "nvim-treesitter/nvim-treesitter-context" })
 	use({ "nvim-treesitter/playground" })
+	use({ "nvim-treesitter/nvim-treesitter-refactor" })
 
 	-- You can alias plugin names
 	use({ "dracula/vim", as = "dracula" })
@@ -30,7 +31,11 @@ return require("packer").startup(function(use)
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
 	--BufferLine
-	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
+	-- use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
+	use({
+		"romgrk/barbar.nvim",
+		requires = { "kyazdani42/nvim-web-devicons" },
+	})
 
 	--ColorScheme
 	use("tomasiser/vim-code-dark")
@@ -156,4 +161,7 @@ return require("packer").startup(function(use)
 	-- Themes
 	-- Install without configuration
 	use({ "projekt0n/github-nvim-theme" })
+
+	-- cursor "illuminated"
+	-- use({ "RRethy/vim-illuminate" })
 end)
