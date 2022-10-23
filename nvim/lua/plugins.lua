@@ -32,10 +32,7 @@ return require("packer").startup(function(use)
 
 	--BufferLine
 	-- use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
-	use({
-		"romgrk/barbar.nvim",
-		requires = { "kyazdani42/nvim-web-devicons" },
-	})
+	use({ "romgrk/barbar.nvim" })
 
 	--ColorScheme
 	use("tomasiser/vim-code-dark")
@@ -162,6 +159,6 @@ return require("packer").startup(function(use)
 	-- Install without configuration
 	use({ "projekt0n/github-nvim-theme" })
 
-	-- cursor "illuminated"
-	-- use({ "RRethy/vim-illuminate" })
+	-- Pupup frames
+	use({ "folke/noice.nvim", "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" })
 end)

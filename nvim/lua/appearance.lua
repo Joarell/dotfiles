@@ -1,8 +1,6 @@
 --###########################################################################--
 --						   Appearance settings				 				 --
 --###########################################################################--
--- Packer settings.
---
 vim.cmd([[
   augroup packer_user_config
     autocmd!
@@ -37,7 +35,7 @@ require("vscode").setup({
 	},
 })
 
-	-- Example config in Lua
+-- Example config in Lua
 require("github-theme").setup({
 	transparent = true,
 	dark_float = true,
@@ -64,141 +62,50 @@ require("github-theme").setup({
 })
 
 
-require("lualine").setup()
+require("lualine").setup({
+	sections = {
+		lualine_x = {
+			{
+				require("noice").api.statusline.mode.get,
+				cond = require("noice").api.statusline.mode.has,
+				color = {fg = "#ff9e64"},
+			}
+		}
+	}
+})
+
+-- require("notify").setup({
+-- 	background_colour = "#000000",
+-- })
 require("jj_neon_theme")
 require("treesitter")
 require("tabline")
 
 --###########################################################################--
---						   Bufferline settings				 				 --
+--							Indent settings					 				 --
 --###########################################################################--
--- require("bufferline").setup({
--- 	options = {
--- 		mode = "buffers", -- set to "tabs" to only show tabpages instead
--- 		numbers = "none", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
--- 		close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
--- 		right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
--- 		left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
--- 		middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
--- 		buffer_close_icon = "",
--- 		modified_icon = "●",
--- 		close_icon = "",
--- 		left_trunc_marker = "",
--- 		right_trunc_marker = "",
--- 		indicator = {
--- 			-- icon = "▎", -- this should be omitted if indicator style is not 'icon'
--- 			-- style = "icon", -- can also be 'underline'|'none',
--- 			style = "icon", -- can also be 'underline'|'none',
--- 		},
--- 		--- name_formatter can be used to change the buffer's label in the bufferline.
--- 		--- Please note some names can/will break the
--- 		--- bufferline so use this at your discretion knowing that it has
--- 		--- some limitations that will *NOT* be fixed.
--- 		name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
--- 			-- remove extension from markdown files for example
--- 			if buf.name:match("%.md") then
--- 				return vim.fn.fnamemodify(buf.name, ":t:r")
--- 			end
--- 		end,
--- 		max_name_length = 18,
--- 		max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
--- 		truncate_names = true, -- whether or not tab names should be truncated
--- 		tab_size = 18,
--- 		diagnostics = "nvim_lsp",
--- 		diagnostics_update_in_insert = false,
--- 		diagnostics_indicator = diagnostics_indicator,
--- 		-- NOTE: this will be called a lot so don't do any heavy processing here
--- 		custom_filter = custom_filter,
--- 		offsets = {
--- 			{
--- 				filetype = "undotree",
--- 				text = "Undotree",
--- 				highlight = "PanelHeading",
--- 				padding = 1,
--- 			},
--- 			{
--- 				filetype = "NvimTree",
--- 				text = "Explorer",
--- 				highlight = "PanelHeading",
--- 				padding = 1,
--- 			},
--- 			{
--- 				filetype = "DiffviewFiles",
--- 				text = "Diff View",
--- 				highlight = "PanelHeading",
--- 				padding = 1,
--- 			},
--- 			{
--- 				filetype = "flutterToolsOutline",
--- 				text = "Flutter Outline",
--- 				highlight = "PanelHeading",
--- 			},
--- 			{
--- 				filetype = "packer",
--- 				text = "Packer",
--- 				highlight = "PanelHeading",
--- 				padding = 1,
--- 			},
--- 		},
--- 		color_icons = true, -- whether or not to add the filetype icon highlights
--- 		show_close_icon = false,
--- 		show_tab_indicators = true,
--- 		persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
--- 		-- can also be a table containing 2 custom separators
--- 		-- [focused and unfocused]. eg: { '|', '|' }
--- 		separator_style = "thin",
--- 		enforce_regular_tabs = false,
--- 		always_show_bufferline = true,
--- 		hover = {
--- 			enabled = false, -- requires nvim 0.8+
--- 			delay = 200,
--- 			reveal = { "close" },
--- 		},
--- 		sort_by = "id",
--- 	},
--- })
+local set = vim.opt
+set.list = true
+set.listchars:append("eol:↴")
+set.listchars:append("space:•")
 
+vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
+vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
+vim.cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
+vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
+vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
+vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 
--- default configuration
--- require('illuminate').configure({
---     -- providers: provider used to get references in the buffer, ordered by priority
---     providers = {
---         'lsp',
---         'treesitter',
---         'regex',
---     },
---     -- delay: delay in milliseconds
---     delay = 50,
---     -- filetype_overrides: filetype specific overrides.
---     -- The keys are strings to represent the filetype while the values are tables that
---     -- supports the same keys passed to .configure except for filetypes_denylist and filetypes_allowlist
---     filetype_overrides = {},
---     -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
---     filetypes_denylist = {
---         'dirvish',
---         'fugitive',
---     },
---     -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
---     filetypes_allowlist = {},
---     -- modes_denylist: modes to not illuminate, this overrides modes_allowlist
---     modes_denylist = {},
---     -- modes_allowlist: modes to illuminate, this is overriden by modes_denylist
---     modes_allowlist = {},
---     -- providers_regex_syntax_denylist: syntax to not illuminate, this overrides providers_regex_syntax_allowlist
---     -- Only applies to the 'regex' provider
---     -- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
---     providers_regex_syntax_denylist = {},
---     -- providers_regex_syntax_allowlist: syntax to illuminate, this is overriden by providers_regex_syntax_denylist
---     -- Only applies to the 'regex' provider
---     -- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
---     providers_regex_syntax_allowlist = {},
---     -- under_cursor: whether or not to illuminate under the cursor
---     under_cursor = true,
---     -- large_file_cutoff: number of lines at which to use large_file_config
---     -- The `under_cursor` option is disabled when this cutoff is hit
---     large_file_cutoff = nil,
---     -- large_file_config: config to use for large files (based on large_file_cutoff).
---     -- Supports the same keys passed to .configure
---     -- If nil, vim-illuminate will be disabled for large files.
---     large_file_overrides = nil,
--- })
+require("indent_blankline").setup({
+	show_end_of_line = true,
+	show_current_context = true,
+	show_current_context_start = true,
+	-- char_highlight_list = {
+	-- 	-- "IndentBlanklineIndent1",
+	-- 	"IndentBlanklineIndent2",
+	-- 	"IndentBlanklineIndent3",
+	-- 	"IndentBlanklineIndent4",
+	-- 	"IndentBlanklineIndent5",
+	-- 	"IndentBlanklineIndent6",
+	-- },
+})

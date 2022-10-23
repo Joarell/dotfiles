@@ -128,7 +128,7 @@ local function change_colors(component, side)
 					v = colors.purple,
 					["␖"] = colors.blue,
 					V = colors.blue,
-					c = colors.magenta,
+					c = colors.orange,
 					no = colors.red,
 					s = colors.orange,
 					S = colors.orange,

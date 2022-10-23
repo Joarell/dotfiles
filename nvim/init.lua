@@ -1,7 +1,8 @@
 --###########################################################################--
 -- 							Settings		 								 --
 --###########################################################################--
---
+require("popup")
+require("tscope")
 require("keybindings")
 require("starter")
 require("appearance")
@@ -35,7 +36,7 @@ set.updatetime = 300
 set.signcolumn = "yes"
 set.guifont = "monospace:h17"
 set.completeopt = { "menu", "menuone", "noselect" }
-set.pumheight = 10
+set.pumheight = 0
 set.showmode = false
 set.timeoutlen = 200
 set.shiftwidth = 4
@@ -55,7 +56,7 @@ set.title = true
 set.undofile = true
 set.termguicolors = true
 set.completeopt = { "menu", "menuone", "noselect" }
-set.winblend = 10
+set.winblend = 0
 set.clipboard = ""
 vim.wo.colorcolumn = "80"
 vim.bo.filetype = "lua"

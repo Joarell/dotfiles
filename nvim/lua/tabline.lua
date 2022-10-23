@@ -21,8 +21,8 @@ require("bufferline").setup({
 	clickable = true,
 
 	-- Excludes buffers from the tabline
-	exclude_ft = { "javascript" },
-	exclude_name = { "package.json" },
+	-- exclude_ft = { "javascript" },
+	-- exclude_name = { "package.json" },
 
 	-- Show every buffer
 	hide = { current = false, inactive = false, visible = false },
@@ -40,8 +40,8 @@ require("bufferline").setup({
 
 	-- Configure icons on the bufferline.
 	icon_separator_active = "⏽",
-	icon_separator_inactive = "⏽",
-	icon_close_tab = " ",
+	icon_separator_inactive = " ⏽",
+	icon_close_tab = " ",
 	icon_close_tab_modified = "●",
 	icon_pinned = "車",
 
@@ -51,10 +51,10 @@ require("bufferline").setup({
 	insert_at_start = false,
 
 	-- Sets the maximum padding width with which to surround each tab
-	maximum_padding = 0,
+	maximum_padding = 1,
 
 	-- Sets the minimum padding width with which to surround each tab
-	minimum_padding = 0,
+	minimum_padding = 1,
 
 	-- Sets the maximum buffer name length.
 	maximum_length = 30,
@@ -85,16 +85,16 @@ map("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
 map("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
 map("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
 -- Goto buffer in position...
-map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
-map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
-map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
-map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
-map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
-map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
-map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
-map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
-map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
-map("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
+map("n", "<leader>1", "<Cmd>BufferGoto 1<CR>", opts)
+map("n", "<leader>2", "<Cmd>BufferGoto 2<CR>", opts)
+map("n", "<leader>3", "<Cmd>BufferGoto 3<CR>", opts)
+map("n", "<leader>4", "<Cmd>BufferGoto 4<CR>", opts)
+map("n", "<leader>5", "<Cmd>BufferGoto 5<CR>", opts)
+map("n", "<leader>6", "<Cmd>BufferGoto 6<CR>", opts)
+map("n", "<leader>7", "<Cmd>BufferGoto 7<CR>", opts)
+map("n", "<leader>8", "<Cmd>BufferGoto 8<CR>", opts)
+map("n", "<leader>9", "<Cmd>BufferGoto 9<CR>", opts)
+map("n", "<leader>10", "<Cmd>BufferLast<CR>", opts)
 -- Pin/unpin buffer
 map("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
 -- Close buffer

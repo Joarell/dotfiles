@@ -52,6 +52,7 @@ local servers = {
 	'bashls', --npm i -g bash-language-server
 	'rust_analyzer',
 	'pyright',
+	'jsonls',
 }
 
 
@@ -64,4 +65,4 @@ for _, lsp in pairs(servers) do
 	}
 end
 
-require('null_ls')
+-- require('null_ls') --(This plugin is in STANDBY)
