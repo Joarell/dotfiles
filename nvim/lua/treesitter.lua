@@ -25,6 +25,7 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 		"rust",
 		"cmake",
 		"vim",
+		"regex",
 	},
 	sync_install = true,
 	additional_vim_regex_highlighting = true,
@@ -53,6 +54,7 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 		smart_rename = { enable = true },
 		navigation = { enable = true },
 	},
+	additional_vim_higlighting = true,
 })
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()

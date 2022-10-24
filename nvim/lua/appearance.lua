@@ -69,14 +69,14 @@ require("lualine").setup({
 				require("noice").api.statusline.mode.get,
 				cond = require("noice").api.statusline.mode.has,
 				color = {fg = "#ff9e64"},
-			}
+			},
 		}
 	}
 })
 
--- require("notify").setup({
--- 	background_colour = "#000000",
--- })
+require("notify").setup({
+	background_colour = "#000000",
+})
 require("jj_neon_theme")
 require("treesitter")
 require("tabline")
