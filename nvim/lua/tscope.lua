@@ -40,3 +40,4 @@ keymap("n", "tk", ":Telescope keymaps<CR>", opts)
 keymap("n", "tm", ":Telescope media_files<CR>", opts)
 keymap("n", "tn", ":Telescope notify<CR>", opts)
 keymap("n", "to", ":Telescope oldfiles<CR>", opts)
+
