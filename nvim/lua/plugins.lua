@@ -7,6 +7,9 @@ return require("packer").startup(function(use)
 	--Faster starters
 	use("nathom/filetype.nvim")
 
+	-- Discord app monitor
+	use({ "andweeb/presence.nvim" })
+
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
@@ -71,19 +74,18 @@ return require("packer").startup(function(use)
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
 	})
-	use({ "dcampos/cmp-snippy" }) --x
-	use({ "dcampos/nvim-snippy" })
-	use({ "quangnguyen30192/cmp-nvim-ultisnips" })
-	use({ "SirVer/ultisnips" })
-	use({ "hrsh7th/vim-vsnip" })
-	use({ "hrsh7th/cmp-vsnip" })
-	use({ "hrsh7th/cmp-cmdline" }) -- added recently
+	-- use({ "dcampos/cmp-snippy" })
+	-- use({ "dcampos/nvim-snippy" })
+	-- use({ "quangnguyen30192/cmp-nvim-ultisnips" })
+	-- use({ "SirVer/ultisnips" })
+	-- use({ "hrsh7th/cmp-vsnip" })
+	use({ "hrsh7th/cmp-cmdline" })
 	use({ "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-buffer" })
 	use({ "hrsh7th/cmp-path" })
 	use({ "saadparwaiz1/cmp_luasnip" })
 	use({ "hrsh7th/cmp-nvim-lsp" })
-	use({ "L3MON4D3/LuaSnip" })
+	use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp", tag = "v<CurrentMajor>.*"})
 	use({ "rafamadriz/friendly-snippets" })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
@@ -93,6 +95,12 @@ return require("packer").startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 	use({ "windwp/nvim-ts-autotag" })
+	use({ "jayp0521/mason-null-ls.nvim" })
+	use({ "onsails/lspkind.nvim" })
+	use({ "uga-rosa/cmp-dictionary" })
+	use({ "tzachar/cmp-tabnine", run="./install.sh", requires = "hrsh7th/nvim-cmp" })
+	use({ "shinglyu/vim-codespell" })
+
 
 	--Comment
 	use("terrortylor/nvim-comment")
@@ -105,9 +113,7 @@ return require("packer").startup(function(use)
 	use({ "tveskag/nvim-blame-line" })
 	use({
 		"tanvirtin/vgit.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
+		requires = { "nvim-lua/plenary.nvim" },
 	})
 	use({ "rhysd/git-messenger.vim" })
 
@@ -161,4 +167,5 @@ return require("packer").startup(function(use)
 
 	-- Pupup frames
 	use({ "folke/noice.nvim", "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" })
+
 end)

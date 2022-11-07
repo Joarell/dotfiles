@@ -1,6 +1,7 @@
 --###########################################################################--
--- 							Bindings settings 								 --
+--							Bindings SEttings 								 --
 --###########################################################################--
+local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
@@ -19,7 +20,7 @@ keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<A-g>", ":G <cr>", opts)
 keymap("n", "<Leader>gs", ":G Status<cr>", opts)
 keymap("n", "<A-g>c", ":G commit<cr>", opts)
-keymap("n", "<A-g>p", ":G push<cr>", opts)
+keymap("n", "<Leader>gp", ":G push<cr>", opts)
 keymap("n", "<Leader>gc", ":G commit<cr>", opts)
 keymap("n", "<Leader>r", ":call vimspector#Restart()<cr>", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
@@ -30,8 +31,8 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==g", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==g", opts)
 keymap("v", "K", ":m '<-2<CR>gv-gv", opts)
 keymap("v", "J", ":m '>+1<CR>gv-gv", opts)
-keymap("n", "vv", "<C-w>v", opts)
-keymap("n", "ss", "<C-w>s", opts)
+keymap("n", "pv", "<C-w>v", opts)
+keymap("n", "ps", "<C-w>s", opts)
 keymap("n", "<Leader>ac", ":lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
 keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
@@ -44,23 +45,41 @@ keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap("n", "<Leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
 
+
+-- Luasnip bindings
+keymap({"i", "s"}, "<C-s>", function()
+	if ls.expand_or_jumpable() then
+		ls.expand_or_jumpable()
+	end
+end, opts)
+keymap({"i", "s"}, "<C-b>", function()
+	if ls.jumpable(-1) then
+		ls.jump(-1)
+	end
+end, opts)
+keymap({"i"}, "<C-l>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, opts)
+
+
 -- Plugins commnnds
 keymap("i", "<S-Tab>", "<right>")
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 keymap("v", "<C-a>a", "<C-a>")
-keymap("n", "<Leader>/", ":CommentToggle<CR>", opts)
-keymap("v", "<Leader>/", ":CommentToggle<CR>", opts)
+keymap({"n", "v"}, "<Leader>/", ":CommentToggle<CR>", opts)
 keymap("v", "<Leader>h", ":<C-H><C-H><C-H><C-H><C-H>HI +<CR>")
 keymap("v", "<Leader>m", ":<C-H><C-H><C-H><C-H><C-H>HSHighlight ")
-keymap("n", "<Leader><right>", ":HI ><CR>")
-keymap("n", "<Leader><left>", ":HI <<CR>")
-keymap("n", "<Leader>[", ":HI {<CR>")
-keymap("n", "<Leader>]", ":HI }<CR>")
-keymap("n", "<Leader>c", ":HI Clear<CR>")
+keymap("n", "<Leader><right>", ":HI ><CR>", opts)
+keymap("n", "<Leader><left>", ":HI <<CR>", opts)
+keymap("n", "<Leader>[", ":HI {<CR>", opts)
+keymap("n", "<Leader>]", ":HI }<CR>", opts)
+keymap("n", "<Leader>c", ":HI Clear<CR>", opts)
 keymap("n", "<Leader>p", ":PackerUpdate<CR>", opts)
 keymap("n", "<Leader>ps", ":PackerUpdate<CR>", opts)
-keymap("n", "<Leader>b", ":ToggleBlameLine<CR>")
+keymap("n", "<Leader>b", ":ToggleBlameLine<CR>", opts)
 keymap("n", "<C-w>|", ":WindowsMaximizeVertically<CR>", opts)
 keymap("n", "<C-w>-", ":WindowsMaximizeHorizontally<CR>", opts)
 keymap("n", "<Leader>hl", ":TSHighlightCapturesUnderCursor<CR>", opts)
@@ -83,6 +102,7 @@ keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+	vim.opt.foldcolumn = "4"
 	print("This key binding folds all indentation lines to protect your code! Your Welcome! ;D")
 end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! ;D" })
 keymap("n", "Q", function()

@@ -74,9 +74,6 @@ require("lualine").setup({
 	}
 })
 
-require("notify").setup({
-	background_colour = "#000000",
-})
 require("jj_neon_theme")
 require("treesitter")
 require("tabline")

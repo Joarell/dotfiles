@@ -587,6 +587,7 @@ alias la = exa -a --color=always --group-directories-first --icons   # all files
 alias neovide = neovide --neovim-bin nvim
 
 #Pacman for software managment
+alias lg = lazygit 
 alias upall = topgrade 
 alias search = sudo pacman -Qs 
 alias remove = sudo pacman -R 

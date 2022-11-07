@@ -213,14 +213,14 @@ local getgit = (vim.fn.finddir(".git", getpath .. ";"))
 print(getgit)
 if (#getgit > 0) then
 	local comp = function ()
-		return "    "
+		return "   "
 	end
 	change_colors(comp, "left")
 end
 
 
 local comp = function()
-	return " 喝 ﬧ       "
+	return "  喝 ﬧ       "
 end
 change_colors(comp, "left")
 
@@ -260,8 +260,8 @@ local comp = function()
 end
 change_colors(comp, "right")
 
--- -- Insert mid section. You can make any number of sections in neovim :)
--- -- for lualine it's any number greater then 2
+-- Insert mid section. You can make any number of sections in neovim :)
+-- for lualine it's any number greater then 2
 -- ins_right {
 -- 	function()
 -- 		return '%='
@@ -274,7 +274,7 @@ change_colors(comp, "right")
 ins_right({
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
-	symbols = { error = " ", warn = " ", info = " " },
+	symbols = { error = " ", warn = " ", info = " " },
 	diagnostics_color = {
 		color_error = { fg = colors.red },
 		color_warn = { fg = colors.orange },
@@ -286,20 +286,20 @@ ins_right({
 ins_right({
 	-- Lsp server name .
 	function()
-		-- local msg = '罹'
-		local msg = " "
+		local msg = '罹'
+		-- local msg = " "
 		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 		local clients = vim.lsp.get_active_clients()
 		if next(clients) == nil then
 			return msg
 		end
 		for _, client in ipairs(clients) do
-			local filetypes = client.config.filetypes
+			local filetypes = client.config.filetypes or {}
 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
 				return client.name
 			end
 		end
-		return msg
+		return client.name
 	end,
 	-- icon = ' LSP  ',
 	-- icon = ' LSP  ',
@@ -325,6 +325,7 @@ local comp = function()
 change_colors(comp, "right")
 	return "    "
 end
+
 change_colors(comp, "right")
 
 ins_right({ "filetype" })

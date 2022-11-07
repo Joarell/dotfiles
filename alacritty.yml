@@ -104,7 +104,7 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     # family: CodeNewRoman Nerd Font
-    family: MesloLGSDZ Nerd Font
+    family: Hack Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: regular
@@ -114,7 +114,7 @@ font:
     # Font family
     # family: MesloLGL Nerd Font Mono
     # family: CodeNewRoman Nerd Font
-    family: MesloLGSDZ Nerd Font
+    family: Hack Nerd Font
     style: Bold
     size: 1000
     # If the bold family is not specified, it will fall back to the
@@ -131,7 +131,7 @@ font:
     # value specified for the normal font.
     # family: MesloLGL Nerd Font Mono
     # family: CodeNewRoman Nerd Font
-    family: MesloLGSDZ Nerd Font
+    family: Hack Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -149,7 +149,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 7.0
+  size: 7.5
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.

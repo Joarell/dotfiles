@@ -20,7 +20,9 @@ export EDITOR=nvim
 export PATH="$HOME/.cargo/bin":$PATH
 export STARSHIP_CACHE=~/.starship/cache
 
+alias lg="lazygit"
 alias vim="nvim-qt"
+alias vide="neovide"
 alias studio="$HOME/android-studio/bin/studio.sh"
 alias android="ssh -p 8022 192.168.0.2"
 alias c="clear"

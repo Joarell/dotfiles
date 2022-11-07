@@ -121,4 +121,14 @@ require("noice").setup({
 		---@type NoiceFormatOptions
 		format = {}, --- @see section on formatting
 	},
+	lsp_progress_done = {
+		{"", hl_group = "NoiceLspProgressSpinner"}
+	},
+})
+
+--###########################################################################--
+--								Notify Settings								 --
+--###########################################################################--
+require("notify").setup({
+	background_colour = "#000000",
 })
