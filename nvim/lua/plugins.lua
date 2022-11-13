@@ -58,8 +58,9 @@ return require("packer").startup(function(use)
 	use({ "nvim-telescope/telescope-symbols.nvim" })
 	use({ "nvim-lua/popup.nvim" })
 
-	--IndentBlankline
+	--IndentBlankline/Fold
 	use({ "lukas-reineke/indent-blankline.nvim" })
+	use({ "anuvyklack/pretty-fold.nvim" })
 
 	--NewScroll
 	use("karb94/neoscroll.nvim")
@@ -79,13 +80,15 @@ return require("packer").startup(function(use)
 	-- use({ "quangnguyen30192/cmp-nvim-ultisnips" })
 	-- use({ "SirVer/ultisnips" })
 	-- use({ "hrsh7th/cmp-vsnip" })
+	use({ "hrsh7th/cmp-nvim-lsp-signature-help" })
+	use({ "ray-x/cmp-treesitter" })
 	use({ "hrsh7th/cmp-cmdline" })
 	use({ "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-buffer" })
 	use({ "hrsh7th/cmp-path" })
 	use({ "saadparwaiz1/cmp_luasnip" })
 	use({ "hrsh7th/cmp-nvim-lsp" })
-	use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp", tag = "v<CurrentMajor>.*"})
+	use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp", tag = "v<CurrentMajor>.*" })
 	use({ "rafamadriz/friendly-snippets" })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
@@ -98,9 +101,7 @@ return require("packer").startup(function(use)
 	use({ "jayp0521/mason-null-ls.nvim" })
 	use({ "onsails/lspkind.nvim" })
 	use({ "uga-rosa/cmp-dictionary" })
-	use({ "tzachar/cmp-tabnine", run="./install.sh", requires = "hrsh7th/nvim-cmp" })
-	use({ "shinglyu/vim-codespell" })
-
+	-- use({ "tzachar/cmp-tabnine", run = "./install.sh", require = "hrsh7th/nvim-cmp" })
 
 	--Comment
 	use("terrortylor/nvim-comment")
@@ -164,8 +165,8 @@ return require("packer").startup(function(use)
 	-- Themes
 	-- Install without configuration
 	use({ "projekt0n/github-nvim-theme" })
+	use({ "liuchengxu/vista.vim" })
 
 	-- Pupup frames
 	use({ "folke/noice.nvim", "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" })
-
 end)

@@ -3,7 +3,22 @@
 --###########################################################################--
 require("mason-null-ls").setup()
 require("complitions") -- ./complitions.lua
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"cssls",
+		"html",
+		"eslint",
+		"cmake",
+		"sumneko_lua",
+		"tsserver", --npm i -g typescript typescript-language-server
+		"clangd",
+		"bashls", --npm i -g bash-language-server
+		"rust_analyzer",
+		"pyright",
+		"jsonls",
+	}
+})
+
 require("mason").setup({
 	ui = {
 		icons = {
@@ -15,8 +30,6 @@ require("mason").setup({
 })
 
 local signs = {
-	-- Error = " ",
-	-- Error = "",
 	Error = "",
 	Warn = " ",
 	Hint = " ",
@@ -45,13 +58,14 @@ local lsp_defaults = lspconfig.util.default_config
 lsp_defaults.capabilities =
 vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
--- lspconfig.util.default_config = vim.tbl_deep_extend(
--- 	'force',
--- 	lspconfig.util.default_config,
--- 	lsp_defaults
--- )
+lspconfig.util.default_config = vim.tbl_deep_extend(
+	'force',
+	lspconfig.util.default_config,
+	lsp_defaults
+)
 
 local servers = {
+	"cssls",
 	"eslint",
 	"cmake",
 	"sumneko_lua",
@@ -73,4 +87,4 @@ for _, lsp in pairs(servers) do
 	})
 end
 
-require('null_ls')
+require("null_ls")
