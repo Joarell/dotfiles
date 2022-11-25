@@ -220,7 +220,7 @@ end
 
 
 local comp = function()
-	return "  喝 ﬧ       "
+	return " 喝 ﬧ       "
 end
 change_colors(comp, "left")
 
@@ -303,7 +303,7 @@ ins_right({
 	end,
 	-- icon = ' LSP  ',
 	-- icon = ' LSP  ',
-	icon = "ﮧ LSP ",
+	icon = " LSP ",
 	color = { fg = colors.pink, gui = "bold" },
 })
 

@@ -10,7 +10,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# ============================ Settings ================================
+# ============================== Settings ======================================
 . $HOME/.asdf/asdf.sh
 
 export PATH="$HOME/.local/bin":$PATH
@@ -36,7 +36,13 @@ alias psql="psql -U postgres"
 
 eval "$(starship init zsh)"
 
-# Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
+
+#============================== Vi mode ========================================
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH

@@ -1,5 +1,5 @@
 --###########################################################################--
---						Luasnip HTML										 --
+--								Luasnip Git.								 --
 --###########################################################################--
 local ls = require("luasnip")
 local s = ls.snippet
@@ -19,26 +19,27 @@ local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
  
 local group = vim.api.nvim_create_augroup("LuaSnippets", { clear = true})
-local file_type = "*.html"
+local file_type = "COMMIT_EDITMSG"
 
-ls.add_snippets("html", {
-	s("!", {
-	t({"<!DOCTYPE html>",
-		"<html lang=\"en\">",
-		"\t\t<head>",
-		"\t\t\t<meta charset=\"utf-8\">",
-		"\t\t\t<title>Untitle</title>",
-		"\t\t\t<meta name=\"viwport\" content=\"width=device-width, initial-scale-1\">",
-		"\t\t\t<link rel=\"stylesheet\" href=\"index.cssh\">",
-		"\t\t</head>",
-		"\t\t<body>",
-			"\t\t<main>",
-				"\t\t\t<h1>",
-					"\t\t\t\t",
-				"\t\t\t</h1>",
-			"\t\t</main>",
-		"\t\t</body>",
-		"<html>",
-	}) }),
-})
-
+ls.add_snippets("all", {
+	s("git",
+		fmt([[
+			{} {}: {}
+		]],
+			{
+				-- i(1, "type"),
+				c(1, {t("build"),
+					t("chore"),
+					t("feat"),
+					t("fix"),
+					t("docs"),
+					t("refactor"),
+					t("perf"),
+					t("style"),
+				}),
+				c(2, {t("scope"), i(1, "scope")}),
+				i(3, "-- Commit message"),
+			}
+		)
+	)}
+)
