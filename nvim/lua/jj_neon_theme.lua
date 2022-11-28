@@ -174,7 +174,7 @@ end
 -- change_colors(seprator( "  ", "left"), "left")
 
 local comp = function()
-	return "⏽  "
+	return "  "
 end
 change_colors(comp, "left")
 
@@ -345,7 +345,7 @@ change_colors(comp, "right")
 ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
 local comp = function()
-	return "⏽"
+	return ""
 end
 change_colors(comp, "right")
 

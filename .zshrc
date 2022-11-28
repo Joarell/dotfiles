@@ -20,6 +20,7 @@ export EDITOR=nvim
 export PATH="$HOME/.cargo/bin":$PATH
 export STARSHIP_CACHE=~/.starship/cache
 
+alias GS="git switch "
 alias ala="./alacritty/target/release/alacritty"
 alias lg="lazygit"
 alias vim="nvim-qt"

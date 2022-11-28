@@ -2,7 +2,7 @@
 --								 LSP settings								 --
 --###########################################################################--
 require("mason-null-ls").setup()
-require("complitions") -- ./complitions.lua
+require("completions") -- ./complitions.lua
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"cssls",
