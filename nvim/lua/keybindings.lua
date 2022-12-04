@@ -5,8 +5,9 @@ local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
-
--- Basic mapping
+--[[************************************************************************]]--
+--[[                             Basic mappings                             ]]--
+--[[************************************************************************]]--
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "<A-q>", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
@@ -44,36 +45,38 @@ keymap("n", "gw", ":lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
 keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
-keymap( {"i", "v"}, "<C-c>", "<Esc>", opts)
+keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
 keymap("n", "<Leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
-keymap("v", "<C-s>", ":SnipRun<cr>" , opts)
-keymap("n", "vu", function ()
-	vim.diagnostic.config({ virtual_text = false})
+keymap("v", "<C-s>", ":SnipRun<cr>", opts)
+keymap("n", "vu", function()
+	vim.diagnostic.config({ virtual_text = false })
 end, opts)
-keymap("n", "vs", function ()
-	vim.diagnostic.config({ virtual_text = true})
+keymap("n", "vs", function()
+	vim.diagnostic.config({ virtual_text = true })
 end, opts)
 
-
--- Luasnip bindings
-keymap({"i"}, "<C-k>", function()
+--[[************************************************************************]]--
+--[[                           Luasnip bindings:                            ]]--
+--[[************************************************************************]]--
+keymap({ "i" }, "<C-k>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
 	end
 end, opts)
-keymap({"i"}, "<C-j>", function()
+keymap({ "i" }, "<C-j>", function()
 	if ls.choice_active() then
 		ls.change_choice(-1)
 	end
 end, opts)
 
-
--- Plugins commnnds
+--[[************************************************************************]]--
+--[[                            Plugins commands                            ]]--
+--[[************************************************************************]]--
 keymap("i", "<S-Tab>", "<right>")
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 keymap("v", "<C-a>a", "<C-a>")
-keymap({"n", "v"}, "<Leader>/", ":CommentToggle<CR>", opts)
+keymap({ "n", "v" }, "<Leader>/", ":CommentToggle<CR>", opts)
 keymap("v", "<Leader>h", ":<C-H><C-H><C-H><C-H><C-H>HI +<CR>")
 keymap("v", "<Leader>m", ":<C-H><C-H><C-H><C-H><C-H>HSHighlight ")
 keymap("n", "<Leader><right>", ":HI ><CR>", opts)
@@ -87,12 +90,18 @@ keymap("n", "<Leader>b", ":ToggleBlameLine<CR>", opts)
 keymap("n", "<C-w>-", ":WindowsMaximizeVertically<CR>", opts)
 keymap("n", "<C-w>|", ":WindowsMaximizeHorizontally<CR>", opts)
 keymap("n", "<Leader>hl", ":TSHighlightCapturesUnderCursor<CR>", opts)
-keymap({"n", "v"}, "<A-t>", ":Pantran<CR>", opts)
-keymap({"n", "v"}, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
-keymap({"n", "v"}, "<Leader>xh", ":RegexplainerHide<CR>", opts)
+keymap({ "n", "v" }, "<A-t>", ":Pantran<CR>", opts)
+keymap({ "n", "v" }, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
+keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
+keymap({ "n", "i" }, "<Leader>ac", ':lua require("nvim-comment-frame").add_comment()<CR>', opts)
+keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multiline_comment()<CR>', opts)
+keymap({ "n", "v" }, "<A-L>", ":CBacbox<CR>", opts) -- left alignment adaptable
+keymap({ "n", "v" }, "<A-A>", ":CBaccbox<CR>", opts) -- center alignment
+keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 
-
--- "F" functions
+--[[************************************************************************]]--
+--[[                             "F" functions:                             ]]--
+--[[************************************************************************]]--
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
 keymap("n", "<F2>", ":call vimspector#ClearLineBreakpoint()<CR>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
@@ -106,7 +115,10 @@ keymap("n", "<F10>", ":call vimspector#StepOver()<CR>", opts)
 keymap("n", "<F11>", ":call vimspector#Continue()<CR>", opts)
 keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 
--- Folder function
+--[[************************************************************************]]--
+--[[                            Folder function:                            ]]--
+--[[************************************************************************]]--
+
 keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

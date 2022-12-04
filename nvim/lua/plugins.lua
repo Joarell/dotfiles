@@ -9,16 +9,24 @@ local packer = require("packer")
 
 packer.startup({
 	function(use)
-		--Faster starters
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Faster starters                                  │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use("nathom/filetype.nvim")
 
-		-- Discord app monitor
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		Discord app monitor                                │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "andweeb/presence.nvim" })
 
-		-- Packer can manage itself
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		Packer can manage itself                           │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use("wbthomason/packer.nvim")
 
-		-- icons
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		icons                                              │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "nvim-tree/nvim-web-devicons" })
 
 		-- You can specify multiple plugins in a single call
@@ -33,17 +41,25 @@ packer.startup({
 		use({ "nvim-treesitter/playground" })
 		use({ "nvim-treesitter/nvim-treesitter-refactor" })
 
-		-- You can alias plugin names
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		You can alias plugin names                         │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "dracula/vim", as = "dracula" })
 
-		--Lua status line
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Lua status line                                  │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
-		--BufferLine
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--BufferLine                                       │
+		--  ╰──────────────────────────────────────────────────────────╯
 		-- use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 		use({ "romgrk/barbar.nvim" })
 
-		--ColorScheme
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--ColorScheme                                      │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use("tomasiser/vim-code-dark")
 		use("norcalli/nvim-colorizer.lua")
 		use({ "https://github.com/sainnhe/sonokai" })
@@ -53,7 +69,9 @@ packer.startup({
 		use({ "azabiong/vim-highlighter" })
 		use({ "chriskempson/base16-vim" })
 
-		--Telescope
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Telescope                                        │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({
 			"nvim-telescope/telescope.nvim",
 			tag = "0.1.0",
@@ -64,19 +82,27 @@ packer.startup({
 		use({ "nvim-telescope/telescope-symbols.nvim" })
 		use({ "nvim-lua/popup.nvim" })
 
-		--IndentBlankline/Fold
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--IndentBlankline/Fold                             │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "lukas-reineke/indent-blankline.nvim" })
 		use({ "anuvyklack/pretty-fold.nvim" })
 		use({ "lukas-reineke/virt-column.nvim" })
 
-		--NewScroll
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--NewScroll                                        │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use("karb94/neoscroll.nvim")
 
-		--Debugger
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Debugger                                         │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use("puremourning/vimspector")
 		use({ "michaelb/sniprun", run = "bash ./install.sh" })
 
-		--LSP and autocomplitions.
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--LSP and autocomplitions.                         │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({
 			"williamboman/mason.nvim",
 			"williamboman/nvim-lsp-installer",
@@ -121,7 +147,10 @@ packer.startup({
 			},
 		})
 
-		--Comment
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Comment                                          │
+		--  ╰──────────────────────────────────────────────────────────╯
+		use("LudoPinelli/comment-box.nvim")
 		use("terrortylor/nvim-comment")
 		-- Lua
 		use({
@@ -135,11 +164,24 @@ packer.startup({
 				})
 			end,
 		})
+		use({
+			"s1n7ax/nvim-comment-frame",
+			requires = {
+				{ "nvim-treesitter" },
+			},
+			config = function()
+				require("nvim-comment-frame").setup()
+			end,
+		})
 
-		--Neovim Ranger
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Neovim Ranger                                    │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "kevinhwang91/rnvimr" })
 
-		--Git Fungitive
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Git Fungitive                                    │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "tpope/vim-fugitive" })
 		use({ "tveskag/nvim-blame-line" })
 		use({
@@ -148,8 +190,10 @@ packer.startup({
 		})
 		use({ "rhysd/git-messenger.vim" })
 
-		--Trouble
-		-- Lua
+		--  ╭───────────╮
+		--  │ --Trouble │
+		--  │    Lua    │
+		--  ╰───────────╯
 		use({
 			"folke/trouble.nvim",
 			requires = "kyazdani42/nvim-web-devicons",
@@ -172,12 +216,13 @@ packer.startup({
 		-- 	end,
 		-- })
 
-
 		-- Definitive git info
 		use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 		use({ "preservim/tagbar" })
 
-		--Window animations
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		--Window animations                                │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({
 			"anuvyklack/windows.nvim",
 			requires = {
@@ -192,13 +237,17 @@ packer.startup({
 			end,
 		})
 
-		-- Themes
-		-- Install without configuration
+		--  ╭───────────────────────────────╮
+		--  │            Themes             │
+		--  │ Install without configuration │
+		--  ╰───────────────────────────────╯
 		use({ "projekt0n/github-nvim-theme" })
 		use({ "liuchengxu/vista.vim" })
 
-		-- Pupup frames
-		-- Packer
+		--  ╭──────────────╮
+		--  │ Pupup frames │
+		--  │    Packer    │
+		--  ╰──────────────╯
 		use({
 			"folke/noice.nvim",
 			config = function()
@@ -216,8 +265,20 @@ packer.startup({
 			},
 		})
 
-		-- Translation
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 		Translation                                        │
+		--  ╰──────────────────────────────────────────────────────────╯
 		use({ "potamides/pantran.nvim" })
+		use({
+			"aserowy/tmux.nvim",
+			config = function()
+				require("tmux").setup()
+			end,
+		})
+
+		--  ╭──────────────────────────────────────────────────────────╮
+		--  │ 	This is the float settgin to open packer:              │
+		--  ╰──────────────────────────────────────────────────────────╯
 	end,
 	config = {
 		display = {

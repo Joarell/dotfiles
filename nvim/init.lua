@@ -47,7 +47,6 @@ set.autoindent = true
 set.smartindent = true
 set.autowrite = true
 set.swapfile = false
-set.title = true
 set.undofile = true
 set.termguicolors = true
 set.winblend = 30
@@ -244,7 +243,7 @@ require("todo-comments").setup({
 		HACK = { icon = " ", color = "warning" },
 		WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
 		PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-		NOTE = { icon = " ", color = "hint", alt = { "INFO", "UPDATE" } },
+		NOTE = { icon = " ", color = "hint", alt = { "INFO", "UPDATE", "INSIDE" } },
 		TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 	},
 	gui_style = {

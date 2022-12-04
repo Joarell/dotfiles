@@ -132,3 +132,116 @@ require("pretty-fold").setup({
 		},
 	},
 })
+
+--###########################################################################--
+--							Frame settings					 				 --
+--###########################################################################--
+require("nvim-comment-frame").setup({
+	languages = {
+		-- configuration for Lua programming language
+		-- @NOTE global configuration will be overridden by language level
+		-- configuration if provided
+		lua = {
+			-- start the comment with this string
+			start_str = "--[[",
+
+			-- end the comment line with this string
+			end_str = "]]--",
+
+			-- fill the comment frame border with this character
+			fill_char = "*",
+
+			-- width of the comment frame
+			frame_width = 80,
+
+			-- wrap the line after 'n' characters
+			line_wrap_len = 70,
+
+			-- automatically indent the comment frame based on the line
+			auto_indent = false,
+
+			-- add comment above the current line
+			add_comment_above = false,
+		},
+		javascript = {
+			-- start the comment with this string
+			start_str = "//|",
+
+			-- end the comment line with this string
+			end_str = "|//",
+
+			-- fill the comment frame border with this character
+			fill_char = "*",
+
+			-- width of the comment frame
+			frame_width = 80,
+
+			-- wrap the line after 'n' characters
+			line_wrap_len = 70,
+
+			-- automatically indent the comment frame based on the line
+			auto_indent = false,
+
+			-- add comment above the current line
+			add_comment_above = false,
+		},
+	},
+
+	-- if true, <leader>cf keymap will be disabled
+	disable_default_keymap = false,
+
+	-- start the comment with this string
+	start_str = "//",
+
+	-- end the comment line with this string
+	end_str = "//",
+
+	-- fill the comment frame border with this character
+	fill_char = "-",
+
+	-- width of the comment frame
+	frame_width = 80,
+
+	-- wrap the line after 'n' characters
+	line_wrap_len = 80,
+
+	-- automatically indent the comment frame based on the line
+	auto_indent = true,
+
+	-- add comment above the current line
+	add_comment_above = true,
+
+	-- configurations for individual language goes here
+})
+
+-- ╭──────────────────────────────────────────────────────────────────────────╮
+-- │[[**********************************************************************]]│
+-- │[[                   Comment Pretty box design pluggin                  ]]│
+-- │[[                       Find some settings below.                      ]]│
+-- │[[**********************************************************************]]│
+-- ╰──────────────────────────────────────────────────────────────────────────╯
+
+-- require("comment-box").setup({
+-- 	doc_width = 80, -- width of the document
+-- 	box_width = 60, -- width of the boxes
+-- 	borders = { -- symbols used to draw a box
+-- 		top = "─",
+-- 		bottom = "─",
+-- 		left = "│",
+-- 		right = "│",
+-- 		top_left = "╭",
+-- 		top_right = "╮",
+-- 		bottom_left = "╰",
+-- 		bottom_right = "╯",
+-- 	},
+-- 	line_width = 70, -- width of the lines
+-- 	line = { -- symbols used to draw a line
+-- 		line = "─",
+-- 		line_start = "─",
+-- 		line_end = "─",
+-- 	},
+-- 	outer_blank_lines = false, -- insert a blank line above and below the box
+-- 	inner_blank_lines = false, -- insert a blank line above and below the text
+-- 	line_blank_line_above = false, -- insert a blank line above the line
+-- 	line_blank_line_below = false, -- insert a blank line below the line
+-- })
