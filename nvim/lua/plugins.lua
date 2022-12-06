@@ -56,6 +56,17 @@ packer.startup({
 		--  ╰──────────────────────────────────────────────────────────╯
 		-- use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 		use({ "romgrk/barbar.nvim" })
+		use({
+			"utilyre/barbecue.nvim",
+			requires = {
+				"neovim/nvim-lspconfig",
+				"smiteshp/nvim-navic",
+				"kyazdani42/nvim-web-devicons", -- optional
+			},
+			config = function()
+				require("barbecue").setup()
+			end,
+		})
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--ColorScheme                                      │
@@ -216,7 +227,9 @@ packer.startup({
 		-- 	end,
 		-- })
 
-		-- Definitive git info
+		--  ╭─────────────────────╮
+		--  │ Definitive git info │
+		--  ╰─────────────────────╯
 		use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 		use({ "preservim/tagbar" })
 

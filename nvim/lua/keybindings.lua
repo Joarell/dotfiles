@@ -5,11 +5,12 @@ local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
+
 --[[************************************************************************]]--
 --[[                             Basic mappings                             ]]--
 --[[************************************************************************]]--
 keymap("n", "<Leader>w", ":w!<CR>", opts)
-keymap("n", "<A-q>", ":q!<CR>", opts)
+keymap("n", "Q", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -125,6 +126,6 @@ keymap("n", "<Leader>f", function()
 	vim.opt.foldcolumn = "6"
 	print("This key binding folds all indentation lines to protect your code! Your Welcome! ;D")
 end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! ;D" })
-keymap("n", "Q", function()
-	print("Hello")
-end, { desc = "Say hello" })
+-- keymap("n", "Q", function()
+-- 	print("Hello")
+-- end, { desc = "Say hello" })

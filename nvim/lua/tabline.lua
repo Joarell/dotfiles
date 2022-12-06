@@ -72,7 +72,7 @@ require("bufferline").setup({
 
 	-- Sets the name of unnamed buffers. By default format is "[Buffer X]"
 	-- where X is the buffer number. But only a static string is accepted here.
-	no_name_title = "New file"
+	no_name_title = "New file",
 })
 
 local map = vim.api.nvim_set_keymap
@@ -118,3 +118,24 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
+--###########################################################################--
+--							Barbecue settings				 				 --
+--###########################################################################--
+require("barbecue.ui").toggle(true)
+require("barbecue.ui").update(winnr)
+vim.api.nvim_create_autocmd({
+	"BufWinEnter",
+	"BufWritePost",
+	"CursorMoved",
+	"InsertLeave",
+	"TextChanged",
+	"TextChangedI",
+	-- add more events here
+}, {
+	group = vim.api.nvim_create_augroup("barbecue", {}),
+	callback = function()
+		require("barbecue.ui").update()
+
+		-- maybe a bit more logic here
+	end,
+})
