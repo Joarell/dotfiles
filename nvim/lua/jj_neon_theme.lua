@@ -220,7 +220,7 @@ end
 
 
 local comp = function()
-	return "   喝 ﬧ        "
+	return "   喝 ﬧ         "
 end
 change_colors(comp, "left")
 

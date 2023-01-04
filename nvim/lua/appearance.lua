@@ -2,10 +2,10 @@
 --						   Appearance settings				 				 --
 --###########################################################################--
 vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
+	augroup packer_user_config
+		autocmd!
+		autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+	augroup end
 ]])
 
 -- Lua:
@@ -35,31 +35,30 @@ require("vscode").setup({
 	},
 })
 
--- Example config in Lua
-require("github-theme").setup({
-	transparent = true,
-	dark_float = true,
-	hide_end_of_buffer = true,
-	dark_sidebar = true,
-	variable_style = "NONE",
-	keyword_style = "bold",
-	theme_style = "dark_default",
-	-- theme_style = "dark",
-	function_style = "italic",
-
-	-- Change the "hint" color to the "orange" color, and make the "error" color bright red
-	colors = { hint = "#33cccc", error = "#ff0000" },
-
-	-- Overwrite the highlight groups
-	overrides = function(c)
-		return {
-			htmlTag = { fg = c.red, bg = "#282c34", sp = c.hint, style = "underline" },
-			DiagnosticHint = { link = "LspDiagnosticsDefaultHint" },
-			-- this will remove the highlight groups
-			TSField = {},
-		}
-	end,
-})
+-- require("github-theme").setup({
+-- 	transparent = true,
+-- 	dark_float = true,
+-- 	hide_end_of_buffer = true,
+-- 	dark_sidebar = true,
+-- 	variable_style = "NONE",
+-- 	keyword_style = "bold",
+-- 	theme_style = "dark_default",
+-- 	-- theme_style = "dark",
+-- 	function_style = "italic",
+--
+-- 	-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+-- 	colors = { hint = "#33cccc", error = "#ff0000" },
+--
+-- 	-- Overwrite the highlight groups
+-- 	overrides = function(c)
+-- 		return {
+-- 			htmlTag = { fg = c.red, bg = "#282c34", sp = c.hint, style = "underline" },
+-- 			DiagnosticHint = { link = "LspDiagnosticsDefaultHint" },
+-- 			-- this will remove the highlight groups
+-- 			TSField = {},
+-- 		}
+-- 	end,
+-- })
 
 require("lualine").setup({
 	sections = {
@@ -214,12 +213,10 @@ require("nvim-comment-frame").setup({
 	-- configurations for individual language goes here
 })
 
--- ╭──────────────────────────────────────────────────────────────────────────╮
--- │[[**********************************************************************]]│
--- │[[                   Comment Pretty box design pluggin                  ]]│
--- │[[                       Find some settings below.                      ]]│
--- │[[**********************************************************************]]│
--- ╰──────────────────────────────────────────────────────────────────────────╯
+--[[************************************************************************]]
+--[[                   Comment Pretty box design pluggin                    ]]
+--[[                       Find some settings below.                        ]]
+--[[************************************************************************]]
 
 -- require("comment-box").setup({
 -- 	doc_width = 80, -- width of the document

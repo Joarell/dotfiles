@@ -123,19 +123,21 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 --###########################################################################--
 require("barbecue.ui").toggle(true)
 require("barbecue.ui").update(winnr)
+require("barbecue").setup()
+
 vim.api.nvim_create_autocmd({
+	"WinScrolled",
 	"BufWinEnter",
-	"BufWritePost",
-	"CursorMoved",
+	"CursorHold",
 	"InsertLeave",
+
+	-- include these if you have set `show_modified` to `true`
+	"BufWritePost",
 	"TextChanged",
 	"TextChangedI",
-	-- add more events here
 }, {
-	group = vim.api.nvim_create_augroup("barbecue", {}),
+	group = vim.api.nvim_create_augroup("Barbecue", {}),
 	callback = function()
 		require("barbecue.ui").update()
-
-		-- maybe a bit more logic here
 	end,
 })

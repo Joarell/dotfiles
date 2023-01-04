@@ -2,10 +2,8 @@
 --						Diagnostics Settings								 --
 --###########################################################################--
 local null_ls = require("null-ls")
-local helpers = require("null-ls.helpers")
 
 null_ls.setup({
-	debug = true,
 	sources = {
 		null_ls.builtins.formatting.stylua,
 		-- null_ls.builtins.formatting.eslint,
@@ -49,9 +47,11 @@ null_ls.setup({
 	},
 })
 
--- register any number of sources simultaneously
+--  ╭──────────────────────────────────────────────────╮
+--  │ -- register any number of sources simultaneously │
+--  ╰──────────────────────────────────────────────────╯
 null_ls.setup({ sources = sources })
-
+-- local helpers = require("null-ls.helpers")
 -- local nodejs = {
 -- 	method = null_ls.methods.DIAGNOSTICS,
 -- 	filetypes = {

@@ -23,7 +23,7 @@ require("telescope").setup({
 	defaults = {
 		selection_caret = " ",
 		prompt_prefix = "  ",
-		initial_mode = "insert",
+		initial_mode = "normal",
 	},
 })
 

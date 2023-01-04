@@ -45,15 +45,15 @@ for type, icon in pairs(signs) do
 end
 
 -- Your custom attach funciont for nvim-lspconfig goes here.
-local custom_nvim_lspconfig_attach = function (...) end
+local custom_nvim_lspconfig_attach = function(...) end
 require("nlua.lsp.nvim").setup(require("lspconfig"), {
 	on_attach = custom_nvim_lspconfig_attach,
 	-- Include globals you want to tell the LSP are real
 	globals = {
 		-- Colorbuddy
 		"Color",
-		"c", 
-		"Group", 
+		"c",
+		"Group",
 		"g",
 		"s",
 	}
@@ -108,5 +108,4 @@ for _, lsp in pairs(servers) do
 		},
 	})
 end
-require("null_ls")
-
+-- require("null_ls")

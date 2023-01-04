@@ -124,8 +124,8 @@ keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 	vim.opt.foldcolumn = "6"
-	print("This key binding folds all indentation lines to protect your code! Your Welcome! ;D")
-end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! ;D" })
+	print("This key binding folds all indentation lines to protect your code! Your Welcome!😎")
+end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! 😎" })
 -- keymap("n", "Q", function()
 -- 	print("Hello")
 -- end, { desc = "Say hello" })

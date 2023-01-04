@@ -31,7 +31,7 @@ vim.keymap.set("n", "<Leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
 vim.keymap.set("n", "<Leader>xl", "<cmd>TroubleToggle loclist<cr>",
 	{ silent = true, noremap = true }
 )
-vim.keymap.set("n", "<Leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+vim.keymap.set("n", "<Leader>qf", "<cmd>TroubleToggle quickfix<cr>",
 	{ silent = true, noremap = true }
 )
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",

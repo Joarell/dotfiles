@@ -112,9 +112,6 @@ require("noice").setup({
 		},
 		override = {
 			-- override the default lsp markdown formatter with Noice
-			["vim.lsp.util.convert_input_to_markdown_lines"] = false,
-			-- override the lsp markdown formatter with Noice
-			["vim.lsp.util.stylize_markdown"] = false,
 			-- override cmp documentation with Noice (needs the other options to work)
 			["cmp.entry.get_documentation"] = false,
 		},
@@ -328,8 +325,3 @@ end
 -- vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
 --              vim.notify(method.message, severity[params.type])
 -- end
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-	vim.lsp.handlers.hover, {
-		border = "rounded",
-	}
-)

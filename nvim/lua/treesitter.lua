@@ -75,12 +75,13 @@ parser_config.zimbu = {
 --###########################################################################--
 --							Regex Settings		 							 --
 --###########################################################################--
+require("regexplainer").show{ display = 'popup' }
 require("regexplainer").setup({
 	-- 'narrative'
 	mode = "narrative", -- TODO: 'ascii', 'graphical'
 
 	-- automatically show the explainer when the cursor enters a regexp
-	auto = false,
+	auto = true,
 
 	-- filetypes (i.e. extensions) in which to run the autocommand
 	filetypes = {
@@ -98,11 +99,11 @@ require("regexplainer").setup({
 	-- Whether to log debug messages
 	debug = false,
 
-	-- display = "popup",
-	display = "split",
+	display = "popup",
 	popup = {
 		border = {
-			style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			padding = {1, 2},
+			style = 'rounded',
 		},
 	},
 

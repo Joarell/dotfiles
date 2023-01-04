@@ -3,7 +3,6 @@
 --###########################################################################--
 require("sniprun").setup()
 require("luasnip_config")
-require("null_ls")
 require("popup")
 require("tscope")
 require("keybindings")
@@ -16,6 +15,7 @@ require("plugins")
 require("neoscroll").setup()
 require("nvim_comment").setup()
 require("vgit").setup()
+require("treesitter")
 
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
@@ -26,6 +26,9 @@ vim.g.loaded_netrwPlugin = 1
 --###########################################################################--
 local set = vim.opt
 
+-- set.spell = true
+set.number = true
+set.relativenumber = true
 set.spellsuggest = en
 set.updatetime = 200
 set.signcolumn = "yes"
@@ -55,8 +58,13 @@ set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 
 vim.wo.colorcolumn = "80"
-vim.bo.filetype = "lua"
 vim.g["zoom#statustext"] = "Z"
+vim.g["netrw_keepdir"] = 0
+vim.g["netrw_winsize"] = 30
+vim.g["netrw_banner"] = 0
+vim.g["netrw_localcopydircmd"] = "cp -r"
+vim.g["load_netrw"] = 1
+vim.g["load_netrwPlugin"] = 1
 vim.wo.fillchars = "eob: "
 
 --###########################################################################--
@@ -96,37 +104,50 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	callback = function()
 		print("Test successful run!")
 		print(bufnr)
-		vim.fn.jobstart({ "npm", "test" })
+		vim.fn.jobstart({ "npm", "test"})
 	end,
 })
 
 vim.api.nvim_create_user_command("AutoRun", function()
-	print("Runing...")
+	print("Running...")
 end, {})
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = "rounded",
+})
+
+vim.lsp.handlers["testDocument/signatureHelp"] = vim.lsp.with(
+	vim.lsp.handlers.signature_help, {
+	border = "rounded",
+})
+
+vim.diagnostic.config({ float = { border = "rounded" } })
+
+-- TODO: - open a terminal without number column nativily.
+-- local newbuf = vim.api.nvim_create_buf(unlisted, true)
+-- vim.api.nvim_open_win(newbuf, vim.cmd ("term"), {
+-- 	relative = "win",
+-- 	width = 300,
+-- 	height = 80,
+-- 	bufpos = {
+-- 		10,
+-- 		40,
+-- 	},
+-- 	border = "rounded",
+-- })
 
 --###########################################################################--
 -- 							Neovide settings 								 --
 --###########################################################################--
 vim.cmd([[
-
 	noremap <yy> "ay
 	nmap <p> "ap
-
+	
 	set guifont=FiraCode\ NF:h07
-	let g:neovide_transparency=0.8
-	set number
-	set relativenumber
-	let g:neovide_no_idle=v:true
+	let g:neovide_transparency = 0.8
+	let g:neovide_no_idle = v:true
 	let g:neovide_input_use_logo = v:true
-	let g:neovide_cursor_vfx_mode = "sonicboom"
-	let g:neovide_touch_drag_timeout = 0.17
-	let g:neovide_touch_deadzone = 6.0
-	let g:neovide_underline_automatic_scaling = v:true
-	let g:neovide_hide_mouse_when_typing = v:false
-	let g:neovide_cursor_vfx_mode = "pixiedust"
-	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-	  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-	  \,sm:block-blinkwait175-blinkoff150-blinkon175,
+	let g:neovide_cursor_vfx_mode = "ripple"
 ]])
 
 --###########################################################################--
@@ -225,6 +246,7 @@ require("pantran").setup({
 		},
 	},
 })
+
 --###########################################################################--
 -- 							Setting TODO comments 							 --
 --###########################################################################--

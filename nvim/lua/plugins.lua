@@ -63,9 +63,6 @@ packer.startup({
 				"smiteshp/nvim-navic",
 				"kyazdani42/nvim-web-devicons", -- optional
 			},
-			config = function()
-				require("barbecue").setup()
-			end,
 		})
 
 		--  ╭──────────────────────────────────────────────────────────╮
@@ -134,13 +131,13 @@ packer.startup({
 		use({ "hrsh7th/cmp-nvim-lsp" })
 		use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp", tag = "v<CurrentMajor>.*" })
 		use({ "rafamadriz/friendly-snippets" })
-		use({
-			"jose-elias-alvarez/null-ls.nvim",
-			config = function()
-				require("null-ls").setup()
-			end,
-			requires = { "nvim-lua/plenary.nvim" },
-		})
+		-- use({
+		-- 	"jose-elias-alvarez/null-ls.nvim",
+		-- 	config = function()
+		-- 		require("null-ls").setup()
+		-- 	end,
+		-- 	requires = { "nvim-lua/plenary.nvim" },
+		-- })
 		use({ "windwp/nvim-ts-autotag" })
 		use({ "jayp0521/mason-null-ls.nvim" })
 		use({ "onsails/lspkind.nvim" })
