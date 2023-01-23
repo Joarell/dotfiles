@@ -99,6 +99,9 @@ keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multil
 keymap({ "n", "v" }, "<A-L>", ":CBacbox<CR>", opts) -- left alignment adaptable
 keymap({ "n", "v" }, "<A-A>", ":CBaccbox<CR>", opts) -- center alignment
 keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
+keymap("n", "TL", ":TwilightEnable<CR>", opts)
+keymap("n", "TO", ":TwilightDisable<CR>", opts)
+
 
 --[[************************************************************************]]--
 --[[                             "F" functions:                             ]]--

@@ -10,14 +10,14 @@ vim.cmd([[
 
 -- Lua:
 -- This is the theme for evential contention on neovim behavior. (Just in case!)
-local c = require("vscode.colors")
+local c = require("vscode.colors").get_colors()
 require("vscode").setup({
 
 	-- Enable transparent background
 	transparent = true,
 
 	-- Enable italic comment
-	italic_comments = true,
+	italic_comments = false,
 
 	-- Disable nvim-tree background color
 	disable_nvimtree_bg = true,
@@ -59,6 +59,16 @@ require("vscode").setup({
 -- 		}
 -- 	end,
 -- })
+
+require('shade').setup({
+	overlay_opacity = 30,
+	opacity_step = 1,
+	keys = {
+		brightness_up   = '<C-Up>',
+		brightness_down = '<C-Down>',
+		toggle          = '<A-S>',
+	}
+})
 
 require("lualine").setup({
 	sections = {
@@ -218,27 +228,27 @@ require("nvim-comment-frame").setup({
 --[[                       Find some settings below.                        ]]
 --[[************************************************************************]]
 
--- require("comment-box").setup({
--- 	doc_width = 80, -- width of the document
--- 	box_width = 60, -- width of the boxes
--- 	borders = { -- symbols used to draw a box
--- 		top = "─",
--- 		bottom = "─",
--- 		left = "│",
--- 		right = "│",
--- 		top_left = "╭",
--- 		top_right = "╮",
--- 		bottom_left = "╰",
--- 		bottom_right = "╯",
--- 	},
--- 	line_width = 70, -- width of the lines
--- 	line = { -- symbols used to draw a line
--- 		line = "─",
--- 		line_start = "─",
--- 		line_end = "─",
--- 	},
--- 	outer_blank_lines = false, -- insert a blank line above and below the box
--- 	inner_blank_lines = false, -- insert a blank line above and below the text
--- 	line_blank_line_above = false, -- insert a blank line above the line
--- 	line_blank_line_below = false, -- insert a blank line below the line
--- })
+require("comment-box").setup({
+	doc_width = 80, -- width of the document
+	box_width = 60, -- width of the boxes
+	borders = { -- symbols used to draw a box
+		top = "─",
+		bottom = "─",
+		left = "│",
+		right = "│",
+		top_left = "╭",
+		top_right = "╮",
+		bottom_left = "╰",
+		bottom_right = "╯",
+	},
+	line_width = 70, -- width of the lines
+	line = { -- symbols used to draw a line
+		line = "─",
+		line_start = "─",
+		line_end = "─",
+	},
+	outer_blank_lines = false, -- insert a blank line above and below the box
+	inner_blank_lines = false, -- insert a blank line above and below the text
+	line_blank_line_above = false, -- insert a blank line above the line
+	line_blank_line_below = false, -- insert a blank line below the line
+})

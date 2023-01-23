@@ -65,7 +65,7 @@ vim.g["netrw_banner"] = 0
 vim.g["netrw_localcopydircmd"] = "cp -r"
 vim.g["load_netrw"] = 1
 vim.g["load_netrwPlugin"] = 1
-vim.wo.fillchars = "eob: "
+vim.o.fcs = 'eob: '
 
 --###########################################################################--
 -- 							Commands setup									 --

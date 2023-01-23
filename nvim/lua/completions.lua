@@ -20,6 +20,9 @@ require("cmp_dictionary").setup({
 	capacity = 5,
 	debug = false,
 })
+-- cmp.config.formatting = {
+-- 	format = require("tailwindcss-colorizer-cmp").formatter
+-- }
 
 -- local has_words_before = function()
 -- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))

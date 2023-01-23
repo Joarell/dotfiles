@@ -1,25 +1,25 @@
 --###########################################################################--
 --								 LSP settings								 --
 --###########################################################################--
-require("mason-null-ls").setup()
+-- require("mason-null-ls").setup()
 require("completions") -- ./complitions.lua
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		"cssls",
-		"yamlls",
-		"dockerls",
-		"html",
-		"eslint",
-		"cmake",
-		"sumneko_lua",
-		"tsserver", --npm i -g typescript typescript-language-server
-		"clangd",
-		"bashls", --npm i -g bash-language-server
-		"rust_analyzer",
-		"pyright",
-		"jsonls",
-	}
-})
+-- require("mason-lspconfig").setup({
+-- 	ensure_installed = {
+-- 		"cssls",
+-- 		"yamlls",
+-- 		"dockerls",
+-- 		"html",
+-- 		"eslint",
+-- 		"cmake",
+-- 		"sumneko_lua",
+-- 		"tsserver", --npm i -g typescript typescript-language-server
+-- 		"clangd",
+-- 		"bashls", --npm i -g bash-language-server
+-- 		"rust_analyzer",
+-- 		"pyright",
+-- 		"jsonls",
+-- 	}
+-- })
 
 require("mason").setup({
 	ui = {

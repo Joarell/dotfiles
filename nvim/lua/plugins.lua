@@ -70,12 +70,24 @@ packer.startup({
 		--  ╰──────────────────────────────────────────────────────────╯
 		use("tomasiser/vim-code-dark")
 		use("norcalli/nvim-colorizer.lua")
-		use({ "https://github.com/sainnhe/sonokai" })
+		-- use({ "https://github.com/sainnhe/sonokai" })
 		use({ "Mofiqul/vscode.nvim" })
 		use({ "p00f/nvim-ts-rainbow" })
 		use({ "Pocco81/HighStr.nvim" })
 		use({ "azabiong/vim-highlighter" })
 		use({ "chriskempson/base16-vim" })
+		use({ "sunjon/shade.nvim" })
+		use {
+			"folke/twilight.nvim",
+			config = function()
+				require("twilight").setup {
+					-- your configuration comes here
+					-- or leave it empty to use the default settings
+					-- refer to the configuration section below
+				}
+			end
+		}
+		use({ "roobert/tailwindcss-colorizer-cmp.nvim" })
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--Telescope                                        │
@@ -130,7 +142,7 @@ packer.startup({
 		use({ "saadparwaiz1/cmp_luasnip" })
 		use({ "hrsh7th/cmp-nvim-lsp" })
 		use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp", tag = "v<CurrentMajor>.*" })
-		use({ "rafamadriz/friendly-snippets" })
+		-- use({ "rafamadriz/friendly-snippets" })
 		-- use({
 		-- 	"jose-elias-alvarez/null-ls.nvim",
 		-- 	config = function()
@@ -139,7 +151,7 @@ packer.startup({
 		-- 	requires = { "nvim-lua/plenary.nvim" },
 		-- })
 		use({ "windwp/nvim-ts-autotag" })
-		use({ "jayp0521/mason-null-ls.nvim" })
+		-- use({ "jayp0521/mason-null-ls.nvim" })
 		use({ "onsails/lspkind.nvim" })
 		use({ "uga-rosa/cmp-dictionary" })
 		-- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
