@@ -1,25 +1,39 @@
 --###########################################################################--
 --								 LSP settings								 --
 --###########################################################################--
+-- require("null_ls")
 -- require("mason-null-ls").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"cssls",
+		"sqls",
+		"yamlls",
+		"dockerls",
+		"html",
+		"eslint",
+		"cmake",
+		"sumneko_lua",
+		"tsserver", --npm i -g typescript typescript-language-server
+		"clangd",
+		"bashls", --npm i -g bash-language-server
+		"rust_analyzer",
+		"pyright",
+		"jsonls",
+	}
+})
+
 require("completions") -- ./complitions.lua
--- require("mason-lspconfig").setup({
--- 	ensure_installed = {
--- 		"cssls",
--- 		"yamlls",
--- 		"dockerls",
--- 		"html",
--- 		"eslint",
--- 		"cmake",
--- 		"sumneko_lua",
--- 		"tsserver", --npm i -g typescript typescript-language-server
--- 		"clangd",
--- 		"bashls", --npm i -g bash-language-server
--- 		"rust_analyzer",
--- 		"pyright",
--- 		"jsonls",
--- 	}
--- })
+require("nvim-lsp-installer").setup({
+	automatic_installation = true,
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
+	PATH = "prepend",
+})
 
 require("mason").setup({
 	ui = {
@@ -29,6 +43,7 @@ require("mason").setup({
 			package_uninstalled = "✗",
 		},
 	},
+	PATH = "prepend",
 })
 
 local signs = {
@@ -86,6 +101,7 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 
 local servers = {
 	"yamlls",
+	"sqls",
 	"cssls",
 	"dockerls",
 	"eslint",
@@ -108,4 +124,3 @@ for _, lsp in pairs(servers) do
 		},
 	})
 end
--- require("null_ls")

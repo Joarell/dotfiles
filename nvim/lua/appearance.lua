@@ -10,6 +10,7 @@ vim.cmd([[
 
 -- Lua:
 -- This is the theme for evential contention on neovim behavior. (Just in case!)
+
 local c = require("vscode.colors").get_colors()
 require("vscode").setup({
 
@@ -34,6 +35,7 @@ require("vscode").setup({
 		Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
 	},
 })
+
 
 -- require("github-theme").setup({
 -- 	transparent = true,

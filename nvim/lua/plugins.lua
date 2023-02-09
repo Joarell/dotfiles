@@ -259,6 +259,11 @@ packer.startup({
 			end,
 		})
 
+		--  ╭─────────────────────────╮
+		--  │ DB connections/settings │
+		--  ╰─────────────────────────╯
+		-- use({'mzarnitsa/psql'})
+
 		--  ╭───────────────────────────────╮
 		--  │            Themes             │
 		--  │ Install without configuration │
