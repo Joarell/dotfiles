@@ -17,7 +17,7 @@ require("telescope").setup({
 		find_files = {
 			hidden = true,
 			no_ignore = true,
-			search_dirs = {"."},
+			search_dirs = { "." },
 		},
 	},
 	defaults = {
@@ -27,12 +27,26 @@ require("telescope").setup({
 	},
 })
 
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
+local telescope = require("telescope")
+
+telescope.setup {
+	defaults = {
+		mappings = {
+			i = { ["<c-t>"] = trouble.open_with_trouble },
+			n = { ["<c-t>"] = trouble.open_with_trouble },
+		},
+	},
+}
+
 local keymap = vim.keymap.set
 local builtin = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
 
 keymap("n", "tc", function()
-	builtin.colorscheme({ enable_preview = true})
+	builtin.colorscheme({ enable_preview = true })
 end, opts)
 keymap("n", "fz", builtin.find_files, opts)
 keymap("n", "fg", builtin.live_grep, opts)

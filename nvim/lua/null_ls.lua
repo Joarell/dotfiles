@@ -50,7 +50,7 @@ null_ls.setup({
 --  ╭──────────────────────────────────────────────────╮
 --  │ -- register any number of sources simultaneously │
 --  ╰──────────────────────────────────────────────────╯
-null_ls.setup({ sources = sources })
+-- null_ls.setup({ sources = sources })
 -- local helpers = require("null-ls.helpers")
 -- local nodejs = {
 -- 	method = null_ls.methods.DIAGNOSTICS,

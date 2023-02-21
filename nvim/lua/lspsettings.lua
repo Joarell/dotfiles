@@ -3,24 +3,24 @@
 --###########################################################################--
 -- require("null_ls")
 -- require("mason-null-ls").setup()
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		"cssls",
-		"sqls",
-		"yamlls",
-		"dockerls",
-		"html",
-		"eslint",
-		"cmake",
-		"sumneko_lua",
-		"tsserver", --npm i -g typescript typescript-language-server
-		"clangd",
-		"bashls", --npm i -g bash-language-server
-		"rust_analyzer",
-		"pyright",
-		"jsonls",
-	}
-})
+-- require("mason-lspconfig").setup({
+-- 	ensure_installed = {
+-- 		"cssls",
+-- 		"sqlls",
+-- 		"yamlls",
+-- 		"dockerls",
+-- 		"html",
+-- 		"eslint",
+-- 		"cmake",
+-- 		"lua_ls",
+-- 		"tsserver", --npm i -g typescript typescript-language-server
+-- 		"clangd",
+-- 		"bashls", --npm i -g bash-language-server
+-- 		"rust_analyzer",
+-- 		"pyright",
+-- 		"jsonls",
+-- 	}
+-- })
 
 require("completions") -- ./complitions.lua
 require("nvim-lsp-installer").setup({
@@ -101,12 +101,13 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 
 local servers = {
 	"yamlls",
-	"sqls",
+	"sqlls",
 	"cssls",
 	"dockerls",
 	"eslint",
 	"cmake",
-	"sumneko_lua",
+	"lua_ls",
+	"tailwindcss",
 	"tsserver", --npm i -g typescript typescript-language-server
 	"clangd",
 	"html", --npm i -g vscode-langservers-extracted

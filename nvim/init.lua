@@ -22,9 +22,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 --  ╭────────────────────────────────────────────────────────────────────────╮
---  │ --##################################################################-- │
 --  │                            Format settings-                            │
---  │ --##################################################################-- │
 --  ╰────────────────────────────────────────────────────────────────────────╯
 local set = vim.opt
 
@@ -59,6 +57,7 @@ set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 
+
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"
 vim.g["netrw_keepdir"] = 0
@@ -68,13 +67,10 @@ vim.g["netrw_localcopydircmd"] = "cp -r"
 vim.g["load_netrw"] = 1
 vim.g["load_netrwPlugin"] = 1
 vim.o.fcs = 'eob: '
-vim.api.nvim_set_option("clipboard", "unnamed")
-
+vim.api.nvim_set_option("clipboard", "unnamedplus")
 
 --  ╭─────────────────────────────────────────────────────────────────────────╮
---  │ --###################################################################-- │
 --  │                             Commands setup                              │
---  │ --###################################################################-- │
 --  ╰─────────────────────────────────────────────────────────────────────────╯
 -- nvim_create_user_command expects three arguments:
 
@@ -128,7 +124,6 @@ vim.lsp.handlers["testDocument/signatureHelp"] = vim.lsp.with(
 })
 
 vim.diagnostic.config({ float = { border = "rounded" } })
-
 -- TODO: - open a terminal without number column nativily.
 -- local newbuf = vim.api.nvim_create_buf(unlisted, true)
 -- vim.api.nvim_open_win(newbuf, vim.cmd ("term"), {
@@ -146,14 +141,12 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 -- 							Neovide settings 								 --
 --###########################################################################--
 vim.cmd([[
-	noremap <yy> "ay
-	nmap <p> "ap
-	
-	set guifont=FiraCode\ NF:h07
+	set guifont=CodeNewRoman\ NF:h07
 	let g:neovide_transparency = 0.8
 	let g:neovide_no_idle = v:true
 	let g:neovide_input_use_logo = v:true
 	let g:neovide_cursor_vfx_mode = "ripple"
+	let g:neovide_refresh_rate = 40
 ]])
 
 --###########################################################################--

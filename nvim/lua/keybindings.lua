@@ -5,6 +5,7 @@ local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
+local opt_map = { silent = true, noremap = false }
 
 --[[************************************************************************]]--
 --[[                             Basic mappings                             ]]--
@@ -41,18 +42,13 @@ keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
 keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
 keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", opts)
 keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)
-keymap("n", "gw", ":lua vim.lsp.buf.document_symbol()<CR>", opts)
+keymap("n", "gs", ":lua vim.lsp.buf.document_symbol()<CR>", opts)
 keymap("n", "gw", ":lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
 keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
 keymap("n", "<Leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
-keymap("v", "y", "\"ay", opts) 
-keymap("v", "yy", "\"ay", opts) 
-keymap("v", "<S-y>", "\"ay", opts) 
-keymap("n", "p", "\"ap", opts) 
-keymap("n", "P", "\"ap", opts) 
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
 keymap("n", "vu", function()
 	vim.diagnostic.config({ virtual_text = false })

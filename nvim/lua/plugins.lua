@@ -88,6 +88,7 @@ packer.startup({
 			end
 		}
 		use({ "roobert/tailwindcss-colorizer-cmp.nvim" })
+		use({ "navarasu/onedark.nvim" })
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--Telescope                                        │
@@ -217,13 +218,6 @@ packer.startup({
 		use({
 			"folke/trouble.nvim",
 			requires = "kyazdani42/nvim-web-devicons",
-			config = function()
-				require("trouble").setup({
-					-- your configuration comes here
-					-- or leave it empty to use the default settings
-					-- refer to the configuration section below
-				})
-			end,
 		})
 
 		--HTML and CSS autopairs.
@@ -302,6 +296,7 @@ packer.startup({
 				require("tmux").setup()
 			end,
 		})
+
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 	This is the float settgin to open packer:              │

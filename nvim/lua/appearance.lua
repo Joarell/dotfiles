@@ -13,28 +13,76 @@ vim.cmd([[
 
 local c = require("vscode.colors").get_colors()
 require("vscode").setup({
-
 	-- Enable transparent background
 	transparent = true,
-
 	-- Enable italic comment
 	italic_comments = false,
-
 	-- Disable nvim-tree background color
 	disable_nvimtree_bg = true,
-
 	-- Override colors (see ./lua/vscode/colors.lua)
 	color_overrides = {
 		vscLineNumber = "#666561",
+		vscPopupFront = '#00ffaa',
+		vscTabOutside = '#000000',
+		vscTabCurrent = '#000000',
 	},
-
 	-- Override highlight groups (see ./lua/vscode/theme.lua)
 	group_overrides = {
 		-- this supports the same val table as vim.api.nvim_set_hl
 		-- use colors from this colorscheme by requiring vscode.colors!
-		Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
+		Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true, italic = true },
 	},
 })
+
+
+-- Lua
+-- require('onedark').setup({
+-- 	-- Main options --
+-- 	style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+-- 	transparent = true, -- Show/hide background
+-- 	term_colors = true, -- Change terminal color as per the selected theme style
+-- 	ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+-- 	cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+-- 	-- toggle theme style ---
+-- 	toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+-- 	toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
+-- 	-- Change code style ---
+-- 	-- Options are italic, bold, underline, none
+-- 	-- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+-- 	code_style = {
+-- 		comments = 'italic',
+-- 		-- keywords = 'none',
+-- 		keywords = 'bold',
+-- 		functions = 'none',
+-- 		strings = 'none',
+-- 		variables = 'italic'
+-- 	},
+-- 	-- Lualine options --
+-- 	lualine = {
+-- 		transparent = true, -- lualine center bar transparency
+-- 	},
+-- 	-- Custom Highlights --
+-- 	colors = {
+-- 		bright_orange = "#ff8800",    -- define a new color
+-- 		green = '#00ffaa',            -- redefine an existing color
+-- 	}, -- Override default colors
+-- 	highlights = {
+-- 		["@keyword"] = {fg = '$green'},
+-- 		-- ["@string"] = {fg = '$bright_orange', bg = '#00ff00', fmt = 'bold'},
+-- 		-- ["@function"] = {fg = '#0000ff', sp = '$cyan', fmt = 'underline,italic'},
+-- 		-- ["@function.builtin"] = {fg = '#0059ff'}
+-- 	}, -- Override highlight groups
+-- 	-- Plugins Config --
+-- 	diagnostics = {
+-- 		darker = true, -- darker colors for diagnostic
+-- 		undercurl = true, -- use undercurl instead of underline for diagnostics
+-- 		background = true, -- use background color for virtual text
+-- 	},
+-- })
+-- require('onedark').setup {
+-- 	style = 'darker'
+-- }
+-- require('onedark').load()
 
 
 -- require("github-theme").setup({
@@ -44,8 +92,8 @@ require("vscode").setup({
 -- 	dark_sidebar = true,
 -- 	variable_style = "NONE",
 -- 	keyword_style = "bold",
--- 	theme_style = "dark_default",
--- 	-- theme_style = "dark",
+-- 	-- theme_style = "dark_default",
+-- 	theme_style = "dark",
 -- 	function_style = "italic",
 --
 -- 	-- Change the "hint" color to the "orange" color, and make the "error" color bright red
@@ -61,6 +109,69 @@ require("vscode").setup({
 -- 		}
 -- 	end,
 -- })
+
+
+require("bufferline").setup({
+	options = {
+		buffer_close_icon = "",
+		close_command = "Bdelete %d",
+		close_icon = "",
+		indicator = {
+			style = "icon",
+			icon = " ",
+		},
+		left_trunc_marker = "",
+		modified_icon = "●",
+		offsets = { { filetype = "NvimTree", text = "EXPLORER", text_align = "center" } },
+		right_mouse_command = "Bdelete! %d",
+		right_trunc_marker = "",
+		show_close_icon = false,
+		show_tab_indicators = true,
+	},
+	highlights = {
+		fill = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "StatusLineNC" },
+		},
+		background = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "StatusLine" },
+		},
+		buffer_visible = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "Normal" },
+		},
+		buffer_selected = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "Normal" },
+		},
+		separator = {
+			fg = { attribute = "bg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "StatusLine" },
+		},
+		separator_selected = {
+			fg = { attribute = "fg", highlight = "Special" },
+			bg = { attribute = "bg", highlight = "Normal" },
+		},
+		separator_visible = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "StatusLineNC" },
+		},
+		close_button = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "StatusLine" },
+		},
+		close_button_selected = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "Normal" },
+		},
+		close_button_visible = {
+			fg = { attribute = "fg", highlight = "Normal" },
+			bg = { attribute = "bg", highlight = "Normal" },
+		},
+	},
+})
+
 
 require('shade').setup({
 	overlay_opacity = 30,
@@ -197,31 +308,22 @@ require("nvim-comment-frame").setup({
 			add_comment_above = false,
 		},
 	},
-
 	-- if true, <leader>cf keymap will be disabled
 	disable_default_keymap = false,
-
 	-- start the comment with this string
 	start_str = "//",
-
 	-- end the comment line with this string
 	end_str = "//",
-
 	-- fill the comment frame border with this character
 	fill_char = "-",
-
 	-- width of the comment frame
 	frame_width = 80,
-
 	-- wrap the line after 'n' characters
 	line_wrap_len = 80,
-
 	-- automatically indent the comment frame based on the line
 	auto_indent = true,
-
 	-- add comment above the current line
 	add_comment_above = true,
-
 	-- configurations for individual language goes here
 })
 
@@ -229,7 +331,6 @@ require("nvim-comment-frame").setup({
 --[[                   Comment Pretty box design pluggin                    ]]
 --[[                       Find some settings below.                        ]]
 --[[************************************************************************]]
-
 require("comment-box").setup({
 	doc_width = 80, -- width of the document
 	box_width = 60, -- width of the boxes
