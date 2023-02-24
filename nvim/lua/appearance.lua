@@ -36,53 +36,66 @@ require("vscode").setup({
 
 
 -- Lua
--- require('onedark').setup({
--- 	-- Main options --
--- 	style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
--- 	transparent = true, -- Show/hide background
--- 	term_colors = true, -- Change terminal color as per the selected theme style
--- 	ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
--- 	cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
--- 	-- toggle theme style ---
--- 	toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
--- 	toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
--- 	-- Change code style ---
--- 	-- Options are italic, bold, underline, none
--- 	-- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
--- 	code_style = {
--- 		comments = 'italic',
--- 		-- keywords = 'none',
--- 		keywords = 'bold',
--- 		functions = 'none',
--- 		strings = 'none',
--- 		variables = 'italic'
--- 	},
--- 	-- Lualine options --
--- 	lualine = {
--- 		transparent = true, -- lualine center bar transparency
--- 	},
--- 	-- Custom Highlights --
--- 	colors = {
--- 		bright_orange = "#ff8800",    -- define a new color
--- 		green = '#00ffaa',            -- redefine an existing color
--- 	}, -- Override default colors
--- 	highlights = {
--- 		["@keyword"] = {fg = '$green'},
--- 		-- ["@string"] = {fg = '$bright_orange', bg = '#00ff00', fmt = 'bold'},
--- 		-- ["@function"] = {fg = '#0000ff', sp = '$cyan', fmt = 'underline,italic'},
--- 		-- ["@function.builtin"] = {fg = '#0059ff'}
--- 	}, -- Override highlight groups
--- 	-- Plugins Config --
--- 	diagnostics = {
--- 		darker = true, -- darker colors for diagnostic
--- 		undercurl = true, -- use undercurl instead of underline for diagnostics
--- 		background = true, -- use background color for virtual text
--- 	},
--- })
--- require('onedark').setup {
--- 	style = 'darker'
--- }
--- require('onedark').load()
+require('onedark').setup({
+	-- Main options --
+	style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+	transparent = true, -- Show/hide background
+	term_colors = true, -- Change terminal color as per the selected theme style
+	ending_tildes = true, -- Show the end-of-buffer tildes. By default they are hidden
+	cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+	-- toggle theme style ---
+	toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+	toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
+	-- Change code style ---
+	-- Options are italic, bold, underline, none
+	-- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+	code_style = {
+		comments = 'italic',
+		keywords = 'bold',
+		-- keywords = 'bold',
+		functions = 'none',
+		strings = 'none',
+		variables = 'italic'
+	},
+	-- Lualine options --
+	lualine = {
+		transparent = true, -- lualine center bar transparency
+	},
+	-- Custom Highlights --
+	colors = {
+		bright_orange = "#ff8800", -- define a new color
+		green = '#00ffaa', -- redefine an existing color
+		purple = '#8e7cc3',
+		pink = '#f0554d',
+		yellow = '#dfc77f',
+		red = '#ff0000',
+		cyan = '#2EA2A9',
+		leaves = '#003964',
+		blue = '#59a0e5',
+		lemon = '#88aa11',
+		blue_func = '0000ff',
+		gold = 'Gold',
+		grass = '#004000',
+	}, -- Override default colors
+	highlights = {
+		["@keyword"] = { fg = '$pink' },
+		["@keyword.function"] = { fg = '$blue_func' },
+		["@string"] = { fg = '$gold', fmt = 'italic' },
+		["@function"] = { fg = '$lemon', sp = '$cyan', fmt = 'bold' },
+		["@function.builtin"] = { fg = '$purple' },
+		["@lable"] = { fg = '$red'},
+		["@parameter"] = { fg = '$bright_orange'},
+		["@error"] = { fg = '$red'},
+		["@comment"] = { fg = '$grass'},
+	}, -- Override highlight groups
+	-- Plugins Config --
+	diagnostics = {
+		darker = true, -- darker colors for diagnostic
+		undercurl = true, -- use undercurl instead of underline for diagnostics
+		background = true, -- use background color for virtual text
+	},
+})
+require('onedark').load()
 
 
 -- require("github-theme").setup({
@@ -174,8 +187,8 @@ require("bufferline").setup({
 
 
 require('shade').setup({
-	overlay_opacity = 30,
-	opacity_step = 1,
+	overlay_opacity = 40,
+	opacity_step = 0.3,
 	keys = {
 		brightness_up   = '<C-Up>',
 		brightness_down = '<C-Down>',
@@ -187,8 +200,22 @@ require("lualine").setup({
 	sections = {
 		lualine_x = {
 			{
-				require("noice").api.statusline.mode.get,
-				cond = require("noice").api.statusline.mode.has,
+				require("noice").api.status.message.get_hl,
+				cond = require("noice").api.status.message.has,
+			},
+			{
+				require("noice").api.status.command.get,
+				cond = require("noice").api.status.command.has,
+				color = { fg = "#ff9e64" },
+			},
+			{
+				require("noice").api.status.mode.get,
+				cond = require("noice").api.status.mode.has,
+				color = { fg = "#ff9e64" },
+			},
+			{
+				require("noice").api.status.search.get,
+				cond = require("noice").api.status.search.has,
 				color = { fg = "#ff9e64" },
 			},
 		},
@@ -229,6 +256,7 @@ require("indent_blankline").setup({
 	-- 	"IndentBlanklineIndent6",
 	-- },
 })
+
 --###########################################################################--
 --							Fold settings					 				 --
 --###########################################################################--

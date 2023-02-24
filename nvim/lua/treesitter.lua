@@ -1,12 +1,6 @@
 --###########################################################################--
 -- 							Treesitter Settings		 						 --
 --###########################################################################--
-require("nvim-treesitter.configs").setup({
-	autotag = {
-		enable = true,
-	},
-})
-
 require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. Feel free to update it.
 	ensure_installed = {
 		"bash",
@@ -41,10 +35,15 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 	rainbow = {
 		enable = true,
 		-- disable = {"jsx", "cpp"}, list of languages you want to disable the plugin for
-		extended_mode = ture, -- Also higlight non-bracket delimiters.
+		extended_mode = true, -- Also higlight non-bracket delimiters.
 		max_file_lines = nil, -- Do not enable for files with more than n lines, integer
 		-- colors = {}, -- table of hex strings
 		-- termcolors = {} -- table of colour name strings
+	},
+	autotag = {
+		enable = true,
+		filetypes = filetypes,
+		skip_tags = skip_tags,
 	},
 	refactor = {
 		highlight_definitions = {
@@ -72,6 +71,7 @@ parser_config.zimbu = {
 	},
 	filetype = "zu", -- if filetype does not match the parser name
 }
+
 --###########################################################################--
 --							Regex Settings		 							 --
 --###########################################################################--
@@ -161,11 +161,3 @@ local skip_tags = {
 	"wbr",
 	"menuitem",
 }
-
-require("nvim-treesitter.configs").setup({
-	autotag = {
-		enable = true,
-		filetypes = filetypes,
-		skip_tags = skip_tags,
-	},
-})

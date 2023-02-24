@@ -8,7 +8,7 @@ local lspkind = require("lspkind")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 
 require("cmp_dictionary").setup({
-	dic = {
+	spelllang = {
 		["*"] = { "/usr/share/dict/en_us.dict" },
 	},
 	exact = 3,
@@ -16,13 +16,16 @@ require("cmp_dictionary").setup({
 	document = false,
 	document_command = "wn %s -over",
 	async = false,
-	max_items = 0,
+	max_items = -1,
 	capacity = 5,
 	debug = false,
 })
-require("tailwindcss-colorizer-cmp").setup({
-	color_square_width = 2,
-})
+
+
+
+-- require("tailwindcss-colorizer-cmp").setup({
+-- 	color_square_width = 2,
+-- })
 -- cmp.config.formatting = {
 -- 	format = require("tailwindcss-colorizer-cmp").formatter
 -- }

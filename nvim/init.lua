@@ -51,7 +51,7 @@ set.smartindent = true
 set.autowrite = true
 set.swapfile = false
 set.undofile = true
-set.termguicolors = true
+-- set.termguicolors = true
 set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
@@ -141,7 +141,7 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 -- 							Neovide settings 								 --
 --###########################################################################--
 vim.cmd([[
-	set guifont=CodeNewRoman\ NF:h07
+	set guifont=CaskaydiaCove\ Nerd\ Font:h08
 	let g:neovide_transparency = 0.8
 	let g:neovide_no_idle = v:true
 	let g:neovide_input_use_logo = v:true

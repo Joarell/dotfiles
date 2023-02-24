@@ -2,25 +2,30 @@
 --								 LSP settings								 --
 --###########################################################################--
 -- require("null_ls")
--- require("mason-null-ls").setup()
--- require("mason-lspconfig").setup({
--- 	ensure_installed = {
--- 		"cssls",
--- 		"sqlls",
--- 		"yamlls",
--- 		"dockerls",
--- 		"html",
--- 		"eslint",
--- 		"cmake",
--- 		"lua_ls",
--- 		"tsserver", --npm i -g typescript typescript-language-server
--- 		"clangd",
--- 		"bashls", --npm i -g bash-language-server
--- 		"rust_analyzer",
--- 		"pyright",
--- 		"jsonls",
--- 	}
+-- require("mason-null-ls").setup({
+-- 	automatic_setup = true,
 -- })
+require('mason').setup()
+require('mason-lspconfig').setup({
+	ensure_installed = {
+		"cssls",
+		"sqlls",
+		"tailwindcss",
+		"yamlls",
+		"dockerls",
+		"html",
+		-- "eslint",
+	-- 	"cmake",
+		"lua_ls",
+		"tsserver", --npm i -g typescript typescript-language-server
+	-- 	"clangd",
+	-- 	"bashls", --npm i -g bash-language-server
+		"rust_analyzer",
+	-- 	"pyright",
+		"jsonls",
+	},
+	-- automatic_installation = true,
+})
 
 require("completions") -- ./complitions.lua
 require("nvim-lsp-installer").setup({
@@ -104,24 +109,24 @@ local servers = {
 	"sqlls",
 	"cssls",
 	"dockerls",
-	"eslint",
-	"cmake",
+	-- "eslint",
+	-- "cmake",
 	"lua_ls",
 	"tailwindcss",
 	"tsserver", --npm i -g typescript typescript-language-server
 	"clangd",
 	"html", --npm i -g vscode-langservers-extracted
-	"bashls", --npm i -g bash-language-server
+	-- "bashls", --npm i -g bash-language-server
 	"rust_analyzer",
-	"pyright",
+	-- "pyright",
 	"jsonls",
 }
 
 for _, lsp in pairs(servers) do
 	require("lspconfig")[lsp].setup({
-		single_file_support = true,
-		flags = {
-			debounce_text_changes = 150,
-		},
+		-- single_file_support = true,
+		-- flags = {
+		-- 	debounce_text_changes = 150,
+		-- },
 	})
 end

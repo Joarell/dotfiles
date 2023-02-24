@@ -36,7 +36,7 @@ require("noice").setup({
 	popupmenu = {
 		enabled = true, -- enables the Noice popupmenu UI
 		---@type 'nui'|'cmp'
-		backend = "nui", -- backend to use to show regular cmdline completions
+		backend = "cmp", -- backend to use to show regular cmdline completions
 		---@type NoicePopupmenuItemKind|false
 		-- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
 		kind_icons = {}, -- set to `false` to disable icons
@@ -61,7 +61,7 @@ require("noice").setup({
 					{ error = true },
 					{ warning = true },
 					{ event = "msg_show", kind = { "" } },
-					{ event = "lsp", kind = "message" },
+					{ event = "lsp",      kind = "message" },
 				},
 			},
 		},
@@ -75,7 +75,7 @@ require("noice").setup({
 					{ error = true },
 					{ warning = true },
 					{ event = "msg_show", kind = { "" } },
-					{ event = "lsp", kind = "message" },
+					{ event = "lsp",      kind = "message" },
 				},
 			},
 			filter_opts = { count = 1 },
@@ -200,8 +200,21 @@ require("noice").setup({
 --								Notify Settings								 --
 --###########################################################################--
 require("notify").setup({
-	background_colour = "Normal",
+	background_colour = "#000000",
+	fps = 30,
+	icons = {
+		DEBUG = "",
+		ERROR = "",
+		INFO = "",
+		TRACE = "✎",
+		WARN = ""
+	},
+	level = 2,
+	minimum_width = 50,
+	render = "default",
 	stages = "fade_in_slide_out",
+	timeout = 5000,
+	top_down = true
 })
 
 vim.notify = require("notify")
@@ -210,7 +223,7 @@ local function notify_output(command, opts)
 	local notification
 	local notify = function(msg, level)
 		local notify_opts =
-		vim.tbl_extend("keep", opts or {}, { title = table.concat(command, " "), replace = notification })
+			vim.tbl_extend("keep", opts or {}, { title = table.concat(command, " "), replace = notification })
 		notification = vim.notify(msg, level, notify_opts)
 	end
 	local on_data = function(_, data)
@@ -316,12 +329,12 @@ vim.lsp.handlers["$/progress"] = function(_, result, ctx)
 end
 
 -- table from lsp severity to vim severity.
--- local severity = {
---   "error",
---   "warn",
---   "info",
---   "info", -- map both hint and info to info?
--- }
--- vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
---              vim.notify(method.message, severity[params.type])
--- end
+local severity = {
+	"error",
+	"warn",
+	"info",
+	"info", -- map both hint and info to info?
+}
+vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
+	vim.notify(method.message, severity[params.type])
+end
