@@ -10,18 +10,18 @@ require('mason-lspconfig').setup({
 	ensure_installed = {
 		"cssls",
 		"sqlls",
-		"tailwindcss",
+		-- "tailwindcss",
 		"yamlls",
 		"dockerls",
 		"html",
 		-- "eslint",
-	-- 	"cmake",
+		-- "cmake",
 		"lua_ls",
 		"tsserver", --npm i -g typescript typescript-language-server
-	-- 	"clangd",
-	-- 	"bashls", --npm i -g bash-language-server
+		-- 	"clangd",
+		"bashls", --npm i -g bash-language-server
 		"rust_analyzer",
-	-- 	"pyright",
+		-- 	"pyright",
 		"jsonls",
 	},
 	-- automatic_installation = true,
@@ -65,7 +65,8 @@ for type, icon in pairs(signs) do
 end
 
 -- Your custom attach funciont for nvim-lspconfig goes here.
-local custom_nvim_lspconfig_attach = function(...) end
+local custom_nvim_lspconfig_attach = function(...)
+end
 require("nlua.lsp.nvim").setup(require("lspconfig"), {
 	on_attach = custom_nvim_lspconfig_attach,
 	-- Include globals you want to tell the LSP are real
@@ -112,7 +113,7 @@ local servers = {
 	-- "eslint",
 	-- "cmake",
 	"lua_ls",
-	"tailwindcss",
+	-- "tailwindcss",
 	"tsserver", --npm i -g typescript typescript-language-server
 	"clangd",
 	"html", --npm i -g vscode-langservers-extracted
@@ -130,3 +131,13 @@ for _, lsp in pairs(servers) do
 		-- },
 	})
 end
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'sh',
+	callback = function()
+		vim.lsp.start({
+			name = 'bash-language-server',
+			cmd = { 'bash-language-server', 'start' },
+		})
+	end,
+})

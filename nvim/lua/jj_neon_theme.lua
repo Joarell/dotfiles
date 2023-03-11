@@ -220,7 +220,7 @@ end
 
 
 local comp = function()
-	return "   喝 ﬧ         "
+	return "   󰲉  ﬧ       "
 end
 change_colors(comp, "left")
 
@@ -309,7 +309,7 @@ ins_right({
 
 
 local comp = function()
-	return "   "
+	return " "
 end
 change_colors(comp, "right")
 
@@ -323,7 +323,7 @@ ins_right({
 
 local comp = function()
 change_colors(comp, "right")
-	return "    "
+	return "  "
 end
 
 change_colors(comp, "right")
@@ -331,7 +331,7 @@ change_colors(comp, "right")
 ins_right({ "filetype" })
 
 local comp = function()
-	return "    "
+	return "  "
 end
 change_colors(comp, "right")
 

@@ -11,16 +11,21 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # ============================== Settings ======================================
-. $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/asdf.sh
 
+
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 export PATH="$HOME/.local/bin":$PATH
-export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-export PATH="$HOME/.local/share/nvim/lsp_servers/vscode-eslint/node_modules/vscode-langservers-extracted/bin":$PATH
 export EDITOR=nvim
 export PATH="$HOME/.cargo/bin":$PATH
-export STARSHIP_CACHE=~/.starship/cache
+export PATH="$HOME/node-v19.6.1-linux-x64/bin":$PATH
+export PATH="$HOME/Nu-shell":$PATH
+export TERM=alacritty
+export ZELIJ_CONFIG_DIR=$HOME/.config/zellij
 
-alias GS="git switch "
+alias zj="zellij options --simplified-ui true --pane-frames false"
+alias rr="ranger"
 alias ala="./alacritty/target/release/alacritty"
 alias lg="lazygit"
 alias vim="nvim-qt"
@@ -35,21 +40,20 @@ alias zi="zoxide query --interactive"
 alias val="valgrind -q --leak-check=full --show-leak-kinds=all -s --error-exitcode=1 --track-origins=yes --tool=memcheck --vgdb=yes --vgdb-error=0 ./test"
 alias psql="psql -U postgres"
 
-eval "$(starship init zsh)"
 
 
 #============================== Vi mode ========================================
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+# bindkey -v '^?' backward-delete-char
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 
 # Path to your Snap installation.
 export PATH=$PATH:/snap/bin
@@ -125,7 +129,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git aliases archlinux branch github zsh-autosuggestions zsh-syntax-highlighting zsh-completions zsh-interactive-cd zsh-navigation-tools)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -445,3 +449,26 @@ fi
 # To initialize zoxide, add this to your configuration (usually ~/.zshrc):
 #
 # eval "$(zoxide init zsh)"
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+export HISTFILE=~/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=50000
+export PROMPT_COMMAND='${PROMPT_COMMAND;+PROMPT_COMMAND'\n'}history -a'
+setopt inc_append_history
+setopt share_history
+
+
+_rtx_hook() {
+  trap -- '' SIGINT;
+  eval "$("/home/jev/.cargo/bin/rtx" hook-env -s zsh)";
+  trap - SIGINT;
+}
+typeset -ag precmd_functions;
+if [[ -z "${precmd_functions[(r)_rtx_hook]+1}" ]]; then
+  precmd_functions=( _rtx_hook ${precmd_functions[@]} )
+fi
+typeset -ag chpwd_functions;
+if [[ -z "${chpwd_functions[(r)_rtx_hook]+1}" ]]; then
+  chpwd_functions=( _rtx_hook ${chpwd_functions[@]} )
+fi

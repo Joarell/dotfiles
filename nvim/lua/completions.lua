@@ -6,11 +6,9 @@ local cmp = require("cmp")
 local ls = require("luasnip")
 local lspkind = require("lspkind")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
+local dict = require("cmp_dictionary")
 
-require("cmp_dictionary").setup({
-	spelllang = {
-		["*"] = { "/usr/share/dict/en_us.dict" },
-	},
+dict.setup({
 	exact = 3,
 	first_case_insensitive = false,
 	document = false,
@@ -21,14 +19,15 @@ require("cmp_dictionary").setup({
 	debug = false,
 })
 
+dict.switcher({
+	spelllang = {
+		en = "~/dotfiles/en.dict",
+	},
+	filepath = {
+		["*"] = "~/dotfiles/en.dict",
+	},
+})
 
-
--- require("tailwindcss-colorizer-cmp").setup({
--- 	color_square_width = 2,
--- })
--- cmp.config.formatting = {
--- 	format = require("tailwindcss-colorizer-cmp").formatter
--- }
 
 -- local has_words_before = function()
 -- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -45,14 +44,12 @@ cmp.setup({
 		end,
 	},
 	sources = {
-		{ name = "nvim_lsp", keyword_length = 3 },
+		{ name = "nvim_lsp", keyword_length = 3},
 		{ name = "luasnip" },
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 3 },
 		{ name = "cmdline", keyword_length = 3 },
 		{ name = "dictionary", keyword_length = 3 },
-		{ name = "ultisnips", keyword_length = 3 },
-		-- { name = "cmp_tabnine", keyword_length = 3 },
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -69,7 +66,7 @@ cmp.setup({
 				nvim_lsp = "   ",
 				luasnip = "   ",
 				buffer = "  ",
-				path = "  ",
+				path = "󰺽 󰑪  ",
 				cmdline = " ",
 				dictionary = "  ",
 				-- cmp_tabnine = "[TabN]",

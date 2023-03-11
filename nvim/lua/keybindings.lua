@@ -1,6 +1,8 @@
---###########################################################################--
---							Bindings SEttings 								 --
---###########################################################################--
+--                             ╭──────────────────╮
+--                             │ Bindings Settins │
+--                             ╰──────────────────╯
+
+
 local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
@@ -102,6 +104,7 @@ keymap({ "n", "v" }, "<A-A>", ":CBaccbox<CR>", opts) -- center alignment
 keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 keymap("n", "TL", ":TwilightEnable<CR>", opts)
 keymap("n", "TO", ":TwilightDisable<CR>", opts)
+-- keymap("n", "<Leader>FA", ':SmoothCursorFancyOn<CR>', opts)
 
 
 --[[************************************************************************]]--

@@ -1,6 +1,8 @@
---###########################################################################--
--- 							Settings		 								 --
---###########################################################################--
+--                                 ╭──────────╮
+--                                 │ Settings │
+--                                 ╰──────────╯
+
+require("cursor_style")
 require("sniprun").setup()
 require("luasnip_config")
 require("popup")
@@ -21,6 +23,7 @@ require("treesitter")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+
 --  ╭────────────────────────────────────────────────────────────────────────╮
 --  │                            Format settings-                            │
 --  ╰────────────────────────────────────────────────────────────────────────╯
@@ -29,7 +32,7 @@ local set = vim.opt
 -- set.spell = true
 set.number = true
 set.relativenumber = true
-set.spellsuggest = en
+set.spellsuggest = "best"
 set.updatetime = 200
 set.signcolumn = "yes"
 set.guifont = "monospace:h17"
@@ -51,11 +54,12 @@ set.smartindent = true
 set.autowrite = true
 set.swapfile = false
 set.undofile = true
--- set.termguicolors = true
+set.termguicolors = true
 set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
+set.guifont = "CaskaydiaCove Nerd Font:h07.5"
 
 
 vim.wo.colorcolumn = "80"
@@ -68,6 +72,7 @@ vim.g["load_netrw"] = 1
 vim.g["load_netrwPlugin"] = 1
 vim.o.fcs = 'eob: '
 vim.api.nvim_set_option("clipboard", "unnamedplus")
+-- vim.opt_global.dictionary = '~/dotfiles/en.dict'
 
 --  ╭─────────────────────────────────────────────────────────────────────────╮
 --  │                             Commands setup                              │
@@ -88,7 +93,7 @@ end, { bang = true, desc = "Search projects folder" })
 -- Highlight on yanks
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = yank_group,
-	pattern = "*",
+	pattern = '*',
 	callback = function()
 		vim.highlight.on_yank({ {
 			higroup = "IncSearch",
@@ -140,14 +145,19 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 --###########################################################################--
 -- 							Neovide settings 								 --
 --###########################################################################--
-vim.cmd([[
-	set guifont=CaskaydiaCove\ Nerd\ Font:h08
-	let g:neovide_transparency = 0.8
-	let g:neovide_no_idle = v:true
-	let g:neovide_input_use_logo = v:true
-	let g:neovide_cursor_vfx_mode = "ripple"
-	let g:neovide_refresh_rate = 40
-]])
+-- vim.cmd([[
+-- 	set guifont=CaskaydiaCove\ Nerd\ Font:h08.5
+-- ]])
+
+vim.g.neovide_transparency = 0.9
+vim.g.neovide_no_idle = true
+vim.g.neovide_cursor_vfx_mode = "ripple"
+vim.g.neovide_refresh_rate = 60
+vim.g.neovide_scroll_animation_length = 0.3
+vim.g.neovide_cursor_trail_size = 0.8
+vim.g.neovide_underline_automatic_sacaling = true
+-- vim.g.neovide_cursor_animation_length = 0.13
+-- vim.g.neovide_cursor_animate_in_insert_mode = true
 
 --###########################################################################--
 -- 							color settings									 --
@@ -201,6 +211,7 @@ require("presence"):setup({
 	line_number_text = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line
 	21,
 })
+
 --###########################################################################--
 -- 							Setting Translate 								 --
 --###########################################################################--
