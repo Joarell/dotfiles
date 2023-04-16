@@ -4,7 +4,12 @@
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("noice")
 require("telescope").load_extension("notify")
-require("telescope").setup({
+local telescope = require("telescope")
+-- local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
+
+telescope.setup {
 	extensions = {
 		media_files = {
 			-- filetypes whitelist
@@ -19,21 +24,14 @@ require("telescope").setup({
 			no_ignore = true,
 			search_dirs = { "." },
 		},
+		colorscheme = {
+			enable_preview = true,
+		},
 	},
 	defaults = {
 		selection_caret = " ",
 		prompt_prefix = "  ",
 		initial_mode = "normal",
-	},
-})
-
-local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
-
-local telescope = require("telescope")
-
-telescope.setup {
-	defaults = {
 		mappings = {
 			i = { ["<c-t>"] = trouble.open_with_trouble },
 			n = { ["<c-t>"] = trouble.open_with_trouble },

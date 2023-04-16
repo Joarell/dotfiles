@@ -1,3 +1,4 @@
+vim.opt.termguicolors = true
 --###########################################################################--
 --								Popup Settings								 --
 --###########################################################################--
@@ -36,7 +37,7 @@ require("noice").setup({
 	popupmenu = {
 		enabled = true, -- enables the Noice popupmenu UI
 		---@type 'nui'|'cmp'
-		backend = "cmp", -- backend to use to show regular cmdline completions
+		backend = "nui", -- backend to use to show regular cmdline completions
 		---@type NoicePopupmenuItemKind|false
 		-- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
 		kind_icons = {}, -- set to `false` to disable icons
@@ -53,7 +54,7 @@ require("noice").setup({
 	commands = {
 		history = {
 			-- options for the message history that you get with `:Noice`
-			view = "split",
+			view = "popup",
 			opts = { enter = true, format = "details" },
 			filter = {
 				any = {
@@ -61,7 +62,7 @@ require("noice").setup({
 					{ error = true },
 					{ warning = true },
 					{ event = "msg_show", kind = { "" } },
-					{ event = "lsp",      kind = "message" },
+					{ event = "lsp",kind = "message" },
 				},
 			},
 		},
@@ -75,7 +76,7 @@ require("noice").setup({
 					{ error = true },
 					{ warning = true },
 					{ event = "msg_show", kind = { "" } },
-					{ event = "lsp",      kind = "message" },
+					{ event = "lsp",kind = "message" },
 				},
 			},
 			filter_opts = { count = 1 },
@@ -113,7 +114,9 @@ require("noice").setup({
 		override = {
 			-- override the default lsp markdown formatter with Noice
 			-- override cmp documentation with Noice (needs the other options to work)
-			["cmp.entry.get_documentation"] = false,
+			["vim.lsp.util.convert_intpu_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+			["cmp.entry.get_documentation"] = true,
 		},
 		hover = {
 			enabled = true,
@@ -180,16 +183,21 @@ require("noice").setup({
 		-- you can enable a preset by setting it to true, or a table that will override the preset config
 		-- you can also add custom presets that you can enable/disable with enabled=true
 		bottom_search = false, -- use a classic bottom cmdline for search
-		command_palette = false, -- position the cmdline and popupmenu together
+		command_palette = true, -- position the cmdline and popupmenu together
 		long_message_to_split = false, -- long messages will be sent to a split
 		inc_rename = false, -- enables an input dialog for inc-rename.nvim
-		lsp_doc_border = false, -- add a border to hover docs and signature help
+		lsp_doc_border = true, -- add a border to hover docs and signature help
 	},
 	throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
 	---@type NoiceConfigViews
 	views = {}, ---@see section on views
 	---@type NoiceRouteConfig[]
-	routes = {}, --- @see section on routes
+	routes = {
+		-- {
+		-- 	view = "notify",
+		-- 	filter =  { event = "msg_showmode" },
+		-- },
+	}, --- @see section on routes
 	---@type table<string, NoiceFilter>
 	status = {}, --- @see section on statusline components
 	---@type NoiceFormatOptions
@@ -335,6 +343,6 @@ local severity = {
 	"info",
 	"info", -- map both hint and info to info?
 }
-vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
-	vim.notify(method.message, severity[params.type])
-end
+-- vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
+-- 	vim.notify(method.message, severity[params.type])
+-- end

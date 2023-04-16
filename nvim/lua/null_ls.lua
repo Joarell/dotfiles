@@ -2,24 +2,30 @@
 --						Diagnostics Settings								 --
 --###########################################################################--
 local null_ls = require("null-ls")
+local null = null_ls.builtins
 
 null_ls.setup({
 	sources = {
-		null_ls.builtins.formatting.stylua,
-		-- null_ls.builtins.formatting.eslint,
-		null_ls.builtins.formatting.codespell,
-		--------------------------------------------------------
-		-- null_ls.builtins.diagnostics.eslint,
-		null_ls.builtins.diagnostics.clang_check,
-		null_ls.builtins.diagnostics.codespell,
-		--------------------------------------------------------
-		null_ls.builtins.completion.spell,
-		null_ls.builtins.completion.vsnip,
-		--------------------------------------------------------
-		-- null_ls.builtins.code_actions.eslint_d,
-		null_ls.builtins.code_actions.refactoring,
-		--------------------------------------------------------
-		null_ls.builtins.hover.dictionary,
+		null.formatting.stylua,
+		null.formatting.eslint,
+		null.formatting.codespell,
+		null.formatting.shellharden,
+		null.formatting.shfmt,
+		null.formatting.djhtml,
+		null.formatting.djlint,
+		----------------------------------------
+		-- null.diagnostics.eslint,
+		null.diagnostics.clang_check,
+		null.diagnostics.codespell,
+		null.diagnostics.djlint,
+		----------------------------------------
+		null.completion.spell,
+		null.completion.vsnip,
+		----------------------------------------
+		null.code_actions.eslint_d,
+		null.code_actions.shellcheck,
+		----------------------------------------
+		null.hover.dictionary,
 	},
 	defaults = {
 		cmd = { "nvim" },
@@ -43,8 +49,9 @@ null_ls.setup({
 	end,
 	linters = {
 		command = "codespell",
-		filetypes = { "javascript", "python", "html", "css", "rust" },
+		filetypes = { "bash", "javascript", "python", "html", "css", "rust" },
 	},
+	debug = true,
 })
 
 --  ╭──────────────────────────────────────────────────╮
@@ -92,5 +99,5 @@ null_ls.setup({
 -- 		}),
 -- 	}),
 -- }
---
+
 -- null_ls.register(nodejs)

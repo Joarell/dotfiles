@@ -4,7 +4,7 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
--- vim.cmd([[packadd packer.nvim]])
+vim.cmd([[packadd packer.nvim]])
 local packer = require("packer")
 
 packer.startup({
@@ -12,7 +12,7 @@ packer.startup({
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--Faster starters                                  │
 		--  ╰──────────────────────────────────────────────────────────╯
-		use("nathom/filetype.nvim")
+		-- use("nathom/filetype.nvim")
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		Discord app monitor                                │
@@ -38,7 +38,7 @@ packer.startup({
 			end,
 		})
 		use({ "nvim-treesitter/nvim-treesitter-context" })
-		use({ "nvim-treesitter/playground" })
+		-- use({ "nvim-treesitter/playground" })
 		use({ "nvim-treesitter/nvim-treesitter-refactor" })
 
 		--  ╭──────────────────────────────────────────────────────────╮
@@ -47,21 +47,22 @@ packer.startup({
 		use({ "dracula/vim", as = "dracula" })
 
 		--  ╭──────────────────────────────────────────────────────────╮
-		--  │ 		--Lua status line                                  │
+		--  │ 		--Lua status line/column                           │
 		--  ╰──────────────────────────────────────────────────────────╯
-		use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
+		use({ "nvim-lualine/lualine.nvim", requires = { "nvim-tree/nvim-web-devicons", opt = true } })
+		-- use({ "luukvbaal/statuscol.nvim" })
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--BufferLine                                       │
 		--  ╰──────────────────────────────────────────────────────────╯
-		-- use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
+		use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 		use({ "romgrk/barbar.nvim" })
 		use({
 			"utilyre/barbecue.nvim",
 			requires = {
 				"neovim/nvim-lspconfig",
 				"smiteshp/nvim-navic",
-				"kyazdani42/nvim-web-devicons", -- optional
+				"nvim-tree/nvim-web-devicons", -- optional
 			},
 		})
 
@@ -77,16 +78,16 @@ packer.startup({
 		use({ "azabiong/vim-highlighter" })
 		use({ "chriskempson/base16-vim" })
 		use({ "sunjon/shade.nvim" })
-		use {
+		use({
 			"folke/twilight.nvim",
 			config = function()
-				require("twilight").setup {
+				require("twilight").setup({
 					-- your configuration comes here
 					-- or leave it empty to use the default settings
 					-- refer to the configuration section below
-				}
-			end
-		}
+				})
+			end,
+		})
 		-- use({ "roobert/tailwindcss-colorizer-cmp.nvim" })
 		use({ "navarasu/onedark.nvim" })
 
@@ -95,13 +96,13 @@ packer.startup({
 		--  ╰──────────────────────────────────────────────────────────╯
 		use({
 			"nvim-telescope/telescope.nvim",
-			tag = "0.1.0",
+			tag = "0.1.1",
 			-- or                            , branch = '0.1.x',
 			requires = { { "nvim-lua/plenary.nvim" } },
 		})
 		use({ "nvim-telescope/telescope-media-files.nvim" })
 		use({ "nvim-telescope/telescope-symbols.nvim" })
-		use({ "nvim-lua/popup.nvim" })
+		-- use({ "nvim-lua/popup.nvim" })
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--IndentBlankline/Fold                             │
@@ -113,26 +114,30 @@ packer.startup({
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--NewScroll                                        │
 		--  ╰──────────────────────────────────────────────────────────╯
-		use({ "karb94/neoscroll.nvim" })
-		use({ 'gen740/SmoothCursor.nvim' })
+		use("karb94/neoscroll.nvim")
+		use({
+			"gen740/SmoothCursor.nvim",
+			config = function()
+				require("smoothcursor").setup()
+			end,
+		})
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--Debugger                                         │
 		--  ╰──────────────────────────────────────────────────────────╯
-		use("puremourning/vimspector")
+		use({ "puremourning/vimspector" })
 		use({ "michaelb/sniprun", run = "bash ./install.sh" })
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 		--LSP and autocomplitions.                         │
 		--  ╰──────────────────────────────────────────────────────────╯
+		-- use({'VonHeikemen/Lsp-zero.nvim', branch = 'v1.x'})
 		use({
 			"williamboman/mason.nvim",
 			"williamboman/nvim-lsp-installer",
 			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
 			"kabouzeid/nvim-lspinstall",
 		})
-		use("tjdevries/nlua.nvim")
 		-- use({ "dcampos/cmp-snippy" })
 		-- use({ "dcampos/nvim-snippy" })
 		-- use({ "quangnguyen30192/cmp-nvim-ultisnips" })
@@ -146,9 +151,9 @@ packer.startup({
 		use({ "hrsh7th/cmp-nvim-lsp" })
 		use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp", tag = "v<CurrentMajor>.*" })
 		-- use({ "rafamadriz/friendly-snippets" })
-		-- use({ "jose-elias-alvarez/null-ls.nvim" })
+		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "windwp/nvim-ts-autotag" })
-		-- use({ "jayp0521/mason-null-ls.nvim" })
+		use({ "jayp0521/mason-null-ls.nvim" })
 		use({ "onsails/lspkind.nvim" })
 		use({ "uga-rosa/cmp-dictionary" })
 		-- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
@@ -206,6 +211,7 @@ packer.startup({
 			requires = { "nvim-lua/plenary.nvim" },
 		})
 		use({ "rhysd/git-messenger.vim" })
+		use({ "rbong/vim-flog" })
 
 		--  ╭───────────╮
 		--  │ --Trouble │
@@ -267,11 +273,6 @@ packer.startup({
 		--  ╰──────────────╯
 		use({
 			"folke/noice.nvim",
-			config = function()
-				require("noice").setup({
-					-- add any options here
-				})
-			end,
 			requires = {
 				-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 				"MunifTanjim/nui.nvim",
@@ -292,7 +293,6 @@ packer.startup({
 				require("tmux").setup()
 			end,
 		})
-
 
 		--  ╭──────────────────────────────────────────────────────────╮
 		--  │ 	This is the float settgin to open packer:              │

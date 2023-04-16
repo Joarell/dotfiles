@@ -7,10 +7,12 @@
 -- Credit: glepnir
 local lualine = require("lualine")
 
+
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-	bg       = '#202328',
+	-- bg       = '#202328',
+	bg       = '',
 	fg       = '#bbc2cf',
 	yellow   = 'Yellow',
 	cyan     = '#008080',
@@ -61,7 +63,27 @@ local config = {
 		lualine_z = {},
 		-- These will be filled later
 		lualine_c = {},
-		lualine_x = {},
+		lualine_x = {
+			{
+				require("noice").api.status.mode.get,
+				cond = require("noice").api.statusline.mode.has,
+				color = { fg = "#ff9e64" },
+			},
+			{
+				require("noice").api.status.message.get_hl,
+				cond = require("noice").api.status.message.has,
+			},
+			{
+				require("noice").api.status.command.get,
+				cond = require("noice").api.status.command.has,
+				color = { fg = "#ff9e64" },
+			},
+			{
+				require("noice").api.status.search.get,
+				cond = require("noice").api.status.search.has,
+				color = { fg = "#ff9e64" },
+			},
+		},
 	},
 	inactive_sections = {
 		-- these are to remove the defaults
@@ -79,12 +101,12 @@ local function ins_left(component)
 	table.insert(config.sections.lualine_c, component)
 end
 
--- Inserts a component in lualine_x ot right section
+-- Inserts a component in lualine_x at right section
 local function ins_right(component)
 	table.insert(config.sections.lualine_x, component)
 end
 
--- Inserts a color in lualine_x ot right section
+-- Inserts a color in lualine_x at right section
 local function change_colors(component, side)
 	if side == "left" then
 		ins_left({
@@ -151,30 +173,8 @@ local function change_colors(component, side)
 	end
 end
 
--- local function seprator(comp , side)
--- 	if comp == nil and side == "left" then
--- 		return "    "
--- 	elseif comp ~= nil and side == "left" then
--- 		return comp
--- 	elseif comp == nil and side == "right" then
--- 		return "   "
--- 	elseif comp ~= nil and side == "right" then
--- 		return comp
--- 	end
--- end
-
--- ins_left({
--- 	function()
--- 		return "▊"
--- 	end,
--- 	color = { fg = colors.blue }, -- Sets highlighting of component
--- 	padding = { left = 0, right = 1 }, -- We don't need space before this
--- })
-
--- change_colors(seprator( "  ", "left"), "left")
-
 local comp = function()
-	return "  "
+	return "   "
 end
 change_colors(comp, "left")
 
@@ -183,7 +183,7 @@ change_colors(comp, "left")
 change_colors("mode", "left")
 
 local comp = function()
-	return "  "
+	return "   "
 end
 change_colors(comp, "left")
 
@@ -199,7 +199,7 @@ ins_left({
 ins_left({
 	"diff",
 	-- Is it me or the symbol for modified us really weird
-	symbols = { added = " ", modified = "柳 ", removed = " " },
+	symbols = { added = " ", modified = "柳", removed = " " },
 	diff_color = {
 		added = { fg = colors.green },
 		modified = { fg = colors.orange },
@@ -209,18 +209,17 @@ ins_left({
 })
 
 local getpath = vim.fn.expand("%:p:h")
-local getgit = (vim.fn.finddir(".git", getpath .. ";"))
-print(getgit)
+local getgit = vim.fn.finddir('.git', getpath .. ';')
 if (#getgit > 0) then
-	local comp = function ()
-		return "   "
+	local comp = function()
+		return "    "
 	end
 	change_colors(comp, "left")
 end
 
 
 local comp = function()
-	return "   󰲉  ﬧ       "
+	return "   󰲉  ﬧ       "
 end
 change_colors(comp, "left")
 
@@ -232,14 +231,6 @@ change_colors(comp, "left")
 
 
 -- Add components to right sections
--- ins_right {
--- 	'o:encoding', -- option component same as &encoding in viml
--- 	fmt = string.upper, -- I'm not sure why it's upper case either ;)
--- 	cond = conditions.hide_in_width,
--- 	color = { fg = colors.green, gui = 'bold' },
--- }
-
-
 local comp = function()
 	return " "
 end
@@ -251,7 +242,7 @@ ins_right({
 	"filesize",
 	padding = { left = 1 },
 	cond = conditions.buffer_not_empty,
-	icon =  "size:",
+	icon = "size:",
 })
 
 
@@ -283,6 +274,18 @@ ins_right({
 })
 
 
+ins_right {
+	'o:encoding',    -- option component same as &encoding in viml
+	fmt = string.upper, -- I'm not sure why it's upper case either ;)
+	cond = conditions.hide_in_width,
+	color = { fg = colors.green, gui = 'bold' },
+}
+
+local comp = function()
+	return "   "
+end
+change_colors(comp, "right")
+
 ins_right({
 	-- Lsp server name .
 	function()
@@ -299,7 +302,7 @@ ins_right({
 				return client.name
 			end
 		end
-		return client.name
+		return clients.name
 	end,
 	-- icon = ' LSP  ',
 	-- icon = ' LSP  ',
@@ -309,43 +312,43 @@ ins_right({
 
 
 local comp = function()
-	return " "
+	return "   "
 end
 change_colors(comp, "right")
 
-ins_right({
-	"fileformat",
-	fmt = string.upper,
-	-- icon = "",
-	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.blue, gui = "bold" },
-})
+-- ins_right({
+-- 	"fileformat",
+-- 	fmt = string.upper,
+-- 	-- icon = "",
+-- 	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+-- 	color = { fg = colors.blue, gui = "bold" },
+-- })
+--
+-- local comp = function()
+-- 	return "   "
+-- end
+-- change_colors(comp, "right")
 
-local comp = function()
-change_colors(comp, "right")
-	return "  "
-end
-
-change_colors(comp, "right")
 
 ins_right({ "filetype" })
 
+
 local comp = function()
-	return "  "
+	return "   "
 end
 change_colors(comp, "right")
 
-ins_right({ "location" })
 
+ins_right({ "location" })
 local comp = function()
-	return "  "
+	return "   "
 end
 change_colors(comp, "right")
 
 ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
 local comp = function()
-	return ""
+	return "  "
 end
 change_colors(comp, "right")
 

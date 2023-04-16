@@ -1,6 +1,6 @@
---                             ╭──────────────────╮
---                             │ Bindings Settins │
---                             ╰──────────────────╯
+--                             ╭───────────────────╮
+--                             │ Bindings Settings │
+--                             ╰───────────────────╯
 
 
 local ls = require("luasnip")
@@ -13,7 +13,7 @@ local opt_map = { silent = true, noremap = false }
 --[[                             Basic mappings                             ]]--
 --[[************************************************************************]]--
 keymap("n", "<Leader>w", ":w!<CR>", opts)
-keymap("n", "Q", ":q!<CR>", opts)
+keymap("n", "E", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -39,7 +39,7 @@ keymap("v", "<PageUp>", ":m '<-2<CR>gv-gv", opts)
 keymap("v", "<PageDown>", ":m '>+1<CR>gv-gv", opts)
 keymap("n", "pv", "<C-w>v", opts)
 keymap("n", "ps", "<C-w>s", opts)
-keymap("n", "<Leader>ac", ":lua vim.lsp.buf.code_action()<CR>", opts)
+keymap("n", "<Leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
 keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
 keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", opts)
@@ -100,11 +100,11 @@ keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
 keymap({ "n", "i" }, "<Leader>ac", ':lua require("nvim-comment-frame").add_comment()<CR>', opts)
 keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multiline_comment()<CR>', opts)
 keymap({ "n", "v" }, "<A-L>", ":CBacbox<CR>", opts) -- left alignment adaptable
-keymap({ "n", "v" }, "<A-A>", ":CBaccbox<CR>", opts) -- center alignment
+keymap({ "n", "v" }, "<A-A>", ":CBlcbox<CR>", opts) -- center alignment
 keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 keymap("n", "TL", ":TwilightEnable<CR>", opts)
 keymap("n", "TO", ":TwilightDisable<CR>", opts)
--- keymap("n", "<Leader>FA", ':SmoothCursorFancyOn<CR>', opts)
+keymap("n", "<Leader>df", ':Gvdiffsplit<CR>', opts)
 
 
 --[[************************************************************************]]--
@@ -133,6 +133,3 @@ keymap("n", "<Leader>f", function()
 	vim.opt.foldcolumn = "6"
 	print("This key binding folds all indentation lines to protect your code! Your Welcome!😎")
 end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! 😎" })
--- keymap("n", "Q", function()
--- 	print("Hello")
--- end, { desc = "Say hello" })

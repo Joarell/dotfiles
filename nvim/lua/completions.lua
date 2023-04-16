@@ -33,8 +33,20 @@ dict.switcher({
 -- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 -- 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 -- end
+-- compare.offset,
+-- compare.exact,
+-- compare.score,
+-- compare.recently_used,
+-- compare.locality,
+-- compare.kind,
+-- compare.sort_text,
+-- compare.length,
+-- compare.order,
 
 cmp.setup({
+	-- sorting = {
+	-- 	priority_weight = 2,
+	-- },
 	snippet = {
 		expand = function(args)
 			if not ls then
@@ -44,11 +56,11 @@ cmp.setup({
 		end,
 	},
 	sources = {
-		{ name = "nvim_lsp", keyword_length = 3},
+		{ name = "nvim_lsp", keyword_length = 3, group_index = 1},
 		{ name = "luasnip" },
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 3 },
-		{ name = "cmdline", keyword_length = 3 },
+		{ name = "cmdline", keyword_length = 3, group_index = 3},
 		{ name = "dictionary", keyword_length = 3 },
 	},
 	window = {

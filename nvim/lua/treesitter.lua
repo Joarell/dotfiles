@@ -85,6 +85,7 @@ require("regexplainer").setup({
 
 	-- filetypes (i.e. extensions) in which to run the autocommand
 	filetypes = {
+		"lua",
 		"html",
 		"js",
 		"cjs",
@@ -94,10 +95,13 @@ require("regexplainer").setup({
 		"tsx",
 		"cjsx",
 		"mjsx",
+		"sh",
+		"yml",
+		"markdown",
 	},
 
 	-- Whether to log debug messages
-	debug = false,
+	debug = true,
 
 	display = "popup",
 	popup = {
@@ -140,6 +144,7 @@ local filetypes = {
 	"glimmer",
 	"handlebars",
 	"hbs",
+	"markdown",
 }
 local skip_tags = {
 	"area",
@@ -160,4 +165,5 @@ local skip_tags = {
 	"track",
 	"wbr",
 	"menuitem",
+	"markdown",
 }

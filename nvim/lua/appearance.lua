@@ -185,48 +185,22 @@ require("bufferline").setup({
 			fg = { attribute = "fg", highlight = "Normal" },
 			bg = { attribute = "bg", highlight = "Normal" },
 		},
+		separator_style = "slant",
 	},
 })
 
 
-require('shade').setup({
-	overlay_opacity = 40,
-	opacity_step = 0.3,
-	keys = {
-		brightness_up   = '<C-Up>',
-		brightness_down = '<C-Down>',
-		toggle          = '<A-S>',
-	}
-})
-
-require("lualine").setup({
-	sections = {
-		lualine_x = {
-			{
-				require("noice").api.status.message.get_hl,
-				cond = require("noice").api.status.message.has,
-			},
-			{
-				require("noice").api.status.command.get,
-				cond = require("noice").api.status.command.has,
-				color = { fg = "#ff9e64" },
-			},
-			{
-				require("noice").api.status.mode.get,
-				cond = require("noice").api.status.mode.has,
-				color = { fg = "#ff9e64" },
-			},
-			{
-				require("noice").api.status.search.get,
-				cond = require("noice").api.status.search.has,
-				color = { fg = "#ff9e64" },
-			},
-		},
-	},
-})
+-- require('shade').setup({
+-- 	overlay_opacity = 40,
+-- 	opacity_step = 0.3,
+-- 	keys = {
+-- 		brightness_up   = '<C-Up>',
+-- 		brightness_down = '<C-Down>',
+-- 		toggle          = '<A-S>',
+-- 	}
+-- })
 
 require("jj_neon_theme")
--- require("jj_neon_theme1")
 require("treesitter")
 require("tabline")
 

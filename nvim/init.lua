@@ -8,7 +8,6 @@ require("luasnip_config")
 require("popup")
 require("tscope")
 require("keybindings")
-require("starter")
 require("appearance")
 require("nvim-ts-autotag").setup()
 require("troublesettings")
@@ -16,7 +15,7 @@ require("lspsettings")
 require("plugins")
 require("neoscroll").setup()
 require("nvim_comment").setup()
-require("vgit").setup()
+require("vgit_config")
 require("treesitter")
 
 -- Disable netrw at the very start of init.lua
@@ -35,11 +34,11 @@ set.relativenumber = true
 set.spellsuggest = "best"
 set.updatetime = 200
 set.signcolumn = "yes"
-set.guifont = "monospace:h17"
 set.completeopt = { "menu", "menuone", "noselect" }
 set.pumheight = 20
-set.showmode = false
+set.showmode = true
 set.timeoutlen = 150
+set.laststatus = 2
 set.shiftwidth = 4
 set.softtabstop = 4
 set.tabstop = 4
@@ -56,7 +55,6 @@ set.swapfile = false
 set.undofile = true
 set.termguicolors = true
 set.winblend = 30
-set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 set.guifont = "CaskaydiaCove Nerd Font:h07.5"
@@ -72,6 +70,7 @@ vim.g["load_netrw"] = 1
 vim.g["load_netrwPlugin"] = 1
 vim.o.fcs = 'eob: '
 vim.api.nvim_set_option("clipboard", "unnamedplus")
+vim.o.incsearch = false
 -- vim.opt_global.dictionary = '~/dotfiles/en.dict'
 
 --  ╭─────────────────────────────────────────────────────────────────────────╮
@@ -173,15 +172,15 @@ high_str.setup({
 	highlight_colors = {
 		-- color_id = {"bg_hex_code",<"fg_hex_code"/"smart">}
 		color_0 = { "#0c0d0e", "smart" }, -- Cosmic charcoal
-		color_1 = { "#e5c07b", "smart" }, -- Pastel yellow
-		color_2 = { "#7FFFD4", "smart" }, -- Aqua menthe
+		color_1 = { "#ff8800", "smart" }, -- Pastel yellow
+		color_2 = { "#00ffaa", "smart" }, -- Aqua menthe
 		color_3 = { "#8A2BE2", "smart" }, -- Proton purple
 		color_4 = { "#FF4500", "smart" }, -- Orange red
 		color_5 = { "#008000", "smart" }, -- Office green
 		color_6 = { "#0000FF", "smart" }, -- Just blue
 		color_7 = { "#FFC0CB", "smart" }, -- Blush pink
-		color_8 = { "#FFF9E3", "smart" }, -- Cosmic latte
-		color_9 = { "#7d5c34", "smart" }, -- Follow brown
+		color_8 = { "#59a0e5", "smart" }, -- Cosmic latte
+		color_9 = { "#0080ff", "smart" }, -- Follow brown
 	},
 })
 
@@ -189,7 +188,7 @@ high_str.setup({
 -- 							Discord app monitor								 --
 --###########################################################################--
 
-require("presence"):setup({
+require("presence").setup({
 	-- General options
 	auto_update = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
 	neovim_image_text = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
