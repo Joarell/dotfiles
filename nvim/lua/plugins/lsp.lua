@@ -1,5 +1,5 @@
 --  ╭──────────────────────────────────────────────────────────╮
---  │ 		--LSP and autocomplitions.                         │
+--  │                 LSP and autocomplitions.                 │
 --  ╰──────────────────────────────────────────────────────────╯
 
 return {
@@ -41,14 +41,18 @@ return {
 			"https://github.com/onsails/lspkind.nvim",
 			"uga-rosa/cmp-dictionary",
 			"shinglyu/vim-codespell",
-			{ 
-				"roobert/tailwindcss-colorizer-cmp.nvim",
-				config = true
-			}
+			-- {
+			-- 	"roobert/tailwindcss-colorizer-cmp.nvim",
+			-- 	config = function ()
+			-- 		require("tailwindcss-colorizer-cmp").setup({
+			-- 			color_square_width = 2,
+			-- 		})
+			-- 	end
+			-- },
 			-- {
 			-- 	"tzachar/cmp-tabnine",
 			-- 	build = "./install.sh",
-			-- 	dependenciess = "hrsh7th/nvim-cmp"
+			-- 	dependencies = "hrsh7th/nvim-cmp"
 			-- },
 		},
 		config = function ()
@@ -61,6 +65,21 @@ return {
 			local cmp = require ("cmp")
 			local ls = require ("luasnip")
 			local dict = require("cmp_dictionary")
+			-- local tailwind_ok, tailwindcss = pcall(require, "tailwindcss-colorizer-cmp")
+			-- if not tailwind_ok then
+			-- 	return
+			-- end
+			-- local tabnine = require("cmp_tabnine.config")
+			--
+			-- tabnine:setup({
+			-- 	max_lines = 1000,
+			-- 	max_num_results = 20,
+			-- 	sort = true,
+			-- 	run_on_every_keystroke = true,
+			-- 	snippet_placeholder = '..',
+			-- 	ignored_file_type = {},
+			-- 	show_prediction_strength = false,
+			-- })
 
 			dict.setup({
 				exact = 3,
@@ -95,12 +114,14 @@ return {
 					end,
 				},
 				sources = {
-					{ name = "nvim_lsp", keyword_length = 3, group_index = 1},
+					{ name = "nvim_lsp", group_index = 0},
+					-- { name = "cmp_tabnine", group_index = 1 },
 					{ name = "luasnip" },
+					{ name = "buffer", keyword_length = 3, group_index = 2 },
 					{ name = "path" },
-					{ name = "buffer", keyword_length = 3 },
+					{ name = "emoji", option = { insert = false } },
 					{ name = "cmdline", keyword_length = 3, group_index = 3},
-					{ name = "cmp-tw2css", keyword_length = 3, group_index = 3},
+					{ name = "cmp-tw2css", group_index = 3},
 					{ name = "dictionary", keyword_length = 3 },
 				},
 				window = {
@@ -111,20 +132,25 @@ return {
 					expandable_indicator = true,
 					fields = { "kind", "abbr", "menu" },
 					format = lspkind.cmp_format({
-						mode = "symbol_text",
+						mode = "text_symbol",
 						maxwidth = 55,
 						withe_text = true,
 						ellipsis_char = "...",
 						menu = {
 							nvim_lsp = "   ",
 							luasnip = "   ",
-							buffer = "  ",
+							buffer = "   ",
 							path = "󰺽 󰑪  ",
 							cmdline = " ",
 							dictionary = "  ",
-							-- tailwind = "󱠓  ",
-							-- cmp_tabnine = "[TabN]",
+							emoji = "   ",
+							-- cmp_tw2css = "󱠓  ",
+							-- cmp_tabnine = "",
 						},
+						-- before = function (entry, vim_item)
+						-- 	vim_item = tailwindcss.formatter(entry, vim_item)
+						-- 	return vim_item
+						-- end
 						before = function(_, vim_item)
 							return vim_item
 						end,
@@ -133,6 +159,20 @@ return {
 				experimental = {
 					native_menu = false,
 					ghost_text = true,
+				},
+				sorting = {
+					priority_weight = 2,
+					comparator = {
+						cmp.config.compare.offset,
+						cmp.config.compare.kind,
+						cmp.config.compare.score,
+						cmp.config.compare.recently_used,
+						cmp.config.compare.sort_text,
+						cmp.config.compare.order,
+						cmp.config.compare.exact,
+						cmp.config.compare.locality,
+						cmp.config.compare.length,
+					},
 				},
 				mapping = {
 					["<C-Space>"] = cmp.mapping.complete(),
@@ -170,9 +210,6 @@ return {
 					end, { "i", "s" }),
 				},
 			})
-			cmp.setup.formatting = {
-				format = require("tailwindcss-colorizer-cmp").formatter,
-			}
 			cmp.setup.cmdline ({'/', '?'}, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {

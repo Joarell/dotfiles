@@ -76,7 +76,7 @@ return {
 				"pyright",
 				"rust_analyzer",
 				"sqlls",
-				"tailwindcss",
+				-- "tailwindcss",
 				"tsserver",
 				"yamlls",
 			}

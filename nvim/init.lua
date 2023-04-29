@@ -1,9 +1,25 @@
---                                 ╭──────────╮
---                                 │ Settings │
---                                 ╰──────────╯
+--  ╭──────────────────────────────────────────────────────────╮
+--  │                         Settings                         │
+--  ╰──────────────────────────────────────────────────────────╯
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("lazy").setup("plugins")
 require("cursor_style")
-require("sniprun").setup()
 require("luasnip_config")
 require("popup")
 require("tscope")
@@ -11,34 +27,33 @@ require("keybindings")
 require("appearance")
 require("nvim-ts-autotag").setup()
 require("troublesettings")
-require("lspsettings")
-require("plugins")
 require("neoscroll").setup()
 require("nvim_comment").setup()
 require("vgit_config")
 require("treesitter")
+require("tmux").setup()
 
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-
 --  ╭────────────────────────────────────────────────────────────────────────╮
 --  │                            Format settings-                            │
 --  ╰────────────────────────────────────────────────────────────────────────╯
+
 local set = vim.opt
 
--- set.spell = true
+set.spell = true
 set.number = true
 set.relativenumber = true
-set.spellsuggest = "best"
+set.sps = "best"
 set.updatetime = 200
 set.signcolumn = "yes"
+set.guifont = "monospace:h17"
 set.completeopt = { "menu", "menuone", "noselect" }
 set.pumheight = 20
-set.showmode = true
+set.showmode = false
 set.timeoutlen = 150
-set.laststatus = 2
 set.shiftwidth = 4
 set.softtabstop = 4
 set.tabstop = 4
@@ -55,10 +70,10 @@ set.swapfile = false
 set.undofile = true
 set.termguicolors = true
 set.winblend = 30
+set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 set.guifont = "CaskaydiaCove Nerd Font:h07.5"
-
 
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"
@@ -68,7 +83,7 @@ vim.g["netrw_banner"] = 0
 vim.g["netrw_localcopydircmd"] = "cp -r"
 vim.g["load_netrw"] = 1
 vim.g["load_netrwPlugin"] = 1
-vim.o.fcs = 'eob: '
+vim.o.fcs = "eob: "
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.o.incsearch = false
 -- vim.opt_global.dictionary = '~/dotfiles/en.dict'
@@ -92,7 +107,7 @@ end, { bang = true, desc = "Search projects folder" })
 -- Highlight on yanks
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = yank_group,
-	pattern = '*',
+	pattern = "*",
 	callback = function()
 		vim.highlight.on_yank({ {
 			higroup = "IncSearch",
@@ -110,7 +125,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	callback = function()
 		print("Test successful run!")
 		print(bufnr)
-		vim.fn.jobstart({ "npm", "test"})
+		vim.fn.jobstart({ "npm", "test" })
 	end,
 })
 
@@ -122,8 +137,7 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	border = "rounded",
 })
 
-vim.lsp.handlers["testDocument/signatureHelp"] = vim.lsp.with(
-	vim.lsp.handlers.signature_help, {
+vim.lsp.handlers["testDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = "rounded",
 })
 
@@ -162,8 +176,6 @@ vim.g.neovide_underline_automatic_sacaling = true
 -- 							color settings									 --
 --###########################################################################--
 -- Attaches to every FileType mode
-require("colorizer").setup()
-
 local high_str = require("high-str")
 
 high_str.setup({
@@ -188,85 +200,40 @@ high_str.setup({
 -- 							Discord app monitor								 --
 --###########################################################################--
 
-require("presence").setup({
+require("presence"):setup({
 	-- General options
-	auto_update = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
+	auto_update = true,                          -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
 	neovim_image_text = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-	main_image = "neovim", -- Main image display (either "neovim" or "file")
-	client_id = "793271441293967371", -- Use your own Discord application client id (not recommended)
-	log_level = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-	debounce_timeout = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-	enable_line_number = false, -- Displays the current line number instead of the current project
-	blacklist = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-	buttons = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`,
-	file_assets = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+	main_image = "neovim",                       -- Main image display (either "neovim" or "file")
+	client_id = "793271441293967371",            -- Use your own Discord application client id (not recommended)
+	log_level = nil,                             -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
+	debounce_timeout = 10,                       -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
+	enable_line_number = false,                  -- Displays the current line number instead of the current project
+	blacklist = {},                              -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
+	buttons = true,                              -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`,
+	file_assets = {},                            -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
 	-- Rich Presence text options
-	editing_text = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
-	file_explorer_text = "Browsing %s", -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
-	git_commit_text = "Committing changes", -- Format string rendered when committing changes in git (either string or function(filename: string): string)
-	plugin_manager_text = "Managing plugins", -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
-	reading_text = "Reading %s", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: st
-	workspace_text = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): s
-	line_number_text = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line
+	editing_text = "Editing %s",                 -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+	file_explorer_text = "Browsing %s",          -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
+	git_commit_text = "Committing changes",      -- Format string rendered when committing changes in git (either string or function(filename: string): string)
+	plugin_manager_text = "Managing plugins",    -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
+	reading_text = "Reading %s",                 -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: st
+	workspace_text = "Working on %s",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): s
+	line_number_text = "Line %s out of %s",      -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line
 	21,
-})
-
---###########################################################################--
--- 							Setting Translate 								 --
---###########################################################################--
-require("pantran").setup({
-	-- Default engine to use for translation. To list valid engine names run
-	-- `:lua =vim.tbl_keys(require("pantran.engines"))`.
-	default_engine = "argos",
-	-- Configuration for individual engines goes here.
-	engines = {
-		yandex = {
-			-- Default languages can be defined on a per engine basis. In this case
-			-- `:lua require("pantran.async").run(function()
-			-- vim.pretty_print(require("pantran.engines").yandex:languages()) end)`
-			-- can be used to list available language identifiers.
-			default_source = "auto",
-			default_target = "pt",
-		},
-	},
-	controls = {
-		mappings = {
-			edit = {
-				n = {
-					-- Use this table to add additional mappings for the normal mode in
-					-- the translation window. Either strings or function references are
-					-- supported.
-					["j"] = "gj",
-					["k"] = "gk",
-				},
-				i = {
-					-- Similar table but for insert mode. Using 'false' disables
-					-- existing keybindings.
-					-- ["<C-y>"] = false,
-					-- ["<C-t>"] = package.loaded.pantran.ui.actions.yank_close_translation,
-				},
-			},
-			-- Keybindings here are used in the selection window.
-			select = {
-				n = {
-					-- ...
-				},
-			},
-		},
-	},
 })
 
 --###########################################################################--
 -- 							Setting TODO comments 							 --
 --###########################################################################--
 require("todo-comments").setup({
-	signs = true, -- show icons in the signs column
+	signs = true,   -- show icons in the signs column
 	sign_priority = 8, -- sign priority
 	-- UPDATE:keywords recognized as todo comments
 	keywords = {
 		FIX = {
-			icon = " ", -- icon used for the sign, and in search results
-			color = "error", -- can be a hex color, or a named color (see below)
+			icon = " ",                     -- icon used for the sign, and in search results
+			color = "error",                   -- can be a hex color, or a named color (see below)
 			alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
 			-- signs = false, -- configure signs for some keywords individually
 		},
@@ -278,8 +245,8 @@ require("todo-comments").setup({
 		TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 	},
 	gui_style = {
-		fg = "NONE", -- The gui style to use for the fg highlight group.
-		bg = "BOLD", -- The gui style to use for the bg highlight group.
+		fg = "NONE",    -- The gui style to use for the fg highlight group.
+		bg = "BOLD",    -- The gui style to use for the bg highlight group.
 	},
 	merge_keywords = true, -- when true, custom keywords will be merged with the defaults
 	-- highlighting of the line containing the todo comment
@@ -287,16 +254,16 @@ require("todo-comments").setup({
 	-- * keyword: highlights of the keyword
 	-- * after: highlights after the keyword (todo text)
 	highlight = {
-		multiline = true, -- enable multine todo comments
-		multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
-		multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
-		before = "", -- "fg" or "bg" or empty
-		keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
-		after = "fg", -- "fg" or "bg" or empty
+		multiline = true,          -- enable multine todo comments
+		multiline_pattern = "^.",  -- lua pattern to match the next multiline from the start of the matched keyword
+		multiline_context = 10,    -- extra lines that will be re-evaluated when changing a line
+		before = "",               -- "fg" or "bg" or empty
+		keyword = "wide",          -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+		after = "fg",              -- "fg" or "bg" or empty
 		pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
-		comments_only = true, -- uses treesitter to match keywords in comments only
-		max_line_len = 400, -- ignore lines longer than this
-		exclude = {}, -- list of file types to exclude highlighting
+		comments_only = true,      -- uses treesitter to match keywords in comments only
+		max_line_len = 400,        -- ignore lines longer than this
+		exclude = {},              -- list of file types to exclude highlighting
 	},
 	-- list of named colors where we try to extract the guifg from the
 	-- list of highlight groups or use the hex color if hl not found as a fallback

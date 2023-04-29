@@ -2,11 +2,17 @@
 --								 LSP settings								 --
 --###########################################################################--
 require("null_ls")
+require("nvim-lsp-installer").setup({})
 require("mason-null-ls").setup({
 	automatic_setup = true,
 })
+require("mason-lspconfig").setup({
+	ensure_installed = SERVERS,
+	automatic_installation = true,
+})
 
 local run = pcall(vim.cmd, 'MasonUpdate')
+
 require("mason").setup({
 	ui = {
 		icons = {
@@ -14,15 +20,10 @@ require("mason").setup({
 			package_pending = "➜",
 			package_uninstalled = "✗",
 		},
-		check_outdated_packages_on_open = true,
-		border = "rounded",
-	},
-	registries = {
-		"lua:mason-registry.index",
-		"github:mason-org/mason-registry",
 	},
 })
 
+local completions = require("completions") -- ./complitions.lua
 local signs = {
 	Error = "",
 	Warn = " ",
@@ -53,28 +54,10 @@ end
 local lspconfig = require("lspconfig")
 local lsp_defaults = lspconfig.util.default_config
 --
-lsp_defaults.capabilities = vim.tbl_deep_extend(
-	"force",
-	lsp_defaults.capabilities,
-	require("cmp_nvim_lsp").default_capabilities()
-)
-lspconfig.util.default_config = vim.tbl_deep_extend(
-	"force",
-	lspconfig.util.default_config,
-	lsp_defaults
-)
+lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
 
-
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
-local completions = require("completions")
-local on_attach = function(client, bufnr)
-	if client.resolved_capabilities.completion then
-		completions.on_attach(client, bufnr)
-	end
-end
-
-local servers = {
+SERVERS = {
 	"bashls",
 	"clangd",
 	"cssls",
@@ -90,20 +73,21 @@ local servers = {
 	"yamlls",
 }
 
-require("mason-lspconfig").setup({
-	ensure_installed = servers,
-	automatic_installation = true,
-})
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+local on_attach = function(client, bufnr)
+	if client.resolved_capabilities.completion then
+		completions.on_attach(client, bufnr)
+	end
+end
 
-for _, lsp in pairs(servers) do
+for _, lsp in pairs(SERVERS) do
 	lspconfig[lsp].setup({
 		on_atttach = on_attach,
-		capabilities = lsp_defaults.capabilities,
-		-- capabilities = capabilities,
+		capabilities = capabilities,
 		single_file_support = true,
 		flags = {
 			debounce_text_changes = 50,
 		},
 	})
 end
-lspconfig.tailwindcss.setup {}

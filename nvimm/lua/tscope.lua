@@ -4,10 +4,11 @@
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("noice")
 require("telescope").load_extension("notify")
-require("telescope").load_extension("file_browser")
 local telescope = require("telescope")
 -- local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
+
+
 telescope.setup {
 	extensions = {
 		media_files = {
@@ -42,7 +43,7 @@ local keymap = vim.keymap.set
 local builtin = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
 
-keymap("n", "ts", function()
+keymap("n", "tc", function()
 	builtin.colorscheme({ enable_preview = true })
 end, opts)
 keymap("n", "fz", builtin.find_files, opts)
@@ -55,4 +56,4 @@ keymap("n", "tm", ":Telescope media_files<CR>", opts)
 keymap("n", "tn", ":Telescope notify<CR>", opts)
 keymap("n", "to", ":Telescope oldfiles<CR>", opts)
 keymap("n", "th", builtin.help_tags, opts)
-keymap("n", "tb", ":Telescope file_browser<CR>", opts)
+keymap("n", "tb", builtin.git_branches, opts)

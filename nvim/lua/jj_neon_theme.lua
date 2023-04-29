@@ -66,12 +66,8 @@ local config = {
 		lualine_x = {
 			{
 				require("noice").api.status.mode.get,
-				cond = require("noice").api.statusline.mode.has,
+				cond = require("noice").api.status.mode.has,
 				color = { fg = "#ff9e64" },
-			},
-			{
-				require("noice").api.status.message.get_hl,
-				cond = require("noice").api.status.message.has,
 			},
 			{
 				require("noice").api.status.command.get,
@@ -219,7 +215,7 @@ end
 
 
 local comp = function()
-	return "   󰲉  ﬧ       "
+	return "󰒲    󰲉  ﬧ       "
 end
 change_colors(comp, "left")
 
@@ -248,6 +244,11 @@ ins_right({
 
 local comp = function()
 	return "  "
+end
+change_colors(comp, "right")
+
+local comp = function()
+	return " "
 end
 change_colors(comp, "right")
 

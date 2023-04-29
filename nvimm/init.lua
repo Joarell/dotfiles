@@ -2,21 +2,6 @@
 --                                 │ Settings │
 --                                 ╰──────────╯
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=satable", --latest stable release
-	})
-end
-vim.opt.rtp:prepend(lazypath)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-require("lazy").setup("plugins")
 require("cursor_style")
 require("sniprun").setup()
 require("luasnip_config")
@@ -26,33 +11,34 @@ require("keybindings")
 require("appearance")
 require("nvim-ts-autotag").setup()
 require("troublesettings")
+require("lspsettings")
+require("plugins")
 require("neoscroll").setup()
 require("nvim_comment").setup()
 require("vgit_config")
 require("treesitter")
-require("tmux").setup()
 
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+
 --  ╭────────────────────────────────────────────────────────────────────────╮
 --  │                            Format settings-                            │
 --  ╰────────────────────────────────────────────────────────────────────────╯
-
-
 local set = vim.opt
+
 -- set.spell = true
 set.number = true
 set.relativenumber = true
 set.spellsuggest = "best"
 set.updatetime = 200
 set.signcolumn = "yes"
-set.guifont = "monospace:h17"
 set.completeopt = { "menu", "menuone", "noselect" }
 set.pumheight = 20
-set.showmode = false
+set.showmode = true
 set.timeoutlen = 150
+set.laststatus = 2
 set.shiftwidth = 4
 set.softtabstop = 4
 set.tabstop = 4
@@ -69,7 +55,6 @@ set.swapfile = false
 set.undofile = true
 set.termguicolors = true
 set.winblend = 30
-set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 set.guifont = "CaskaydiaCove Nerd Font:h07.5"
@@ -177,6 +162,8 @@ vim.g.neovide_underline_automatic_sacaling = true
 -- 							color settings									 --
 --###########################################################################--
 -- Attaches to every FileType mode
+require("colorizer").setup()
+
 local high_str = require("high-str")
 
 high_str.setup({
@@ -201,7 +188,7 @@ high_str.setup({
 -- 							Discord app monitor								 --
 --###########################################################################--
 
-require("presence"):setup({
+require("presence").setup({
 	-- General options
 	auto_update = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
 	neovim_image_text = "The One True Text Editor", -- Text displayed when hovered over the Neovim image

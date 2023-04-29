@@ -29,11 +29,6 @@ return {
 	-- { "nvim-treesitter/playground" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		You can alias plugin names                         │
-	--  ╰──────────────────────────────────────────────────────────╯
-	{ "dracula/vim", name = "dracula" },
-
-	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--Lua status line/column                           │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
@@ -67,7 +62,6 @@ return {
 	{ "p00f/nvim-ts-rainbow" },
 	{ "Pocco81/HighStr.nvim" },
 	{ "azabiong/vim-highlighter" },
-	{ "chriskempson/base16-vim" },
 	{ "sunjon/shade.nvim" },
 	{ "folke/twilight.nvim",
 		config = function()
@@ -87,7 +81,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		-- or                            , branch = '0.1.x',
-		dependencies = { 
+		dependencies = {
 			"nvim-lua/plenary.nvim"
 		},
 	},
@@ -118,7 +112,6 @@ return {
 	--  │ 		--Debugger                                         │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{"puremourning/vimspector"},
-	{ "michaelb/sniprun", build = "bash ./install.sh" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--Comment                                          │
@@ -159,8 +152,8 @@ return {
 	{ "tveskag/nvim-blame-line" },
 	{
 		"tanvirtin/vgit.nvim",
-		dependencies = { 
-			"nvim-lua/plenary.nvim" 
+		dependencies = {
+			"nvim-lua/plenary.nvim"
 		},
 	},
 	{ "rhysd/git-messenger.vim" },
@@ -189,7 +182,6 @@ return {
 	--  │ Definitive git info │
 	--  ╰─────────────────────╯
 	{ "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim" },
-	{ "preservim/tagbar" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--Window animations                                │
@@ -213,17 +205,22 @@ return {
 	--  ╰─────────────────────────╯
 	-- {'mzarnitsa/psql'},
 
-	--  ╭───────────────────────────────╮
-	--  │            Themes             │
-	--  │ Install without configuration │
-	--  ╰───────────────────────────────╯
+	--  ╭─────────────────────────────────────────────────╮
+	--  │      Themes Install without configuration       │
+	--  ╰─────────────────────────────────────────────────╯
 	{ "projekt0n/github-nvim-theme" },
-	{ "liuchengxu/vista.vim" },
+	{
+		"liuchengxu/vista.vim",
+		config = function()
+			vim.g["vista_icon_ident"] = '"╰─▸ ", "├─▸ "'
+			vim.g["vista_default_executive"] = "ctags"
+			vim.g["vista_fzf_preview"] = 'right:50%'
+		end
+	},
 
-	--  ╭──────────────╮
-	--  │ Pupup frames │
-	--  │    Packer    │
-	--  ╰──────────────╯
+	--  ╭───────────────────────────╮
+	--  │    Pupup frames Packer    │
+	--  ╰───────────────────────────╯
 	{
 		"folke/noice.nvim",
 		dependencies = {
@@ -239,6 +236,5 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		Translation                                        │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "potamides/pantran.nvim" },
 	{ "aserowy/tmux.nvim"},
 }

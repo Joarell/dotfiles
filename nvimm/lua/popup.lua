@@ -4,7 +4,7 @@ vim.opt.termguicolors = true
 --###########################################################################--
 require("noice").setup({
 	cmdline = {
-		enabled = false, -- enables the Noice cmdline UI
+		enabled = true, -- enables the Noice cmdline UI
 		view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
 		opts = {}, -- global options for the cmdline. See section on views
 		---@type table<string, CmdlineFormat>
@@ -19,7 +19,7 @@ require("noice").setup({
 			search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
 			filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
 			lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-
+			help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
 			input = {}, -- Used by input()
 			-- lua = false, -- to disable a format, set to `false`
 		},
@@ -27,7 +27,7 @@ require("noice").setup({
 	messages = {
 		-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 		-- This is a current Neovim limitation.
-		enabled = false, -- enables the Noice messages UI
+		enabled = true, -- enables the Noice messages UI
 		view = "notify", -- default view for messages
 		view_error = "notify", -- view for errors
 		view_warn = "notify", -- view for warnings
@@ -35,7 +35,7 @@ require("noice").setup({
 		view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
 	},
 	popupmenu = {
-		enabled = false, -- enables the Noice popupmenu UI
+		enabled = true, -- enables the Noice popupmenu UI
 		---@type 'nui'|'cmp'
 		backend = "nui", -- backend to use to show regular cmdline completions
 		---@type NoicePopupmenuItemKind|false
@@ -96,7 +96,7 @@ require("noice").setup({
 		-- event is always "notify" and kind can be any log level as a string
 		-- The default routes will forward notifications to nvim-notify
 		-- Benefit of using Noice for this is the routing and consistent history view
-		enabled = false,
+		enabled = true,
 		view = "notify",
 	},
 	lsp = {

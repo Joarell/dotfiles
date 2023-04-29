@@ -2,6 +2,7 @@ vim.opt.termguicolors = true
 --###########################################################################--
 --								Popup Settings								 --
 --###########################################################################--
+
 require("noice").setup({
 	cmdline = {
 		enabled = true, -- enables the Noice cmdline UI
@@ -19,7 +20,6 @@ require("noice").setup({
 			search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
 			filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
 			lua = { pattern = "^:%s*lua%s+", icon = "", lang = "lua" },
-			help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
 			input = {}, -- Used by input()
 			-- lua = false, -- to disable a format, set to `false`
 		},
@@ -76,7 +76,7 @@ require("noice").setup({
 					{ error = true },
 					{ warning = true },
 					{ event = "msg_show", kind = { "" } },
-					{ event = "lsp",kind = "message" },
+					{ event = "lsp", kind = "message" },
 				},
 			},
 			filter_opts = { count = 1 },
@@ -101,7 +101,7 @@ require("noice").setup({
 	},
 	lsp = {
 		progress = {
-			enabled = true,
+			enabled = false,
 			-- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
 			-- See the section on formatting for more details on how to customize.
 			--- @type NoiceFormat|string
@@ -115,11 +115,12 @@ require("noice").setup({
 			-- override the default lsp markdown formatter with Noice
 			-- override cmp documentation with Noice (needs the other options to work)
 			["vim.lsp.util.convert_intpu_to_markdown_lines"] = true,
-			["vim.lsp.util.stylize_markdown"] = true,
+			["vim.lsp.util.stylize_markdown"] = false,
 			["cmp.entry.get_documentation"] = true,
 		},
 		hover = {
 			enabled = true,
+			silent = true, -- set to true to not show a message if hover is not available
 			view = nil, -- when nil, use defaults from documentation
 			---@type NoiceViewOptions
 			opts = {}, -- merged with defaults from documentation
@@ -183,9 +184,9 @@ require("noice").setup({
 		-- you can enable a preset by setting it to true, or a table that will override the preset config
 		-- you can also add custom presets that you can enable/disable with enabled=true
 		bottom_search = false, -- use a classic bottom cmdline for search
-		command_palette = true, -- position the cmdline and popupmenu together
+		command_palette = false, -- position the cmdline and popupmenu together
 		long_message_to_split = false, -- long messages will be sent to a split
-		inc_rename = false, -- enables an input dialog for inc-rename.nvim
+		inc_rename = true, -- enables an input dialog for inc-rename.nvim
 		lsp_doc_border = true, -- add a border to hover docs and signature help
 	},
 	throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
@@ -193,10 +194,10 @@ require("noice").setup({
 	views = {}, ---@see section on views
 	---@type NoiceRouteConfig[]
 	routes = {
-		-- {
-		-- 	view = "notify",
-		-- 	filter =  { event = "msg_showmode" },
-		-- },
+		{
+			view = "notify",
+			filter =  { event = "msg_showmode" },
+		},
 	}, --- @see section on routes
 	---@type table<string, NoiceFilter>
 	status = {}, --- @see section on statusline components
