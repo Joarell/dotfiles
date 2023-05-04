@@ -19,6 +19,7 @@ return {
 					-- null.formatting.shfmt,
 					-- null.formatting.djhtml,
 					-- null.formatting.djlint,
+					null.formatting.rustfmt,
 					----------------------------------------
 					-- null.diagnostics.eslint,
 					-- null.diagnostics.clang_check,

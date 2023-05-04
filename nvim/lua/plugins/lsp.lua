@@ -31,7 +31,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"https://github.com/jcha0713/cmp-tw2css",
+			-- "https://github.com/jcha0713/cmp-tw2css",
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
@@ -57,9 +57,9 @@ return {
 		},
 		config = function ()
 			require("luasnip/loaders/from_vscode").lazy_load()
-			require("cmp-tw2css").setup({
-				fallback = true
-			})
+			-- require("cmp-tw2css").setup({
+			-- 	fallback = true
+			-- })
 
 			local lspkind = require("lspkind")
 			local cmp = require ("cmp")
@@ -115,14 +115,13 @@ return {
 				},
 				sources = {
 					{ name = "nvim_lsp", group_index = 0},
-					-- { name = "cmp_tabnine", group_index = 1 },
-					{ name = "luasnip" },
-					{ name = "buffer", keyword_length = 3, group_index = 2 },
+					{ name = "buffer", keyword_length = 3, group_index = 1 },
+					{ name = "luasnip", keyword_length = 2 },
+					{ name = "cmdline", keyword_length = 3, group_index = 2},
 					{ name = "path" },
 					{ name = "emoji", option = { insert = false } },
-					{ name = "cmdline", keyword_length = 3, group_index = 3},
-					{ name = "cmp-tw2css", group_index = 3},
-					{ name = "dictionary", keyword_length = 3 },
+					-- { name = "cmp-tw2css", group_index = 3},
+					{ name = "dictionary", keyword_length = 4 },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -164,13 +163,13 @@ return {
 					priority_weight = 2,
 					comparator = {
 						cmp.config.compare.offset,
-						cmp.config.compare.kind,
-						cmp.config.compare.score,
 						cmp.config.compare.recently_used,
+						cmp.config.compare.score,
+						cmp.config.compare.kind,
+						cmp.config.compare.locality,
 						cmp.config.compare.sort_text,
 						cmp.config.compare.order,
 						cmp.config.compare.exact,
-						cmp.config.compare.locality,
 						cmp.config.compare.length,
 					},
 				},
