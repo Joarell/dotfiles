@@ -1,12 +1,6 @@
 --###########################################################################--
 --						   Appearance settings				 				 --
 --###########################################################################--
--- vim.cmd([[
--- 	augroup packer_user_config
--- 		autocmd!
--- 		autocmd BufWritePost plugins.lua source <afile> | PackerCompile
--- 	augroup end
--- ]])
 
 -- Lua:
 -- This is the theme for evential contention on neovim behavior. (Just in case!)
@@ -100,7 +94,7 @@ require('onedark').setup({
 		background = true, -- use background color for virtual text
 	},
 })
--- require('onedark').load()
+require('onedark').load()
 
 
 -- Example config in Lua
@@ -150,7 +144,8 @@ require('github-theme').setup({
 })
 
 -- vim.cmd('colorscheme github_dark')
-
+-- vim.g["codedark_transparent"] = 1
+vim.cmd('colorscheme codedark')
 
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Bufferline settings:                   │
