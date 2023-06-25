@@ -136,7 +136,7 @@ return {
 						withe_text = true,
 						ellipsis_char = "...",
 						menu = {
-							nvim_lsp = "   ",
+							nvim_lsp = "   ",
 							luasnip = "   ",
 							buffer = "   ",
 							path = "󰺽 󰑪  ",

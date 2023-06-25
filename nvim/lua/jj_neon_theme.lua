@@ -170,7 +170,7 @@ local function change_colors(component, side)
 end
 
 local comp = function()
-	return "   "
+	return "  "
 end
 change_colors(comp, "left")
 
@@ -179,7 +179,7 @@ change_colors(comp, "left")
 change_colors("mode", "left")
 
 local comp = function()
-	return "   "
+	return "  "
 end
 change_colors(comp, "left")
 
@@ -208,14 +208,14 @@ local getpath = vim.fn.expand("%:p:h")
 local getgit = vim.fn.finddir('.git', getpath .. ';')
 if (#getgit > 0) then
 	local comp = function()
-		return "    "
+		return "   "
 	end
 	change_colors(comp, "left")
 end
 
 
 local comp = function()
-	return "󰒲    󰲉  ﬧ       "
+	return "󰒲    󰲉  ﬧ      "
 end
 change_colors(comp, "left")
 
@@ -283,7 +283,7 @@ ins_right {
 }
 
 local comp = function()
-	return "   "
+	return "  "
 end
 change_colors(comp, "right")
 
@@ -313,7 +313,7 @@ ins_right({
 
 
 local comp = function()
-	return "   "
+	return "  "
 end
 change_colors(comp, "right")
 
@@ -335,21 +335,21 @@ ins_right({ "filetype" })
 
 
 local comp = function()
-	return "   "
+	return "  "
 end
 change_colors(comp, "right")
 
 
 ins_right({ "location" })
 local comp = function()
-	return "   "
+	return "  "
 end
 change_colors(comp, "right")
 
 ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
 local comp = function()
-	return "  "
+	return " "
 end
 change_colors(comp, "right")
 

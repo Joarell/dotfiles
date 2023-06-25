@@ -63,15 +63,15 @@ return {
 	{ "Pocco81/HighStr.nvim" },
 	{ "azabiong/vim-highlighter" },
 	{ "sunjon/shade.nvim" },
-	{ "folke/twilight.nvim",
-		config = function()
-			require("twilight").setup({
-				-- your configuration comes here
-				-- or leave it empty to h, default settings
-				-- refer to the configuration section below
-			})
-		end,
-	},
+	-- { "folke/twilight.nvim",
+	-- 	config = function()
+	-- 		require("twilight").setup({
+	-- 			-- your configuration comes here
+	-- 			-- or leave it empty to h, default settings
+	-- 			-- refer to the configuration section below
+	-- 		})
+	-- 	end,
+	-- },
 	{ "navarasu/onedark.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
@@ -157,7 +157,7 @@ return {
 		},
 	},
 	{ "rhysd/git-messenger.vim" },
-	{ "rbong/vim-flog" },
+	-- { "rbong/vim-flog" },
 
 	--  ╭───────────╮
 	--  │ --Trouble │
