@@ -28,7 +28,8 @@ telescope.setup {
 		},
 	},
 	defaults = {
-		selection_caret = " ",
+		-- selection_caret = " ",
+		selection_caret = " ",
 		prompt_prefix = "  ",
 		initial_mode = "normal",
 		mappings = {

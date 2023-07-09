@@ -67,11 +67,14 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local navbuddy = require("nvim-navbuddy")
 local completions = require("completions")
 local on_attach = function(client, bufnr)
 	if client.resolved_capabilities.completion then
 		completions.on_attach(client, bufnr)
 	end
+	navbuddy.attach(client, bufnr)
 end
 
 local servers = {
@@ -89,6 +92,7 @@ local servers = {
 	"tsserver",
 	"yamlls",
 }
+
 
 require("mason-lspconfig").setup({
 	ensure_installed = servers,

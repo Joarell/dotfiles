@@ -1,8 +1,6 @@
 --                             ╭───────────────────╮
 --                             │ Bindings Settings │
 --                             ╰───────────────────╯
-
-
 local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
@@ -15,10 +13,10 @@ local opt_map = { silent = true, noremap = false }
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "E", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
-keymap("n", "<C-Down>", ":resize -2<CR>", opts)
-keymap("n", "<C-Up>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-up>", ":resize -2<CR>", opts)
+keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
 keymap("n", "gl", ":lua vim.diagnostic.open_float()<CR>", opts)
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
@@ -103,23 +101,35 @@ keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 keymap("n", "TL", ":TwilightEnable<CR>", opts)
 keymap("n", "TO", ":TwilightDisable<CR>", opts)
 keymap("n", "<Leader>df", ':Gvdiffsplit<CR>', opts)
+keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
+keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
 
 
 --[[************************************************************************]]--
 --[[                             "F" functions:                             ]]--
 --[[************************************************************************]]--
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
-keymap("n", "<F2>", ":call vimspector#ClearLineBreakpoint()<CR>", opts)
+-- keymap("n", "<F2>", ":call vimspector#ClearLineBreakpoint()<CR>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
-keymap("n", "<F4>", ":call vimspector#Reset()<CR>", opts)
-keymap("n", "<F5>", ":call vimspector#Continue()<cr>", opts)
-keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
-keymap("n", "<F7>", ":call vimspector#StepOver()<CR>", opts)
+-- keymap("n", "<F4>", ":call vimspector#Reset()<CR>", opts)
+-- keymap("n", "<F5>", ":call vimspector#Continue()<cr>", opts)
+-- keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
+-- keymap("n", "<F7>", ":call vimspector#StepOver()<CR>", opts)
 keymap("n", "<F8>", ":Vista<CR>", opts)
-keymap("n", "<F9>", ":call vimspector#ToggleBreakpoint()<CR>", opts)
-keymap("n", "<F10>", ":call vimspector#StepOver()<CR>", opts)
-keymap("n", "<F11>", ":call vimspector#Continue()<CR>", opts)
+-- keymap("n", "<F9>", ":call vimspector#ToggleBreakpoint()<CR>", opts)
+-- keymap("n", "<F10>", ":call vimspector#StepOver()<CR>", opts)
+-- keymap("n", "<F11>", ":call vimspector#Continue()<CR>", opts)
 keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
+
+keymap("n", "<F2>", ":DapTerminate<cr>", opts)
+keymap("n", "<F4>", ":DapRestartFrame<CR>", opts)
+keymap("n", "<F5>", ":DapContinue<CR>", opts)
+keymap("n", "<F6>", ":lua require('dapui').float_element()<CR>", opts)
+keymap("n", "<F7>", ":DapStepOver<CR>", opts)
+keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", opts)
+keymap("n", "<F10>", ":DapStepInto<CR>", opts)
+keymap("n", "<F11>", ":lua require('dap').restart()<CR>", opts)
+
 
 --[[************************************************************************]]--
 --[[                            Folder function:                            ]]--

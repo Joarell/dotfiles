@@ -19,6 +19,18 @@ return {
 		},
 	},
 	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{
+				"Smiteshp/nvim-navbuddy",
+				dependencies = {
+					"MunifTanjim/nui.nvim"
+				},
+				opts = { lsp = { auto_attach = true } }
+			}
+		},
+	},
+	{
 		"bennypowers/nvim-regexplainer",
 		config = function()
 			require("regexplainer").setup()

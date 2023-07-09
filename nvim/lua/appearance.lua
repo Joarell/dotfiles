@@ -220,8 +220,8 @@ require('shade').setup({
 	overlay_opacity = 40,
 	opacity_step = 0.3,
 	keys = {
-		brightness_up   = '<C-Up>',
-		brightness_down = '<C-Down>',
+		brightness_up   = '<A-+>',
+		brightness_down = '<A-->',
 		toggle          = '<A-S>',
 	}
 })

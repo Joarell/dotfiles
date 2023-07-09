@@ -23,7 +23,7 @@ return {
 					----------------------------------------
 					-- null.diagnostics.eslint,
 					-- null.diagnostics.clang_check,
-					null.diagnostics.codespell,
+					-- null.diagnostics.codespell,
 					-- null.diagnostics.djlint,
 					----------------------------------------
 					null.completion.spell,

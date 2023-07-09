@@ -18,6 +18,7 @@ return {
 			local mason_lsp = require("mason-lspconfig")
 			local mason = require("mason")
 			local completions = require("cmp")
+			local mason_registry = require("mason-registry")
 			local signs = {
 				Error = "",
 				Warn = " ",
@@ -64,8 +65,12 @@ return {
 			)
 			-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 			-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+			local codelldb = mason_registry.get_package('codelldb')
+			local extension_path = codelldb:get_install_path() .. "/extension/"
+			local codelldb_path = extension_path .. "adapter/codelldb"
+			local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
 
-			servers = {
+			SERVERS = {
 				"bashls",
 				"clangd",
 				"cssls",
@@ -76,18 +81,20 @@ return {
 				"pyright",
 				"rust_analyzer",
 				"sqlls",
-				-- "tailwindcss",
 				"tsserver",
 				"yamlls",
 			}
 
 			mason_lsp.setup({
-				ensure_installed = servers,
+				ensure_installed = SERVERS,
 				automatic_installation = true,
 			})
 
-			for _, lsp in pairs(servers) do
+			for _, lsp in pairs(SERVERS) do
 				lspconfig[lsp].setup({
+					dap = {
+						adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+					},
 					on_atttach = on_attach,
 					capabilities = lsp_defaults.capabilities,
 					-- capabilities = capabilities,

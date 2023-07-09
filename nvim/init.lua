@@ -32,6 +32,7 @@ require("nvim_comment").setup()
 require("vgit_config")
 require("treesitter")
 require("tmux").setup()
+require("dap_config")
 
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
@@ -124,8 +125,10 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = { "*.test.js", "*.test.mjs" },
 	callback = function()
 		print("Test successful run!")
-		print(bufnr)
-		vim.fn.jobstart({ "npm", "test" })
+		local file = vim.fn.expand("%")
+		print(vim.cmd('!node --test ' .. file))
+		-- print(vim.fn.jobstart({ "node", "--test --watch" .. file }))
+		-- print(test)
 	end,
 })
 
