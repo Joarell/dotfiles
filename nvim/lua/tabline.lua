@@ -4,6 +4,7 @@
 -- Set barbar's options
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
+vim.opt.sessionoptions:append("globals")
 
 -- Move to previous/next
 map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
@@ -46,7 +47,7 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 vim.g.barbar_auto_setup = false -- disable auto-setup
-require 'barbar'.setup {
+require("barbar").setup({
 	-- WARN: do not copy everything below into your config!
 	--       It is just an example of what configuration options there are.
 	--       The defaults are suitable for most people.
@@ -71,10 +72,10 @@ require 'barbar'.setup {
 
 	-- A buffer to this direction will be focused (if it exists) when closing the current buffer.
 	-- Valid options are 'left' (the default) and 'right'
-	focus_on_close = 'left',
+	focus_on_close = "left",
 
 	-- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-	hide = { extensions = true, inactive = true },
+	hide = { extensions = true, inactive = false },
 
 	-- Disable highlighting alternate buffers
 	highlight_alternate = false,
@@ -88,14 +89,14 @@ require 'barbar'.setup {
 	icons = {
 		-- Configure the base icons on the bufferline.
 		buffer_index = false,
-		buffer_number = false,
-		button = ' ',
+		buffer_number = true,
+		button = "  ",
 		-- Enables / disables diagnostic symbols
 		diagnostics = {
-			[vim.diagnostic.severity.ERROR] = { enabled = true, icon = 'ﬀ ' },
-			[vim.diagnostic.severity.WARN] = { enabled = true, icon = ' ' },
-			[vim.diagnostic.severity.INFO] = { enabled = true, icon = ' ' },
-			[vim.diagnostic.severity.HINT] = { enabled = true, icon = ' '},
+			[vim.diagnostic.severity.ERROR] = { enabled = true, icon = "ﬀ " },
+			[vim.diagnostic.severity.WARN] = { enabled = true, icon = " " },
+			[vim.diagnostic.severity.INFO] = { enabled = true, icon = " " },
+			[vim.diagnostic.severity.HINT] = { enabled = true, icon = " " },
 		},
 		filetype = {
 			-- Sets the icon's highlight group.
@@ -104,16 +105,16 @@ require 'barbar'.setup {
 			-- Requires `nvim-web-devicons` if `true`
 			enabled = true,
 		},
-		separator = { left = '▎', right = ' ' },
+		separator = { left = "▎", right = "" },
 		-- Configure the icons on the bufferline when modified or pinned.
 		-- Supports all the base icon options.
-		modified = { button = '󰐾 ' },
-		pinned = { button = '車', filename = true, separator = { right = '' } },
+		modified = { button = "󰐾 " },
+		pinned = { button = "車", filename = true, separator = { right = "" } },
 		-- Configure the icons on the bufferline based on the visibility of a buffer.
 		-- Supports all the base icon options, plus `modified` and `pinned`.
 		alternate = { filetype = { enabled = false } },
 		current = { buffer_index = false },
-		inactive = { button = '×' },
+		inactive = { button = "×" },
 		visible = { modified = { buffer_number = false } },
 	},
 
@@ -142,22 +143,22 @@ require 'barbar'.setup {
 		-- Use the default values: {event = 'BufWinLeave', text = nil}
 		NvimTree = false,
 		-- Or, specify the text used for the offset:
-		undotree = { text = 'undotree' },
+		undotree = { text = "undotree" },
 		-- Or, specify the event which the sidebar executes when leaving:
-		['neo-tree'] = { event = 'BufWipeout' },
+		["neo-tree"] = { event = "BufWipeout" },
 		-- Or, specify both
-		Outline = { event = 'BufWinLeave', text = 'symbols-outline' },
+		Outline = { event = "BufWinLeave", text = "symbols-outline" },
 	},
 
 	-- New buffer letters are assigned in this order. This order is
 	-- optimal for the qwerty keyboard layout but might need adjustment
 	-- for other layouts.
-	letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+	letters = "asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP",
 
 	-- Sets the name of unnamed buffers. By default format is "[Buffer X]"
 	-- where X is the buffer number. But only a static string is accepted here.
-	no_name_title = nil,
-}
+	no_name_title = "New Buffer",
+})
 
 --###########################################################################--
 --							Barbecue settings				 				 --

@@ -33,6 +33,7 @@ require("vgit_config")
 require("treesitter")
 require("tmux").setup()
 require("dap_config")
+require("commands_nvim")
 
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
@@ -50,7 +51,6 @@ set.relativenumber = true
 set.sps = "best"
 set.updatetime = 200
 set.signcolumn = "yes"
-set.guifont = "monospace:h17"
 set.completeopt = { "menu", "menuone", "noselect" }
 set.pumheight = 20
 set.showmode = false
@@ -74,7 +74,7 @@ set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "CaskaydiaCove Nerd Font:h07.5"
+set.guifont = "CaskaydiaCove NF:h08.5"
 
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"
@@ -117,21 +117,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-local bufnr = vim.api.nvim_get_current_buf()
-
--- Incomplete commands at the moment. It pretend to virtualize tests status.
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = vim.api.nvim_create_augroup("TestRunner", { clear = true }),
-	pattern = { "*.test.js", "*.test.mjs" },
-	callback = function()
-		print("Test successful run!")
-		local file = vim.fn.expand("%")
-		print(vim.cmd('!node --test ' .. file))
-		-- print(vim.fn.jobstart({ "node", "--test --watch" .. file }))
-		-- print(test)
-	end,
-})
-
 vim.api.nvim_create_user_command("AutoRun", function()
 	print("Running...")
 end, {})
@@ -162,7 +147,7 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 -- 							Neovide settings 								 --
 --###########################################################################--
 -- vim.cmd([[
--- 	set guifont=CaskaydiaCove\ Nerd\ Font:h08.5
+-- 	set guifont=CaskaydiaCove\ NF:h08.5
 -- ]])
 
 vim.g.neovide_transparency = 0.9

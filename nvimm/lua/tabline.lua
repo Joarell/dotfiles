@@ -74,21 +74,21 @@ require 'barbar'.setup {
 	focus_on_close = 'left',
 
 	-- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-	hide = { extensions = true, inactive = true },
+	hide = { extensions = false, inactive = true },
 
 	-- Disable highlighting alternate buffers
-	highlight_alternate = false,
+	highlight_alternate = true,
 
 	-- Disable highlighting file icons in inactive buffers
-	highlight_inactive_file_icons = false,
+	highlight_inactive_file_icons = true,
 
 	-- Enable highlighting visible buffers
-	highlight_visible = true,
+	highlight_visible = false,
 
 	icons = {
 		-- Configure the base icons on the bufferline.
 		buffer_index = false,
-		buffer_number = false,
+		buffer_number = true,
 		button = ' ',
 		-- Enables / disables diagnostic symbols
 		diagnostics = {
@@ -100,7 +100,7 @@ require 'barbar'.setup {
 		filetype = {
 			-- Sets the icon's highlight group.
 			-- If false, will use nvim-web-devicons colors
-			custom_colors = false,
+			custom_colors = true,
 			-- Requires `nvim-web-devicons` if `true`
 			enabled = true,
 		},

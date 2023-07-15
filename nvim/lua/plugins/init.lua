@@ -73,7 +73,13 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
-	{ "navarasu/onedark.nvim" },
+	-- { "navarasu/onedark.nvim" },
+	{ "olimorris/onedarkpro.nvim" },
+	{ "lunarvim/Onedarker.nvim" },
+	{ "EdenEast/nightfox.nvim" },
+	{ "marko-cerovac/material.nvim" },
+	{ "ray-x/aurora" },
+	{ "ray-x/starry.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--Telescope                                        │
@@ -209,7 +215,7 @@ return {
 	--  ╭─────────────────────────────────────────────────╮
 	--  │      Themes Install without configuration       │
 	--  ╰─────────────────────────────────────────────────╯
-	{ "projekt0n/github-nvim-theme" },
+	-- { "projekt0n/github-nvim-theme" },
 	{
 		"liuchengxu/vista.vim",
 		config = function()

@@ -24,22 +24,27 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 		"vim",
 		"regex",
 	},
-	sync_install = true,
-	additional_vim_regex_highlighting = true,
+	sync_install = false,
 	indent = { enable = true },
 	highlight = {
 		enable = true, -- false will disble the whole extension
-		disable = { "" }, -- list of language that will be disabled
 		additional_vim_regex_highlighting = true,
+		disable = function (_, buf)
+			local max_filesize = 100 * 1024 -- 100kb
+			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+			if ok and stats and stats.size > max_filesize then
+				return true				
+			end
+		end
 	},
-	rainbow = {
-		enable = true,
-		-- disable = {"jsx", "cpp"}, list of languages you want to disable the plugin for
-		extended_mode = true, -- Also higlight non-bracket delimiters.
-		max_file_lines = nil, -- Do not enable for files with more than n lines, integer
-		-- colors = {}, -- table of hex strings
-		-- termcolors = {} -- table of colour name strings
-	},
+	-- rainbow = {
+	-- 	enable = true,
+	-- 	-- disable = {"jsx", "cpp"}, list of languages you want to disable the plugin for
+	-- 	extended_mode = true, -- Also higlight non-bracket delimiters.
+	-- 	max_file_lines = nil, -- Do not enable for files with more than n lines, integer
+	-- 	-- colors = {}, -- table of hex strings
+	-- 	-- termcolors = {} -- table of colour name strings
+	-- },
 	autotag = {
 		enable = true,
 		filetypes = filetypes,
@@ -49,12 +54,20 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 		highlight_definitions = {
 			enable = true,
 			-- Set to false if you have an `updatetime` of ~100.
-			clear_on_cursor_move = true,
+			clear_on_cursor_move = false,
 			timeoutlen = 0,
 		},
 		-- highlight_current_scope = { enable = true, timeout = 100 },
-		smart_rename = { enable = true },
-		navigation = { enable = true },
+		smart_rename = {
+			enable = true,
+			keymaps = { "grr" },
+		},
+		navigation = {
+			enable = true,
+			keymaps = {
+				list_definiitons_toc = "gO",
+			},
+		},
 	},
 	additional_vim_higlighting = true,
 })
@@ -112,7 +125,7 @@ require("regexplainer").setup({
 	},
 
 	mappings = {
-		toggle = "gR",
+		-- toggle = "gR",
 		-- examples, not defaults:
 		-- show = 'gS',
 		-- hide = 'gH',

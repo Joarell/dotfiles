@@ -10,7 +10,7 @@ return {
 			"williamboman/nvim-lsp-installer",
 			"williamboman/mason-lspconfig.nvim",
 			"kabouzeid/nvim-lspinstall",
-			"jayp0521/mason-null-ls.nvim",
+			-- "jayp0521/mason-null-ls.nvim",
 		},
 		config = function ()
 			local lspconfig = require("lspconfig")

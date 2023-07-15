@@ -226,6 +226,21 @@ end
 change_colors(comp, "left")
 
 
+
+-- Insert mid section. You can make any number of sections in neovim :)
+-- for lualine it's any number greater then 2
+-- ins_right {
+-- 	function()
+-- 		return string.format(" %3d:%-2d ", map(_, vim.api.nvim_win_get_cursor(0)))
+-- 		-- return '%='
+-- 	end,
+-- }
+-- local comp = function()
+-- 	return '%='
+-- end
+-- change_colors(comp, "right")
+
+
 -- Add components to right sections
 local comp = function()
 	return " "
@@ -248,20 +263,10 @@ end
 change_colors(comp, "right")
 
 local comp = function()
-	return " "
+	return "  "
 end
 change_colors(comp, "right")
 
--- Insert mid section. You can make any number of sections in neovim :)
--- for lualine it's any number greater then 2
--- ins_right {
--- 	function()
--- 		return '%='
--- 	end,
--- }
-
--- local comp = function()
--- change_colors(comp, "right")
 
 ins_right({
 	"diagnostics",
