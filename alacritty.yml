@@ -46,7 +46,7 @@ window:
   #  x: 0
   #  y: 0
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
   # Window decorations
   #
   # Values for `decorations`:
@@ -56,7 +56,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background and no title bar buttons
-  #decorations: full
+  decorations: full
   # Background opacity
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
@@ -103,9 +103,9 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
+    family: CaskaydiaCove NF
     # family: CodeNewRoman Nerd Font
-    family: Fira Code Nerd Font
-
+    # family: Hack Nerd Font
     # The `style` can be specified to pick a specific face.
     style: Regular
 
@@ -113,15 +113,14 @@ font:
   bold:
     # Font family
     # family: MesloLGL Nerd Font Mono
-    # family: CodeNewRoman Nerd Font
-    family: Hack Nerd Font
-    style: Bold
-    size: 1000
+    # family: Hack Nerd Font
+    family: CaskaydiaCove NF
+    size: 800
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: monospace
     # The `style` can be specified to pick a specific face.
-    #style: Bold
+    style: Bold
 
   # Italic font face
   italic:
@@ -131,8 +130,8 @@ font:
     # value specified for the normal font.
     # family: MesloLGL Nerd Font Mono
     # family: CodeNewRoman Nerd Font
-    family: Hack Nerd Font
-
+    # family: Hack Nerd Font
+    family: CaskaydiaCove NF
     # The `style` can be specified to pick a specific face.
     style: Italic
 
@@ -144,9 +143,10 @@ font:
     # value specified for the normal font.
     #family: monospace
     # family: CodeNewRoman Nerd Font
-    family: MesloLGSDZ Nerd Font
+    # family: MesloLGSDZ Nerd Font
+    family: CaskaydiaCove NF
     # The `style` can be specified to pick a specific face.
-    #style: Bold Italic
+    style: Bold Italic
 
   # Point size
   size: 7
@@ -182,11 +182,14 @@ colors:
   name: 3024 (dark)
   author: Chris Kempson
   primary:
-    background: "#090300"
+    background: "#000000"
+    # background: "#090300"
     foreground: "#a5a2a2"
   cursor:
     text: "#090300"
-    cursor: "#a5a2a2"
+    # cursor: "#ff0000"
+    cursor: "#2EA2A9"
+    # cursor: "#a5a2a2"
   normal:
     black: "#090300"
     red: "#db2d20"
@@ -223,9 +226,8 @@ cursor:
     #   - | Beam
     shape: Underline
 
-  # vi_mode_style:
-  #   shape: Underline
-
+    # vi_mode_style:
+    #   shape: Underline
     # Cursor blinking state
     #
     # Values for `blinking`:
@@ -255,7 +257,7 @@ cursor:
 
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
-  thickness: 0.0
+  thickness: 0.15
   # Live config reload (changes require restart)
   #live_config_reload: true
   # Shell
