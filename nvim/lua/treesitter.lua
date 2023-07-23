@@ -60,12 +60,14 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 		-- highlight_current_scope = { enable = true, timeout = 100 },
 		smart_rename = {
 			enable = true,
-			keymaps = { "grr" },
+			-- keymaps = {
+			-- 	smart_rename = "cn"
+			-- },
 		},
 		navigation = {
 			enable = true,
 			keymaps = {
-				list_definiitons_toc = "gO",
+				list_definiitons = "gO",
 			},
 		},
 	},

@@ -215,7 +215,7 @@ end
 
 
 local comp = function()
-	return "󰒲    󰲉  ﬧ      "
+	return "󰒲    󰲉  󰘨      "
 end
 change_colors(comp, "left")
 
@@ -243,7 +243,7 @@ change_colors(comp, "left")
 
 -- Add components to right sections
 local comp = function()
-	return " "
+	return " 󰂵"
 end
 change_colors(comp, "right")
 
@@ -295,7 +295,7 @@ change_colors(comp, "right")
 ins_right({
 	-- Lsp server name .
 	function()
-		local msg = '罹'
+		local msg = ''
 		-- local msg = " "
 		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 		local clients = vim.lsp.get_active_clients()

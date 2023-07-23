@@ -74,7 +74,7 @@ set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "CaskaydiaCove NF:h08.5"
+set.guifontwide = "CaskaydiaCove NF:h07"
 
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"
@@ -87,7 +87,6 @@ vim.g["load_netrwPlugin"] = 1
 vim.o.fcs = "eob: "
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.o.incsearch = false
--- vim.opt_global.dictionary = '~/dotfiles/en.dict'
 
 --  ╭─────────────────────────────────────────────────────────────────────────╮
 --  │                             Commands setup                              │

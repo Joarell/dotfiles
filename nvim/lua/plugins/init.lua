@@ -137,15 +137,15 @@ return {
 			})
 		end,
 	},
-	{
-		"s1n7ax/nvim-comment-frame",
-		dependencies = {
-			{ "nvim-treesitter" },
-		},
-		config = function()
-			require("nvim-comment-frame").setup()
-		end,
-	},
+	-- {
+	-- 	"s1n7ax/nvim-comment-frame",
+	-- 	dependencies = {
+	-- 		{ "nvim-treesitter" },
+	-- 	},
+	-- 	config = function()
+	-- 		require("nvim-comment-frame").setup()
+	-- 	end,
+	-- },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--Neovim Ranger                                    │

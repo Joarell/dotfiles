@@ -47,7 +47,7 @@ keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
 keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
-keymap("n", "<Leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
+keymap("n", "cn", ":lua vim.lsp.buf.rename()<CR>", opts)
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
 keymap("n", "vu", function()
 	vim.diagnostic.config({ virtual_text = false })
@@ -95,7 +95,7 @@ keymap({ "n", "v" }, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
 keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
 keymap({ "n", "i" }, "<Leader>ac", ':lua require("nvim-comment-frame").add_comment()<CR>', opts)
 keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multiline_comment()<CR>', opts)
-keymap({ "n", "v" }, "<A-L>", ":CBacbox<CR>", opts) -- left alignment adaptable
+keymap({ "n", "v" }, "cm", ":CBacbox<CR>", opts) -- left alignment adaptable
 keymap({ "n", "v" }, "<A-A>", ":CBlcbox<CR>", opts) -- center alignment
 keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 keymap("n", "TL", ":TwilightEnable<CR>", opts)
@@ -109,26 +109,18 @@ keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
 --[[                             "F" functions:                             ]]--
 --[[************************************************************************]]--
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
--- keymap("n", "<F2>", ":call vimspector#ClearLineBreakpoint()<CR>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
--- keymap("n", "<F4>", ":call vimspector#Reset()<CR>", opts)
--- keymap("n", "<F5>", ":call vimspector#Continue()<cr>", opts)
--- keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
--- keymap("n", "<F7>", ":call vimspector#StepOver()<CR>", opts)
-keymap("n", "<F8>", ":Vista<CR>", opts)
--- keymap("n", "<F9>", ":call vimspector#ToggleBreakpoint()<CR>", opts)
--- keymap("n", "<F10>", ":call vimspector#StepOver()<CR>", opts)
--- keymap("n", "<F11>", ":call vimspector#Continue()<CR>", opts)
-keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
-
 keymap("n", "<F2>", ":DapTerminate<cr>", opts)
 keymap("n", "<F4>", ":DapRestartFrame<CR>", opts)
-keymap("n", "<F5>", ":DapContinue<CR>", opts)
+keymap("n", "<F5>", ":DapContinue<CR> and vim.cmd('1')<CR>", opts)
 keymap("n", "<F6>", ":lua require('dapui').float_element()<CR>", opts)
+-- keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
 keymap("n", "<F7>", ":DapStepOver<CR>", opts)
 keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", opts)
 keymap("n", "<F10>", ":DapStepInto<CR>", opts)
 keymap("n", "<F11>", ":lua require('dap').restart()<CR>", opts)
+keymap("n", "<F8>", ":Vista<CR>", opts)
+keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 
 
 --[[************************************************************************]]--
