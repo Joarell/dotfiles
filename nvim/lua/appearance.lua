@@ -31,52 +31,6 @@ require("vscode").setup({
 require('vscode').load('dark')
 
 
--- Example config in Lua
--- require('github-theme').setup({
--- 	options = {
--- 		transparent = true,
--- 		hide_end_of_buffer = true,
--- 		hide_nc_statusline = true,
--- 		styles = {
--- 			comments = 'italic, bold',
--- 			functions = 'NONE',
--- 			keywords = 'bold',
--- 			variables = 'underline',
--- 		},
--- 		darken = {
--- 			floats = true,
--- 			sidebars = {
--- 				enable = tr
--- 			},
--- 		},
--- 		specs = {
--- 			-- Change the color of only the 'github_dark' theme's 'hint' color to magenta and make the 'error' color a dim red.
--- 			github_dark = {
--- 				diag = {
--- 					error = '#660000',
--- 					hint = 'magenta.base',
--- 				},
--- 			},
--- 			-- Change the "hint" color to the "orange" color, and make the "error" color bright red.
--- 			all = {
--- 				diag = {
--- 					error = '#ff0000',
--- 					hint = 'orange',
--- 				},
--- 			},
--- 		},
--- 		-- Overwrite the highlight groups for all colorschemes
--- 		groups = {
--- 			all = {
--- 				htmlTag = { fg = 'palette.red', bg = '#282c34', sp = 'diag.hint', style = 'underline,bold' },
--- 				DiagnosticHint = { link = 'LspDiagnosticsDefaultHint' },
--- 				-- this will remove the highlight groups
--- 				TSField = {},
--- 			},
--- 		},
--- 	}
--- })
-
 require("onedarkpro").setup({
 	options = {
 		cursorline = true,           -- Use cursorline highlighting?
@@ -210,15 +164,15 @@ require("bufferline").setup({
 })
 
 
-require('shade').setup({
-	overlay_opacity = 40,
-	opacity_step = 0.3,
-	keys = {
-		brightness_up   = '<A-+>',
-		brightness_down = '<A-->',
-		toggle          = '<A-S>',
-	}
-})
+-- require('shade').setup({
+-- 	overlay_opacity = 40,
+-- 	opacity_step = 0.3,
+-- 	keys = {
+-- 		brightness_up   = '<A-+>',
+-- 		brightness_down = '<A-->',
+-- 		toggle          = '<A-S>',
+-- 	}
+-- })
 
 require("jj_neon_theme")
 require("treesitter")

@@ -102,24 +102,24 @@ keymap("n", "TL", ":TwilightEnable<CR>", opts)
 keymap("n", "TO", ":TwilightDisable<CR>", opts)
 keymap("n", "<Leader>df", ':Gvdiffsplit<CR>', opts)
 keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
-keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
 
 
 --[[************************************************************************]]--
 --[[                             "F" functions:                             ]]--
 --[[************************************************************************]]--
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
-keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
 keymap("n", "<F2>", ":DapTerminate<cr>", opts)
+keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
 keymap("n", "<F4>", ":DapRestartFrame<CR>", opts)
 keymap("n", "<F5>", ":DapContinue<CR> and vim.cmd('1')<CR>", opts)
+keymap("n", "<Leader>g", ":DapContinue<CR>", opts)
 keymap("n", "<F6>", ":lua require('dapui').float_element()<CR>", opts)
 -- keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
 keymap("n", "<F7>", ":DapStepOver<CR>", opts)
+keymap("n", "<F8>", ":Vista<CR>", opts)
 keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", opts)
 keymap("n", "<F10>", ":DapStepInto<CR>", opts)
 keymap("n", "<F11>", ":lua require('dap').restart()<CR>", opts)
-keymap("n", "<F8>", ":Vista<CR>", opts)
 keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 
 

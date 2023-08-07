@@ -63,7 +63,7 @@ return {
 	{ "p00f/nvim-ts-rainbow" },
 	{ "Pocco81/HighStr.nvim" },
 	{ "azabiong/vim-highlighter" },
-	{ "sunjon/shade.nvim" },
+	-- { "sunjon/shade.nvim" },
 	-- { "folke/twilight.nvim",
 	-- 	config = function()
 	-- 		require("twilight").setup({

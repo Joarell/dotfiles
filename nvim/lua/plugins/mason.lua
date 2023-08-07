@@ -83,6 +83,7 @@ return {
 				"sqlls",
 				"tsserver",
 				"yamlls",
+				"jdtls",
 			}
 
 			mason_lsp.setup({

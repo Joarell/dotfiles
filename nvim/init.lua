@@ -74,7 +74,7 @@ set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifontwide = "CaskaydiaCove NF:h07"
+set.guifont = "CaskaydiaCove NF:h08"
 
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"
@@ -152,7 +152,7 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 vim.g.neovide_transparency = 0.9
 vim.g.neovide_no_idle = true
 vim.g.neovide_cursor_vfx_mode = "ripple"
-vim.g.neovide_refresh_rate = 100
+vim.g.neovide_refresh_rate = 60
 vim.g.neovide_scroll_animation_length = 0.3
 vim.g.neovide_cursor_trail_size = 0.8
 vim.g.neovide_underline_automatic_sacaling = true
