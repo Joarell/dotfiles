@@ -1,4 +1,4 @@
-neofetch
+neofetch | lolcat
 _fix_cursor() {
 	echo -ne '\033[4 q'
 }
@@ -17,29 +17,30 @@ fi
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 export PATH="$HOME/.local/bin":$PATH
-export EDITOR=nvim
+export EDITOR=jnvim
 export PATH="$HOME/.cargo/bin":$PATH
-export PATH="$HOME/node-v19.6.1-linux-x64/bin":$PATH
 export PATH="$HOME/Nu-shell":$PATH
 export TERM=alacritty
 export ZELIJ_CONFIG_DIR=$HOME/.config/zellij
 
+alias wezterm='flatpak run org.wezfurlong.wezterm'
+alias Astro="NVIM_APPNAME=Astro nvim"
+alias LazyVim="NVIM_APPNAME=LazyVim nvim"
+alias lazy="NVIM_APPNAME=lazy nvim"
+alias v="nvim"
+alias gssh="eval \"$(ssh-agent -s)\" && ssh-add ~/.ssh/id_jev"
 alias zj="zellij options --simplified-ui true --pane-frames false"
 alias rr="ranger"
-alias ala="./alacritty/target/release/alacritty"
 alias lg="lazygit"
-alias vim="nvim-qt"
-alias vide="neovide"
 alias studio="$HOME/android-studio/bin/studio.sh"
 alias android="ssh -p 8022 192.168.0.2"
 alias c="clear"
 alias up="source ~/.zshrc"
-alias nv="neovide --neovim-bin ~/.local/bin/lvim"
-alias neovide="neovide --neovim-bin nvim"
+alias vide="neovide --multigrid"
+alias neovide="neovide --neovim-bin jvim"
 alias zi="zoxide query --interactive"
 alias val="valgrind -q --leak-check=full --show-leak-kinds=all -s --error-exitcode=1 --track-origins=yes --tool=memcheck --vgdb=yes --vgdb-error=0 ./test"
 alias psql="psql -U postgres"
-
 
 
 #============================== Vi mode ========================================

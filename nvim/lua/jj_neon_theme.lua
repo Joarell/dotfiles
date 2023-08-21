@@ -258,7 +258,7 @@ ins_right({
 
 
 local comp = function()
-	return "  "
+	return "󰂵  "
 end
 change_colors(comp, "right")
 

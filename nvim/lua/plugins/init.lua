@@ -216,14 +216,14 @@ return {
 	--  │      Themes Install without configuration       │
 	--  ╰─────────────────────────────────────────────────╯
 	-- { "projekt0n/github-nvim-theme" },
-	{
-		"liuchengxu/vista.vim",
-		config = function()
-			vim.g["vista_icon_ident"] = '"╰─▸ ", "├─▸ "'
-			vim.g["vista_default_executive"] = "ctags"
-			vim.g["vista_fzf_preview"] = 'right:50%'
-		end
-	},
+	-- {
+	-- 	"liuchengxu/vista.vim",
+	-- 	config = function()
+	-- 		vim.g["vista_icon_ident"] = '"╰─▸ ", "├─▸ "'
+	-- 		vim.g["vista_default_executive"] = "ctags"
+	-- 		vim.g["vista_fzf_preview"] = 'right:50%'
+	-- 	end
+	-- },
 
 	--  ╭───────────────────────────╮
 	--  │    Pupup frames Packer    │
