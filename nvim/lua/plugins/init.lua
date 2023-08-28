@@ -26,10 +26,11 @@ return {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
 	},
+	{ "HipHish/nvim-ts-rainbow2" },
 	-- { "nvim-treesitter/playground" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--Lua status line/column                           │
+	--  │ 		Lua status line/column                             │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
 		"nvim-lualine/lualine.nvim",
@@ -41,7 +42,7 @@ return {
 	-- { "luukvbaal/statuscol.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--BufferLine                                       │
+	--  │ 		BufferLine                                         │
 	--  ╰──────────────────────────────────────────────────────────╯
 	-- { "akinsho/bufferline.nvim", tag = "v2.*", dependenciess = "nvim-tree/nvim-web-devicons" },
 	{ "romgrk/barbar.nvim" },
@@ -57,10 +58,9 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--ColorScheme                                      │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{"tomasiser/vim-code-dark"},
+	-- {"tomasiser/vim-code-dark"},
 	-- { "https://github.com/sainnhe/sonokai" },
-	{ "Mofiqul/vscode.nvim" },
-	{ "p00f/nvim-ts-rainbow" },
+	-- { "Mofiqul/vscode.nvim" },
 	{ "Pocco81/HighStr.nvim" },
 	{ "azabiong/vim-highlighter" },
 	-- { "sunjon/shade.nvim" },
@@ -74,11 +74,11 @@ return {
 	-- 	end,
 	-- },
 	-- { "navarasu/onedark.nvim" },
-	{ "olimorris/onedarkpro.nvim" },
-	{ "lunarvim/Onedarker.nvim" },
+	-- { "olimorris/onedarkpro.nvim" },
+	-- { "lunarvim/Onedarker.nvim" },
 	{ "EdenEast/nightfox.nvim" },
-	{ "marko-cerovac/material.nvim" },
-	{ "ray-x/aurora" },
+	-- { "marko-cerovac/materialepllnvim" },
+	-- { "ray-x/aurora" },
 	{ "ray-x/starry.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮

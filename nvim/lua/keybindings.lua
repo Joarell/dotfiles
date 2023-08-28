@@ -129,6 +129,6 @@ keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-	vim.opt.foldcolumn = "6"
+	vim.opt.foldcolumn = "8"
 	print("This key binding folds all indentation lines to protect your code! Your Welcome!😎")
 end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! 😎" })

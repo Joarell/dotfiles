@@ -52,7 +52,7 @@ return {
 			"windwp/nvim-ts-autotag",
 			"https://github.com/onsails/lspkind.nvim",
 			"uga-rosa/cmp-dictionary",
-			"shinglyu/vim-codespell",
+			-- "shinglyu/vim-codespell",
 			-- {
 			-- 	"roobert/tailwindcss-colorizer-cmp.nvim",
 			-- 	config = function ()

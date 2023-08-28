@@ -24,6 +24,7 @@ return {
 				Warn = " ",
 				Hint = " ",
 				Info = " ",
+				Break = "",
 			}
 
 			for type, icon in pairs(signs) do

@@ -33,18 +33,28 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 			local max_filesize = 100 * 1024 -- 100kb
 			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 			if ok and stats and stats.size > max_filesize then
-				return true				
+				return true
 			end
 		end
 	},
-	-- rainbow = {
-	-- 	enable = true,
-	-- 	-- disable = {"jsx", "cpp"}, list of languages you want to disable the plugin for
-	-- 	extended_mode = true, -- Also higlight non-bracket delimiters.
-	-- 	max_file_lines = nil, -- Do not enable for files with more than n lines, integer
-	-- 	-- colors = {}, -- table of hex strings
-	-- 	-- termcolors = {} -- table of colour name strings
-	-- },
+	rainbow = {
+		enable = true,
+		-- disable = {"jsx", "cpp"}, list of languages you want to disable the plugin for
+		extended_mode = true, -- Also higlight non-bracket delimiters.
+		-- max_file_lines = nil, -- Do not enable for files with more than n lines, integer
+		-- colors = {}, -- table of hex strings
+		-- termcolors = {} -- table of colour name strings
+		strategy = require('ts-rainbow').strategy.global,
+		hlgroups = {
+			'TSRainbowRed',
+			'TSRainbowYellow',
+			'TSRainbowBlue',
+			'TSRainbowOrange',
+			'TSRainbowGreen',
+			'TSRainbowViolet',
+			'TSRainbowCyan',
+		},
+	},
 	autotag = {
 		enable = true,
 		filetypes = filetypes,
