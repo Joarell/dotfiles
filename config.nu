@@ -680,6 +680,8 @@ alias update = sudo pacman -Syyu
 alias clrcache = sudo pacman -Scc 
 alias orphans = sudo pacman -Rns $(pacman -Qtdq) 
 alias akring = sudo pacman -Sy archlinux-keyring --noconfirm 
+alias zjs = zellij -l strider
+alias zjc = zellij -l compact
 
 # Paru/Yay stuff
 alias pget = paru -S  
