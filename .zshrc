@@ -22,6 +22,7 @@ export PATH="$HOME/.cargo/bin":$PATH
 export PATH="$HOME/Nu-shell":$PATH
 export TERM=alacritty
 export ZELIJ_CONFIG_DIR=$HOME/.config/zellij
+export ZELIJ_CONFIG_FILE=$HOME/.config/zellij/config.kdl
 
 alias wezterm='flatpak run org.wezfurlong.wezterm'
 alias Astro="NVIM_APPNAME=Astro nvim"
@@ -29,7 +30,8 @@ alias LazyVim="NVIM_APPNAME=LazyVim nvim"
 alias lazy="NVIM_APPNAME=lazy nvim"
 alias v="nvim"
 alias gssh="eval \"$(ssh-agent -s)\" && ssh-add ~/.ssh/id_jev"
-alias zj="zellij options --simplified-ui true --pane-frames false"
+alias zjs="zellij -l strider -s DB"
+alias zjc="zellij -l compact -s DB"
 alias rr="ranger"
 alias lg="lazygit"
 alias studio="$HOME/android-studio/bin/studio.sh"
