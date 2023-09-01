@@ -1,0 +1,31 @@
+layout {
+	pane size=2 borderless=true {
+		plugin location="zellij:compact-bar"
+	}
+	pane split_direction="vertical" {
+		pane split_direction="horizontal" size=90 {
+			pane borderless=true name="monitor" {
+				command "btop" close_on_exit=true
+			}
+			pane borderless=true name="vis1" {
+				command "vis" close_on_exit=true
+			}
+		}
+		pane split_direction="horizontal" {
+			pane borderless=true
+			pane cwd="$HOME/web_crater/builder/docker" size=10 name="docker" {
+				command "docker" close_on_exit=true start_suspended=true
+				args "compose" "up" "--build" "--remove-orphans"
+			}
+		}
+		pane size=20 split_direction="horizontal" size=90 {
+			pane borderless=true name="ranger" {
+				command "ranger" close_on_exit=true
+			}
+			pane borderless=true name="vis2" {
+				command "vis" close_on_exit=true
+				args "[Space]"
+			}
+		}
+	}
+}

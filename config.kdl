@@ -254,6 +254,7 @@ auto_layout true
 // Default: default
 //
 // theme "default"
+theme "Tokyo Night Light"
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -320,7 +321,7 @@ scrollback_editor "/usr/bin/nvim"
 
 // The folder in which Zellij will look for layouts
 //
-// layout_dir "/path/to/my/layout_dir"
+layout_dir "$HOME/.config/zellij"
 
 // The folder in which Zellij will look for themes
 //
