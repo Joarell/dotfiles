@@ -1,0 +1,78 @@
+layout {
+	tab name="DEV" focus=true {
+		pane size=1 borderless=true {
+			// plugin location="zellij:compact-bar"
+			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+				format_left  "  #[fg=#89B4FA,bold] {session} {mode} {tabs} 󰋘  "
+				format_right "󰃭 {datetime}󰔟"
+				format_space ""
+
+				mode_locked	"#[bg=#B80056] {name}"
+				mode_normal	"#[bg=#333] {name}"
+				mode_tmux	"#[bg=#ffc387] {name}"
+
+				tab_normal	"#[fg=#6C7086] {name} "
+				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+				
+				datetime	"#[fg=#6C7086,bold] {format} "
+				datetime_format "%A, %d %b %Y %H:%M"
+				datetime_timezone "America/Sao_Paulo"
+
+				first_start	"true"
+			}
+		}
+		pane split_direction="vertical" {
+			pane split_direction="horizontal" size=80 {
+				pane borderless=true name="monitor" {
+					command "btop" close_on_exit=true
+				}
+				pane borderless=true name="vis1" {
+					command "vis" close_on_exit=true
+				}
+			}
+			pane split_direction="horizontal" {
+				pane borderless=true
+				pane cwd="$HOME/web_crater/builder/docker" size=10 name="docker" {
+					command "docker" close_on_exit=true start_suspended=true
+					args "compose" "up" "--build" "--remove-orphans"
+				}
+			}
+			pane split_direction="horizontal" size=80 {
+				pane borderless=true name="ranger" {
+					command "ranger" close_on_exit=true
+				}
+				pane borderless=true name="vis2" {
+					command "vis" close_on_exit=true
+					args "[Space]"
+				}
+			}
+		}
+	}
+	tab name="EXTAB" {
+		pane size=1 borderless=true {
+			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+				format_left  "  #[fg=#89B4FA,bold] {session} {mode} {tabs} 󰋘 "
+				format_right "󰃭 {datetime}󰔟"
+
+				mode_locked	"#[bg=#B80056] {name}"
+				mode_normal	"#[bg=#333] {name}"
+				mode_tmux	"#[bg=#ffc387] {name}"
+
+				tab_normal	"#[fg=#6C7086] {name} "
+				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+
+				datetime	"#[fg=#6C7086,bold] {format} "
+				datetime_format "%A, %d %b %Y %H:%M"
+				datetime_timezone "America/Sao_Paulo"
+
+				first_start	"true"
+			}
+		}
+		pane split_direction="vertical" {
+			pane split_direction="vertical" size=30 {
+				plugin location="zellij:strider"
+			}
+			pane name="ExPnae"
+		}
+	}
+}
