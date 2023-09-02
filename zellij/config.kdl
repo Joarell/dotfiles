@@ -1,8 +1,6 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds clear-defaults=true {
     normal {
-		unbind "Ctrl b"
-		unbind "Ctrl h"
         bind "Ctrl k" { SwitchToMode "locked"; }
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
@@ -42,13 +40,13 @@ keybinds clear-defaults=true {
         bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
      move {
-         unbind "Ctrl h" { SwitchToMode "Normal"; }
-         bind "n" "Tab" { MovePane; }
-         bind "p" { MovePaneBackwards; }
-         bind "h" "Left" { MovePane "Left"; }
-         bind "j" "Down" { MovePane "Down"; }
-         bind "k" "Up" { MovePane "Up"; }
-         bind "l" "Right" { MovePane "Right"; }
+        bind "Ctrl h" { SwitchToMode "Normal"; }
+        bind "n" "Tab" { MovePane; }
+        bind "p" { MovePaneBackwards; }
+        bind "h" "Left" { MovePane "Left"; }
+        bind "j" "Down" { MovePane "Down"; }
+        bind "k" "Up" { MovePane "Up"; }
+        bind "l" "Right" { MovePane "Right"; }
      }
     tab {
         bind "Ctrl t" { SwitchToMode "Normal"; }
@@ -127,6 +125,7 @@ keybinds clear-defaults=true {
     }
     tmux {
         bind "[" { SwitchToMode "Scroll"; }
+        unbind "Ctrl b" { Write 2; SwitchToMode "Normal"; }
         bind "Ctrl a" { Write 2; SwitchToMode "Normal"; }
         bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "%" { NewPane "Right"; SwitchToMode "Normal"; }

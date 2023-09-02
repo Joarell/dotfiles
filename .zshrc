@@ -30,8 +30,8 @@ alias LazyVim="NVIM_APPNAME=LazyVim nvim"
 alias lazy="NVIM_APPNAME=lazy nvim"
 alias v="nvim"
 alias gssh="eval \"$(ssh-agent -s)\" && ssh-add ~/.ssh/id_jev"
-alias zjs="zellij -l strider -s"
-alias zjc="zellij -l compact -s"
+alias zjt="zellij -l strider -s"
+alias zjc="zellij -l ~/.config/zellij/standard.kdl -s"
 alias zjs="zellij -l ~/.config/zellij/layout.kdl -s"
 alias rr="ranger"
 alias lg="lazygit"
@@ -44,6 +44,7 @@ alias neovide="neovide --neovim-bin jvim"
 alias zi="zoxide query --interactive"
 alias val="valgrind -q --leak-check=full --show-leak-kinds=all -s --error-exitcode=1 --track-origins=yes --tool=memcheck --vgdb=yes --vgdb-error=0 ./test"
 alias psql="psql -U postgres"
+alias zj="zellij"
 
 
 #============================== Vi mode ========================================

@@ -1,22 +1,30 @@
 layout {
-	pane size=15 split_direction="vertical" {
-		pane
-	}
-	pane size=15 borderless=true {
-		plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
-			format_left  "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
-			format_right "{datetime}"
+	tab name="EXTAB" {
+		pane size=1 borderless=true {
+			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+				format_left  "  #[fg=#89B4FA,bold] {session} {mode} {tabs} 󰋘 "
+				format_right "󰃭 {datetime}󰔟"
 
-			mode_normal	"#[bg=#89B4FA] "
-			mode_tmux	"#[bg=#ffc387] "
+				mode_locked	"#[bg=#B80056] {name}"
+				mode_normal	"#[bg=#333] {name}"
+				mode_tmux	"#[bg=#ffc387] {name}"
 
-			tab_normal	"#[fg=#6C7086] {name} "
-			tab_active	"#[fg=#9399B2,bold,italic] {name} "
+				tab_normal	"#[fg=#6C7086] {name} "
+				tab_active	"#[fg=#80CED7,bold,italic] {name} "
 
-			datetime	"#[fg=#6C7086,bold] {format} "
-			datetime_format "%A, %d %b %Y %H:%M"
+				datetime	"#[fg=#6C7086,bold] {format} "
+				datetime_format "%A, %d %b %Y %H:%M"
+				datetime_timezone "America/Sao_Paulo"
 
-			first_start	"true"
+				hide_frame_for_single_pane "true"
+				first_start	"true"
+			}
+		}
+		pane split_direction="vertical" {
+			pane split_direction="vertical" size=30 {
+				plugin location="zellij:strider"
+			}
+			pane name="TAB" borderless=true
 		}
 	}
 }
