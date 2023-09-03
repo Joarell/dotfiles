@@ -103,6 +103,11 @@ keymap("n", "TO", ":TwilightDisable<CR>", opts)
 keymap("n", "<Leader>df", ':Gvdiffsplit<CR>', opts)
 keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
 
+keymap("n", "<Leader>h", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
+keymap("n", "<C-1>", ':lua require("harpoon.mark").add_file()<CR>', opts)
+keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
+
+keymap("n", "<Leader>du", 'DBUI<CR>', opts)
 
 --[[************************************************************************]]--
 --[[                             "F" functions:                             ]]--

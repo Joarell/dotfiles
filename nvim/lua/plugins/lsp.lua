@@ -52,6 +52,7 @@ return {
 			"windwp/nvim-ts-autotag",
 			"https://github.com/onsails/lspkind.nvim",
 			"uga-rosa/cmp-dictionary",
+			"kristijanhusak/vim-dadbod-completion",
 			-- "shinglyu/vim-codespell",
 			-- {
 			-- 	"roobert/tailwindcss-colorizer-cmp.nvim",
@@ -67,15 +68,12 @@ return {
 			-- 	dependencies = "hrsh7th/nvim-cmp"
 			-- },
 		},
-		config = function ()
+		config = function()
 			require("luasnip/loaders/from_vscode").lazy_load()
-			-- require("cmp-tw2css").setup({
-			-- 	fallback = true
-			-- })
 
 			local lspkind = require("lspkind")
-			local cmp = require ("cmp")
-			local ls = require ("luasnip")
+			local cmp = require("cmp")
+			local ls = require("luasnip")
 			local dict = require("cmp_dictionary")
 			-- local tailwind_ok, tailwindcss = pcall(require, "tailwindcss-colorizer-cmp")
 			-- if not tailwind_ok then
@@ -126,14 +124,14 @@ return {
 					end,
 				},
 				sources = {
-					{ name = "nvim_lsp", group_index = 0},
-					{ name = "buffer", keyword_length = 3, group_index = 1 },
-					{ name = "luasnip", keyword_length = 2 },
-					{ name = "cmdline", keyword_length = 3, group_index = 2},
+					{ name = "nvim_lsp",             group_index = 0 },
+					{ name = "buffer",               keyword_length = 3,         group_index = 1 },
+					{ name = "luasnip",              keyword_length = 2 },
+					{ name = "cmdline",              keyword_length = 3,         group_index = 2 },
 					{ name = "path" },
-					{ name = "emoji", option = { insert = false } },
-					-- { name = "cmp-tw2css", group_index = 3},
-					{ name = "dictionary", keyword_length = 4 },
+					{ name = "emoji",                option = { insert = false } },
+					{ name = "vim-dadbod-completion" },
+					{ name = "dictionary",           keyword_length = 4 },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -221,17 +219,17 @@ return {
 					end, { "i", "s" }),
 				},
 			})
-			cmp.setup.cmdline ({'/', '?'}, {
+			cmp.setup.cmdline({ '/', '?' }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
 					{ name = 'buffer' }
 				}
 			})
-			cmp.setup.cmdline (':', {
+			cmp.setup.cmdline(':', {
 				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources ({
+				sources = cmp.config.sources({
 					{ name = 'path' }
-				},{
+				}, {
 					{ name = 'cmdline' }
 				})
 			})

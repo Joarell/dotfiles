@@ -96,6 +96,8 @@ return {
 	{ "nvim-telescope/telescope-symbols.nvim" },
 	{ "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-lua/popup.nvim" },
+	{ "ThePrimeagen/git-worktree.nvim" },
+	{ "ThePrimeagen/harpoon" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
