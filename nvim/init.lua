@@ -31,7 +31,7 @@ require("neoscroll").setup()
 require("nvim_comment").setup()
 require("vgit_config")
 require("treesitter")
-require("tmux").setup()
+-- require("tmux").setup()
 require("dap_config")
 require("commands_nvim")
 

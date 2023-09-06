@@ -1,13 +1,14 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds clear-defaults=true {
     normal {
-        bind "Ctrl k" { SwitchToMode "locked"; }
+        bind "Ctrl b" { SwitchToMode "locked"; }
+        bind "Ctrl a" { Write 2; SwitchToMode "Normal"; }
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
     }
     locked {
         unbind "Ctrl g" { SwitchToMode "Normal"; }
-        bind "Ctrl k" { SwitchToMode "Normal"; }
+        bind "Ctrl b" { SwitchToMode "Normal"; }
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
@@ -125,7 +126,6 @@ keybinds clear-defaults=true {
     }
     tmux {
         bind "[" { SwitchToMode "Scroll"; }
-        unbind "Ctrl b" { Write 2; SwitchToMode "Normal"; }
         bind "Ctrl a" { Write 2; SwitchToMode "Normal"; }
         bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "%" { NewPane "Right"; SwitchToMode "Normal"; }

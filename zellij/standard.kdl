@@ -21,9 +21,9 @@ layout {
 			}
 		}
 		pane split_direction="vertical" {
-			pane split_direction="vertical" size=30 {
-				plugin location="zellij:strider"
-			}
+			// pane split_direction="vertical" size=40 {
+			// 	plugin location="zellij:strider"
+			// }
 			pane name="TAB" borderless=true
 		}
 	}
