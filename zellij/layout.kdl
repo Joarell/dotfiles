@@ -3,7 +3,7 @@ layout {
 		pane size=1 borderless=true {
 			// plugin location="zellij:compact-bar"
 			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
-				format_left  "  #[fg=#89B4FA,bold] {session} {mode} {tabs} 󰋘  "
+				format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
 				format_right "󰃭 {datetime}󰔟"
 				format_space ""
 
@@ -32,9 +32,15 @@ layout {
 			}
 			pane split_direction="horizontal" {
 				pane borderless=true
-				pane cwd="$HOME/web_crater/builder/docker" size=10 name="docker" {
-					command "docker" close_on_exit=true start_suspended=true
-					args "compose" "up" "--build" "--remove-orphans"
+				pane split_direction="vertical" size=10 {
+					pane cwd="$HOME/web_crater/builder/docker"  name="docker" {
+						command "docker" close_on_exit=true start_suspended=true
+						args "compose" "up" "--build" "--remove-orphans"
+					}
+					pane name="The Matrix has you." {
+						command "zsh"
+						args "dotfiles/zellij/connection.sh"
+					}
 				}
 			}
 			pane split_direction="horizontal" size=80 {
@@ -51,7 +57,7 @@ layout {
 	tab name="EXTAB" {
 		pane size=1 borderless=true {
 			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
-				format_left  "  #[fg=#89B4FA,bold] {session} {mode} {tabs} 󰋘 "
+				format_left  "  #[fg=#89B4FA,bold] {session}  {mode} {tabs} 󰋘   "
 				format_right "󰃭 {datetime}󰔟"
 
 				mode_locked	"#[bg=#B80056] {name}"
@@ -69,10 +75,10 @@ layout {
 			}
 		}
 		pane split_direction="vertical" {
-			pane split_direction="vertical" size=30 {
+			pane borderless=true split_direction="vertical" size=30 {
 				plugin location="zellij:strider"
 			}
-			pane name="ExPnae"
+			pane name="ExPane"
 		}
 	}
 }
