@@ -32,25 +32,24 @@ layout {
 			}
 			pane split_direction="horizontal" {
 				pane borderless=true
-				pane split_direction="vertical" size=10 {
-					pane cwd="$HOME/web_crater/builder/docker"  name="docker" {
-						command "docker" close_on_exit=true start_suspended=true
-						args "compose" "up" "--build" "--remove-orphans"
-					}
-					pane name="The Matrix has you." {
-						command "zsh"
-						args "dotfiles/zellij/connection.sh"
-					}
-				}
 			}
 			pane split_direction="horizontal" size=80 {
-				pane borderless=true name="ranger" {
-					command "ranger" close_on_exit=true
+				pane borderless=true name="󰌘" {
+					command "zsh" close_on_exit=true
+					args "dotfiles/zellij/connection.sh"
 				}
+				// pane borderless=true name="ranger" {
+				// 	command "ranger" close_on_exit=true
+				// }
 				pane borderless=true name="vis2" {
 					command "vis" close_on_exit=true
-					args "[Space]"
 				}
+			}
+		}
+		floating_panes split_direction="vertical" size=10 {
+			pane cwd="$HOME/web_crater/builder/docker"  name="Docker " {
+				command "docker" close_on_exit=true start_suspended=true
+				args "compose" "up" "--build" "--remove-orphans"
 			}
 		}
 	}
@@ -78,7 +77,7 @@ layout {
 			pane borderless=true split_direction="vertical" size=30 {
 				plugin location="zellij:strider"
 			}
-			pane name="ExPane"
+			pane name="ExPane" borderless=true
 		}
 	}
 }

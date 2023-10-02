@@ -12,7 +12,12 @@ fi
 
 # ============================== Settings ======================================
 # . $HOME/.asdf/asdf.sh
-
+# Blur {{{
+if [[ $(ps --no-header -p $PPID -o comm) =~ '^yakuake|kitty$|alacritty|wezterm|' ]]; then
+	for wid in $(xdotool search --pid $PPID); do
+		xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
+fi
+# }}}
 
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
@@ -24,7 +29,6 @@ export TERM=alacritty
 export ZELIJ_CONFIG_DIR=$HOME/.config/zellij
 export ZELIJ_CONFIG_FILE=$HOME/.config/zellij/config.kdl
 
-alias wezterm='flatpak run org.wezfurlong.wezterm'
 alias Astro="NVIM_APPNAME=Astro nvim"
 alias LazyVim="NVIM_APPNAME=LazyVim nvim"
 alias lazy="NVIM_APPNAME=lazy nvim"

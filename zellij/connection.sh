@@ -7,18 +7,19 @@ function placeConnection()
 	TEST=www.google.com
 
 	while true ; do
+		sleep 10
 		AGENT=$(curl -Is "$TEST" | sed -n '1p' | awk '{print $2}')
 
-		if [[ "$AGENT" -ne "200" ]] && [[ "$CHECK" -eq 1 ]]; then
+		if [[ "$AGENT" != 20* ]] && [[ "$CHECK" == 1 ]]; then
 			CHECK=0
-			tmatrix -C white &
-		elif [[ "$AGENT" -eq "200" ]] && [[ "$CHECK" -eq 0 ]]; then
+			tmatrix -g 0,80 -C white -t "WORNING: Connection Lost!" &
+		elif [[ "$AGENT" == 20* ]] && [[ "$CHECK" == 0 ]]; then
 			CHECK=1
 			PID="$(pgrep tmatrix | tail -n 1)"
 			kill "$PID"
 		fi
 	done
-};
+}
 
 placeConnection &
-tmatrix
+tmatrix -g 0,100 -t "The Matrix has you."

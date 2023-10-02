@@ -1,4 +1,3 @@
-
 --  ╭──────────────────────────────────────────────────────────╮
 --  │ 		--LSP and installer sever.                         │
 --  ╰──────────────────────────────────────────────────────────╯
@@ -10,9 +9,10 @@ return {
 			"williamboman/nvim-lsp-installer",
 			"williamboman/mason-lspconfig.nvim",
 			"kabouzeid/nvim-lspinstall",
-			-- "jayp0521/mason-null-ls.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
 		},
-		config = function ()
+		config = function()
+			local dap_install = require("mason-nvim-dap")
 			local lspconfig = require("lspconfig")
 			local lsp_defaults = lspconfig.util.default_config
 			local mason_lsp = require("mason-lspconfig")
@@ -37,6 +37,17 @@ return {
 					completions.on_attach(client, bufnr)
 				end
 			end
+
+			dap_install.setup({
+				ensure_installed = {
+					'stylua',
+					'jq',
+					'node-debug2-adapter',
+					'codelldb',
+					'bash-debug-adapter'
+				},
+				handlers = {},
+			})
 
 			mason.setup({
 				ui = {
@@ -106,6 +117,58 @@ return {
 					},
 				})
 			end
-		end
+
+			local server = mason_registry.get_package("nginx-language-server")
+			local path = server:get_install_path() .. "/venv/"
+			local nginx = path .. "bin/nginx-language-server"
+
+			require'lspconfig'.nginx_language_server.setup {
+				cmd = { "nginx-language-server" },
+				filetypes = "nginx",
+				root_dir = vim.fn.expand("%:t"),
+				capabilities = lsp_defaults.capabilities,
+				on_attach = function(_, bufnr)
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = nginx,
+					})
+				end,
+				single_file_support = true,
+				flags = {
+					debounce_text_changes = 50,
+				},
+			}
+		end,
+
+		require 'lspconfig'.lua_ls.setup {
+			on_init = function(client)
+				local path = client.workspace_folders[1].name
+				if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+					client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+						Lua = {
+							runtime = {
+								-- Tell the language server which version of Lua you're using
+								-- (most likely LuaJIT in the case of Neovim)
+								version = 'LuaJIT'
+							},
+							-- Make the server aware of Neovim runtime files
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									vim.env.VIMRUNTIME
+									-- "${3rd}/luv/library"
+									-- "${3rd}/busted/library",
+								}
+								-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+								-- library = vim.api.nvim_get_runtime_file("", true)
+							}
+						}
+					})
+
+					client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+				end
+				return true
+			end
+		}
 	}
 }

@@ -42,7 +42,7 @@ dap.configurations.javascript = {
 	},
 }
 
--- dapui.configurations.layouts = {{
+
 -- 	elements = { {
 -- 		id = "scopes",
 -- 		size = 0.25
