@@ -35,6 +35,16 @@ require("tmux").setup()
 require("dap_config")
 require("commands_nvim")
 
+local ok, harpoon = pcall(require, 'harppon');
+if ok then
+	harpoon.setup({
+		menu = {
+			width = vim.api.nvim_win_get_width(0) - 4,
+		}
+	})
+end
+
+
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -219,8 +229,8 @@ require("todo-comments").setup({
 	-- UPDATE:keywords recognized as todo comments
 	keywords = {
 		FIX = {
-			icon = " ",                     -- icon used for the sign, and in search results
-			color = "error",                   -- can be a hex color, or a named color (see below)
+			icon = " ", -- icon used for the sign, and in search results
+			color = "error", -- can be a hex color, or a named color (see below)
 			alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
 			-- signs = false, -- configure signs for some keywords individually
 		},

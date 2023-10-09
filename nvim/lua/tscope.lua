@@ -5,11 +5,17 @@
 require("telescope").load_extension("noice")
 require("telescope").load_extension("notify")
 require("telescope").load_extension("file_browser")
-require("telescope").load_extension("harpoon")
 require("telescope").load_extension("git_worktree")
+local ok = pcall(require, 'harppon');
+if ok then
+	require("telescope").load_extension("harpoon")
+end
+
+
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
+
 telescope.setup {
 	extensions = {
 		media_files = {

@@ -118,26 +118,26 @@ return {
 				})
 			end
 
-			local server = mason_registry.get_package("nginx-language-server")
-			local path = server:get_install_path() .. "/venv/"
-			local nginx = path .. "bin/nginx-language-server"
-
-			require'lspconfig'.nginx_language_server.setup {
-				cmd = { "nginx-language-server" },
-				filetypes = "nginx",
-				root_dir = vim.fn.expand("%:t"),
-				capabilities = lsp_defaults.capabilities,
-				on_attach = function(_, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = nginx,
-					})
-				end,
-				single_file_support = true,
-				flags = {
-					debounce_text_changes = 50,
-				},
-			}
+			-- local server = mason_registry.get_package("nginx-language-server")
+			-- local path = server:get_install_path() .. "/venv/"
+			-- local nginx = path .. "bin/nginx-language-server"
+			--
+			-- require'lspconfig'.nginx_language_server.setup {
+			-- 	cmd = { "nginx-language-server" },
+			-- 	filetypes = "nginx",
+			-- 	root_dir = vim.fn.expand("%:t"),
+			-- 	capabilities = lsp_defaults.capabilities,
+			-- 	on_attach = function(_, bufnr)
+			-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 			buffer = bufnr,
+			-- 			command = nginx,
+			-- 		})
+			-- 	end,
+			-- 	single_file_support = true,
+			-- 	flags = {
+			-- 		debounce_text_changes = 50,
+			-- 	},
+			-- }
 		end,
 
 		require 'lspconfig'.lua_ls.setup {

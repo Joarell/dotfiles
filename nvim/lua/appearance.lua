@@ -186,7 +186,7 @@ require("virt-column").setup({})
 local set = vim.opt
 set.list = true
 set.listchars:append("eol:↴")
-set.listchars:append("space:•")
+set.listchars:append("space:·")
 
 local highlight = {
 	"RainbowRed",

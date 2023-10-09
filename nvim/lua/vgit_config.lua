@@ -43,8 +43,9 @@ require('vgit').setup({
 			GitSignsDeleteLn = 'DiffDelete',
 			GitWordAdd = {
 				gui = nil,
-				fg = nil,
-				bg = '#5d7a22',
+				fg = '#00ffaa',
+				bg = 'green',
+				-- bg = '#5d7a22',
 				sp = nil,
 				override = false,
 			},
