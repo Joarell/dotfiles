@@ -35,15 +35,6 @@ require("tmux").setup()
 require("dap_config")
 require("commands_nvim")
 
-local ok, harpoon = pcall(require, 'harppon');
-if ok then
-	harpoon.setup({
-		menu = {
-			width = vim.api.nvim_win_get_width(0) - 4,
-		}
-	})
-end
-
 
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
