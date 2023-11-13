@@ -86,6 +86,7 @@ require('nightfox').setup({
 			search = true,
 		},
 		modules = { -- List of various plugins and additional options
+			barbar = {}
 			-- ...
 		},
 	},
@@ -176,8 +177,11 @@ require("bufferline").setup({
 -- })
 
 require("jj_neon_theme")
-require("treesitter")
 require("tabline")
+local ok = pcall(require, "treesitter")
+if ok then
+	require("treesitter")
+end
 
 --###########################################################################--
 --							Indent settings					 				 --

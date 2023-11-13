@@ -5,7 +5,6 @@ local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
-local opt_map = { silent = true, noremap = false }
 
 --[[************************************************************************]]--
 --[[                             Basic mappings                             ]]--
@@ -20,7 +19,6 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "gl", ":lua vim.diagnostic.open_float()<CR>", opts)
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
-keymap("n", "<A-g>", ":VGit project_diff_preview<cr>", opts)
 -- keymap("n", "<A-g>", ":G <cr>", opts)
 keymap("n", "<A-g>c", ":G commit<cr>", opts)
 keymap("n", "<A-P>", ":G push origin HEAD<cr>", opts)
@@ -47,6 +45,9 @@ keymap("n", "gw", ":lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
 keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
+keymap("n", "<A-T>", function ()
+	vim.lsp.inlay_hint(0, nil)
+end, { desc = "Toggle Inlay Hints" }, opts)
 keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
 keymap("n", "cn", ":lua vim.lsp.buf.rename()<CR>", opts)
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
@@ -99,9 +100,11 @@ keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multil
 keymap({ "n", "v" }, "cm", ":CBacbox<CR>", opts) -- left alignment adaptable
 keymap({ "n", "v" }, "<A-A>", ":CBlcbox<CR>", opts) -- center alignment
 keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
-keymap("n", "TL", ":TwilightEnable<CR>", opts)
-keymap("n", "TO", ":TwilightDisable<CR>", opts)
-keymap("n", "<Leader>df", ':Gvdiffsplit<CR>', opts)
+-- keymap("n", "TL", ":TwilightEnable<CR>", opts)
+-- keymap("n", "TO", ":TwilightDisable<CR>", opts)
+keymap("n", "<Leader>da", ':DiffviewOpen<CR>', opts)
+keymap("n", "<Leader>do", ':DiffviewClose<CR>', opts)
+keymap("n", "<A-g>", ":VGit project_diff_preview<cr>", opts)
 keymap("n", "<A-D>", ':VGit buffer_diff_preview<CR>', opts)
 keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
 
@@ -117,15 +120,15 @@ keymap("n", "<Leader>du", 'DBUI<CR>', opts)
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
 keymap("n", "<F2>", ":DapTerminate<cr>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
-keymap("n", "<F4>", ":DapRestartFrame<CR>", opts)
+keymap("n", "<F4>", ":lua require('dap').restart()<CR>", opts)
 keymap("n", "<F5>", ":DapContinue<CR> and vim.cmd('1')<CR>", opts)
 keymap("n", "<F6>", ":lua require('dapui').float_element()<CR>", opts)
 -- keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
-keymap("n", "<F8>", ":DapContinue<CR>", opts)
--- keymap("n", "<F8>", ":Vista<CR>", opts)
+-- keymap("n", "<F8>", ":DapContinue<CR>", opts)
+keymap("n", "<F8>", ":G<CR>", opts)
 keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", opts)
 keymap("n", "<F10>", ":DapStepInto<CR>", opts)
-keymap("n", "<F11>", ":lua require('dap').restart()<CR>", opts)
+keymap("n", "<F11>", ":DapContinue<CR>", opts)
 keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 
 

@@ -241,12 +241,7 @@ return {
 	--  │ 		--NewScroll                                        │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "karb94/neoscroll.nvim" },
-	{
-		"gen740/SmoothCursor.nvim",
-		config = function()
-			require("smoothcursor").setup()
-		end,
-	},
+	{ "gen740/SmoothCursor.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--Debugger                                         │

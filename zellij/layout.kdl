@@ -3,8 +3,9 @@ layout {
 		pane size=1 borderless=true {
 			// plugin location="zellij:compact-bar"
 			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
-				format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
-				format_right "󰃭 {datetime}󰔟"
+				// format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
+				format_left  "  #[fg=#89B4FA,bold] {session}  {tabs} 󰋘   "
+				format_right "{mode} 󰃭 {datetime}󰔟"
 				format_space ""
 
 				mode_locked	"#[bg=#B80056] {name}"
@@ -32,6 +33,7 @@ layout {
 			}
 			pane split_direction="horizontal" {
 				pane borderless=true
+				pane borderless=true size=10
 			}
 			pane split_direction="horizontal" size=80 {
 				pane borderless=true name="󰌘" {

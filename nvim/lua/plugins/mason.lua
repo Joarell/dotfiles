@@ -83,26 +83,67 @@ return {
 			local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
 
 			SERVERS = {
+				"astro",
 				"bashls",
 				"clangd",
 				"cssls",
 				"dockerls",
+				"eslint",
 				"html",
 				"jsonls",
+				"nginx_language_server",
 				"lua_ls",
 				"pyright",
 				"rust_analyzer",
+				-- "rustwind",
 				"sqlls",
 				"tsserver",
 				"yamlls",
 				"jdtls",
 			}
 
-			mason_lsp.setup({
-				ensure_installed = SERVERS,
-				automatic_installation = true,
-			})
+			local servers = {
+				tsserver = {
+					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+					javascript = {
+						inlayHints = {
+							includeInlayEnumMemberValueHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayParameterNameHints = 'all',
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayVariableTypeHints = true,
+						},
+					},
+					typescript = {
+						inlayHints = {
+							includeInlayEnumMemberValueHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayParameterNameHints = 'all',
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayVariableTypeHints = true,
+						},
+					},
+				},
+			}
 
+			-- mason_lsp.setup({
+			-- 	ensure_installed = SERVERS,
+			-- 	automatic_installation = true,
+			-- 	handlers = {
+			-- 		settings = servers[server_name],
+			-- 		filetypes = (servers[server_name] or {}).filetypes,
+			-- 		function(server_name)
+			-- 			require("lspconfig")[server_name].setup {}
+			-- 		end
+			-- 	}
+			-- })
+
+
+			-- require'lspconfig'.ngix_language_server.setup{}
 			for _, lsp in pairs(SERVERS) do
 				lspconfig[lsp].setup({
 					dap = {
@@ -110,36 +151,13 @@ return {
 					},
 					on_atttach = on_attach,
 					capabilities = lsp_defaults.capabilities,
-					-- capabilities = capabilities,
 					single_file_support = true,
 					flags = {
 						debounce_text_changes = 50,
 					},
 				})
 			end
-
-			-- local server = mason_registry.get_package("nginx-language-server")
-			-- local path = server:get_install_path() .. "/venv/"
-			-- local nginx = path .. "bin/nginx-language-server"
-			--
-			-- require'lspconfig'.nginx_language_server.setup {
-			-- 	cmd = { "nginx-language-server" },
-			-- 	filetypes = "nginx",
-			-- 	root_dir = vim.fn.expand("%:t"),
-			-- 	capabilities = lsp_defaults.capabilities,
-			-- 	on_attach = function(_, bufnr)
-			-- 		vim.api.nvim_create_autocmd("BufWritePre", {
-			-- 			buffer = bufnr,
-			-- 			command = nginx,
-			-- 		})
-			-- 	end,
-			-- 	single_file_support = true,
-			-- 	flags = {
-			-- 		debounce_text_changes = 50,
-			-- 	},
-			-- }
 		end,
-
 		require 'lspconfig'.lua_ls.setup {
 			on_init = function(client)
 				local path = client.workspace_folders[1].name

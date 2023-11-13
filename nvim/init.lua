@@ -19,7 +19,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("lazy").setup("plugins")
-require("cursor_style")
 require("luasnip_config")
 require("popup")
 require("tscope")
@@ -30,10 +29,14 @@ require("troublesettings")
 require("neoscroll").setup()
 require("nvim_comment").setup()
 require("vgit_config")
-require("treesitter")
 require("tmux").setup()
 require("dap_config")
 require("commands_nvim")
+
+local cursor = pcall(require, "cursor_style")
+if cursor then
+	require("cursor_style")
+end
 
 
 -- Disable netrw at the very start of init.lua
@@ -75,7 +78,7 @@ set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "CaskaydiaCove NF:h08"
+set.guifont = "CaskaydiaCove NF:h13"
 
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"

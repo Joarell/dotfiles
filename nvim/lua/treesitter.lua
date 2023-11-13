@@ -1,6 +1,7 @@
---###########################################################################--
--- 							Treesitter Settings		 						 --
---###########################################################################--
+--  ╭──────────────────────────────────────────────────────────╮
+--  │                   Treesitter Settings.                   │
+--  ╰──────────────────────────────────────────────────────────╯
+
 require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. Feel free to update it.
 	ensure_installed = {
 		"bash",
@@ -30,7 +31,7 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 	highlight = {
 		enable = true, -- false will disble the whole extension
 		additional_vim_regex_highlighting = true,
-		disable = function (_, buf)
+		disable = function(_, buf)
 			local max_filesize = 100 * 1024 -- 100kb
 			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 			if ok and stats and stats.size > max_filesize then
@@ -85,6 +86,46 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 		},
 	},
 	additional_vim_higlighting = true,
+	textobjects = {
+		move = {
+			enable = true,
+			set_jumps = true, -- whether to set jumps in the jumplist
+			goto_next_start = {
+				["]m"] = "@function.outer",
+				["]]"] = { query = "@class.outer", desc = "Next class start" },
+				--
+				-- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
+				["]o"] = "@loop.*",
+				-- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
+				--
+				-- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+				-- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+				["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+				["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+			},
+			goto_next_end = {
+				["]M"] = "@function.outer",
+				["]["] = "@class.outer",
+			},
+			goto_previous_start = {
+				["[m"] = "@function.outer",
+				["[["] = "@class.outer",
+			},
+			goto_previous_end = {
+				["[M"] = "@function.outer",
+				["[]"] = "@class.outer",
+			},
+			-- Below will go to either the start or the end, whichever is closer.
+			-- Use if you want more granular movements
+			-- Make it even more gradual by adding multiple queries and regex.
+			goto_next = {
+				["]d"] = "@conditional.outer",
+			},
+			goto_previous = {
+				["[d"] = "@conditional.outer",
+			}
+		},
+	},
 })
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
@@ -93,17 +134,17 @@ parser_config.zimbu = {
 		url = "~/projects/tree-sitter-zimbu", -- local path or git repo
 		files = { "src/parser.c" },
 		-- optional entries:
-		branch = "main", -- default branch in case of git repo if different from master
-		generate_requires_npm = true, -- if stand-alone parser without npm dependencies
+		branch = "main",                 -- default branch in case of git repo if different from master
+		generate_requires_npm = true,    -- if stand-alone parser without npm dependencies
 		requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
 	},
-	filetype = "zu", -- if filetype does not match the parser name
+	filetype = "zu",                     -- if filetype does not match the parser name
 }
 
 --###########################################################################--
 --							Regex Settings		 							 --
 --###########################################################################--
-require("regexplainer").show{ display = 'popup' }
+require("regexplainer").show { display = 'popup' }
 require("regexplainer").setup({
 	-- 'narrative'
 	mode = "narrative", -- TODO: 'ascii', 'graphical'
@@ -134,7 +175,7 @@ require("regexplainer").setup({
 	display = "popup",
 	popup = {
 		border = {
-			padding = {1, 2},
+			padding = { 1, 2 },
 			style = 'rounded',
 		},
 	},
