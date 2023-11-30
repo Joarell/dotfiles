@@ -33,7 +33,9 @@ layout {
 			}
 			pane split_direction="horizontal" {
 				pane borderless=true
-				pane borderless=true size=10
+				pane borderless=true name="cava" size=10 {
+					command "cava" close_on_exit=true
+				}
 			}
 			pane split_direction="horizontal" size=80 {
 				pane borderless=true name="󰌘" {
@@ -55,31 +57,31 @@ layout {
 			}
 		}
 	}
-	tab name="EXTAB" {
-		pane size=1 borderless=true {
-			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
-				format_left  "  #[fg=#89B4FA,bold] {session}  {mode} {tabs} 󰋘   "
-				format_right "󰃭 {datetime}󰔟"
+	//tab name="EXTAB" {
+	//	pane size=1 borderless=true {
+	//		plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+	//			format_left  "  #[fg=#89B4FA,bold] {session}  {mode} {tabs} 󰋘   "
+	//			format_right "󰃭 {datetime}󰔟"
 
-				mode_locked	"#[bg=#B80056] {name}"
-				mode_normal	"#[bg=#333] {name}"
-				mode_tmux	"#[bg=#ffc387] {name}"
+	//			mode_locked	"#[bg=#B80056] {name}"
+	//			mode_normal	"#[bg=#333] {name}"
+	//			mode_tmux	"#[bg=#ffc387] {name}"
 
-				tab_normal	"#[fg=#6C7086] {name} "
-				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+	//			tab_normal	"#[fg=#6C7086] {name} "
+	//			tab_active	"#[fg=#80CED7,bold,italic] {name} "
 
-				datetime	"#[fg=#6C7086,bold] {format} "
-				datetime_format "%A, %d %b %Y %H:%M"
-				datetime_timezone "America/Sao_Paulo"
+	//			datetime	"#[fg=#6C7086,bold] {format} "
+	//			datetime_format "%A, %d %b %Y %H:%M"
+	//			datetime_timezone "America/Sao_Paulo"
 
-				first_start	"true"
-			}
-		}
-		pane split_direction="vertical" {
-			pane borderless=true split_direction="vertical" size=30 {
-				plugin location="zellij:strider"
-			}
-			pane name="ExPane" borderless=true
-		}
-	}
+	//			first_start	"true"
+	//		}
+	//	}
+	//	pane split_direction="vertical" {
+	//		pane borderless=true split_direction="vertical" size=30 {
+	//			plugin location="zellij:strider"
+	//		}
+	//		pane name="ExPane" borderless=true
+	//	}
+	//}
 }
