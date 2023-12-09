@@ -133,6 +133,7 @@ vim.lsp.handlers["testDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 })
 
 vim.diagnostic.config({ float = { border = "rounded" } })
+
 -- TODO: - open a terminal without number column nativily.
 -- local newbuf = vim.api.nvim_create_buf(unlisted, true)
 -- vim.api.nvim_open_win(newbuf, vim.cmd ("term"), {

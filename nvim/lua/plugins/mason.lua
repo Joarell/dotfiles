@@ -12,10 +12,11 @@ return {
 			"jay-babu/mason-nvim-dap.nvim",
 		},
 		config = function()
+			require("sg").setup({})
 			local dap_install = require("mason-nvim-dap")
 			local lspconfig = require("lspconfig")
 			local lsp_defaults = lspconfig.util.default_config
-			local mason_lsp = require("mason-lspconfig")
+			-- local mason_lsp = require("mason-lspconfig")
 			local mason = require("mason")
 			local completions = require("cmp")
 			local mason_registry = require("mason-registry")

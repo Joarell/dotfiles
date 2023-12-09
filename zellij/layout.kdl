@@ -39,12 +39,9 @@ layout {
 			}
 			pane split_direction="horizontal" size=80 {
 				pane borderless=true name="󰌘" {
-					command "zsh" close_on_exit=true
+					command "bash" close_on_exit=true
 					args "dotfiles/zellij/connection.sh"
 				}
-				// pane borderless=true name="ranger" {
-				// 	command "ranger" close_on_exit=true
-				// }
 				pane borderless=true name="vis2" {
 					command "vis" close_on_exit=true
 				}

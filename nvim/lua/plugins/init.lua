@@ -40,6 +40,12 @@ return {
 			opt = true
 		}
 	},
+	{
+		{
+			"sourcegraph/sg.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
+		},
+	},
 	-- { "luukvbaal/statuscol.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
@@ -338,6 +344,9 @@ return {
 	--  ╭─────────────────────────────────────────────────╮
 	--  │      Themes Install without configuration       │
 	--  ╰─────────────────────────────────────────────────╯
+	{
+		"craftzdog/solarized-osaka.nvim",
+	},
 	-- { "projekt0n/github-nvim-theme" },
 	-- {
 	-- 	"liuchengxu/vista.vim",

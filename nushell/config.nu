@@ -786,6 +786,7 @@ alias linstall = sudo pacman -U
 alias update = sudo pacman -Syyu 
 alias clrcache = sudo pacman -Scc 
 alias akring = sudo pacman -Sy archlinux-keyring --noconfirm 
+alias rr = ranger
 alias zjs = zellij -l strider
 alias zjc = zellij -l compact
 
