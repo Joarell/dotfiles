@@ -229,7 +229,8 @@ return {
 			"nvim-lua/plenary.nvim"
 		},
 	},
-	{ "nvim-telescope/telescope-media-files.nvim" },
+	{"nvim-telescope/telescope-ui-select.nvim"},
+	-- { "nvim-telescope/telescope-media-files.nvim" },
 	{ "nvim-telescope/telescope-symbols.nvim" },
 	{ "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-lua/popup.nvim" },

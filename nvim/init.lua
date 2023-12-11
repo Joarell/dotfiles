@@ -78,7 +78,7 @@ set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "CaskaydiaCove NF:h9"
+set.guifont = "CaskaydiaCove NF:h12.5"
 
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"

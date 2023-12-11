@@ -5,6 +5,17 @@
 return {
 	-- {'VonHeikemen/Lsp-zero.nvim', branch = 'v1.x'},
 	{
+		"michaelb/sniprun",
+		branch = "master",
+		build = "sh ./install.sh",
+		config = function ()
+			require('sniprun').setup({
+				display = { "NvimNotify" },
+				display_options = { notification_timeout = 5 }, -- in seconds
+			})
+		end,
+	},
+	{
 		"https://github.com/L3MON4D3/LuaSnip",
 		version = "1.2.1.*",
 		build = "make install_jsregexp",
