@@ -81,12 +81,11 @@ $env.NU_PLUGIN_DIRS = [
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
-neofetch | lolcat
-source ~/.cache/starship/init.nu
-source ~/dotfiles/script.nu
+neofetch
 source ~/.zoxide.nu
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
 ssh-add ~/.ssh/id_jev
+source ~/.oh-my-posh.nu
 
 register ~/.cargo/bin/nu_plugin_highlight
 $env.NU_PLUGIN_HIGHLIGHT_TRUE_COLORS = true

@@ -775,7 +775,7 @@ alias neovide = neovide --neovim-bin nvim
 alias zj = zellij options --simplified-ui true --pane-frames false
 
 # Pacman for software management
-alias vide = neovide --multigrid
+alias vide = neovide
 alias v = nvim
 alias lg = lazygit 
 alias upall = topgrade 

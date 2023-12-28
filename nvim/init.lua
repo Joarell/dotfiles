@@ -73,12 +73,14 @@ set.smartindent = true
 set.autowrite = true
 set.swapfile = false
 set.undofile = true
+set.undodir = vim.fn.stdpath('config') .. '/.undo'
 set.termguicolors = true
 set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "CaskaydiaCove NF:h12.5"
+set.guifont = "CaskaydiaCove NF:h13"
+-- set.guifont = "CaskaydiaCove NF:h9"
 
 vim.wo.colorcolumn = "80"
 vim.g["zoom#statustext"] = "Z"
@@ -161,8 +163,7 @@ vim.g.neovide_refresh_rate = 60
 vim.g.neovide_scroll_animation_length = 0.3
 vim.g.neovide_cursor_trail_size = 0.8
 vim.g.neovide_underline_automatic_sacaling = true
--- vim.g.neovide_cursor_animation_length = 0.13
--- vim.g.neovide_cursor_animate_in_insert_mode = true
+vim.g.neovide_cursor_animate_in_insert_mode = true
 
 --###########################################################################--
 -- 							color settings									 --

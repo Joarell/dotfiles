@@ -1,12 +1,15 @@
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Telescope Settings.                    │
 --  ╰──────────────────────────────────────────────────────────╯
--- require("telescope").load_extension("media_files")
+require("telescope").load_extension("ui-select")
 require("telescope").load_extension("noice")
 require("telescope").load_extension("notify")
 require("telescope").load_extension("file_browser")
 require("telescope").load_extension("git_worktree")
-require("telescope").load_extension("ui-select")
+require("telescope").load_extension("dap")
+require("telescope").load_extension("docker")
+
+
 local ok = pcall(require, 'harppon');
 if ok then
 	require("telescope").load_extension("harpoon")
@@ -18,20 +21,16 @@ local trouble = require("trouble.providers.telescope")
 
 telescope.setup {
 	extensions = {
-		-- media_files = {
-		-- 	-- filetypes whitelist
-		-- 	-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-		-- 	filetypes = { "png", "webp", "jpg", "jpeg" },
-		-- 	find_cmd = "rg", -- find command (defaults to `fd`)
-		-- },
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown{
-				specific_opts = {
-					["kind"] = {
-						make_displayer = 120,
-					},
-				},
-			}
+			require("telescope.themes").get_dropdown{},
+		},
+		docker = {
+			theme = "dropdown",
+			binary = "docker",
+			compose_binary = "docker compose",
+		},
+		file_browser = {
+			theme = "dropdown",
 		},
 	},
 	pickers = {
@@ -39,10 +38,18 @@ telescope.setup {
 			hidden = true,
 			no_ignore = true,
 			search_dirs = { "." },
+			theme = "dropdown",
+		},
+		live_grep = {
+			theme = "dropdown"
 		},
 		colorscheme = {
 			enable_preview = true,
+			theme = "dropdown"
 		},
+		oldfiles = {
+			theme = "dropdown"
+		}
 	},
 	defaults = {
 		-- selection_caret = " ",
@@ -76,9 +83,7 @@ local keymap = vim.keymap.set
 local builtin = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
 
-keymap("n", "ts", function()
-	builtin.colorscheme({ enable_preview = true })
-end, opts)
+keymap("n", "ts", builtin.colorscheme, opts)
 keymap("n", "fz", builtin.find_files, opts)
 keymap("n", "fg", builtin.live_grep, opts)
 keymap("n", "fb", builtin.buffers, opts)

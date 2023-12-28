@@ -229,13 +229,16 @@ return {
 			"nvim-lua/plenary.nvim"
 		},
 	},
-	{"nvim-telescope/telescope-ui-select.nvim"},
 	-- { "nvim-telescope/telescope-media-files.nvim" },
 	{ "nvim-telescope/telescope-symbols.nvim" },
 	{ "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-lua/popup.nvim" },
 	{ "ThePrimeagen/git-worktree.nvim" },
 	{ "ThePrimeagen/harpoon" },
+	{ "nvim-telescope/telescope-dap.nvim" },
+	{ "gbrlsnchs/telescope-lsp-handlers.nvim" },
+	{ "lpoto/telescope-docker.nvim" },
+	{"nvim-telescope/telescope-ui-select.nvim"},
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
