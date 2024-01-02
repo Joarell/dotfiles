@@ -9,8 +9,7 @@ require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("dap")
 require("telescope").load_extension("docker")
 
-
-local ok = pcall(require, 'harppon');
+local ok = pcall(require, "harppon")
 if ok then
 	require("telescope").load_extension("harpoon")
 end
@@ -19,10 +18,10 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 
-telescope.setup {
+telescope.setup({
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown{},
+			require("telescope.themes").get_dropdown {}
 		},
 		docker = {
 			theme = "dropdown",
@@ -41,15 +40,15 @@ telescope.setup {
 			theme = "dropdown",
 		},
 		live_grep = {
-			theme = "dropdown"
+			theme = "dropdown",
 		},
 		colorscheme = {
 			enable_preview = true,
-			theme = "dropdown"
+			theme = "dropdown",
 		},
 		oldfiles = {
-			theme = "dropdown"
-		}
+			theme = "dropdown",
+		},
 	},
 	defaults = {
 		-- selection_caret = " ",
@@ -77,7 +76,7 @@ telescope.setup {
 			["<C-Up>"] = actions.cycle_history_prev,
 		},
 	},
-}
+})
 
 local keymap = vim.keymap.set
 local builtin = require("telescope.builtin")
@@ -96,4 +95,3 @@ keymap("n", "to", ":Telescope oldfiles<CR>", opts)
 keymap("n", "th", builtin.help_tags, opts)
 keymap("n", "tb", ":Telescope file_browser<CR>", opts)
 keymap("n", "tm", ":Telescope harpoon marks<CR>", opts)
-

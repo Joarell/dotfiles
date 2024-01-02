@@ -120,6 +120,7 @@ keybinds clear-defaults=true {
             LaunchOrFocusPlugin "zellij:session-manager" {
                 floating true
                 move_to_focused_tab true
+				session_serialization false
             };
             SwitchToMode "Normal"
         }
@@ -345,6 +346,7 @@ copy_command "xclip -selection clipboard" // x11
 // Default: $EDITOR or $VISUAL
 //
 scrollback_editor "/usr/bin/nvim"
+session_serialization false
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

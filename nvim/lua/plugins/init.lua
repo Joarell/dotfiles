@@ -6,7 +6,27 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		Discord app monitor                                │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "andweeb/presence.nvim" },
+	-- { "andweeb/presence.nvim" },
+	-- { "ObserverOfTime/nvimcord" },
+	-- {
+	-- 	"rust-lang/rust.vim",
+	-- 	ft = "rust",
+	-- 	config = function ()
+	-- 		vim.g.rustfmt_autosave = 1
+	-- 	end
+	-- },
+	-- {
+	-- 	"mrcjkb/rustaceanvim",
+	-- 	version = '^3',
+	-- 	ft = {'rust'},
+	-- },
+	{
+		"lpturmel/discord.nvim",
+		config = function ()
+			local discord = require("discord")
+			discord.setup({})
+		end
+	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		icons                                              │

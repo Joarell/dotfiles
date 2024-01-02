@@ -18,7 +18,13 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-require("lazy").setup("plugins")
+local opts = {
+	ui = {
+		border = "rounded",
+	}
+}
+
+require("lazy").setup("plugins", opts)
 require("luasnip_config")
 require("popup")
 require("tscope")
@@ -37,7 +43,6 @@ local cursor = pcall(require, "cursor_style")
 if cursor then
 	require("cursor_style")
 end
-
 
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
@@ -73,7 +78,7 @@ set.smartindent = true
 set.autowrite = true
 set.swapfile = false
 set.undofile = true
-set.undodir = vim.fn.stdpath('config') .. '/.undo'
+set.undodir = vim.fn.stdpath("config") .. "/.undo"
 set.termguicolors = true
 set.winblend = 30
 set.clipboard = ""
@@ -83,6 +88,7 @@ set.guifont = "CaskaydiaCove NF:h13"
 -- set.guifont = "CaskaydiaCove NF:h9"
 
 vim.wo.colorcolumn = "80"
+vim.g.transparecey = 0.8
 vim.g["zoom#statustext"] = "Z"
 vim.g["netrw_keepdir"] = 0
 vim.g["netrw_winsize"] = 30
@@ -152,11 +158,14 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 --###########################################################################--
 -- 							Neovide settings 								 --
 --###########################################################################--
--- vim.cmd([[
--- 	set guifont=CaskaydiaCove\ NF:h08.5
--- ]])
+local alpha = function()
+	return string.format("%x", math.floor(255 * 0.8))
+end
 
-vim.g.neovide_transparency = 0.9
+vim.g.neovide_floating_blur_amount_x = 2.0
+vim.g.neovide_floating_blur_amount_y = 2.0
+vim.g.neovide_transparency = 0.95
+vim.g.neovide_background_color = "#0F1117" .. alpha()
 vim.g.neovide_no_idle = true
 vim.g.neovide_cursor_vfx_mode = "ripple"
 vim.g.neovide_refresh_rate = 60
@@ -164,6 +173,8 @@ vim.g.neovide_scroll_animation_length = 0.3
 vim.g.neovide_cursor_trail_size = 0.8
 vim.g.neovide_underline_automatic_sacaling = true
 vim.g.neovide_cursor_animate_in_insert_mode = true
+vim.g.neovide_cursor_animation_far_lines = 1
+vim.g.neovide_underline_stroke_scale = 0.8
 
 --###########################################################################--
 -- 							color settings									 --
@@ -193,28 +204,48 @@ high_str.setup({
 -- 							Discord app monitor								 --
 --###########################################################################--
 
-require("presence"):setup({
-	-- General options
-	auto_update = true,                          -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
-	neovim_image_text = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-	main_image = "neovim",                       -- Main image display (either "neovim" or "file")
-	client_id = "793271441293967371",            -- Use your own Discord application client id (not recommended)
-	log_level = nil,                             -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-	debounce_timeout = 10,                       -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-	enable_line_number = false,                  -- Displays the current line number instead of the current project
-	blacklist = {},                              -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-	buttons = true,                              -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`,
-	file_assets = {},                            -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
-	-- Rich Presence text options
-	editing_text = "Editing %s",                 -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
-	file_explorer_text = "Browsing %s",          -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
-	git_commit_text = "Committing changes",      -- Format string rendered when committing changes in git (either string or function(filename: string): string)
-	plugin_manager_text = "Managing plugins",    -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
-	reading_text = "Reading %s",                 -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: st
-	workspace_text = "Working on %s",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): s
-	line_number_text = "Line %s out of %s",      -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line
-	21,
-})
+-- require("presence").setup({
+-- 	-- General options
+-- 	auto_update = true,                          -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
+-- 	neovim_image_text = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
+-- 	main_image = "neovim",                       -- Main image display (either "neovim" or "file")
+-- 	client_id = "793271441293967371",            -- Use your own Discord application client id (not recommended)
+-- 	log_level = "warn",                          -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
+-- 	debounce_timeout = 10,                       -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
+-- 	enable_line_number = false,                  -- Displays the current line number instead of the current project
+-- 	blacklist = {},                              -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
+-- 	buttons = false,                              -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`,
+-- 	file_assets = {},                            -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+--
+-- 	-- Rich Presence text options
+-- 	editing_text = "Editing %s",                 -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+-- 	file_explorer_text = "Browsing %s",          -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
+-- 	git_commit_text = "Committing changes",      -- Format string rendered when committing changes in git (either string or function(filename: string): string)
+-- 	plugin_manager_text = "Managing plugins",    -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
+-- 	reading_text = "Reading %s",                 -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: st
+-- 	workspace_text = "Working on %s",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): s
+-- 	line_number_text = "Line %s out of %s",      -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line
+-- })
+
+-- NOTE: these are the defaults
+-- require("nvimcord").setup({
+-- 	-- Start the RPC manually (boolean)
+-- 	autostart = false,
+-- 	-- Set the client ID (string)
+-- 	client_id = "954365489214291979",
+-- 	-- Use the filetype as the large icon (boolean)
+-- 	large_file_icon = true,
+-- 	-- Set the log level (enum)
+-- 	log_level = vim.log.levels.INFO,
+-- 	-- Get the workspace name (function|string)
+-- 	workspace_name = function()
+-- 		return --[[cwd basename]]
+-- 	end,
+-- 	-- Get the workspace URL (function|string)
+-- 	workspace_url = function()
+-- 		return ""
+-- 	end,
+-- })
 
 --###########################################################################--
 -- 							Setting TODO comments 							 --

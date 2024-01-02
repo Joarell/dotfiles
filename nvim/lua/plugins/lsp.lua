@@ -8,8 +8,8 @@ return {
 		"michaelb/sniprun",
 		branch = "master",
 		build = "sh ./install.sh",
-		config = function ()
-			require('sniprun').setup({
+		config = function()
+			require("sniprun").setup({
 				display = { "NvimNotify" },
 				display_options = { notification_timeout = 5 }, -- in seconds
 			})
@@ -22,9 +22,9 @@ return {
 		dependencies = {
 			"dcampos/cmp-snippy",
 			"dcampos/nvim-snippy",
-			"hrsh7th/cmp-vsnip",
 			"rafamadriz/friendly-snippets",
 			"SirVer/ultisnips",
+			"honza/vim-snippets",
 			"saadparwaiz1/cmp_luasnip",
 			"quangnguyen30192/cmp-nvim-ultisnips",
 		},
@@ -35,10 +35,10 @@ return {
 			{
 				"Smiteshp/nvim-navbuddy",
 				dependencies = {
-					"MunifTanjim/nui.nvim"
+					"MunifTanjim/nui.nvim",
 				},
-				opts = { lsp = { auto_attach = true } }
-			}
+				opts = { lsp = { auto_attach = true } },
+			},
 		},
 	},
 	{
@@ -54,7 +54,11 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			-- "https://github.com/jcha0713/cmp-tw2css",
+			"hrsh7th/vim-vsnip",
+			"hrsh7th/vim-vsnip-integ",
+			"hrsh7th/cmp-vsnip",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
@@ -64,43 +68,16 @@ return {
 			"https://github.com/onsails/lspkind.nvim",
 			"uga-rosa/cmp-dictionary",
 			"kristijanhusak/vim-dadbod-completion",
-			-- "shinglyu/vim-codespell",
-			-- {
-			-- 	"roobert/tailwindcss-colorizer-cmp.nvim",
-			-- 	config = function ()
-			-- 		require("tailwindcss-colorizer-cmp").setup({
-			-- 			color_square_width = 2,
-			-- 		})
-			-- 	end
-			-- },
-			-- {
-			-- 	"tzachar/cmp-tabnine",
-			-- 	build = "./install.sh",
-			-- 	dependencies = "hrsh7th/nvim-cmp"
-			-- },
 		},
 		config = function()
-			require("luasnip/loaders/from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_snipmate").lazy_load()
+			vim.o.completeopt = "menuone,noinsert,noselect"
 
 			local lspkind = require("lspkind")
 			local cmp = require("cmp")
 			local ls = require("luasnip")
 			local dict = require("cmp_dictionary")
-			-- local tailwind_ok, tailwindcss = pcall(require, "tailwindcss-colorizer-cmp")
-			-- if not tailwind_ok then
-			-- 	return
-			-- end
-			-- local tabnine = require("cmp_tabnine.config")
-			--
-			-- tabnine:setup({
-			-- 	max_lines = 1000,
-			-- 	max_num_results = 20,
-			-- 	sort = true,
-			-- 	run_on_every_keystroke = true,
-			-- 	snippet_placeholder = '..',
-			-- 	ignored_file_type = {},
-			-- 	show_prediction_strength = false,
-			-- })
 
 			dict.setup({
 				exact = 3,
@@ -128,21 +105,26 @@ return {
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						if not ls then
-							return
-						end
-						ls.lsp_expand(args.body)
+						-- if not ls then
+						-- 	return vim.fn["UtilSnips#Anon"](args.body)
+						-- end
+						-- ls.lsp_expand(args.body)
+						vim.fn["vsnip#anonymous"](args.body)
 					end,
 				},
 				sources = {
-					{ name = "nvim_lsp",             group_index = 0 },
-					{ name = "buffer",               keyword_length = 3,         group_index = 1 },
-					{ name = "luasnip",              keyword_length = 2 },
-					{ name = "cmdline",              keyword_length = 3,         group_index = 2 },
+					{ name = "nvim_lsp",               group_index = 0,            keyword_length = 3 },
+					{ name = "nvim_lua",               keyword_length = 3 },
+					{ name = "nvim_lsp_signature_help" },
+					{ name = "buffer",                 keyword_length = 3,         group_index = 1 },
+					{ name = "luasnip",                keyword_length = 2 },
+					{ name = "vsnip",                  keyword_length = 2 },
+					{ name = "utilsnips",              keyword_length = 2 },
+					{ name = "cmdline",                keyword_length = 3,         group_index = 2 },
 					{ name = "path" },
-					{ name = "emoji",                option = { insert = false } },
+					{ name = "emoji",                  option = { insert = false } },
 					{ name = "vim-dadbod-completion" },
-					{ name = "dictionary",           keyword_length = 4 },
+					{ name = "dictionary",             keyword_length = 4 },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -158,14 +140,16 @@ return {
 						ellipsis_char = "...",
 						menu = {
 							nvim_lsp = "   ",
+							nvim_lsp_signature_help = "  ",
+							vsnip = "   ",
+							utilsnips = " ",
+							nvim_lua = "   ",
 							luasnip = "   ",
 							buffer = "   ",
 							path = "󰺽 󰑪  ",
 							cmdline = " ",
 							dictionary = "  ",
 							emoji = "   ",
-							-- cmp_tw2css = "󱠓  ",
-							-- cmp_tabnine = "",
 						},
 						-- before = function (entry, vim_item)
 						-- 	vim_item = tailwindcss.formatter(entry, vim_item)
@@ -230,19 +214,19 @@ return {
 					end, { "i", "s" }),
 				},
 			})
-			cmp.setup.cmdline({ '/', '?' }, {
+			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = 'buffer' }
-				}
+					{ name = "buffer" },
+				},
 			})
-			cmp.setup.cmdline(':', {
+			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
-					{ name = 'path' }
+					{ name = "path" },
 				}, {
-					{ name = 'cmdline' }
-				})
+					{ name = "cmdline" },
+				}),
 			})
 		end,
 	},
