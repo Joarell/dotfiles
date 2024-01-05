@@ -21,7 +21,7 @@ local trouble = require("trouble.providers.telescope")
 telescope.setup({
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown {}
+			require("telescope.themes").get_dropdown({}),
 		},
 		docker = {
 			theme = "dropdown",
@@ -56,8 +56,8 @@ telescope.setup({
 		prompt_prefix = "  ",
 		initial_mode = "normal",
 		mappings = {
-			i = { ["<c-t>"] = trouble.open_with_trouble },
-			n = { ["<c-t>"] = trouble.open_with_trouble },
+			i = { ["<C-t>"] = trouble.open_with_trouble },
+			n = { ["<C-t>"] = trouble.open_with_trouble },
 		},
 		-- layout_config = {
 		-- 	width = function (_, cols, _)

@@ -17,20 +17,3 @@ require 'nvim-web-devicons'.setup {
 	-- will get overriden by `get_icons` option
 	default = true;
 }
-
---Trouble
-vim.keymap.set("n", "<Leader>t", "<cmd>TroubleToggle<cr>",
-	{ silent = true, noremap = true }
-)
-vim.keymap.set("n", "<Leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-	{ silent = true, noremap = true }
-)
-vim.keymap.set("n", "<Leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-	{ silent = true, noremap = true }
-)
-vim.keymap.set("n", "<Leader>xl", "<cmd>TroubleToggle loclist<cr>",
-	{ silent = true, noremap = true }
-)
--- vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
--- 	{ silent = true, noremap = true }
--- )

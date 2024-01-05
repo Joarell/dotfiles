@@ -2,54 +2,6 @@
 --  │                   Appearance settings                    │
 --  ╰──────────────────────────────────────────────────────────╯
 
--- Lua:
--- This is the theme for evential contention on neovim behavior. (Just in case!)
-
--- local c = require("vscode.colors").get_colors()
--- require("vscode").setup({
--- 	-- Enable transparent background
--- 	transparent = true,
--- 	-- Enable italic comment
--- 	italic_comments = true,
--- 	-- Disable nvim-tree background color
--- 	disable_nvimtree_bg = true,
--- 	-- Override colors (see ./lua/vscode/colors.lua)
--- 	color_overrides = {
--- 		vscLineNumber = "#666561",
--- 		-- vscPopupFront = '#00ffaa',
--- 		vscPopupFront = '#0080ff',
--- 		vscTabOutside = '#000000',
--- 		vscTabCurrent = '#000000',
--- 	},
--- 	-- Override highlight groups (see ./lua/vscode/theme.lua)
--- 	group_overrides = {
--- 		-- this supports the same val table as vim.api.nvim_set_hl
--- 		-- use colors from this colorscheme by requiring vscode.colors!
--- 		Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true, italic = true },
--- 	},
--- })
--- require('vscode').load('dark')
---
---
--- require("onedarkpro").setup({
--- 	options = {
--- 		cursorline = true,           -- Use cursorline highlighting?
--- 		transparency = true,         -- Use a transparent background?
--- 		terminal_colors = true,      -- Use the theme's colors for Neovim's :terminal?
--- 		highlight_inactive_windows = true, -- When the window is out of focus, change the normal background?
--- 	},
--- 	highlights = {
--- 		comment = {
--- 			italic = true,
--- 		},
--- 	},
--- 	styles = {
--- 		keywords = "italic",
--- 		variables = "italic",
--- 	},
--- })
-
--- Default options
 require('nightfox').setup({
 	options = {
 		-- Compiled file's destination location
@@ -58,7 +10,7 @@ require('nightfox').setup({
 		transparent = true,          -- Disable setting background
 		terminal_colors = true,      -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
 		dim_inactive = true,         -- Non focused panes set to alternative background
-		module_default = true,       -- Default enable value for modules
+		module_default = false,       -- Default enable value for modules
 		colorblind = {
 			enable = false,          -- Enable colorblind support
 			simulate_only = false,   -- Only show simulated colorblind colors and not diff shifted
@@ -109,7 +61,7 @@ require("solarized-osaka").setup({
 		-- Value is any valid attr-list value for `:help nvim_set_hl`
 		comments = { italic = true },
 		keywords = { italic = true },
-		functions = {},
+		functions = { bold = true},
 		variables = {},
 		-- Background styles. Can be "dark", "transparent" or "normal"
 		sidebars = "dark",          -- style for sidebars, see below

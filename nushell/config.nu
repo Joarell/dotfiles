@@ -789,6 +789,7 @@ alias akring = sudo pacman -Sy archlinux-keyring --noconfirm
 alias rr = ranger
 alias zjs = zellij -l strider
 alias zjc = zellij -l compact
+alias weather = zellij plugin -- https://github.com/imsnif/weather-pal/releases/latest/download/weather-pal.wasm
 
 # Paru/Yay stuff
 alias pget = paru -S  

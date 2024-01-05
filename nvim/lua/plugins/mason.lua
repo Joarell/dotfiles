@@ -11,7 +11,7 @@ return {
 			"kabouzeid/nvim-lspinstall",
 			"jay-babu/mason-nvim-dap.nvim",
 			"jay-babu/mason-null-ls.nvim",
-			"simrat39/rust-tools.nvim",
+			-- "simrat39/rust-tools.nvim",
 		},
 		config = function()
 			require("mason-null-ls").setup({})
@@ -22,7 +22,6 @@ return {
 			local mason_lsp = require("mason-lspconfig")
 			local mason = require("mason")
 			local completions = require("cmp")
-			-- local mason_registry = require("mason-registry")
 			local signs = {
 				Error = "",
 				Warn = " ",
@@ -36,9 +35,18 @@ return {
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 			end
 
-			local on_attach = function(client, bufnr)
-				if client.resolved_capabilities.completion then
-					completions.on_attach(client, bufnr)
+			-- local on_attach = function(client, bufnr)
+			-- 	if client.resolved_capabilities.completion then
+			-- 		completions.on_attach(client, bufnr)
+			-- 	end
+			-- end
+			local on_attach = function(_, bufnr)
+				local nmap = function(keys, func, desc)
+					if desc then
+						desc = "LSP: " .. desc
+					end
+
+					vim.keymap.set("n", keys, func, { buffer = bufnr, desck = desc })
 				end
 			end
 
@@ -70,14 +78,22 @@ return {
 					"lua:mason-registry.index",
 					"github:mason-org/mason-registry",
 				},
+				providers = {
+					"mason.providers.registry-api",
+					"mason.providers.client",
+				},
 			})
 
-			lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
-			lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			capabilities.textDocument.completion.completionItem.resolveSupport = "additionalTextEdits"
+			lsp_defaults.capabilities = vim.tbl_deep_extend(
+				"force",
+				lsp_defaults.capabilities,
+				require("cmp_nvim_lsp").default_capabilities(capabilities)
+			)
+			lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- vim.g.rustaceanvim = function()
 			-- 	-- Update this path
@@ -95,59 +111,112 @@ return {
 			-- 		-- The liblldb extension is .so for Linux and .dylib for MacOS
 			-- 		liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
 			-- 	end
-			--
-			-- 	local cfg = require('rustaceanvim.config')
-			-- 	return {
-			-- 		dap = {
-			-- 			adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-			-- 		},
-			-- 	}
-			-- end
 
-			SERVERS = {
-				"astro",
-				"ast_grep",
-				"bashls",
-				"clangd",
-				"cssls",
-				"dockerls",
+			local servers = {
+				astro = {},
+				ast_grep = {},
+				bashls = {},
+				clangd = {},
+				cssls = {},
+				dockerls = {},
 				-- "eslint",
-				"gopls",
-				"gopls",
-				"html",
-				"jsonls",
-				"nginx_language_server",
-				"lua_ls",
-				"pyright",
-				"rust_analyzer",
-				"sqlls",
-				"tsserver",
-				"typos_lsp",
-				"yamlls",
-				"jdtls",
+				gopls = {},
+				html = {
+					filetypes = { 'html', 'twig', 'hbs' }
+				},
+				jsonls = {},
+				nginx_language_server = {},
+				lua_ls = {
+					Lua = {
+						workspace = { checkThirdParty = false },
+						telemetry = { enable = false },
+						hint = { enable = true },
+					},
+				},
+				pyright = {},
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							imports = {
+								granularity = {
+									group = "module",
+								},
+								prefix = "self",
+							},
+							cargo = {
+								allFeatures = true,
+								buildScripts = true,
+							},
+							procMacro = { enable = true },
+							inlayHints = {
+								enable = true
+							}
+						},
+					}
+				},
+				sqlls = {},
+				tsserver = {
+					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+					javascript = {
+						inlayHints = {
+							includeInlayEnumMemberValueHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayVariableTypeHints = true,
+						},
+					},
+					typescript = {
+						inlayHints = {
+							includeInlayEnumMemberValueHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayVariableTypeHints = true,
+						},
+					},
+				},
+				typos_lsp = {},
+				yamlls = {},
+				jdtls = {},
 			}
 
-			for _, lsp in pairs(SERVERS) do
-				lspconfig[lsp].setup({
-					on_atttach = on_attach,
-					capabilities = lsp_defaults.capabilities,
-					-- capabilities = capabilities,
-					single_file_support = true,
-					flags = {
-						debounce_text_changes = 50,
-					},
-				})
-			end
+			-- for _, lsp in pairs(servers) do
+			-- 	lspconfig[lsp].setup({
+			-- 		on_atttach = on_attach,
+			-- 		capabilities = lsp_defaults.capabilities,
+			-- 		-- capabilities = capabilities,
+			-- 		single_file_support = true,
+			-- 		flags = {
+			-- 			debounce_text_changes = 50,
+			-- 		},
+			-- 		hint = { enable = true },
+			-- 	})
+			-- end
 
-			-- require("lspconfig")["rust_analyzer"].setup({
-			-- 	on_atttach = function (client)
-			-- 		require'completion'.on_atttach(client)
+			-- lspconfig.rust_analyzer.setup({
+			-- 	on_attach = function(client)
+			-- 		require("completion").on_attach(client)
 			-- 	end,
 			-- 	capabilities = capabilities,
+			-- 	filetypes = { "rust" },
+			-- 	root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+			-- 	cmd = {
+			-- 		"rustup",
+			-- 		"run",
+			-- 		"stable",
+			-- 		"rust-analyzer",
+			-- 	},
 			-- 	settings = {
 			-- 		["rust-analyzer"] = {
 			-- 			imports = {
-			-- 				granularity = { group = "module" },
+			-- 				granularity = {
+			-- 					group = "module",
+			-- 				},
 			-- 				prefix = "self",
 			-- 			},
 			-- 			cargo = {
@@ -157,94 +226,25 @@ return {
 			-- 				allFeatures = true,
 			-- 			},
 			-- 			procMacro = {
-			-- 				enable = true
+			-- 				enable = true,
 			-- 			},
-			-- 		}
-			-- 	}
-			-- })
-
-			-- mason_lsp.setup({
-			-- 	ensure_installed = SERVERS,
-			-- 	automatic_installation = true,
-			-- 	handlers = {
-			-- 		settings = servers[server_name],
-			-- 		filetypes = (servers[server_name] or {}).filetypes,
-			-- 		function(server_name)
-			-- 			require("lspconfig")[server_name].setup {}
-			-- 		end
-			-- 	}
-			-- })
-
-			-- require'lspconfig'.ngix_language_server.setup{}
-			-- lspconfig["rust_analyzer"].setup({
-			lspconfig.rust_analyzer.setup({
-				on_attach = function(client)
-					require("completion").on_attach(client)
-				end,
-				capabilities = capabilities,
-				filetypes = { "rust" },
-				root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-				cmd = {
-					"rustup", "run", "stable", "rust-analyzer",
-				},
-				settings = {
-					["rust-analyzer"] = {
-						imports = {
-							granularity = {
-								group = "module",
-							},
-							prefix = "self",
-						},
-						cargo = {
-							buildScripts = {
-								enable = true,
-							},
-							allFeatures = true,
-						},
-						procMacro = {
-							enable = true,
-						},
-					},
-					function()
-						local opts = {
-							executor = require("rust-tools.executors").termopen,
-							runnables = {
-								use_telescope = true,
-							},
-							inlay_hints = {
-								auto = true,
-								show_parameter_hints = false,
-								parameter_hints_prefix = "",
-								other_hints_prefix = "",
-							},
-						}
-						require("rust-tools").setup(opts)
-					end,
-				},
-			})
-
-			-- local opts = {
-			-- 	executor = require("rust-tools.executors").termopen,
-			-- 	runnables = {
-			-- 		use_telescope = true,
+			-- 		},
 			-- 	},
-			-- 	inlay_hints = {
-			-- 		auto = true,
-			-- 		show_paramater_hints = false,
-			-- 		parameter_hints_prefix = "",
-			-- 		other_hints_prefix = "",
-			-- 	},
-			-- }
-			-- require("rust-tools").setup(opts)
+			-- })
 
 			mason_lsp.setup({
 				automatic_installation = true,
-				-- ensure_installed = SERVERS,
+				ensure_installed = vim.tbl_keys(servers),
 			})
 
 			mason_lsp.setup_handlers({
 				function(server_name)
-					require("lspconfig")[server_name].setup({})
+					lspconfig[server_name].setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						settings = servers[server_name],
+						filetypes = (servers[server_name] or {}).filetypes,
+					})
 				end,
 			})
 		end,

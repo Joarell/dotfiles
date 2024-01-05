@@ -6,9 +6,12 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
---[[************************************************************************]]--
---[[                             Basic mappings                             ]]--
---[[************************************************************************]]--
+--[[************************************************************************]]
+--
+--[[                             Basic mappings                             ]]
+--
+--[[************************************************************************]]
+--
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "E", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
@@ -37,7 +40,7 @@ keymap("v", "<PageDown>", ":m '>+1<CR>gv-gv", opts)
 keymap("n", "pv", "<C-w>v", opts)
 keymap("n", "ps", "<C-w>s", opts)
 keymap("n", "<Leader>ac", ":lua vim.lsp.buf.code_action()<CR>", opts)
--- keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
 keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
 keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)
 keymap("n", "gs", ":lua vim.lsp.buf.document_symbol()<CR>", opts)
@@ -45,22 +48,34 @@ keymap("n", "gw", ":lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
 keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
-keymap("n", "<A-T>", function ()
-	vim.lsp.inlay_hint(0, nil)
-end, { desc = "Toggle Inlay Hints" }, opts)
 keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
 keymap("n", "cn", ":lua vim.lsp.buf.rename()<CR>", opts)
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
+
 keymap("n", "vu", function()
 	vim.diagnostic.config({ virtual_text = false })
 end, opts)
+
 keymap("n", "vs", function()
 	vim.diagnostic.config({ virtual_text = true })
 end, opts)
 
---[[************************************************************************]]--
---[[                           Luasnip bindings:                            ]]--
---[[************************************************************************]]--
+if vim.lsp.inlay_hint then
+	keymap("n", "<A-T>", function()
+		if vim.lsp.inlay_hint.is_enabled() then
+			vim.lsp.inlay_hint.enable(0, false)
+		else
+			vim.lsp.inlay_hint.enable(0, true)
+		end
+	end, { desc = "Toggle Inlay Hints!" }, opts)
+end
+
+--[[************************************************************************]]
+--
+--[[                           Luasnip bindings:                            ]]
+--
+--[[************************************************************************]]
+--
 keymap({ "i" }, "<C-k>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
@@ -72,9 +87,12 @@ keymap({ "i" }, "<C-j>", function()
 	end
 end, opts)
 
---[[************************************************************************]]--
---[[                            Plugins commands                            ]]--
---[[************************************************************************]]--
+--[[************************************************************************]]
+--
+--[[                            Plugins commands                            ]]
+--
+--[[************************************************************************]]
+--
 keymap("i", "<S-Tab>", "<right>")
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
@@ -97,31 +115,34 @@ keymap({ "n", "v" }, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
 keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
 -- keymap({ "n", "i" }, "<Leader>ac", ':lua require("nvim-comment-frame").add_comment()<CR>', opts)
 keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multiline_comment()<CR>', opts)
-keymap({ "n", "v" }, "cm", ":CBacbox<CR>", opts) -- left alignment adaptable
+keymap({ "n", "v" }, "cm", ":CBacbox<CR>", opts)    -- left alignment adaptable
 keymap({ "n", "v" }, "<A-A>", ":CBlcbox<CR>", opts) -- center alignment
 keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 -- keymap("n", "TL", ":TwilightEnable<CR>", opts)
 -- keymap("n", "TO", ":TwilightDisable<CR>", opts)
-keymap("n", "<Leader>da", ':DiffviewOpen<CR>', opts)
-keymap("n", "<Leader>do", ':DiffviewClose<CR>', opts)
+keymap("n", "<Leader>da", ":DiffviewOpen<CR>", opts)
+keymap("n", "<Leader>do", ":DiffviewClose<CR>", opts)
 keymap("n", "<A-g>", ":VGit project_diff_preview<cr>", opts)
-keymap("n", "<A-D>", ':VGit buffer_diff_preview<CR>', opts)
-keymap("n", "<Leader>n", ':Navbuddy<CR>', opts)
+keymap("n", "<A-D>", ":VGit buffer_diff_preview<CR>", opts)
+keymap("n", "<Leader>n", ":Navbuddy<CR>", opts)
 
 keymap("n", "<Leader>h", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
 keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
 keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
+keymap("n", "<Leader>du", "DBUI<CR>", opts)
 
-keymap("n", "<Leader>du", 'DBUI<CR>', opts)
-
---[[************************************************************************]]--
---[[                             "F" functions:                             ]]--
---[[************************************************************************]]--
+--[[************************************************************************]]
+--
+--[[                             "F" functions:                             ]]
+--
+--[[************************************************************************]]
+--
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
 keymap("n", "<F2>", ":DapTerminate<cr>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
 keymap("n", "<F4>", ":lua require('dap').restart()<CR>", opts)
 -- keymap("n", "<F5>", ":DapContinue<CR> and vim.cmd('1')<CR>", opts)
+keymap("n", "<F5>", ":DBUIToggle<CR>", opts)
 keymap("n", "<F6>", ":lua require('dapui').float_element()<CR>", opts)
 -- keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
 -- keymap("n", "<F8>", ":DapContinue<CR>", opts)
@@ -131,10 +152,20 @@ keymap("n", "<F10>", ":DapStepInto<CR>", opts)
 keymap("n", "<F11>", ":DapContinue<CR>", opts)
 keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 
+--Trouble
+keymap("n", "<Leader>tr", ':lua require("trouble").next({ skip_groups = true, jump = true })<CR>', opts)
+keymap("n", "<Leader>t", "<cmd>TroubleToggle<cr>", opts)
+keymap("n", "<Leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
+keymap("n", "<Leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
+keymap("n", "<Leader>xt", "<cmd>TroubleToggle loclist<cr>", opts)
+keymap("n", "<Leader>gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
 
---[[************************************************************************]]--
---[[                            Folder function:                            ]]--
---[[************************************************************************]]--
+--[[************************************************************************]]
+--
+--[[                            Folder function:                            ]]
+--
+--[[************************************************************************]]
+--
 
 keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"

@@ -43,7 +43,7 @@ return {
 					null.diagnostics.clang_check,
 					-- null.diagnostics.codespell,
 					null.diagnostics.ltrs,
-					null.diagnostics.cpplint,
+					-- null.diagnostics.cpplint,
 					-- null.diagnostics.djlint,
 					----------------------------------------
 					-- null.completion.spell,

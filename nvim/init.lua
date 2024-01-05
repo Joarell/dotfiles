@@ -88,6 +88,7 @@ set.guifont = "CaskaydiaCove NF:h13"
 -- set.guifont = "CaskaydiaCove NF:h9"
 
 vim.wo.colorcolumn = "80"
+vim.g.editorconfig = true
 vim.g.transparecey = 0.8
 vim.g["zoom#statustext"] = "Z"
 vim.g["netrw_keepdir"] = 0
@@ -164,7 +165,7 @@ end
 
 vim.g.neovide_floating_blur_amount_x = 2.0
 vim.g.neovide_floating_blur_amount_y = 2.0
-vim.g.neovide_transparency = 0.95
+vim.g.neovide_transparency = 0.799
 vim.g.neovide_background_color = "#0F1117" .. alpha()
 vim.g.neovide_no_idle = true
 vim.g.neovide_cursor_vfx_mode = "ripple"

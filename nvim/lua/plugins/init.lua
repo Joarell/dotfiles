@@ -15,17 +15,17 @@ return {
 	-- 		vim.g.rustfmt_autosave = 1
 	-- 	end
 	-- },
-	-- {
-	-- 	"mrcjkb/rustaceanvim",
-	-- 	version = '^3',
-	-- 	ft = {'rust'},
-	-- },
+	{
+		"mrcjkb/rustaceanvim",
+		version = '^3',
+		ft = {'rust'},
+	},
 	{
 		"lpturmel/discord.nvim",
-		config = function ()
+		config = function()
 			local discord = require("discord")
 			discord.setup({})
-		end
+		end,
 	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
@@ -36,10 +36,11 @@ return {
 	-- You can specify multiple plugins in a single call
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = function()
-			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-			ts_update()
-		end,
+		-- build = function()
+		-- 	local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+		-- 	ts_update()
+		-- end,
+		build = ":TSUpdate",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-refactor",
@@ -57,13 +58,15 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			opt = true
-		}
+			opt = true,
+		},
 	},
 	{
 		{
 			"sourcegraph/sg.nvim",
-			dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
+			dependencies = {
+				"nvim-lua/plenary.nvim", --[[ "nvim-elescope/telescope.nvim ]]
+			},
 		},
 	},
 	-- { "luukvbaal/statuscol.nvim" },
@@ -75,11 +78,11 @@ return {
 	{
 		"romgrk/barbar.nvim",
 		dependencies = {
-			'lewis6991/gitsigns.nvim',
-			'nvim-tree/nvim-web-devicons',
+			"lewis6991/gitsigns.nvim",
+			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()
-			vim.g.barbar_auto_setup = false;
+			vim.g.barbar_auto_setup = false
 		end,
 		config = function()
 			require("barbar").setup({
@@ -134,9 +137,9 @@ return {
 						[vim.diagnostic.severity.HINT] = { enabled = true, icon = " " },
 					},
 					gitsigns = {
-						added = { enabled = true, icon = '+' },
-						changed = { enabled = true, icon = '~' },
-						deleted = { enabled = true, icon = '-' },
+						added = { enabled = true, icon = "+" },
+						changed = { enabled = true, icon = "~" },
+						deleted = { enabled = true, icon = "-" },
 					},
 					filetype = {
 						-- Sets the icon's highlight group.
@@ -149,7 +152,7 @@ return {
 					-- Configure the icons on the bufferline when modified or pinned.
 					-- Supports all the base icon options.
 					modified = { button = "󰐾 " },
-					preset = 'slanted',
+					preset = "slanted",
 					pinned = { button = "車", filename = true, separator = { right = "" } },
 					-- Configure the icons on the bufferline based on the visibility of a buffer.
 					-- Supports all the base icon options, plus `modified` and `pinned`.
@@ -201,7 +204,7 @@ return {
 				no_name_title = "New Buffer",
 			})
 		end,
-		version = '^1.0.0',
+		version = "^1.0.0",
 	},
 	{
 		"utilyre/barbecue.nvim",
@@ -246,7 +249,7 @@ return {
 		branch = "0.1.x",
 		-- or                            , branch = '0.1.x',
 		dependencies = {
-			"nvim-lua/plenary.nvim"
+			"nvim-lua/plenary.nvim",
 		},
 	},
 	-- { "nvim-telescope/telescope-media-files.nvim" },
@@ -258,12 +261,21 @@ return {
 	{ "nvim-telescope/telescope-dap.nvim" },
 	{ "gbrlsnchs/telescope-lsp-handlers.nvim" },
 	{ "lpoto/telescope-docker.nvim" },
-	{"nvim-telescope/telescope-ui-select.nvim"},
+	{ "nvim-telescope/telescope-ui-select.nvim" },
+	-- {
+	-- 	"jedrzejboczar/possession.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 	},
+	-- 	config = function ()
+	-- 		require('possession').setup({})
+	-- 	end
+	-- },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "lukas-reineke/indent-blankline.nvim",       main = "ibl" },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 	{ "anuvyklack/pretty-fold.nvim" },
 	{ "lukas-reineke/virt-column.nvim" },
 
@@ -318,7 +330,7 @@ return {
 	{
 		"tanvirtin/vgit.nvim",
 		dependencies = {
-			"nvim-lua/plenary.nvim"
+			"nvim-lua/plenary.nvim",
 		},
 	},
 	{ "rhysd/git-messenger.vim" },
@@ -382,7 +394,7 @@ return {
 	-- },
 
 	--  ╭───────────────────────────╮
-	--  │    Pupup frames Packer    │
+	--  │    Popup frames Packer    │
 	--  ╰───────────────────────────╯
 	{
 		"folke/noice.nvim",
