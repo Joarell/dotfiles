@@ -33,13 +33,19 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			{
-				"Smiteshp/nvim-navbuddy",
+				"p00f/clangd_extensions.nvim",
+				-- "Smiteshp/nvim-navbuddy",
 				dependencies = {
+					"smiteshp/nvim-navic",
 					"MunifTanjim/nui.nvim",
 				},
 				opts = { lsp = { auto_attach = true } },
 			},
 		},
+		config = function()
+			require("clangd_extensions.inlay_hints").setup_autocmd()
+			require("clangd_extensions.inlay_hints").set_inlay_hints()
+		end
 	},
 	{
 		"bennypowers/nvim-regexplainer",
@@ -78,22 +84,23 @@ return {
 			local ls = require("luasnip")
 			local dict = require("cmp_dictionary")
 
+			-- dict.setup({
+			-- 	exact = 3,
+			-- 	first_case_insensitive = false,
+			-- 	document = false,
+			-- 	document_command = "wn %s -over",
+			-- 	async = false,
+			-- 	max_items = -1,
+			-- 	capacity = 5,
+			-- 	debug = false,
+			-- })
 			dict.setup({
-				exact = 3,
-				first_case_insensitive = false,
-				document = false,
-				document_command = "wn %s -over",
-				async = false,
-				max_items = -1,
-				capacity = 5,
-				debug = false,
-			})
-			dict.switcher({
-				spelllang = {
-					en = "~/dotfiles/en.dict",
-				},
-				filepath = {
-					["*"] = "~/dotfiles/en.dict",
+				paths = { "/home/jev/dotfiles/en.dict", },
+				exact_length = 2,
+				first_case_insensitive = true,
+				document = {
+					enable = true,
+					command = { "wn", "${label}", "-over" },
 				},
 			})
 
@@ -117,13 +124,13 @@ return {
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "buffer",                 keyword_length = 3,         group_index = 1 },
 					{ name = "luasnip",                keyword_length = 2 },
-					-- { name = "vsnip",                  keyword_length = 2 },
+					{ name = "vsnip",                  keyword_length = 2 },
 					-- { name = "utilsnips",              keyword_length = 2 },
 					{ name = "cmdline",                keyword_length = 3,         group_index = 2 },
 					{ name = "path" },
 					{ name = "emoji",                  option = { insert = false } },
 					{ name = "vim-dadbod-completion" },
-					{ name = "dictionary",             keyword_length = 4 },
+					{ name = "dictionary",             keyword_length = 2 },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -140,8 +147,8 @@ return {
 						menu = {
 							nvim_lsp = "   ",
 							nvim_lsp_signature_help = "  ",
-							-- vsnip = "   ",
-							vim_dadbod = "DATA",
+							vsnip = "   ",
+							DB = "DATA",
 							-- utilsnips = " ",
 							nvim_lua = "   ",
 							luasnip = "   ",
@@ -168,6 +175,7 @@ return {
 					priority_weight = 2,
 					comparator = {
 						cmp.config.compare.recently_used,
+						require("clangd_extensions.cmp_scores"),
 						cmp.config.compare.score,
 						cmp.config.compare.offset,
 						cmp.config.compare.kind,

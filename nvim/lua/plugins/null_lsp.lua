@@ -12,6 +12,7 @@ return {
 			null_ls.setup({
 				sources = {
 					null.formatting.stylua,
+					null.formatting.prettierd,
 					null.formatting.prettier.with({
 						filetypes = {
 							"html",
@@ -43,6 +44,7 @@ return {
 					null.diagnostics.clang_check,
 					-- null.diagnostics.codespell,
 					null.diagnostics.ltrs,
+					null.diagnostics.markdownlint,
 					-- null.diagnostics.cpplint,
 					-- null.diagnostics.djlint,
 					----------------------------------------

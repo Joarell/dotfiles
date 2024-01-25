@@ -6,8 +6,8 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		Discord app monitor                                │
 	--  ╰──────────────────────────────────────────────────────────╯
-	-- { "andweeb/presence.nvim" },
-	-- { "ObserverOfTime/nvimcord" },
+	{ "ThePrimeagen/vim-be-good" },
+	{ "jiriks74/presence.nvim" },
 	-- {
 	-- 	"rust-lang/rust.vim",
 	-- 	ft = "rust",
@@ -18,15 +18,19 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = '^3',
-		ft = {'rust'},
+		ft = { 'rust' },
 	},
-	{
-		"lpturmel/discord.nvim",
-		config = function()
-			local discord = require("discord")
-			discord.setup({})
-		end,
-	},
+	-- {
+	-- 	"lpturmel/discord.nvim",
+	-- 	config = function()
+	-- 		local discord = require("discord")
+	-- 		discord.setup({})
+	-- 	end,
+	-- },
+	-- {
+	-- 	"IogaMaster/neocord", event = "VeryLazy",
+	-- },
+
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		icons                                              │
@@ -61,14 +65,14 @@ return {
 			opt = true,
 		},
 	},
-	{
-		{
-			"sourcegraph/sg.nvim",
-			dependencies = {
-				"nvim-lua/plenary.nvim", --[[ "nvim-elescope/telescope.nvim ]]
-			},
-		},
-	},
+	-- {
+	-- 	{
+	-- 		"sourcegraph/sg.nvim",
+	-- 		dependencies = {
+	-- 			"nvim-lua/plenary.nvim", --[[ "nvim-elescope/telescope.nvim ]]
+	-- 		},
+	-- 	},
+	-- },
 	-- { "luukvbaal/statuscol.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
@@ -275,7 +279,7 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
+	{ "lukas-reineke/indent-blankline.nvim",       main = "ibl" },
 	{ "anuvyklack/pretty-fold.nvim" },
 	{ "lukas-reineke/virt-column.nvim" },
 

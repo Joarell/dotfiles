@@ -2,7 +2,7 @@
 	name = Joarell
 	email = josephjoarell@gmail.com
 [core]
-	editor = lvim
+	editor = nvim
     pager = delta
 [init]
 	defaultBranch = main
@@ -19,6 +19,10 @@
 
 [merge]
     conflictstyle = diff3
+	ff = no
+	commit = no
 
 [diff]
     colorMoved = default
+[color]
+	ui = auto

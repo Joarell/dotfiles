@@ -6,22 +6,23 @@ return {
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
+			"folke/neodev.nvim",
 			"williamboman/nvim-lsp-installer",
 			"williamboman/mason-lspconfig.nvim",
 			"kabouzeid/nvim-lspinstall",
 			"jay-babu/mason-nvim-dap.nvim",
 			"jay-babu/mason-null-ls.nvim",
-			-- "simrat39/rust-tools.nvim",
 		},
 		config = function()
 			require("mason-null-ls").setup({})
-			require("sg").setup({})
+			-- require("sg").setup({})
+			require("neodev").setup({});
 			local dap_install = require("mason-nvim-dap")
 			local lspconfig = require("lspconfig")
 			local lsp_defaults = lspconfig.util.default_config
 			local mason_lsp = require("mason-lspconfig")
 			local mason = require("mason")
-			local completions = require("cmp")
+			-- local mason_registry = require("mason-registry")
 			local signs = {
 				Error = "",
 				Warn = " ",
@@ -35,20 +36,21 @@ return {
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 			end
 
-			-- local on_attach = function(client, bufnr)
-			-- 	if client.resolved_capabilities.completion then
-			-- 		completions.on_attach(client, bufnr)
-			-- 	end
-			-- end
-			local on_attach = function(_, bufnr)
+			local on_attach = function(client, bufnr)
+				-- local navbuddy = require("nvim-navbuddy")
 				local nmap = function(keys, func, desc)
 					if desc then
 						desc = "LSP: " .. desc
 					end
-
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desck = desc })
 				end
+				-- navbuddy.attach(client, bufnr)
 			end
+
+			-- local codelldb = mason_registry.get_package("codelldb")
+			-- local extension_path = codelldb:get_install_path() .. "/extension/"
+			-- local codelldb_path = extension_path .. "adapter/codelldb"
+			-- local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
 
 			dap_install.setup({
 				ensure_installed = {
@@ -95,23 +97,6 @@ return {
 			lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
 			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- vim.g.rustaceanvim = function()
-			-- 	-- Update this path
-			-- 	local codelldb = mason_registry.get_package("codelldb")
-			-- 	local extension_path = codelldb:get_install_path() .. "/extension/"
-			-- 	local codelldb_path = extension_path .. "adapter/codelldb"
-			-- 	local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-			-- 	local this_os = vim.uv.os_uname().sysname;
-			--
-			-- 	-- The path is different on Windows
-			-- 	if this_os:find "Windows" then
-			-- 		codelldb_path = extension_path .. "adapter\\codelldb.exe"
-			-- 		liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
-			-- 	else
-			-- 		-- The liblldb extension is .so for Linux and .dylib for MacOS
-			-- 		liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
-			-- 	end
-
 			local servers = {
 				astro = {},
 				ast_grep = {},
@@ -120,14 +105,31 @@ return {
 				cssls = {},
 				dockerls = {},
 				-- "eslint",
-				gopls = {},
+				gopls = {
+					settings = {
+						gopls = {
+							hints = {
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
+								compositeLiteralTypes = true,
+								constantValues = true,
+								functionTypeParameters = true,
+								parameterNames = true,
+								rangeVariableTypes = true,
+							},
+						},
+					},
+				},
 				html = {
-					filetypes = { 'html', 'twig', 'hbs' }
+					filetypes = { "html", "twig", "hbs" },
 				},
 				jsonls = {},
 				nginx_language_server = {},
 				lua_ls = {
 					Lua = {
+						completion = {
+							callSnippet = "Replace"
+						},
 						workspace = { checkThirdParty = false },
 						telemetry = { enable = false },
 						hint = { enable = true },
@@ -149,10 +151,10 @@ return {
 							},
 							procMacro = { enable = true },
 							inlayHints = {
-								enable = true
-							}
+								enable = true,
+							},
 						},
-					}
+					},
 				},
 				sqlls = {},
 				tsserver = {
@@ -185,52 +187,16 @@ return {
 				jdtls = {},
 			}
 
-			-- for _, lsp in pairs(servers) do
-			-- 	lspconfig[lsp].setup({
-			-- 		on_atttach = on_attach,
-			-- 		capabilities = lsp_defaults.capabilities,
-			-- 		-- capabilities = capabilities,
-			-- 		single_file_support = true,
-			-- 		flags = {
-			-- 			debounce_text_changes = 50,
-			-- 		},
-			-- 		hint = { enable = true },
-			-- 	})
-			-- end
-
-			-- lspconfig.rust_analyzer.setup({
-			-- 	on_attach = function(client)
-			-- 		require("completion").on_attach(client)
-			-- 	end,
-			-- 	capabilities = capabilities,
-			-- 	filetypes = { "rust" },
-			-- 	root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-			-- 	cmd = {
-			-- 		"rustup",
-			-- 		"run",
-			-- 		"stable",
-			-- 		"rust-analyzer",
-			-- 	},
-			-- 	settings = {
-			-- 		["rust-analyzer"] = {
-			-- 			imports = {
-			-- 				granularity = {
-			-- 					group = "module",
-			-- 				},
-			-- 				prefix = "self",
-			-- 			},
-			-- 			cargo = {
-			-- 				buildScripts = {
-			-- 					enable = true,
-			-- 				},
-			-- 				allFeatures = true,
-			-- 			},
-			-- 			procMacro = {
-			-- 				enable = true,
-			-- 			},
-			-- 		},
-			-- 	},
-			-- })
+			require("rust-tools").setup({
+				dap = {
+					adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+				},
+				tools = {
+					inlay_hints = {
+						auto = true,
+					},
+				},
+			})
 
 			mason_lsp.setup({
 				automatic_installation = true,

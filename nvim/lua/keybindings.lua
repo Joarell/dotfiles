@@ -7,11 +7,10 @@ local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
 --[[************************************************************************]]
---
 --[[                             Basic mappings                             ]]
---
 --[[************************************************************************]]
 --
+
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "E", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
@@ -53,11 +52,11 @@ keymap("n", "cn", ":lua vim.lsp.buf.rename()<CR>", opts)
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
 
 keymap("n", "vu", function()
-	vim.diagnostic.config({ virtual_text = false })
+	vim.diagnostic.disable()
 end, opts)
 
 keymap("n", "vs", function()
-	vim.diagnostic.config({ virtual_text = true })
+	vim.diagnostic.enable()
 end, opts)
 
 if vim.lsp.inlay_hint then
@@ -71,9 +70,7 @@ if vim.lsp.inlay_hint then
 end
 
 --[[************************************************************************]]
---
 --[[                           Luasnip bindings:                            ]]
---
 --[[************************************************************************]]
 --
 keymap({ "i" }, "<C-k>", function()
@@ -110,7 +107,6 @@ keymap("n", "<Leader>b", ":ToggleBlameLine<CR>", opts)
 keymap("n", "<C-w>-", ":WindowsMaximizeVertically<CR>", opts)
 keymap("n", "<C-w>|", ":WindowsMaximizeHorizontally<CR>", opts)
 keymap("n", "<Leader>hl", ":TSHighlightCapturesUnderCursor<CR>", opts)
-keymap({ "n", "v" }, "<A-t>", ":Pantran<CR>", opts)
 keymap({ "n", "v" }, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
 keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
 -- keymap({ "n", "i" }, "<Leader>ac", ':lua require("nvim-comment-frame").add_comment()<CR>', opts)
@@ -154,9 +150,10 @@ keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 
 --Trouble
 keymap("n", "<Leader>tr", ':lua require("trouble").next({ skip_groups = true, jump = true })<CR>', opts)
+keymap("n", "<Leader>tb", ':lua require("trouble").previous({ skip_groups = true, jump = true })<CR>', opts)
 keymap("n", "<Leader>t", "<cmd>TroubleToggle<cr>", opts)
 keymap("n", "<Leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
-keymap("n", "<Leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
+keymap("n", "<Leader>td", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
 keymap("n", "<Leader>xt", "<cmd>TroubleToggle loclist<cr>", opts)
 keymap("n", "<Leader>gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
 

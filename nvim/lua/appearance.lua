@@ -2,7 +2,7 @@
 --  │                   Appearance settings                    │
 --  ╰──────────────────────────────────────────────────────────╯
 
-require('nightfox').setup({
+require("nightfox").setup({
 	options = {
 		-- Compiled file's destination location
 		compile_path = vim.fn.stdpath("cache") .. "/nightfox",
@@ -10,7 +10,7 @@ require('nightfox').setup({
 		transparent = true,          -- Disable setting background
 		terminal_colors = true,      -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
 		dim_inactive = true,         -- Non focused panes set to alternative background
-		module_default = false,       -- Default enable value for modules
+		module_default = false,      -- Default enable value for modules
 		colorblind = {
 			enable = false,          -- Enable colorblind support
 			simulate_only = false,   -- Only show simulated colorblind colors and not diff shifted
@@ -38,7 +38,7 @@ require('nightfox').setup({
 			search = true,
 		},
 		modules = { -- List of various plugins and additional options
-			barbar = {}
+			barbar = {},
 			-- ...
 		},
 	},
@@ -46,10 +46,6 @@ require('nightfox').setup({
 	specs = {},
 	groups = {},
 })
-
--- setup must be called before loading
--- vim.cmd("colorscheme nightfox")
-
 
 require("solarized-osaka").setup({
 	-- your configuration comes here
@@ -61,16 +57,16 @@ require("solarized-osaka").setup({
 		-- Value is any valid attr-list value for `:help nvim_set_hl`
 		comments = { italic = true },
 		keywords = { italic = true },
-		functions = { bold = true},
+		functions = { bold = true },
 		variables = {},
 		-- Background styles. Can be "dark", "transparent" or "normal"
-		sidebars = "dark",          -- style for sidebars, see below
-		floats = "dark",            -- style for floating windows
+		sidebars = "dark",         -- style for sidebars, see below
+		floats = "dark",           -- style for floating windows
 	},
-	sidebars = { "qf", "help" },    -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-	day_brightness = 0.3,           -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+	sidebars = { "qf", "help" },   -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+	day_brightness = 0.3,          -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
 	hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-	dim_inactive = false,           -- dims inactive windows
+	dim_inactive = false,          -- dims inactive windows
 	lualine_bold = true,           -- When `true`, section headers in the lualine theme will be bold
 
 	--- You can override specific color groups to use other groups or a hex color
@@ -85,7 +81,8 @@ require("solarized-osaka").setup({
 	on_highlights = function(highlights, colors) end,
 })
 
-vim.cmd("colorscheme solarized-osaka")
+-- vim.cmd("colorscheme solarized-osaka")
+vim.cmd("colorscheme terafox")
 
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Bufferline settings:                   │
@@ -106,8 +103,8 @@ require("bufferline").setup({
 		right_trunc_marker = "",
 		show_close_icon = false,
 		show_tab_indicators = true,
-		separator_style = 'slant',
-		mode = 'tabs',
+		separator_style = "slant",
+		mode = "tabs",
 		color_icons = true,
 	},
 	highlights = {
@@ -154,7 +151,6 @@ require("bufferline").setup({
 	},
 })
 
-
 -- require('shade').setup({
 -- 	overlay_opacity = 40,
 -- 	opacity_step = 0.3,
@@ -190,7 +186,7 @@ local highlight = {
 	"RainbowViolet",
 	"RainbowCyan",
 }
-local hooks = require "ibl.hooks"
+local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
@@ -224,7 +220,6 @@ require("ibl").setup({
 })
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-
 
 --###########################################################################--
 --							Fold settings					 				 --
@@ -316,7 +311,7 @@ require("pretty-fold").setup({
 --[[                   Comment Pretty box design pluggin                    ]]
 --[[                       Find some settings below.                        ]]
 --[[************************************************************************]]
-local status, frame_box = pcall(require, 'comment-box')
+local status, frame_box = pcall(require, "comment-box")
 
 if not status and frame_box then
 	vim.notify(res, vim.log.levels.ERROR)
