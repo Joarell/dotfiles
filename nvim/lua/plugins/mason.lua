@@ -14,9 +14,21 @@ return {
 			"jay-babu/mason-null-ls.nvim",
 		},
 		config = function()
+			require("nvim-lsp-installer").setup({
+				ui = {
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+					check_outdated_packages_on_open = true,
+					border = "rounded",
+				},
+			})
+
 			require("mason-null-ls").setup({})
 			-- require("sg").setup({})
-			require("neodev").setup({});
+			require("neodev").setup({})
 			local dap_install = require("mason-nvim-dap")
 			local lspconfig = require("lspconfig")
 			local lsp_defaults = lspconfig.util.default_config
@@ -105,6 +117,7 @@ return {
 				cssls = {},
 				dockerls = {},
 				-- "eslint",
+				kotlin_language_server = {},
 				gopls = {
 					settings = {
 						gopls = {
@@ -128,7 +141,7 @@ return {
 				lua_ls = {
 					Lua = {
 						completion = {
-							callSnippet = "Replace"
+							callSnippet = "Replace",
 						},
 						workspace = { checkThirdParty = false },
 						telemetry = { enable = false },

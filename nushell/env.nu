@@ -81,6 +81,7 @@ $env.NU_PLUGIN_DIRS = [
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/nvim-discord/target/release/nvim-discord')
+$env.PATH = ($env.PATH | split row (char esep) | append '~/.local/share/rtx/installs/kotlin/1.9.22/kotlinc/bin/kotlin')
 
 neofetch
 source ~/.zoxide.nu

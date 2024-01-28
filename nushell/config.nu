@@ -773,7 +773,8 @@ alias ll = exa -l --color=always --group-directories-first --icons   # long form
 alias la = exa -a --color=always --group-directories-first --icons   # all files and dirs
 alias zj = zellij options --simplified-ui true --pane-frames false
 
-# Pacman for software management
+
+alias lg = lazygit
 alias vide = neovide
 alias v = nvim
 alias lg = lazygit 

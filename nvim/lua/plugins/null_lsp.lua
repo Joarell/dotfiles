@@ -35,6 +35,7 @@ return {
 					null.formatting.djhtml,
 					-- null.formatting.djlint,
 					null.formatting.sqlfmt,
+					null.formatting.ktlint,
 					null.formatting.sql_formatter,
 					null.formatting.clang_format,
 					----------------------------------------
@@ -44,6 +45,7 @@ return {
 					null.diagnostics.clang_check,
 					-- null.diagnostics.codespell,
 					null.diagnostics.ltrs,
+					null.diagnostics.ktlint,
 					null.diagnostics.markdownlint,
 					-- null.diagnostics.cpplint,
 					-- null.diagnostics.djlint,

@@ -119,7 +119,7 @@ return {
 					end,
 				},
 				sources = {
-					{ name = "nvim_lsp",               group_index = 0,            keyword_length = 3 },
+					{ name = "nvim_lsp",               keyword_length = 3,         group_index = 0 },
 					{ name = "nvim_lua",               keyword_length = 3 },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "buffer",                 keyword_length = 3,         group_index = 1 },
@@ -200,7 +200,7 @@ return {
 
 					-- Moving between completion items.
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-l>"] = cmp.mapping(function(fallback)
+					["<C-j>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif ls.expand_or_jumpable() then
@@ -211,7 +211,7 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					["<C-h>"] = cmp.mapping(function(fallback)
+					["<C-k>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
 						elseif ls.jumpable(-1) then
