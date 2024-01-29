@@ -44,7 +44,7 @@ require("nightfox").setup({
 	},
 	palettes = {
 		-- Custom duskfox with black background
-		duskfox = {
+		terafox = {
 			bg1 = "#000000", -- Black background
 			bg0 = "#1d1d2b", -- Alt backgrounds (floats, statusline, ...)
 			bg3 = "#121820", -- 55% darkened from stock
@@ -103,7 +103,7 @@ require("solarized-osaka").setup({
 })
 
 -- vim.cmd("colorscheme solarized-osaka")
-vim.cmd("colorscheme duskfox")
+vim.cmd("colorscheme terafox")
 
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Bufferline settings:                   │

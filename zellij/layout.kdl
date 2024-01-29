@@ -33,9 +33,9 @@ layout {
 			}
 			pane split_direction="horizontal" {
 				pane borderless=true
-				//pane borderless=true name="cava" size=10 {
-				//	command "cava" close_on_exit=true
-				//}
+				pane borderless=true name="cava" size=10 {
+					command "cava" close_on_exit=true
+				}
 			}
 			pane split_direction="horizontal" size=80 {
 				pane borderless=true name="󰌘" {

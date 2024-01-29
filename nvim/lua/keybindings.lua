@@ -72,7 +72,7 @@ end
 --[[************************************************************************]]
 --[[                           Luasnip bindings:                            ]]
 --[[************************************************************************]]
---
+
 keymap({ "i" }, "<C-l>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
@@ -85,11 +85,9 @@ keymap({ "i" }, "<C-h>", function()
 end, opts)
 
 --[[************************************************************************]]
---
 --[[                            Plugins commands                            ]]
---
 --[[************************************************************************]]
---
+
 keymap("i", "<S-Tab>", "<right>")
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
@@ -128,11 +126,9 @@ keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
 keymap("n", "<Leader>du", "DBUI<CR>", opts)
 
 --[[************************************************************************]]
---
 --[[                             "F" functions:                             ]]
---
 --[[************************************************************************]]
---
+
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
 keymap("n", "<F2>", ":DapTerminate<cr>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
@@ -158,11 +154,8 @@ keymap("n", "<Leader>xt", "<cmd>TroubleToggle loclist<cr>", opts)
 keymap("n", "<Leader>gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
 
 --[[************************************************************************]]
---
 --[[                            Folder function:                            ]]
---
 --[[************************************************************************]]
---
 
 keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"
@@ -170,3 +163,28 @@ keymap("n", "<Leader>f", function()
 	vim.opt.foldcolumn = "8"
 	print("This key binding folds all indentation lines to protect your code! Your Welcome!😎")
 end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! 😎" })
+
+-- ╭─────────────────────────────────────────────────────────╮
+-- │                   Neovide clipboard.                    │
+-- ╰─────────────────────────────────────────────────────────╯
+if vim.g.neovide then
+	keymap('v', '<D-c>', '"+y') -- Copy
+	keymap('n', '<D-v>', '"+P') -- Paste normal mode
+	keymap('v', '<D-v>', '"+P') -- Paste visual mode
+	keymap('c', '<D-v>', '<C-R>+') -- Paste command mode
+	keymap('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+end
+keymap('', '<D-v>', '+p<CR>',  opts)
+keymap('!', '<D-v>', '<C-R>+', opts)
+keymap('t', '<D-v>', '<C-R>+', opts)
+keymap('v', '<D-v>', '<C-R>+', opts)
+vim.g.neovide_scale_factor = 1.0
+local change_scale_factor = function(delta)
+	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+end
+keymap("n", "<C-=>", function()
+	change_scale_factor(1.25)
+end)
+keymap("n", "<C-->", function()
+	change_scale_factor(1 / 1.25)
+end)
