@@ -5,6 +5,12 @@ local dapui = require("dapui")
 -- dapui.float_element()
 -- dapui.eval()
 
+-- vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpoint', {text=' ', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointCondition', {text='󱫪 ', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text=' ', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointRejected', {text=' ', texthl='', linehl='', numhl=''})
+
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
 end

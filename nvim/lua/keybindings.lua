@@ -9,7 +9,6 @@ local opts = { silent = true, noremap = true }
 --[[************************************************************************]]
 --[[                             Basic mappings                             ]]
 --[[************************************************************************]]
---
 
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "E", ":q!<CR>", opts)
@@ -123,7 +122,7 @@ keymap("n", "<Leader>n", ":Navbuddy<CR>", opts)
 keymap("n", "<Leader>h", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
 keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
 keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
-keymap("n", "<Leader>du", "DBUI<CR>", opts)
+keymap("n", "<Leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 
 --[[************************************************************************]]
 --[[                             "F" functions:                             ]]
@@ -139,6 +138,7 @@ keymap("n", "<F6>", ":lua require('dapui').float_element()<CR>", opts)
 -- keymap("n", "<F6>", ":!gcc -wall -werror -wextra -g -D buffer_size= <c-r>% -o test <Up>", opts)
 -- keymap("n", "<F8>", ":DapContinue<CR>", opts)
 keymap("n", "<F8>", ":G<CR>", opts)
+keymap("n", "<F7>", ':lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opts)
 keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", opts)
 keymap("n", "<F10>", ":DapStepInto<CR>", opts)
 keymap("n", "<F11>", ":DapContinue<CR>", opts)

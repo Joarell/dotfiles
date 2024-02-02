@@ -74,6 +74,12 @@ return {
 	-- 	},
 	-- },
 	-- { "luukvbaal/statuscol.nvim" },
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function ()
+			require("gitsigns").setup()
+		end
+	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		BufferLine                                         │
@@ -82,7 +88,7 @@ return {
 	{
 		"romgrk/barbar.nvim",
 		dependencies = {
-			-- "lewis6991/gitsigns.nvim",
+			"lewis6991/gitsigns.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()

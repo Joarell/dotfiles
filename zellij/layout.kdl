@@ -5,8 +5,13 @@ layout {
 			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
 				// format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
 				format_left  "  #[fg=#89B4FA,bold] {session}  {tabs} 󰋘   "
-				format_right "{mode} 󰃭 {datetime}󰔟"
+				format_right "{command_git_branch} {mode} 󰃭 {datetime}󰔟"
 				format_space ""
+
+				// border_enabled	"true"
+				// border_char		"-"
+				// border_format	"#[fg=#6C7086]"
+				// border_position	"top"
 
 				mode_locked	"#[bg=#B80056] {name}"
 				mode_normal	"#[bg=#333] {name}"
@@ -19,7 +24,11 @@ layout {
 				datetime_format "%A, %d %b %Y %H:%M"
 				datetime_timezone "America/Sao_Paulo"
 
-				first_start	"true"
+				command_git_branch_command		"git rev-parse --abbrev-ref HEAD"
+				command_git_branch_format		"[fg=cyan] {stdout} "
+				command_git_branch_interval		"10"
+				command_git_branch_rendermode	"static"
+				// first_start	"true"
 			}
 		}
 		pane split_direction="vertical" {

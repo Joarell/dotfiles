@@ -1,7 +1,6 @@
 --###########################################################################--
 --								 LSP settings								 --
 --###########################################################################--
-require("null_ls")
 require("mason-null-ls").setup({
 	automatic_setup = true,
 })
@@ -31,13 +30,9 @@ local signs = {
 }
 
 for type, icon in pairs(signs) do
+	-- local hl = "DiagnosticSign" .. type
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
--- Your custom attach funciont for nvim-lspconfig goes here.
-local custom_nvim_lspconfig_attach = function(client, bufnr)
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
 -- local lsp_def = {
@@ -86,7 +81,6 @@ local servers = {
 	"pyright",
 	"rust_analyzer",
 	"sqlls",
-	"tailwindcss",
 	"tsserver",
 	"yamlls",
 }
