@@ -116,6 +116,7 @@ return {
 				clangd = {},
 				cssls = {},
 				dockerls = {},
+				docker_compose_language_service = {},
 				-- "eslint",
 				kotlin_language_server = {},
 				gopls = {
@@ -148,6 +149,7 @@ return {
 						hint = { enable = true },
 					},
 				},
+				marksman = {},
 				pyright = {},
 				rust_analyzer = {
 					settings = {

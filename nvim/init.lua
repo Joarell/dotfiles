@@ -54,6 +54,7 @@ vim.g.loaded_netrwPlugin = 1
 
 local set = vim.opt
 
+set.cole = 1
 set.spell = true
 set.number = true
 set.relativenumber = true
@@ -79,7 +80,7 @@ set.autowrite = true
 set.swapfile = false
 set.undofile = true
 set.undodir = vim.fn.stdpath("config") .. "/.undo"
-set.termguicolors = true
+set.tgc = true
 set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
@@ -144,7 +145,7 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 
 vim.diagnostic.config({
 	virtual_text = {
-		prefix = ' 󱠇'
+		prefix = " 󱠇",
 	},
 })
 --

@@ -17,8 +17,8 @@ return {
 	-- },
 	{
 		"mrcjkb/rustaceanvim",
-		version = '^3',
-		ft = { 'rust' },
+		version = "^3",
+		ft = { "rust" },
 	},
 	-- {
 	-- 	"lpturmel/discord.nvim",
@@ -30,7 +30,6 @@ return {
 	-- {
 	-- 	"IogaMaster/neocord", event = "VeryLazy",
 	-- },
-
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		icons                                              │
@@ -76,9 +75,9 @@ return {
 	-- { "luukvbaal/statuscol.nvim" },
 	{
 		"lewis6991/gitsigns.nvim",
-		config = function ()
+		config = function()
 			require("gitsigns").setup()
-		end
+		end,
 	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
@@ -285,7 +284,7 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "lukas-reineke/indent-blankline.nvim",       main = "ibl" },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 	{ "anuvyklack/pretty-fold.nvim" },
 	{ "lukas-reineke/virt-column.nvim" },
 

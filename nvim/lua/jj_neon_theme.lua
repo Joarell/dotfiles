@@ -170,7 +170,7 @@ local function change_colors(component, side)
 end
 
 local comp = function()
-	return "  "
+	return "   "
 end
 change_colors(comp, "left")
 

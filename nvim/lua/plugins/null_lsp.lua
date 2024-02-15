@@ -47,6 +47,7 @@ return {
 					null.diagnostics.ltrs,
 					null.diagnostics.ktlint,
 					null.diagnostics.markdownlint,
+					null.diagnostics.write_good,
 					-- null.diagnostics.cpplint,
 					-- null.diagnostics.djlint,
 					----------------------------------------

@@ -37,10 +37,10 @@ require("nightfox").setup({
 			visual = true,
 			search = true,
 		},
-		modules = { -- List of various plugins and additional options
-			barbar = {},
-			-- ...
-		},
+		-- modules = { -- List of various plugins and additional options
+		-- 	barbar = {},
+		-- 	-- ...
+		-- },
 	},
 	-- palettes = {
 	-- 	-- Custom duskfox with black background
@@ -102,7 +102,7 @@ require("solarized-osaka").setup({
 	on_highlights = function(highlights, colors) end,
 })
 
--- vim.cmd("colorscheme solarized-osaka")
+-- vim.cmd("colorscheme solarized-osaka-day")
 vim.cmd("colorscheme nightfox")
 
 --  ╭──────────────────────────────────────────────────────────╮

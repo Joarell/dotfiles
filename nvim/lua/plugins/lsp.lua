@@ -23,7 +23,7 @@ return {
 			-- "dcampos/cmp-snippy",
 			-- "dcampos/nvim-snippy",
 			"rafamadriz/friendly-snippets",
-			-- "SirVer/ultisnips",
+			"SirVer/ultisnips",
 			-- "honza/vim-snippets",
 			"saadparwaiz1/cmp_luasnip",
 			"quangnguyen30192/cmp-nvim-ultisnips",
@@ -95,7 +95,7 @@ return {
 			-- 	debug = false,
 			-- })
 			dict.setup({
-				paths = { "/home/jev/dotfiles/en.dict", },
+				paths = { "/home/jev/dotfiles/en.dict" },
 				exact_length = 2,
 				first_case_insensitive = true,
 				document = {
@@ -114,23 +114,23 @@ return {
 						-- if not ls then
 						-- 	return vim.fn["UtilSnips#Anon"](args.body)
 						-- end
-						-- ls.lsp_expand(args.body)
-						vim.fn["vsnip#anonymous"](args.body)
+						ls.lsp_expand(args.body)
+						-- vim.fn["vsnip#anonymous"](args.body)
 					end,
 				},
 				sources = {
-					{ name = "nvim_lsp",               keyword_length = 3,         group_index = 0 },
+					{ name = "nvim_lsp",               keyword_length = 1 },
 					{ name = "nvim_lua",               keyword_length = 3 },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "buffer",                 keyword_length = 3,         group_index = 1 },
 					{ name = "luasnip",                keyword_length = 2 },
 					{ name = "vsnip",                  keyword_length = 2 },
-					-- { name = "utilsnips",              keyword_length = 2 },
+					-- { name = "utisnips",              keyword_length = 2 },
 					{ name = "cmdline",                keyword_length = 3,         group_index = 2 },
 					{ name = "path" },
 					{ name = "emoji",                  option = { insert = false } },
 					{ name = "vim-dadbod-completion" },
-					{ name = "dictionary",             keyword_length = 2 },
+					{ name = "dictionary",             keyword_length = 3 },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -145,12 +145,12 @@ return {
 						withe_text = true,
 						ellipsis_char = "...",
 						menu = {
-							nvim_lsp = "   ",
+							nvim_lsp = "    ",
 							nvim_lsp_signature_help = "  ",
-							vsnip = "   ",
+							vsnip = "    ",
 							DB = "DATA",
-							-- utilsnips = " ",
-							nvim_lua = "   ",
+							-- utisnips = " ",
+							nvim_lua = "   ",
 							luasnip = "   ",
 							buffer = "   ",
 							path = "󰺽 󰑪  ",

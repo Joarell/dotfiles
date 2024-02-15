@@ -5,7 +5,7 @@ layout {
 			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
 				// format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
 				format_left  "  #[fg=#89B4FA,bold] {session}  {tabs} 󰋘   "
-				format_right "{command_git_branch} {mode} 󰃭 {datetime}󰔟"
+				format_right " {command_git_branch} {mode} #[italic] 󰃭 {datetime}󰔟"
 				format_space ""
 
 				// border_enabled	"true"
@@ -57,7 +57,7 @@ layout {
 			}
 		}
 		floating_panes split_direction="vertical" size=10 {
-			pane cwd="$HOME/web_crater/builder/docker"  name="Docker " {
+			pane cwd="$HOME/Otto/builder/docker"  name="Docker " {
 				command "docker" close_on_exit=true start_suspended=true
 				args "compose" "up" "--build" "--remove-orphans"
 			}
