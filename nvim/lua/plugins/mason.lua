@@ -109,8 +109,40 @@ return {
 			lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
 			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+			local swift_lsp = vim.api.nvim_create_augroup("swift_lsp", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "swift" },
+				callback = function()
+					local root_dir = vim.fs.dirname(vim.fs.find({
+						"Package.swift",
+						".git",
+					}, { upward = true })[1])
+					local client = vim.lsp.start({
+						name = "sourcekit-lsp",
+						cmd = { "sourcekit-lsp" },
+						root_dir = root_dir,
+					})
+					vim.lsp.buf_attach_client(0, client)
+				end,
+				group = swift_lsp,
+			})
+
+			local html_format_tab = vim.api.nvim_create_augroup("Format", {})
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				pattern = "*.html",
+				callback = function()
+					vim.opt.shiftwidth = 2
+					vim.opt.softtabstop = 2
+					vim.opt.tabstop = 2
+					vim.lsp.buf.format({ timeout_ms = 200 })
+				end,
+				group = html_format_tab,
+			})
+
 			local servers = {
 				astro = {},
+				asm_lsp = {},
+				-- asmfmt = {},
 				ast_grep = {},
 				bashls = {},
 				clangd = {},
@@ -137,6 +169,7 @@ return {
 				html = {
 					filetypes = { "html", "twig", "hbs" },
 				},
+				dprint = {},
 				jsonls = {},
 				nginx_language_server = {},
 				lua_ls = {
@@ -150,10 +183,10 @@ return {
 					},
 				},
 				marksman = {},
-				pyright = {},
 				rust_analyzer = {
 					settings = {
 						["rust-analyzer"] = {
+							editorTabSize = 4,
 							imports = {
 								granularity = {
 									group = "module",
@@ -165,12 +198,10 @@ return {
 								buildScripts = true,
 							},
 							procMacro = { enable = true },
-							inlayHints = {
-								enable = true,
-							},
 						},
 					},
 				},
+				swift_mesonls = {},
 				sqlls = {},
 				tsserver = {
 					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
@@ -201,17 +232,6 @@ return {
 				yamlls = {},
 				jdtls = {},
 			}
-
-			require("rust-tools").setup({
-				dap = {
-					adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-				},
-				tools = {
-					inlay_hints = {
-						auto = true,
-					},
-				},
-			})
 
 			mason_lsp.setup({
 				automatic_installation = true,

@@ -60,6 +60,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
+			"nvim-lua/plenary.nvim",
 			"hrsh7th/vim-vsnip",
 			"hrsh7th/vim-vsnip-integ",
 			"hrsh7th/cmp-vsnip",
@@ -84,16 +85,6 @@ return {
 			local ls = require("luasnip")
 			local dict = require("cmp_dictionary")
 
-			-- dict.setup({
-			-- 	exact = 3,
-			-- 	first_case_insensitive = false,
-			-- 	document = false,
-			-- 	document_command = "wn %s -over",
-			-- 	async = false,
-			-- 	max_items = -1,
-			-- 	capacity = 5,
-			-- 	debug = false,
-			-- })
 			dict.setup({
 				paths = { "/home/jev/dotfiles/en.dict" },
 				exact_length = 2,

@@ -102,8 +102,8 @@ require("solarized-osaka").setup({
 	on_highlights = function(highlights, colors) end,
 })
 
--- vim.cmd("colorscheme solarized-osaka-day")
-vim.cmd("colorscheme nightfox")
+-- vim.cmd("colorscheme solarized-osaka")
+vim.cmd("colorscheme retrobox")
 
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Bufferline settings:                   │

@@ -13,7 +13,7 @@ local opts = { silent = true, noremap = true }
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "<Leader>W", ":sav <c-r>% ", opts)
 keymap("n", "E", ":q!<CR>", opts)
-keymap("n", "<Leader>s", ":so<tab>CR>", opts)
+keymap("n", "<Leader>s", ":so%<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
@@ -124,6 +124,7 @@ keymap("n", "<Leader>h", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', o
 keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
 keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
 keymap("n", "<Leader>gp", ":Gitsigns preview_hunk<CR>", opts)
+keymap("n", "<A-O>", ":ObsidianNew<CR>", opts)
 
 --[[************************************************************************]]
 --[[                             "F" functions:                             ]]

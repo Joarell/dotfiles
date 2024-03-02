@@ -48,7 +48,7 @@ return {
 			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"HipHish/nvim-ts-rainbow2",
+			"HiPhish/rainbow-delimiters.nvim",
 			"windwp/nvim-ts-autotag",
 		},
 	},
