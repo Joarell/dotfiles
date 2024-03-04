@@ -70,36 +70,4 @@ local on_attach = function(client, bufnr)
 	end
 end
 
-local servers = {
-	"bashls",
-	"clangd",
-	"cssls",
-	"dockerls",
-	"html",
-	"jsonls",
-	"lua_ls",
-	"pyright",
-	"rust_analyzer",
-	"sqlls",
-	"tsserver",
-	"yamlls",
-}
-
-
-require("mason-lspconfig").setup({
-	ensure_installed = servers,
-	automatic_installation = true,
-})
-
-for _, lsp in pairs(servers) do
-	lspconfig[lsp].setup({
-		on_atttach = on_attach,
-		capabilities = lsp_defaults.capabilities,
-		-- capabilities = capabilities,
-		single_file_support = true,
-		flags = {
-			debounce_text_changes = 50,
-		},
-	})
-end
 lspconfig.tailwindcss.setup {}

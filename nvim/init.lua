@@ -87,6 +87,17 @@ set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 set.guifont = "CaskaydiaCove NF:h13"
 
+local html_format_tab = vim.api.nvim_create_augroup("Format", {})
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.html",
+	callback = function()
+		vim.opt.shiftwidth = 2
+		vim.opt.softtabstop = 2
+		vim.opt.tabstop = 2
+	end,
+	group = html_format_tab,
+})
+
 -- vim.api.nvim_set_option("clipboard", "unnamed")
 vim.wo.colorcolumn = "80"
 vim.g.editorconfig = true

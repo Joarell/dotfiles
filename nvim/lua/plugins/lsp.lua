@@ -105,8 +105,8 @@ return {
 						-- if not ls then
 						-- 	return vim.fn["UtilSnips#Anon"](args.body)
 						-- end
-						ls.lsp_expand(args.body)
-						-- vim.fn["vsnip#anonymous"](args.body)
+						-- ls.lsp_expand(args.body)
+						vim.fn["vsnip#anonymous"](args.body)
 					end,
 				},
 				sources = {

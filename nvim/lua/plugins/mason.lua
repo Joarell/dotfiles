@@ -56,6 +56,10 @@ return {
 					end
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desck = desc })
 				end
+
+				if vim.lsp.inlay_hint then
+					vim.lsp.inlay_hint.enable(bufnr, true)
+				end
 				-- navbuddy.attach(client, bufnr)
 			end
 
@@ -127,18 +131,6 @@ return {
 				group = swift_lsp,
 			})
 
-			local html_format_tab = vim.api.nvim_create_augroup("Format", {})
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				pattern = "*.html",
-				callback = function()
-					vim.opt.shiftwidth = 2
-					vim.opt.softtabstop = 2
-					vim.opt.tabstop = 2
-					vim.lsp.buf.format({ timeout_ms = 200 })
-				end,
-				group = html_format_tab,
-			})
-
 			local servers = {
 				astro = {},
 				asm_lsp = {},
@@ -154,6 +146,16 @@ return {
 				gopls = {
 					settings = {
 						gopls = {
+							analyses = {
+								nilness = true,
+								unusedparams = true,
+								unusedwrite = true,
+								useanay = true,
+							},
+							experimentalPostfixCompletion = true,
+							gofumpt = true,
+							staticcheck = true,
+							usePlaceholders = true,
 							hints = {
 								assignVariableTypes = true,
 								compositeLiteralFields = true,
@@ -183,24 +185,6 @@ return {
 					},
 				},
 				marksman = {},
-				rust_analyzer = {
-					settings = {
-						["rust-analyzer"] = {
-							editorTabSize = 4,
-							imports = {
-								granularity = {
-									group = "module",
-								},
-								prefix = "self",
-							},
-							cargo = {
-								allFeatures = true,
-								buildScripts = true,
-							},
-							procMacro = { enable = true },
-						},
-					},
-				},
 				swift_mesonls = {},
 				sqlls = {},
 				tsserver = {
@@ -248,6 +232,70 @@ return {
 					})
 				end,
 			})
+
+			vim.g.rustaceanvim = {
+				tools = {
+					autoSetHints = true,
+					hover_with_actions = true,
+					inlay_hints = {
+						only_current_line = false,
+						show_parameter_hints = true,
+						parameter_hints_prefix = "",
+						other_hints_prefix = "",
+						max_len_align = false,
+						max_len_align_padding = 1,
+						right_align = false,
+						right_align_padding = 7,
+						highlight = "Comment",
+					},
+					runnables = {
+						use_telescope = true,
+					},
+				},
+				server = {
+					on_attach = function (client, bufnr)
+						if vim.lsp.inlay_hint then
+							vim.lsp.inlay_hint.enable(bufnr, true)
+						end
+					end,
+					standalone = true,
+					default_settings = {
+						cmd = {'rusup', 'run', 'nightly', 'rust_analyzer'},
+						["rust-analyzer"] = {
+							assist = {
+								importEnforceGranualrity = true,
+								importPrefix = "crate",
+							},
+							diagnostics = { enable = true },
+							inlayHints = {
+								lifetimeElisionHints = {
+									enable = true,
+									useParameterNames = true,
+								},
+							},
+							imports = {
+								granularity = {
+									group = "module",
+								},
+								prefix = "self",
+							},
+							cargo = {
+								allFeatures = true,
+								buildScripts = true,
+							},
+							standalone = false,
+							procMacro = { enable = true },
+						},
+					}
+				},
+				dap = {
+					adapter = {
+						type = "executable",
+						command = "lldb-vscode",
+						name = "rt_lldb",
+					},
+				}
+			}
 		end,
 
 		require("lspconfig").lua_ls.setup({
