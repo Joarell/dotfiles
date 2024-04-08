@@ -89,6 +89,5 @@ ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -
 ssh-add ~/.ssh/id_jev
 source ~/.oh-my-posh.nu
 
-register ~/.cargo/bin/nu_plugin_highlight
 $env.NU_PLUGIN_HIGHLIGHT_TRUE_COLORS = true
 $env.NU_PLUGIN_HIGHLIGHT_THEME = Coldark-Dark

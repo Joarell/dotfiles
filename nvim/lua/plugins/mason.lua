@@ -115,15 +115,17 @@ return {
 
 			local swift_lsp = vim.api.nvim_create_augroup("swift_lsp", { clear = true })
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "swift" },
+				pattern = { "swift", "objective-c", "objective-cpp" },
 				callback = function()
 					local root_dir = vim.fs.dirname(vim.fs.find({
 						"Package.swift",
 						".git",
 					}, { upward = true })[1])
 					local client = vim.lsp.start({
+						filetypes = { "swift", "objective-c", "objective-cpp" },
+						autostart = true,
 						name = "sourcekit-lsp",
-						cmd = { "sourcekit-lsp" },
+						cmd = { "/usr/bin/sourcekit-lsp" },
 						root_dir = root_dir,
 					})
 					vim.lsp.buf_attach_client(0, client)
@@ -135,7 +137,7 @@ return {
 				astro = {},
 				asm_lsp = {},
 				-- asmfmt = {},
-				ast_grep = {},
+				-- ast_grep = {},
 				bashls = {},
 				clangd = {},
 				cssls = {},
@@ -168,12 +170,12 @@ return {
 						},
 					},
 				},
+				-- ['htmx-lsp'] = {},
 				html = {
 					filetypes = { "html", "twig", "hbs" },
 				},
 				dprint = {},
 				jsonls = {},
-				nginx_language_server = {},
 				lua_ls = {
 					Lua = {
 						completion = {
@@ -185,7 +187,6 @@ return {
 					},
 				},
 				marksman = {},
-				swift_mesonls = {},
 				sqlls = {},
 				tsserver = {
 					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration

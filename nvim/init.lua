@@ -33,7 +33,6 @@ require("appearance")
 require("nvim-ts-autotag").setup()
 require("troublesettings")
 require("neoscroll").setup()
-require("nvim_comment").setup()
 require("vgit_config")
 require("tmux").setup()
 require("dap_config")
@@ -55,6 +54,7 @@ vim.g.loaded_netrwPlugin = 1
 local set = vim.opt
 
 set.cole = 1
+set.encoding = 'utf-8'
 set.spell = true
 set.number = true
 set.relativenumber = true
@@ -86,14 +86,15 @@ set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 set.guifont = "CaskaydiaCove NF:h13"
+set.background = nil
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
 vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*.html",
+	pattern = {"*.html", "*.css" },
 	callback = function()
-		vim.opt.shiftwidth = 2
-		vim.opt.softtabstop = 2
-		vim.opt.tabstop = 2
+		set.shiftwidth = 2
+		set.softtabstop = 2
+		set.tabstop = 2
 	end,
 	group = html_format_tab,
 })
@@ -109,8 +110,8 @@ vim.g["netrw_banner"] = 0
 vim.g["netrw_localcopydircmd"] = "cp -r"
 vim.g["load_netrw"] = 1
 vim.g["load_netrwPlugin"] = 1
-vim.o.fcs = "eob: "
 vim.o.incsearch = false
+vim.o.fcs = "eob: ,foldopen:▾,foldsep:│,foldclose:▸"
 
 --  ╭─────────────────────────────────────────────────────────────────────────╮
 --  │                             Commands setup                              │
@@ -182,7 +183,7 @@ end
 
 -- vim.g.neovide_floating_blur_amount_x = 2.0
 -- vim.g.neovide_floating_blur_amount_y = 2.0
-vim.g.neovide_transparency = 0.799
+vim.g.neovide_transparency = 0.899
 -- vim.g.neovide_background_color = "#0F1117" .. alpha()
 vim.g.neovide_no_idle = true
 vim.g.neovide_cursor_vfx_mode = "ripple"

@@ -6,13 +6,12 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
---[[************************************************************************]]
---[[                             Basic mappings                             ]]
---[[************************************************************************]]
-
+-- ╭─────────────────────────────────────────────────────────╮
+-- │                     Main Bindings.                      │
+-- ╰─────────────────────────────────────────────────────────╯
 keymap("n", "<Leader>w", ":w!<CR>", opts)
 keymap("n", "<Leader>W", ":sav <c-r>% ", opts)
-keymap("n", "E", ":q!<CR>", opts)
+-- keymap("n", "E", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so%<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -45,6 +44,7 @@ keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)
 keymap("n", "gs", ":lua vim.lsp.buf.document_symbol()<CR>", opts)
 keymap("n", "gw", ":lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
+keymap("n", "<Leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
@@ -69,10 +69,10 @@ if vim.lsp.inlay_hint then
 	end, { desc = "Toggle Inlay Hints!" }, opts)
 end
 
---[[************************************************************************]]
---[[                           Luasnip bindings:                            ]]
---[[************************************************************************]]
 
+-- ╭─────────────────────────────────────────────────────────╮
+-- │                        Lua Snips                        │
+-- ╰─────────────────────────────────────────────────────────╯
 keymap({ "i" }, "<C-l>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
@@ -84,15 +84,13 @@ keymap({ "i" }, "<C-h>", function()
 	end
 end, opts)
 
---[[************************************************************************]]
---[[                            Plugins commands                            ]]
---[[************************************************************************]]
-
+-- ╭─────────────────────────────────────────────────────────╮
+-- │                     Plugins Command                     │
+-- ╰─────────────────────────────────────────────────────────╯
 keymap("i", "<S-Tab>", "<right>")
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 keymap("v", "<C-a>a", "<C-a>")
-keymap({ "n", "v" }, "<Leader>/", ":CommentToggle<CR>", opts)
 keymap("v", "<Leader>h", ":<C-H><C-H><C-H><C-H><C-H>HI +<CR>")
 keymap("v", "<Leader>m", ":<C-H><C-H><C-H><C-H><C-H>HSHighlight ")
 keymap("n", "<Leader><right>", ":HI ><CR>", opts)
@@ -118,7 +116,7 @@ keymap("n", "<Leader>da", ":DiffviewOpen<CR>", opts)
 keymap("n", "<Leader>do", ":DiffviewClose<CR>", opts)
 keymap("n", "<A-g>", ":VGit project_diff_preview<cr>", opts)
 keymap("n", "<A-D>", ":VGit buffer_diff_preview<CR>", opts)
-keymap("n", "<Leader>n", ":Navbuddy<CR>", opts)
+-- keymap("n", "<Leader>n", ":Navbuddy<CR>", opts)
 
 keymap("n", "<Leader>h", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
 keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
@@ -126,10 +124,9 @@ keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
 keymap("n", "<Leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap("n", "<A-O>", ":ObsidianNew<CR>", opts)
 
---[[************************************************************************]]
---[[                             "F" functions:                             ]]
---[[************************************************************************]]
-
+-- ╭─────────────────────────────────────────────────────────╮
+-- │                       F function.                       │
+-- ╰─────────────────────────────────────────────────────────╯
 keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
 keymap("n", "<F2>", ":DapTerminate<cr>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
@@ -154,10 +151,9 @@ keymap("n", "<Leader>td", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
 keymap("n", "<Leader>xt", "<cmd>TroubleToggle loclist<cr>", opts)
 keymap("n", "<Leader>gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
 
---[[************************************************************************]]
---[[                            Folder function:                            ]]
---[[************************************************************************]]
-
+-- ╭─────────────────────────────────────────────────────────╮
+-- │                     Folder function                     │
+-- ╰─────────────────────────────────────────────────────────╯
 keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

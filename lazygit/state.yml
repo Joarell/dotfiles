@@ -1,18 +1,20 @@
 lastupdatecheck: 0
 recentrepos:
-- /home/jev/dotfiles
-- /home/jev/OB
-- /home/jev/Otto/builder
-- /home/jev/Otto/main
-- /home/jev/Otto/typescript
-- /home/jev/RUSTLINGS
+    - /home/jev/dotfiles
+    - /home/jev/Otto/builder
+    - /home/jev/OB
+    - /home/jev/rust_test/trait-test
+    - /home/jev/Otto/main
+    - /home/jev/Otto/typescript
+    - /home/jev/RUSTLINGS
 startuppopupversion: 5
+lastversion: pre-0.41.c02408bba
 customcommandshistory:
-- git rebase builder
-- git fetch HEAD
-- git log
-- git merge builder
-- 'git merge '
+    - git rebase builder
+    - git fetch HEAD
+    - git log
+    - git merge builder
+    - 'git merge '
 hidecommandlog: false
 ignorewhitespaceindiffview: false
 diffcontextsize: 3

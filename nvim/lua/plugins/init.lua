@@ -227,6 +227,9 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--ColorScheme                                      │
 	--  ╰──────────────────────────────────────────────────────────╯
+	{"folke/tokyonight.nvim"},
+	{"rebelot/kanagawa.nvim"},
+	{"marko-cerovac/material.nvim"},
 	-- {"tomasiser/vim-code-dark"},
 	-- { "https://github.com/sainnhe/sonokai" },
 	-- { "Mofiqul/vscode.nvim" },
@@ -303,7 +306,6 @@ return {
 	--  │ 		--Comment                                          │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "LudoPinelli/comment-box.nvim" },
-	{ "terrortylor/nvim-comment" },
 	-- Lua
 	{
 		"folke/todo-comments.nvim",

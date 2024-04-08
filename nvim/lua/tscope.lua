@@ -82,9 +82,11 @@ local keymap = vim.keymap.set
 local builtin = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
 
+keymap("n", "QF", builtin.quickfix, opts)
+keymap("n", "FH", builtin.quickfixhistory, opts)
 keymap("n", "ts", builtin.colorscheme, opts)
 keymap("n", "fz", builtin.find_files, opts)
-keymap("n", "fg", builtin.live_grep, opts)
+keymap("n", "lg", builtin.live_grep, opts)
 keymap("n", "fb", builtin.buffers, opts)
 keymap("n", "fh", builtin.help_tags, opts)
 keymap("n", "tt", ":Telescope<CR>", opts)
