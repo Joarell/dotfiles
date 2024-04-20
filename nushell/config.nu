@@ -767,10 +767,10 @@ alias vim = ~/Downloads/nvim-linux64/bin/nvim
 # alias up = source ~/.config/nushell/config.nu
 alias c = clear
 alias val = valgrind -q --leak-check=full --show-leak-kinds=all -s --error-exitcode=1 --track-origins=yes --tool=memcheck --vgdb=yes --vgdb-error=0 ./test
-alias l = exa -lah --color=always --group-directories-first --icons  # tree listing
-alias lt = exa -aT --color=always --group-directories-first --icons  # tree listing
-alias ll = exa -l --color=always --group-directories-first --icons   # long format
-alias la = exa -a --color=always --group-directories-first --icons   # all files and dirs
+alias l = eza -lah --color=always --group-directories-first --icons  # tree listing
+alias lt = eza -aT --color=always --group-directories-first --icons  # tree listing
+alias ll = eza -l --color=always --group-directories-first --icons   # long format
+alias la = eza -a --color=always --group-directories-first --icons   # all files and dirs
 alias zj = zellij options --simplified-ui true --pane-frames false
 
 

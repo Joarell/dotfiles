@@ -4,7 +4,7 @@
 
 return {
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		Discord app monitor                                │
+	--  │ 		Discord app monitor																	 │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "ThePrimeagen/vim-be-good" },
 	{ "jiriks74/presence.nvim" },
@@ -213,7 +213,7 @@ return {
 				no_name_title = "New Buffer",
 			})
 		end,
-		version = "^1.0.0",
+		version = "^1.0.x",
 	},
 	{
 		"utilyre/barbecue.nvim",
@@ -227,9 +227,9 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--ColorScheme                                      │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{"folke/tokyonight.nvim"},
-	{"rebelot/kanagawa.nvim"},
-	{"marko-cerovac/material.nvim"},
+	{ "folke/tokyonight.nvim" },
+	{ "rebelot/kanagawa.nvim" },
+	{ "marko-cerovac/material.nvim" },
 	-- {"tomasiser/vim-code-dark"},
 	-- { "https://github.com/sainnhe/sonokai" },
 	-- { "Mofiqul/vscode.nvim" },
@@ -264,7 +264,7 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 	},
-	-- { "nvim-telescope/telescope-media-files.nvim" },
+	{ "vanya-robertson/telescope-media-files.nvim" },
 	{ "nvim-telescope/telescope-symbols.nvim" },
 	{ "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-lua/popup.nvim" },
@@ -287,14 +287,19 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-	{ "anuvyklack/pretty-fold.nvim" },
+	{ "lukas-reineke/indent-blankline.nvim",       main = "ibl" },
+	{ "bbjornstad/pretty-fold.nvim" },
 	{ "lukas-reineke/virt-column.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--NewScroll                                        │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "karb94/neoscroll.nvim" },
+	{
+		"karb94/neoscroll.nvim",
+		config = function ()
+			require('neoscroll').setup()
+		end
+	},
 	{ "gen740/SmoothCursor.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮

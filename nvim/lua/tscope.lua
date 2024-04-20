@@ -8,6 +8,7 @@ require("telescope").load_extension("file_browser")
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("dap")
 require("telescope").load_extension("docker")
+require("telescope").load_extension("media_files")
 
 local ok = pcall(require, "harppon")
 if ok then
@@ -31,23 +32,34 @@ telescope.setup({
 		file_browser = {
 			theme = "dropdown",
 		},
+		media_files = {
+			filetypes = {
+				"png",
+				"webp",
+				"jpg",
+				"jpeg",
+				"pdf",
+				"epub"
+			},
+			find_cmd = "rg",
+		},
 	},
 	pickers = {
 		find_files = {
 			hidden = true,
 			no_ignore = true,
 			search_dirs = { "." },
-			theme = "dropdown",
+			-- theme = "dropdown",
 		},
 		live_grep = {
-			theme = "dropdown",
+			-- theme = "dropdown",
 		},
 		colorscheme = {
 			enable_preview = true,
 			theme = "dropdown",
 		},
 		oldfiles = {
-			theme = "dropdown",
+			-- theme = "dropdown",
 		},
 	},
 	defaults = {
@@ -91,9 +103,12 @@ keymap("n", "fb", builtin.buffers, opts)
 keymap("n", "fh", builtin.help_tags, opts)
 keymap("n", "tt", ":Telescope<CR>", opts)
 keymap("n", "tk", ":Telescope keymaps<CR>", opts)
--- keymap("n", "tm", ":Telescope media_files<CR>", opts)
+keymap("n", "TM", ":Telescope media_files<CR>", opts)
 keymap("n", "tn", ":Telescope notify<CR>", opts)
 keymap("n", "to", ":Telescope oldfiles<CR>", opts)
 keymap("n", "th", builtin.help_tags, opts)
+keymap("n", "gd", builtin.lsp_definitions, opts)
+keymap("n", "gr", builtin.lsp_references, opts)
+keymap("n", "td", builtin.lsp_type_definitions, opts)
 keymap("n", "tb", ":Telescope file_browser<CR>", opts)
 keymap("n", "tm", ":Telescope harpoon marks<CR>", opts)

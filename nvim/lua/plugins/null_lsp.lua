@@ -37,6 +37,7 @@ return {
 					null.formatting.ktlint,
 					null.formatting.sql_formatter,
 					null.formatting.asmfmt,
+					null.formatting.typstfmt,
 					----------------------------------------
 					-- null.diagnostics.eslint,
 					null.diagnostics.selene,

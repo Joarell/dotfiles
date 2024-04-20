@@ -9,10 +9,11 @@ local opts = { silent = true, noremap = true }
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                     Main Bindings.                      │
 -- ╰─────────────────────────────────────────────────────────╯
+keymap("n", "<Esc>", ":nohlsearch<CR>", opts)
 keymap("n", "<Leader>w", ":w!<CR>", opts)
-keymap("n", "<Leader>W", ":sav <c-r>% ", opts)
+keymap("n", "<Leader>W", ":save <c-r>% ", opts)
 -- keymap("n", "E", ":q!<CR>", opts)
-keymap("n", "<Leader>s", ":so%<CR>", opts)
+keymap("n", "<Leader>s", ":so<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
@@ -39,36 +40,46 @@ keymap("n", "pv", "<C-w>v", opts)
 keymap("n", "ps", "<C-w>s", opts)
 keymap("n", "<Leader>ac", ":lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
-keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
 keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)
 keymap("n", "gs", ":lua vim.lsp.buf.document_symbol()<CR>", opts)
 keymap("n", "gw", ":lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
+keymap("n", "[d", vim.diagnostic.goto_prev, opts)
+keymap("n", "]d", vim.diagnostic.goto_next, opts)
+keymap("n", "gn", ":cnext<CR>", opts)
+keymap("n", "gp", ":cprev<CR>", opts)
+keymap("n", "<leader>e", vim.diagnostic.open_float, opts)
 keymap("n", "<Leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)
-keymap("n", "<Leader>d", ":lua vim.lsp.buf.type_definition()<CR>", opts)
 keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
 keymap("n", "cn", ":lua vim.lsp.buf.rename()<CR>", opts)
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
 
+keymap("n", "BL", function()
+	vim.cmd("set background=light")
+end, opts)
+
+keymap("n", "BD", function()
+	vim.cmd("set background=dark")
+end, opts)
+
 keymap("n", "vu", function()
-	vim.diagnostic.disable()
+	vim.diagnostic.enable(false)
 end, opts)
 
 keymap("n", "vs", function()
-	vim.diagnostic.enable()
+	vim.diagnostic.enable(true)
 end, opts)
 
 if vim.lsp.inlay_hint then
 	keymap("n", "<A-T>", function()
 		if vim.lsp.inlay_hint.is_enabled() then
-			vim.lsp.inlay_hint.enable(0, false)
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 		else
-			vim.lsp.inlay_hint.enable(0, true)
+			vim.lsp.inlay_hint.enable()
 		end
 	end, { desc = "Toggle Inlay Hints!" }, opts)
 end
-
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                        Lua Snips                        │
@@ -87,6 +98,7 @@ end, opts)
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                     Plugins Command                     │
 -- ╰─────────────────────────────────────────────────────────╯
+keymap("n", "<A-M>", ":Mason<CR>", opts)
 keymap("i", "<S-Tab>", "<right>")
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
@@ -107,7 +119,7 @@ keymap({ "n", "v" }, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
 keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
 -- keymap({ "n", "i" }, "<Leader>ac", ':lua require("nvim-comment-frame").add_comment()<CR>', opts)
 keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multiline_comment()<CR>', opts)
-keymap({ "n", "v" }, "cm", ":CBacbox<CR>", opts)    -- left alignment adaptable
+keymap({ "n", "v" }, "cm", ":CBacbox<CR>", opts) -- left alignment adaptable
 keymap({ "n", "v" }, "<A-A>", ":CBlcbox<CR>", opts) -- center alignment
 keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 -- keymap("n", "TL", ":TwilightEnable<CR>", opts)
@@ -118,6 +130,7 @@ keymap("n", "<A-g>", ":VGit project_diff_preview<cr>", opts)
 keymap("n", "<A-D>", ":VGit buffer_diff_preview<CR>", opts)
 -- keymap("n", "<Leader>n", ":Navbuddy<CR>", opts)
 
+keymap("n", "<Leader>P", ":TypstPreviewToggle<CR>", opts)
 keymap("n", "<Leader>h", ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
 keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
 keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
@@ -165,16 +178,16 @@ end, { desc = "This key binding folds all indentation lines to protect your code
 -- │                   Neovide clipboard.                    │
 -- ╰─────────────────────────────────────────────────────────╯
 if vim.g.neovide then
-	keymap('v', '<D-c>', '"+y') -- Copy
-	keymap('n', '<D-v>', '"+P') -- Paste normal mode
-	keymap('v', '<D-v>', '"+P') -- Paste visual mode
-	keymap('c', '<D-v>', '<C-R>+') -- Paste command mode
-	keymap('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+	keymap("v", "<D-c>", '"+y') -- Copy
+	keymap("n", "<D-v>", '"+P') -- Paste normal mode
+	keymap("v", "<D-v>", '"+P') -- Paste visual mode
+	keymap("c", "<D-v>", "<C-R>+") -- Paste command mode
+	keymap("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
-keymap('', '<D-v>', '+p<CR>',  opts)
-keymap('!', '<D-v>', '<C-R>+', opts)
-keymap('t', '<D-v>', '<C-R>+', opts)
-keymap('v', '<D-v>', '<C-R>+', opts)
+keymap("", "<D-v>", "+p<CR>", opts)
+keymap("!", "<D-v>", "<C-R>+", opts)
+keymap("t", "<D-v>", "<C-R>+", opts)
+keymap("v", "<D-v>", "<C-R>+", opts)
 vim.g.neovide_scale_factor = 1.0
 local change_scale_factor = function(delta)
 	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta

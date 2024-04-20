@@ -2,13 +2,13 @@ lastupdatecheck: 0
 recentrepos:
     - /home/jev/dotfiles
     - /home/jev/Otto/builder
+    - /home/jev/RUSTLINGS
     - /home/jev/OB
     - /home/jev/rust_test/trait-test
     - /home/jev/Otto/main
     - /home/jev/Otto/typescript
-    - /home/jev/RUSTLINGS
 startuppopupversion: 5
-lastversion: pre-0.41.c02408bba
+lastversion: pre-0.41.34f8f7293
 customcommandshistory:
     - git rebase builder
     - git fetch HEAD

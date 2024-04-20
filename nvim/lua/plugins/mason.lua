@@ -58,7 +58,7 @@ return {
 				end
 
 				if vim.lsp.inlay_hint then
-					vim.lsp.inlay_hint.enable(bufnr, true)
+					vim.lsp.inlay_hint.enable()
 				end
 				-- navbuddy.attach(client, bufnr)
 			end
@@ -213,6 +213,7 @@ return {
 						},
 					},
 				},
+				typst_lsp = {},
 				typos_lsp = {},
 				yamlls = {},
 				jdtls = {},

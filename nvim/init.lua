@@ -32,7 +32,6 @@ require("keybindings")
 require("appearance")
 require("nvim-ts-autotag").setup()
 require("troublesettings")
-require("neoscroll").setup()
 require("vgit_config")
 require("tmux").setup()
 require("dap_config")
@@ -48,9 +47,8 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 --  ╭────────────────────────────────────────────────────────────────────────╮
---  │                            Format settings-                            │
+--  │                            Format settings                             │
 --  ╰────────────────────────────────────────────────────────────────────────╯
-
 local set = vim.opt
 
 set.cole = 1
@@ -86,9 +84,10 @@ set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 set.guifont = "CaskaydiaCove NF:h13"
-set.background = nil
+set.background = 'dark'
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
+
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = {"*.html", "*.css" },
 	callback = function()

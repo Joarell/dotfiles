@@ -295,7 +295,7 @@ live_config_reload = true
 [bell]
   animation = "linear"
   duration = 300
-  color = "#F21AA5"
+  color = "#333333"
 
   # Keys used for the hint labels.
   #alphabet: "jfkdls;ahgurieowpq"
