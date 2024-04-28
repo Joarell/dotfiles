@@ -4,7 +4,7 @@
 
 return {
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		Discord app monitor																	 │
+	--  │ 		Discord app monitor								   │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "ThePrimeagen/vim-be-good" },
 	{ "jiriks74/presence.nvim" },
@@ -283,11 +283,53 @@ return {
 	-- 		require('possession').setup({})
 	-- 	end
 	-- },
+	{
+		"vhyrro/luarocks.nvim",
+		priority = 1001, -- this plugin needs to run before anything else
+		opts = {
+			rocks = { "magick" },
+		},
+	},
+	-- {
+	-- 	"3rd/image.nvim",
+	-- 	dependencies = { "luarocks.nvim" },
+	-- 	config = function()
+	-- 		-- default config
+	-- 		require("image").setup({
+	-- 			backend = "kitty",
+	-- 			integrations = {
+	-- 				markdown = {
+	-- 					enabled = true,
+	-- 					clear_in_insert_mode = false,
+	-- 					download_remote_images = true,
+	-- 					only_render_image_at_cursor = false,
+	-- 					filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+	-- 				},
+	-- 				neorg = {
+	-- 					enabled = true,
+	-- 					clear_in_insert_mode = false,
+	-- 					download_remote_images = true,
+	-- 					only_render_image_at_cursor = false,
+	-- 					filetypes = { "norg" },
+	-- 				},
+	-- 			},
+	-- 			max_width = nil,
+	-- 			max_height = nil,
+	-- 			max_width_window_percentage = nil,
+	-- 			max_height_window_percentage = 50,
+	-- 			window_overlap_clear_enabled = false,                         -- toggles images when windows are overlapped
+	-- 			window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+	-- 			editor_only_render_when_focused = false,                      -- auto show/hide images when the editor gains/looses focus
+	-- 			tmux_show_only_in_active_window = false,                      -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+	-- 			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
+	-- 		})
+	-- 	end,
+	-- },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "lukas-reineke/indent-blankline.nvim",       main = "ibl" },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 	{ "bbjornstad/pretty-fold.nvim" },
 	{ "lukas-reineke/virt-column.nvim" },
 
@@ -296,19 +338,19 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
 		"karb94/neoscroll.nvim",
-		config = function ()
-			require('neoscroll').setup()
-		end
+		config = function()
+			require("neoscroll").setup()
+		end,
 	},
 	{ "gen740/SmoothCursor.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--Debugger                                         │
+	--  │ 		--Debugger                                           │
 	--  ╰──────────────────────────────────────────────────────────╯
 	-- {"puremourning/vimspector"},
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--Comment                                          │
+	--  │ 		--Comment                                            │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "LudoPinelli/comment-box.nvim" },
 	-- Lua
@@ -334,12 +376,19 @@ return {
 	-- },
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--Neovim Ranger                                    │
+	--  │ 		--Neovim Ranger                                      │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "kevinhwang91/rnvimr" },
+	-- { "kevinhwang91/rnvimr" },
+	{
+		"DreamMaoMao/yazi.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+		},
+	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--Git Fungitive                                    │
+	--  │ 		--Git Fungitive                                      │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "tpope/vim-fugitive" },
 	{ "tveskag/nvim-blame-line" },
@@ -351,7 +400,29 @@ return {
 	},
 	{ "rhysd/git-messenger.vim" },
 	-- { "rbong/vim-flog" },
-
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		config = function()
+			require("lazy").setup({
+				-- optional for floating window border decoration
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
+				-- setting the keybinding for LazyGit with 'keys' is recommended in
+				-- order to load the plugin when the command is run for the first time
+				keys = {
+					{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+				},
+			})
+		end,
+	},
 	--  ╭───────────╮
 	--  │ --Trouble │
 	--  │    Lua    │
@@ -367,7 +438,7 @@ return {
 	{ "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--Window animations                                │
+	--  │ 		--Window animations                                  │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
 		"anuvyklack/windows.nvim",
@@ -425,7 +496,19 @@ return {
 	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		Translation                                        │
+	--  │ 		Translation                                          │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "aserowy/tmux.nvim" },
+	-- {
+	-- 	"https://git.sr.ht/~swaits/zellij-nav.nvim",
+	-- 	lazy = true,
+	-- 	event = "VeryLazy",
+	-- 	keys = {
+	-- 		{ "<c-h>", "<cmd>ZellijNavigateLeft<cr>",  { silent = true, desc = "navigate left" } },
+	-- 		{ "<c-j>", "<cmd>ZellijNavigateDown<cr>",  { silent = true, desc = "navigate down" } },
+	-- 		{ "<c-k>", "<cmd>ZellijNavigateUp<cr>",    { silent = true, desc = "navigate up" } },
+	-- 		{ "<c-l>", "<cmd>ZellijNavigateRight<cr>", { silent = true, desc = "navigate right" } },
+	-- 	},
+	-- 	opts = {},
+	-- },
 }

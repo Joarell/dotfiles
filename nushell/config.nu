@@ -775,6 +775,7 @@ alias zj = zellij options --simplified-ui true --pane-frames false
 
 
 alias lg = lazygit
+alias yz = yazi
 alias vide = neovide
 alias v = nvim
 alias lg = lazygit 

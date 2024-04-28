@@ -27,7 +27,6 @@ keymap("n", "<A-P>", ":G push origin HEAD<cr>", opts)
 keymap("n", "<A-C>", ":G commit<cr>", opts)
 keymap("n", "<Leader>gs", ":Gvdiffsplit HEAD~1<cr>", opts)
 keymap("n", "<Leader>gsp", ":Gsplit HEAD~1<cr>", opts)
-keymap("n", "<Leader>r", ":call vimspector#Restart()<cr>", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -72,7 +71,8 @@ keymap("n", "vs", function()
 end, opts)
 
 if vim.lsp.inlay_hint then
-	keymap("n", "<A-T>", function()
+	--- @return boolean inlay hints ON or OFF.
+	keymap("n", "<A-T>",function()
 		if vim.lsp.inlay_hint.is_enabled() then
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 		else
@@ -98,6 +98,7 @@ end, opts)
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                     Plugins Command                     │
 -- ╰─────────────────────────────────────────────────────────╯
+keymap("n", "lz", ":LazyGit<CR>", opts)
 keymap("n", "<A-M>", ":Mason<CR>", opts)
 keymap("i", "<S-Tab>", "<right>")
 keymap("v", "<", "<gv")
@@ -140,7 +141,7 @@ keymap("n", "<A-O>", ":ObsidianNew<CR>", opts)
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                       F function.                       │
 -- ╰─────────────────────────────────────────────────────────╯
-keymap("n", "<F1>", ":RnvimrToggle<CR>", opts)
+keymap("n", "<F1>", ":Yazi<CR>", opts)
 keymap("n", "<F2>", ":DapTerminate<cr>", opts)
 keymap("n", "<F3>", ":WindowsMaximize<CR>", opts)
 keymap("n", "<F4>", ":DBUIToggle<CR>", opts)
