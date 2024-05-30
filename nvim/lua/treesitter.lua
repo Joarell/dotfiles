@@ -64,7 +64,22 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 		enable_rename = true,
 		enable_close = true,
 		enable_close_on_slash = true,
-		filetypes = { "html", "css", "xml" },
+		filetypes = {
+			"html",
+			"css",
+			"xml",
+			"javascript",
+			"rust",
+			"cpp",
+			"c",
+			"kotlin",
+			"java",
+			"bash",
+			"lua",
+			"yaml",
+			"python",
+			"json"
+		},
 	},
 	refactor = {
 		highlight_definitions = {

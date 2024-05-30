@@ -88,6 +88,7 @@ source ~/.zoxide.nu
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
 ssh-add ~/.ssh/id_jev
 source ~/.oh-my-posh.nu
+source ~/.local/share/atuin/init.nu
 
 $env.NU_PLUGIN_HIGHLIGHT_TRUE_COLORS = true
 $env.NU_PLUGIN_HIGHLIGHT_THEME = Coldark-Dark

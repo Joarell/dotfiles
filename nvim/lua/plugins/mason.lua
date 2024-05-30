@@ -176,6 +176,7 @@ return {
 				},
 				dprint = {},
 				jsonls = {},
+				luau_lsp = {},
 				lua_ls = {
 					Lua = {
 						completion = {
@@ -284,6 +285,9 @@ return {
 							cargo = {
 								allFeatures = true,
 								buildScripts = true,
+							},
+							check = {
+								command = "clippy",
 							},
 							standalone = false,
 							procMacro = { enable = true },

@@ -159,7 +159,7 @@ keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 --Trouble
 keymap("n", "<Leader>tr", ':lua require("trouble").next({ skip_groups = true, jump = true })<CR>', opts)
 keymap("n", "<Leader>tb", ':lua require("trouble").previous({ skip_groups = true, jump = true })<CR>', opts)
-keymap("n", "<Leader>t", "<cmd>TroubleToggle<cr>", opts)
+keymap("n", "<Leader>t", "<cmd>Trouble<cr>", opts)
 keymap("n", "<Leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
 keymap("n", "<Leader>td", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
 keymap("n", "<Leader>xt", "<cmd>TroubleToggle loclist<cr>", opts)
@@ -180,8 +180,7 @@ end, { desc = "This key binding folds all indentation lines to protect your code
 -- ╰─────────────────────────────────────────────────────────╯
 if vim.g.neovide then
 	keymap("v", "<D-c>", '"+y') -- Copy
-	keymap("n", "<D-v>", '"+P') -- Paste normal mode
-	keymap("v", "<D-v>", '"+P') -- Paste visual mode
+	keymap({ "n", "v" }, "<D-v>", '"+P') -- Paste normal mode
 	keymap("c", "<D-v>", "<C-R>+") -- Paste command mode
 	keymap("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end

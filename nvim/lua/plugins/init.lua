@@ -47,7 +47,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-refactor",
-			"nvim-treesitter/nvim-treesitter-textobjects",
+			-- "nvim-treesitter/nvim-treesitter-textobjects",
 			"HiPhish/rainbow-delimiters.nvim",
 			"windwp/nvim-ts-autotag",
 		},
@@ -330,7 +330,7 @@ return {
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-	{ "bbjornstad/pretty-fold.nvim" },
+	{ "e-roux/pretty-fold.nvim" },
 	{ "lukas-reineke/virt-column.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
@@ -438,7 +438,7 @@ return {
 	{ "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
-	--  │ 		--Window animations                                  │
+	--  │ 		--Window animations                                │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
 		"anuvyklack/windows.nvim",
@@ -499,16 +499,16 @@ return {
 	--  │ 		Translation                                          │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "aserowy/tmux.nvim" },
-	-- {
-	-- 	"https://git.sr.ht/~swaits/zellij-nav.nvim",
-	-- 	lazy = true,
-	-- 	event = "VeryLazy",
-	-- 	keys = {
-	-- 		{ "<c-h>", "<cmd>ZellijNavigateLeft<cr>",  { silent = true, desc = "navigate left" } },
-	-- 		{ "<c-j>", "<cmd>ZellijNavigateDown<cr>",  { silent = true, desc = "navigate down" } },
-	-- 		{ "<c-k>", "<cmd>ZellijNavigateUp<cr>",    { silent = true, desc = "navigate up" } },
-	-- 		{ "<c-l>", "<cmd>ZellijNavigateRight<cr>", { silent = true, desc = "navigate right" } },
-	-- 	},
-	-- 	opts = {},
-	-- },
+	{
+		"https://git.sr.ht/~swaits/zellij-nav.nvim",
+		lazy = true,
+		event = "VeryLazy",
+		keys = {
+			{ "<c-h>", "<cmd>ZellijNavigateLeft<cr>",  { silent = true, desc = "navigate left" } },
+			{ "<c-j>", "<cmd>ZellijNavigateDown<cr>",  { silent = true, desc = "navigate down" } },
+			{ "<c-k>", "<cmd>ZellijNavigateUp<cr>",    { silent = true, desc = "navigate up" } },
+			{ "<c-l>", "<cmd>ZellijNavigateRight<cr>", { silent = true, desc = "navigate right" } },
+		},
+		opts = {},
+	},
 }

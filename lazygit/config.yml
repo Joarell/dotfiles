@@ -58,7 +58,8 @@ git:
   paging:
     colorArg: always
     useConfig: false
-    pager: delta --dark --paging=never
+    externalDiffCommand: difft --color=always
+    # pager: delta --dark --paging=never
   commit:
     signOff: false
   merging:

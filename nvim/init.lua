@@ -83,10 +83,22 @@ set.winblend = 30
 set.clipboard = ""
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "CaskaydiaCove NF:h13"
+-- set.guifont = "CaskaydiaCove NF:h13"
 set.background = 'dark'
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
+local rust_theme = vim.api.nvim_create_augroup("RustTheme", {})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.rs", "*.cpp", "*.c" },
+	callback = function()
+		vim.cmd("colorscheme terafox")
+		require("lualine").setup()
+		require("bufferline").setup()
+	end,
+	group = rust_theme,
+})
+
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = {"*.html", "*.css" },
@@ -94,6 +106,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		set.shiftwidth = 2
 		set.softtabstop = 2
 		set.tabstop = 2
+		vim.cmd("colorscheme nightfox")
+		require("lualine").setup()
+		require("bufferline").setup()
 	end,
 	group = html_format_tab,
 })

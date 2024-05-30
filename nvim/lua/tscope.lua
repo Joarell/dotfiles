@@ -17,7 +17,7 @@ end
 
 local telescope = require("telescope")
 local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
+local trouble = require("trouble.sources.telescope")
 
 telescope.setup({
 	extensions = {
@@ -68,8 +68,8 @@ telescope.setup({
 		prompt_prefix = "  ",
 		initial_mode = "normal",
 		mappings = {
-			i = { ["<C-t>"] = trouble.open_with_trouble },
-			n = { ["<C-t>"] = trouble.open_with_trouble },
+			i = { ["<C-t>"] = trouble.open },
+			n = { ["<C-t>"] = trouble.open },
 		},
 		-- layout_config = {
 		-- 	width = function (_, cols, _)
