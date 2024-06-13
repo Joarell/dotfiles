@@ -79,6 +79,12 @@ return {
 			require("gitsigns").setup()
 		end,
 	},
+	{
+		"altermo/ultimate-autopair.nvim",
+		event = {'InsertEnter', 'CmdlineEnter'},
+		branch = 'v0.6',
+		opts = {},
+	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		BufferLine                                         │
@@ -227,6 +233,7 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--ColorScheme                                      │
 	--  ╰──────────────────────────────────────────────────────────╯
+	-- { "rose-pine/neovim", name = "rose-pine" },
 	{ "folke/tokyonight.nvim" },
 	{ "rebelot/kanagawa.nvim" },
 	{ "marko-cerovac/material.nvim" },

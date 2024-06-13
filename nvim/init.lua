@@ -87,31 +87,21 @@ set.inccommand = split --Shows replacements in a split screen, before applying t
 set.background = 'dark'
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
-local rust_theme = vim.api.nvim_create_augroup("RustTheme", {})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.rs", "*.cpp", "*.c" },
-	callback = function()
-		vim.cmd("colorscheme terafox")
-		require("lualine").setup()
-		require("bufferline").setup()
-	end,
-	group = rust_theme,
-})
 
 
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("BufRead", {
 	pattern = {"*.html", "*.css" },
 	callback = function()
+		vim.cmd("colorscheme solarized-osaka")
+		require("lualine").setup()
+		require("bufferline").setup()
 		set.shiftwidth = 2
 		set.softtabstop = 2
 		set.tabstop = 2
-		vim.cmd("colorscheme nightfox")
-		require("lualine").setup()
-		require("bufferline").setup()
 	end,
 	group = html_format_tab,
 })
+
 
 -- vim.api.nvim_set_option("clipboard", "unnamed")
 vim.wo.colorcolumn = "80"

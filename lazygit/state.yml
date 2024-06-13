@@ -1,11 +1,11 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/jev/dotfiles
-    - /home/jev/Otto/Rust
-    - /home/jev/Otto/vite
-    - /home/jev/zed
     - /home/jev/Otto/main
+    - /home/jev/Otto/vite
+    - /home/jev/Otto/Rust
     - /home/jev/Otto/builder
+    - /home/jev/zed
     - /home/jev/Otto/typescript
     - /home/jev/RUSTLINGS
     - /home/jev/OB
@@ -13,9 +13,9 @@ recentrepos:
 startuppopupversion: 5
 lastversion: v0.42.0.ef1daf314
 customcommandshistory:
-    - git merge builder
     - git push --force
     - git rebase builder
+    - git merge builder
     - git fetch HEAD
     - git log
     - 'git merge '

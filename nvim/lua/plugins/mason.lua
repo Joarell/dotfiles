@@ -6,7 +6,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
-			"folke/neodev.nvim",
+			"folke/lazydev.nvim",
 			"williamboman/nvim-lsp-installer",
 			"williamboman/mason-lspconfig.nvim",
 			"kabouzeid/nvim-lspinstall",
@@ -28,7 +28,7 @@ return {
 
 			require("mason-null-ls").setup({})
 			-- require("sg").setup({})
-			require("neodev").setup({})
+			require("lazydev").setup({})
 			local dap_install = require("mason-nvim-dap")
 			local lspconfig = require("lspconfig")
 			local lsp_defaults = lspconfig.util.default_config
@@ -56,11 +56,11 @@ return {
 					end
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desck = desc })
 				end
+				-- vim.lsp.completion.enable(true, client, 0, { autotrigger = true })
 
 				if vim.lsp.inlay_hint then
 					vim.lsp.inlay_hint.enable()
 				end
-				-- navbuddy.attach(client, bufnr)
 			end
 
 			-- local codelldb = mason_registry.get_package("codelldb")
@@ -68,16 +68,16 @@ return {
 			-- local codelldb_path = extension_path .. "adapter/codelldb"
 			-- local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
 
-			dap_install.setup({
-				ensure_installed = {
-					"stylua",
-					"jq",
-					"node-debug2-adapter",
-					"codelldb",
-					"bash-debug-adapter",
-				},
-				handlers = {},
-			})
+			-- dap_install.setup({
+			-- 	ensure_installed = {
+			-- 		"stylua",
+			-- 		"jq",
+			-- 		"node-debug2-adapter",
+			-- 		"codelldb",
+			-- 		"bash-debug-adapter",
+			-- 	},
+			-- 	handlers = {},
+			-- })
 
 			mason.setup({
 				github = {
@@ -188,6 +188,7 @@ return {
 					},
 				},
 				marksman = {},
+				nginx_language_server = {},
 				sqlls = {},
 				tsserver = {
 					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration

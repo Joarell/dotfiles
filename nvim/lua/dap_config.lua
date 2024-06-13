@@ -5,11 +5,15 @@ local dapui = require("dapui")
 -- dapui.float_element()
 -- dapui.eval()
 
--- vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "󱫪 ", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define("DapStopped", { text = " ", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "", linehl = "", numhl = "" })
+vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = "#FC007A" })
+vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = "#00FF00" })
+vim.api.nvim_set_hl(0, 'DapBreakpointCondition', { ctermbg = 0, fg = "#00CADD" })
+
+-- vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='DapBreakpoint', linehl='', numhl=''})
+vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "󱫪 ", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "yellow", linehl = "", numhl = "" })
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
@@ -108,78 +112,33 @@ end
 -- 	args = { "-i", "dap" },
 -- }
 
--- dap.configurations.rust = {
--- 	{
--- 		name = "Launch",
--- 		type = "gdb",
--- 		request = "launch",
--- 		program = function()
--- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
--- 		end,
--- 		cwd = "${workspaceFolder}",
--- 	},
--- }
 
--- dap.configurations.cpp = {
--- 	{
--- 		name = "Launch",
--- 		type = "gdb",
--- 		request = "launch",
--- 		program = function()
--- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
--- 		end,
--- 		cwd = "${workspaceFolder}",
--- 	},
--- }
+local mason_registry = require("mason-registry")
+local codelldb = mason_registry.get_package("codelldb")
+local extension_path = codelldb:get_install_path() .. "/extension/"
+local codelldb_path = extension_path .. "adapter/codelldb"
 
--- dap.configurations.c = {
--- 	{
--- 		name = "Launch",
--- 		type = "gdb",
--- 		request = "launch",
--- 		program = function()
--- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
--- 		end,
--- 		cwd = "${workspaceFolder}",
--- 	},
--- }
+dap.adapters.codelldb = {
+	type = 'server',
+	port = "${port}",
+	executable = {
+		command = codelldb_path,
+		args = { "--port", "${port}" }
+	}
+}
 
--- dapui.setup({
--- 	layouts = {
--- 		{
--- 			elements = {
--- 				{
--- 					id = "scopes",
--- 					size = 0.25,
--- 				},
--- 				{
--- 					id = "breakpoints",
--- 					size = 0.25,
--- 				},
--- 				{
--- 					id = "stacks",
--- 					size = 0.25,
--- 				},
--- 				{
--- 					id = "watches",
--- 					size = 0.25,
--- 				},
--- 			},
--- 			position = "left",
--- 			size = 80,
--- 		},
--- 		{
--- 			elements = { {
--- 				id = "repl",
--- 				size = 0.2,
--- 				enabled = false,
--- 			}, {
--- 				id = "console",
--- 				size = 0.5,
--- 				enabled = false,
--- 			} },
--- 			position = "bottom",
--- 			size = 5,
--- 		},
--- 	},
--- })
+dap.configurations.cpp = {
+	{
+		name = "Launch file",
+		type = "codelldb",
+		request = "launch",
+		program = function()
+			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+		end,
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+	},
+}
+
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp

@@ -45,7 +45,7 @@ return {
 		config = function()
 			require("clangd_extensions.inlay_hints").setup_autocmd()
 			require("clangd_extensions.inlay_hints").set_inlay_hints()
-		end
+		end,
 	},
 	{
 		"bennypowers/nvim-regexplainer",
@@ -118,7 +118,7 @@ return {
 					{ name = "vsnip",                  keyword_length = 2 },
 					-- { name = "utisnips",              keyword_length = 2 },
 					{ name = "cmdline",                keyword_length = 3,         group_index = 2 },
-					{ name = "path" },
+					{ name = "path",                   keyword_length = 3 },
 					{ name = "emoji",                  option = { insert = false } },
 					{ name = "vim-dadbod-completion" },
 					{ name = "dictionary",             keyword_length = 3 },
