@@ -270,7 +270,9 @@ change_colors(comp, "right")
 
 ins_right({
 	"diagnostics",
-	sources = { "nvim_diagnostic" },
+	sources = { 
+		"nvim_diagnostic",
+	},
 	symbols = { error = " ", warn = " ", info = " " },
 	diagnostics_color = {
 		color_error = { fg = colors.red },

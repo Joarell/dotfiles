@@ -7,7 +7,6 @@ return {
 	--  │ 		Discord app monitor								   │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "ThePrimeagen/vim-be-good" },
-	{ "jiriks74/presence.nvim" },
 	-- {
 	-- 	"rust-lang/rust.vim",
 	-- 	ft = "rust",
@@ -60,9 +59,25 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
+			"folke/trouble.nvim",
 			"nvim-tree/nvim-web-devicons",
 			opt = true,
 		},
+		-- opts = function (_, opts)
+		-- 	local trouble = require("trouble")
+		-- 	local symbols = trouble.statusline({
+		-- 		mode = "lsp_document_symbols",
+		-- 		groups = {},
+		-- 		title = false,
+		-- 		filter = { ranger = true },
+		-- 		format = "{kind_icon}{symbol.name:Normal}",
+		-- 		hl_group = "lualine_c_normal",
+		-- 	})
+		-- 	table.insert(opts.sections.lualine_c, {
+		-- 		symbols.get,
+		-- 		cond = symbols.has,
+		-- 	})
+		-- end,
 	},
 	-- {
 	-- 	{
@@ -265,7 +280,7 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
 		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
+		branch = '0.1.x',
 		-- or                            , branch = '0.1.x',
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -296,6 +311,16 @@ return {
 		opts = {
 			rocks = { "magick" },
 		},
+	},
+	{
+		'MeanderingProgrammer/markdown.nvim',
+		name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+		config = function()
+			require('render-markdown').setup({})
+		end,
 	},
 	-- {
 	-- 	"3rd/image.nvim",
@@ -399,12 +424,12 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "tpope/vim-fugitive" },
 	{ "tveskag/nvim-blame-line" },
-	{
-		"tanvirtin/vgit.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-	},
+	-- {
+	-- 	"tanvirtin/vgit.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 	},
+	-- },
 	{ "rhysd/git-messenger.vim" },
 	-- { "rbong/vim-flog" },
 	{
@@ -505,7 +530,7 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		Translation                                          │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "aserowy/tmux.nvim" },
+	-- { "aserowy/tmux.nvim" },
 	{
 		"https://git.sr.ht/~swaits/zellij-nav.nvim",
 		lazy = true,

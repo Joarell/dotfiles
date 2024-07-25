@@ -1,6 +1,6 @@
 local session = 0
 
--- Incomplete commands at the moment. It's intent to virtualize tests status.
+--- Incomplete commands at the moment. It's intent to virtualize tests status.
 vim.api.nvim_create_autocmd("BufWritePost", {
 	group = vim.api.nvim_create_augroup("TestRunner", { clear = true }),
 	pattern = { "*.test.js", "*.test.mjs" },
@@ -30,5 +30,16 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 				end
 			end
 		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	group = vim.api.nvim_create_augroup("Transpiler", { clear = true }),
+	pattern = { "*.ts" },
+	callback = function()
+		print("Transpiled! 😎")
+		local file = vim.fn.expand("%")
+
+		vim.fn.jobstart({ "tsc", file})
 	end,
 })

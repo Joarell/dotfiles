@@ -32,8 +32,8 @@ require("keybindings")
 require("appearance")
 require("nvim-ts-autotag").setup()
 require("troublesettings")
-require("vgit_config")
-require("tmux").setup()
+-- require("vgit_config")
+-- require("tmux").setup()
 require("dap_config")
 require("commands_nvim")
 
@@ -87,6 +87,7 @@ set.inccommand = split --Shows replacements in a split screen, before applying t
 set.background = 'dark'
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
+local color_hl = vim.api.nvim_create_augroup("Dap_Set", {})
 
 
 vim.api.nvim_create_autocmd("BufRead", {
@@ -102,6 +103,16 @@ vim.api.nvim_create_autocmd("BufRead", {
 	group = html_format_tab,
 })
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = {"*"},
+	callback = function()
+		vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "󱫪 ", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DapBreakpointRejected", linehl = "", numhl = "" })
+	end,
+	group = color_hl,
+})
 
 -- vim.api.nvim_set_option("clipboard", "unnamed")
 vim.wo.colorcolumn = "80"
@@ -222,53 +233,6 @@ high_str.setup({
 		color_9 = { "#0080ff", "smart" }, -- Follow brown
 	},
 })
-
---###########################################################################--
--- 							Discord app monitor								 --
---###########################################################################--
-
-require("presence").setup({
-	-- General options
-	logo = "auto",
-	neovim_image_text = "Neovim PDE - (Personalized Development Environment)", -- Text displayed when hovered over the Neovim image
-	main_image = "neovim", -- Main image display (either "neovim" or "file")
-	client_id = "793271441293967371", -- Use your own Discord application client id (not recommended)
-	log_level = "warn", -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-	debounce_timeout = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-	enable_line_number = false, -- Displays the current line number instead of the current project
-	blacklist = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-	buttons = false, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`,
-	file_assets = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
-
-	-- Rich Presence text options
-	editing_text = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
-	file_explorer_text = "Browsing %s", -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
-	git_commit_text = "Committing changes", -- Format string rendered when committing changes in git (either string or function(filename: string): string)
-	plugin_manager_text = "Managing plugins", -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
-	reading_text = "Reading %s", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: st
-	workspace_text = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): s
-	line_number_text = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line
-})
-
--- NOTE: these are the defaults
--- require("nvimcord").setup({
--- 	-- Start the RPC manually (boolean)
--- 	autostart = false,
--- 	-- Set the client ID (string)
--- 	client_id = "954365489214291979",
--- 	-- Use the filetype as the large icon (boolean)
--- 	large_file_icon = true,
--- 	-- Set the log level (enum)
--- 	log_level = vim.log.levels.INFO,
--- 	-- Get the workspace name (function|string)
--- 	workspace_name = function()
--- 		return --[[cwd basename]]
--- 	end,
--- 	-- Get the workspace URL (function|string)
--- 	workspace_url = function()
--- 		return ""
--- 	end,
--- })
 
 --###########################################################################--
 -- 							Setting TODO comments 							 --

@@ -219,6 +219,7 @@ return {
 				typos_lsp = {},
 				yamlls = {},
 				jdtls = {},
+				zls =  {}
 			}
 
 			mason_lsp.setup({

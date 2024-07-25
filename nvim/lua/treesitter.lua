@@ -2,7 +2,7 @@
 --  │                   Treesitter Settings.                   │
 --  ╰──────────────────────────────────────────────────────────╯
 
-require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. Feel free to update it.
+require("nvim-treesitter.configs").setup({ -- Here is all languages supported. Feel free to update it.
 	auto_install = true,
 	-- ensure_installed = {
 	-- 	"bash",
@@ -31,7 +31,7 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 	indent = { enable = true },
 	ignore_install = { "cpp" },
 	highlight = {
-		enable = true, -- false will disble the whole extension
+		enable = true, -- false will disable the whole extension
 		additional_vim_regex_highlighting = true,
 		disable = function(_, buf)
 			local max_filesize = 100 * 1024 -- 100kb
@@ -39,32 +39,7 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 			if ok and stats and stats.size > max_filesize then
 				return true
 			end
-		end
-	},
-	rainbow = {
-		enable = true,
-		-- disable = {"jsx", "cpp"}, list of languages you want to disable the plugin for
-		extended_mode = true, -- Also higlight non-bracket delimiters.
-		-- max_file_lines = nil, -- Do not enable for files with more than n lines, integer
-		-- colors = {}, -- table of hex strings
-		-- termcolors = {} -- table of colour name strings
-		strategy = require('ts-rainbow').strategy.global,
-		hlgroups = {
-			'TSRainbowRed',
-			'TSRainbowYellow',
-			'TSRainbowBlue',
-			'TSRainbowOrange',
-			'TSRainbowGreen',
-			'TSRainbowViolet',
-			'TSRainbowCyan',
-		},
-	},
-	autotag = {
-		enable = true,
-		enable_rename = true,
-		enable_close = true,
-		enable_close_on_slash = true,
-		filetypes = { "html" },
+		end,
 	},
 	refactor = {
 		highlight_definitions = {
@@ -96,7 +71,7 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 				["]m"] = "@function.outer",
 				["]]"] = { query = "@class.outer", desc = "Next class start" },
 				--
-				-- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
+				-- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
 				["]o"] = "@loop.*",
 				-- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
 				--
@@ -125,7 +100,24 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages suportted. F
 			},
 			goto_previous = {
 				["[d"] = "@conditional.outer",
-			}
+			},
+		},
+	},
+})
+
+require("nvim-ts-autotag").setup({
+	opts = {
+		-- Defaults
+		enable_close = true, -- Auto close tags
+		enable_rename = true, -- Auto rename pairs of tags
+		enable_close_on_slash = false, -- Auto close on trailing </
+	},
+	-- Also override individual filetype configs, these take priority.
+	-- Empty by default, useful if one of the "opts" global settings
+	-- doesn't work well in a specific filetype
+	per_filetype = {
+		["html"] = {
+			enable_close = true,
 		},
 	},
 })
@@ -136,17 +128,17 @@ parser_config.zimbu = {
 		url = "~/projects/tree-sitter-zimbu", -- local path or git repo
 		files = { "src/parser.c" },
 		-- optional entries:
-		branch = "main",                 -- default branch in case of git repo if different from master
-		generate_requires_npm = true,    -- if stand-alone parser without npm dependencies
+		branch = "main", -- default branch in case of git repo if different from master
+		generate_requires_npm = true, -- if stand-alone parser without npm dependencies
 		requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
 	},
-	filetype = "zu",                     -- if filetype does not match the parser name
+	filetype = "zu", -- if filetype does not match the parser name
 }
 
 --###########################################################################--
 --							Regex Settings		 							 --
 --###########################################################################--
-require("regexplainer").show { display = 'popup' }
+require("regexplainer").show({ display = "popup" })
 require("regexplainer").setup({
 	-- 'narrative'
 	mode = "narrative", -- TODO: 'ascii', 'graphical'
@@ -178,7 +170,7 @@ require("regexplainer").setup({
 	popup = {
 		border = {
 			padding = { 1, 2 },
-			style = 'rounded',
+			style = "rounded",
 		},
 	},
 

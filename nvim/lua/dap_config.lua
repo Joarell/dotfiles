@@ -8,12 +8,12 @@ local dapui = require("dapui")
 vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = "#FC007A" })
 vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = "#00FF00" })
 vim.api.nvim_set_hl(0, 'DapBreakpointCondition', { ctermbg = 0, fg = "#00CADD" })
+vim.api.nvim_set_hl(0, 'DapBreakpointRejected', { ctermbg = 0, fg = "#800080" })
 
--- vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='DapBreakpoint', linehl='', numhl=''})
 vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointCondition", { text = "󱫪 ", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = " ", texthl = "DapStopped", linehl = "", numhl = "" })
-vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "yellow", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DapBreakpointRejected", linehl = "", numhl = "" })
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
@@ -33,6 +33,31 @@ dap.adapters.node2 = {
 	args = {},
 }
 
+dap.configurations.typescript = {
+	{
+		name = "Launch",
+		type = "node2",
+		request = "launch",
+		program = "${file}",
+		cwd = vim.fn.getcwd(),
+		sourceMaps = true,
+		protocol = "inspector",
+		console = "integratedTerminal",
+	},
+	{
+		name = "Attach",
+		type = "node2",
+		request = "attach",
+		processId = require("dap.utils").pick_process,
+		cwd = vim.fn.getcwd(),
+		sourceMaps = true,
+	},
+	{
+		name = "Attach to process",
+		type = "node2",
+		request = "launch",
+	},
+}
 dap.configurations.javascript = {
 	{
 		name = "Launch",
@@ -43,6 +68,14 @@ dap.configurations.javascript = {
 		sourceMaps = true,
 		protocol = "inspector",
 		console = "integratedTerminal",
+	},
+	{
+		name = "Attach",
+		type = "node2",
+		request = "attach",
+		processId = require("dap.utils").pick_process,
+		cwd = vim.fn.getcwd(),
+		sourceMaps = true,
 	},
 	{
 		name = "Attach to process",

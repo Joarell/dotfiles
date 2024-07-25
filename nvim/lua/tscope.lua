@@ -17,13 +17,12 @@ end
 
 local telescope = require("telescope")
 local actions = require("telescope.actions")
-local trouble = require("trouble.sources.telescope")
+local trouble = require("trouble.sources.telescope").open
 
 telescope.setup({
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}),
-		},
+			require("telescope.themes").get_dropdown({}), },
 		docker = {
 			theme = "dropdown",
 			binary = "docker",
@@ -68,8 +67,8 @@ telescope.setup({
 		prompt_prefix = "  ",
 		initial_mode = "normal",
 		mappings = {
-			i = { ["<C-t>"] = trouble.open },
-			n = { ["<C-t>"] = trouble.open },
+			i = { ["<C-t>"] = trouble },
+			n = { ["<C-t>"] = trouble },
 		},
 		-- layout_config = {
 		-- 	width = function (_, cols, _)
