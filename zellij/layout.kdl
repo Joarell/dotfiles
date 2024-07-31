@@ -56,12 +56,18 @@ layout {
 				}
 			}
 		}
-		floating_panes split_direction="vertical" size=10 {
-			pane cwd="$HOME/Otto/main/docker"  name="Docker " {
-				command "docker" close_on_exit=true start_suspended=true
-				args "compose" "up" "--build" "--remove-orphans"
-			}
-		}
+		// floating_panes split_direction="vertical" size=10 {
+		// 	pane cwd="$HOME/Otto/main/docker"  name="Docker " {
+		// 		command "docker" close_on_exit=true start_suspended=true
+		// 		args "compose" "up" "--build" "--remove-orphans"
+		// 	}
+		// }
+		// floating_panes split_direction="vertical" size=10 {
+		// 	pane cwd="$HOME/Otto/builder/docker"  name="Docker DEV " {
+		// 		command "docker" close_on_exit=true start_suspended=true
+		// 		args "compose" "up" "--build" "--remove-orphans"
+		// 	}
+		// }
 	}
 	//tab name="EXTAB" {
 	//	pane size=1 borderless=true {

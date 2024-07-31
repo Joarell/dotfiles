@@ -1,6 +1,6 @@
 # Nushell Environment Config File
 #
-# version = "0.84.0"
+# version = "0.96.0"
 
 def create_left_prompt [] {
 	mut home = ""
@@ -86,7 +86,8 @@ neofetch
 source ~/.zoxide.nu
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
 ssh-add ~/.ssh/id_jev
-source ~/.oh-my-posh.nu
+oh-my-posh init nu --config ~/oh-my-posh/themes/di4am0nd.omp.json
+source ~/dotfiles/script.nu
 source ~/.local/share/atuin/init.nu
 
 $env.NU_PLUGIN_HIGHLIGHT_TRUE_COLORS = true

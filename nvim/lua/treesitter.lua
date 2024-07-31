@@ -209,6 +209,7 @@ local filetypes = {
 	"hbs",
 	"markdown",
 }
+
 local skip_tags = {
 	"area",
 	"base",

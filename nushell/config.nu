@@ -838,3 +838,4 @@ alias grubup = sudo grub-mkconfig -o /boot/grub/grub.cfg
 #our experimental - best option for the moment
 alias mirrorx = sudo reflector --age 6 --latest 20  --fastest 20 --threads 5 --sort rate --protocol https --save /etc/pacman.d/mirrorlist 
 alias mirrorxx = sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist 
+source ~/.oh-my-posh.nu

@@ -70,16 +70,6 @@ telescope.setup({
 			i = { ["<C-t>"] = trouble },
 			n = { ["<C-t>"] = trouble },
 		},
-		-- layout_config = {
-		-- 	width = function (_, cols, _)
-		-- 		if cols > 200 then
-		-- 			return 170
-		-- 		else
-		-- 			return math.floor(cols * 0.87)
-		-- 		end
-		-- 	end,
-		-- 	preview_cutoff = 200,
-		-- },
 	},
 	mappings = {
 		i = {
