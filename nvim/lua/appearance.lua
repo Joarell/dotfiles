@@ -360,7 +360,7 @@ require("bufferline").setup({
 		offsets = { { filetype = "NvimTree", text = "EXPLORER", text_align = "center" } },
 		right_mouse_command = "Bdelete! %d",
 		right_trunc_marker = "",
-		show_close_icon = false,
+		show_close_icon = true,
 		show_tab_indicators = true,
 		separator_style = "slant",
 		mode = "tabs",

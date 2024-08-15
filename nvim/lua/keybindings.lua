@@ -11,6 +11,7 @@ local opts = { silent = true, noremap = true }
 -- ╰─────────────────────────────────────────────────────────╯
 keymap("n", "<Esc>", ":nohlsearch<CR>", opts)
 keymap("n", "<Leader>w", ":w!<CR>", opts)
+keymap("n", "<A-c>", ":q!<CR>", opts)
 keymap("n", "<Leader>W", ":save <c-r>% ", opts)
 -- keymap("n", "E", ":q!<CR>", opts)
 keymap("n", "<Leader>s", ":so<CR>", opts)
@@ -21,7 +22,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "gl", ":lua vim.diagnostic.open_float()<CR>", opts)
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
--- keymap("n", "<A-g>", ":G <cr>", opts)
+keymap("n", "<A-g>", ":G <cr>", opts)
 keymap("n", "<A-g>c", ":G commit<cr>", opts)
 keymap("n", "<A-P>", ":G push origin HEAD<cr>", opts)
 keymap("n", "<A-C>", ":G commit<cr>", opts)
@@ -84,12 +85,12 @@ end
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                        Lua Snips                        │
 -- ╰─────────────────────────────────────────────────────────╯
-keymap({ "i" }, "<C-l>", function()
+keymap({ "i" }, "<C-n>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
 	end
 end, opts)
-keymap({ "i" }, "<C-h>", function()
+keymap({ "i" }, "<C-p>", function()
 	if ls.choice_active() then
 		ls.change_choice(-1)
 	end
@@ -98,6 +99,7 @@ end, opts)
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                     Plugins Command                     │
 -- ╰─────────────────────────────────────────────────────────╯
+keymap("n", "<A-U>", ":UndotreeToggle<CR>", opts)
 keymap("n", "lz", ":LazyGit<CR>", opts)
 keymap("n", "<A-M>", ":Mason<CR>", opts)
 keymap("i", "<S-Tab>", "<right>")
@@ -160,7 +162,7 @@ keymap("n", "<F12>", ":lua vim.lsp.buf.format()<CR>", opts)
 --Trouble
 keymap("n", "<Leader>tr", ':lua require("trouble").next({ skip_groups = true, jump = true })<CR>', opts)
 keymap("n", "<Leader>tb", ':lua require("trouble").previous({ skip_groups = true, jump = true })<CR>', opts)
-keymap("n", "<Leader>t", ":Trouble<cr>",jopts)
+keymap("n", "<Leader>t", ":Trouble<cr>",opts)
 keymap("n", "<Leader>xt", ":Trouble loclist<cr>", opts)
 keymap("n", "<Leader>td", ":Trouble diagnostics<cr>", opts)
 keymap("n", "<Leader>gr", ":Trouble lsp_references<cr>", opts)

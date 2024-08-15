@@ -71,6 +71,7 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
+			"saecki/crates.nvim",
 			"windwp/nvim-ts-autotag",
 			"https://github.com/onsails/lspkind.nvim",
 			"uga-rosa/cmp-dictionary",
@@ -78,11 +79,11 @@ return {
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_snipmate").lazy_load()
+			require("crates").setup()
 			vim.o.completeopt = "menuone,noinsert,noselect"
 
 			local lspkind = require("lspkind")
 			local cmp = require("cmp")
-			local ls = require("luasnip")
 			local dict = require("cmp_dictionary")
 
 			dict.setup({
@@ -95,33 +96,33 @@ return {
 				},
 			})
 
-			ls.config.setup({
-				history = true,
-				update_events = "TextChanged, TextChangedI",
-			})
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						-- if not ls then
-						-- 	return vim.fn["UtilSnips#Anon"](args.body)
-						-- end
-						-- ls.lsp_expand(args.body)
-						vim.fn["vsnip#anonymous"](args.body)
+						local ls = prequire("luasnip")
+						if not ls then
+							return vim.fn["vsnip#anonymous"](args.body)
+						end
+						ls.lsp_expand(args.body)
+						ls.config.setup({
+							history = true,
+							update_events = "TextChanged, TextChangedI",
+						})
 					end,
 				},
 				sources = {
-					{ name = "nvim_lsp",               keyword_length = 1 },
-					{ name = "nvim_lua",               keyword_length = 3 },
+					{ name = "nvim_lsp", keyword_length = 1 },
+					{ name = "nvim_lua", keyword_length = 3 },
 					{ name = "nvim_lsp_signature_help" },
-					{ name = "buffer",                 keyword_length = 3,         group_index = 1 },
-					{ name = "luasnip",                keyword_length = 2 },
-					{ name = "vsnip",                  keyword_length = 2 },
+					{ name = "buffer", keyword_length = 3, group_index = 1 },
+					{ name = "luasnip", keyword_length = 2 },
+					{ name = "vsnip", keyword_length = 2 },
 					-- { name = "utisnips",              keyword_length = 2 },
-					{ name = "cmdline",                keyword_length = 3,         group_index = 2 },
-					{ name = "path",                   keyword_length = 3 },
-					{ name = "emoji",                  option = { insert = false } },
+					{ name = "cmdline", keyword_length = 3, group_index = 2 },
+					{ name = "path", keyword_length = 3 },
+					{ name = "emoji", option = { insert = false } },
 					{ name = "vim-dadbod-completion" },
-					{ name = "dictionary",             keyword_length = 3 },
+					{ name = "dictionary", keyword_length = 3 },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -178,10 +179,11 @@ return {
 					},
 				},
 				mapping = {
+					-- Moving between completion items.
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<S-Tab>"] = cmp.mapping.select_prev_item(select_opts),
-					["<Tab>"] = cmp.mapping.select_next_item(select_opts),
-
+					["<Tab>"] = cmp.mapping.select_next_item(fallback),
+					["<S-Tab>"] = cmp.mapping.select_prev_item(fallback),
 					-- Scroll text in the documentation window.
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -189,9 +191,13 @@ return {
 					-- Cancel completion
 					["<C-e>"] = cmp.mapping.abort(),
 
-					-- Moving between completion items.
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-j>"] = cmp.mapping(function(fallback)
+					["<C-l>"] = cmp.mapping(function(fallback)
+						local ls = pcall(require, "luasnip")
+						if not ls then
+							return
+						end
+						local ls = require("luasnip")
+
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif ls.expand_or_jumpable() then
@@ -202,7 +208,13 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					["<C-k>"] = cmp.mapping(function(fallback)
+					["<C-h>"] = cmp.mapping(function(fallback)
+						local ls = pcall(require, "luasnip")
+						if not ls then
+							return
+						end
+						local ls = require("luasnip")
+
 						if cmp.visible() then
 							cmp.select_prev_item()
 						elseif ls.jumpable(-1) then
@@ -224,11 +236,9 @@ return {
 				sources = cmp.config.sources({
 					{ name = "path" },
 				}, {
-					{ name = "cmdline",
-					option = {
-						ignore_cmds = { 'Man', '!' }
-					}
-				},
+					{ name = "cmdline", option = {
+						ignore_cmds = { "Man", "!" },
+					} },
 				}),
 			})
 		end,

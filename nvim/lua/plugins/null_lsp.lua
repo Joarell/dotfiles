@@ -15,8 +15,8 @@ return {
 					null.formatting.prettierd,
 					null.formatting.prettier.with({
 						filetypes = {
-							"html",
-							"css",
+							-- "html",
+							-- "css",
 							"json",
 							"yaml",
 							"markdown",
@@ -33,10 +33,17 @@ return {
 					null.formatting.ktlint,
 					null.formatting.sql_formatter,
 					null.formatting.asmfmt,
+					null.formatting.gofumpt,
+					null.formatting.goimports,
+					null.formatting.golines,
 					null.formatting.typstfmt,
 					----------------------------------------
 					-- null.diagnostics.eslint,
 					null.diagnostics.selene,
+					null.diagnostics.golangci_lint,
+					null.diagnostics.revive,
+					-- null.diagnostics.semgrep,
+					-- null.diagnostics.staticcheck,
 					null.diagnostics.trivy,
 					null.diagnostics.ktlint,
 					null.diagnostics.markdownlint,
@@ -45,6 +52,7 @@ return {
 					----------------------------------------
 					-- null.completion.spell,
 					----------------------------------------
+					null.code_actions.gomodifytags,
 					-- null.code_actions.eslint_d,
 					-- null.code_actions.shellcheck,
 					-- null.code_actions.ltrs,

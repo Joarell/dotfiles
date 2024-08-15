@@ -1,9 +1,9 @@
 --###########################################################################--
 --								 LSP settings								 --
 --###########################################################################--
-require("mason-null-ls").setup({
-	automatic_setup = true,
-})
+-- require("mason-null-ls").setup({
+-- 	automatic_setup = true,
+-- })
 
 local run = pcall(vim.cmd, 'MasonUpdate')
 require("mason").setup({

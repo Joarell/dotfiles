@@ -34,7 +34,7 @@ return {
 			local lsp_defaults = lspconfig.util.default_config
 			local mason_lsp = require("mason-lspconfig")
 			local mason = require("mason")
-			-- local mason_registry = require("mason-registry")
+			local mason_registry = require("mason-registry")
 			local signs = {
 				Error = "",
 				Warn = " ",
@@ -155,18 +155,18 @@ return {
 								useanay = true,
 							},
 							experimentalPostfixCompletion = true,
-							gofumpt = true,
-							staticcheck = true,
-							usePlaceholders = true,
 							hints = {
-								assignVariableTypes = true,
-								compositeLiteralFields = true,
+								assingVariableTypes = true,
+								compositeLieteralFields = true,
 								compositeLiteralTypes = true,
 								constantValues = true,
 								functionTypeParameters = true,
-								parameterNames = true,
+								useParameterNames = true,
 								rangeVariableTypes = true,
 							},
+							gofumpt = true,
+							staticcheck = true,
+							usePlaceholders = true,
 						},
 					},
 				},

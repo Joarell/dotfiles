@@ -56,44 +56,49 @@ layout {
 				}
 			}
 		}
-		// floating_panes split_direction="vertical" size=10 {
-		// 	pane cwd="$HOME/Otto/main/docker"  name="Docker " {
-		// 		command "docker" close_on_exit=true start_suspended=true
-		// 		args "compose" "up" "--build" "--remove-orphans"
-		// 	}
-		// }
-		// floating_panes split_direction="vertical" size=10 {
-		// 	pane cwd="$HOME/Otto/builder/docker"  name="Docker DEV " {
-		// 		command "docker" close_on_exit=true start_suspended=true
-		// 		args "compose" "up" "--build" "--remove-orphans"
-		// 	}
-		// }
+		floating_panes split_direction="vertical" size=10 {
+			pane cwd="$HOME/Otto/main/docker"  name="Docker " {
+				command "docker" close_on_exit=true start_suspended=true
+				args "compose" "up" "--build" "--remove-orphans"
+			}
+		}
 	}
-	//tab name="EXTAB" {
-	//	pane size=1 borderless=true {
-	//		plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
-	//			format_left  "  #[fg=#89B4FA,bold] {session}  {mode} {tabs} 󰋘   "
-	//			format_right "󰃭 {datetime}󰔟"
+	tab name="EXTAB" {
+		pane size=1 borderless=true {
+			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+				// format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
+				format_left  "  #[fg=#89B4FA,bold] {session}  {tabs} 󰋘   "
+				format_right " {command_git_branch} {mode} #[italic] 󰃭 {datetime}󰔟"
+				format_space ""
 
-	//			mode_locked	"#[bg=#B80056] {name}"
-	//			mode_normal	"#[bg=#333] {name}"
-	//			mode_tmux	"#[bg=#ffc387] {name}"
+				// border_enabled	"true"
+				// border_char		"-"
+				// border_format	"#[fg=#6C7086]"
+				// border_position	"top"
 
-	//			tab_normal	"#[fg=#6C7086] {name} "
-	//			tab_active	"#[fg=#80CED7,bold,italic] {name} "
+				mode_locked	"#[bg=#B80056] {name}"
+				mode_normal	"#[bg=#333] {name}"
+				mode_tmux	"#[bg=#ffc387] {name}"
 
-	//			datetime	"#[fg=#6C7086,bold] {format} "
-	//			datetime_format "%A, %d %b %Y %H:%M"
-	//			datetime_timezone "America/Sao_Paulo"
+				tab_normal	"#[fg=#6C7086] {name} "
+				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+				
+				datetime	"#[fg=#6C7086,bold] {format} "
+				datetime_format "%A, %d %b %Y %H:%M"
+				datetime_timezone "America/Sao_Paulo"
 
-	//			first_start	"true"
-	//		}
-	//	}
-	//	pane split_direction="vertical" {
-	//		pane borderless=true split_direction="vertical" size=30 {
-	//			plugin location="zellij:strider"
-	//		}
-	//		pane name="ExPane" borderless=true
-	//	}
-	//}
+				command_git_branch_command		"git rev-parse --abbrev-ref HEAD"
+				command_git_branch_format		"[fg=cyan] {stdout} "
+				command_git_branch_interval		"10"
+				command_git_branch_rendermode	"static"
+				// first_start	"true"
+			}
+		}
+		pane split_direction="vertical" {
+			pane borderless=false split_direction="vertical" size=40 {
+				plugin location="zellij:strider"
+			}
+			pane name="ExPane" borderless=true split_direction="vertical"
+		}
+	}
 }

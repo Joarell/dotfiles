@@ -96,15 +96,26 @@ return {
 	},
 	{
 		"altermo/ultimate-autopair.nvim",
-		event = {'InsertEnter', 'CmdlineEnter'},
-		branch = 'v0.6',
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6",
 		opts = {},
 	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		BufferLine                                         │
 	--  ╰──────────────────────────────────────────────────────────╯
-	-- { "akinsho/bufferline.nvim", tag = "v2.*", dependenciess = "nvim-tree/nvim-web-devicons" },
+	-- { "akinsho/bufferline.nvim", version = "*", dependenciess = "nvim-tree/nvim-web-devicons" },
+	-- {
+	-- 	"tiagovla/scope.nvim",
+	-- 	config = function ()
+	-- 		vim.opt.sessionoptions = {
+	-- 			"buffers",
+	-- 			"tabpages",
+	-- 			"globals",
+	-- 		}
+	-- 		require("scope").setup({})
+	-- 	end,
+	-- },
 	{
 		"romgrk/barbar.nvim",
 		dependencies = {
@@ -116,10 +127,6 @@ return {
 		end,
 		config = function()
 			require("barbar").setup({
-				-- WARN: do not copy everything below into your config!
-				--       It is just an example of what configuration options there are.
-				--       The defaults are suitable for most people.
-
 				-- Enable/disable animations
 				animation = true,
 
@@ -167,9 +174,9 @@ return {
 						[vim.diagnostic.severity.HINT] = { enabled = true, icon = " " },
 					},
 					gitsigns = {
-						added = { enabled = true, icon = "+" },
-						changed = { enabled = true, icon = "~" },
-						deleted = { enabled = true, icon = "-" },
+						added = { enabled = false, icon = "+" },
+						changed = { enabled = false, icon = "~" },
+						deleted = { enabled = false, icon = "-" },
 					},
 					filetype = {
 						-- Sets the icon's highlight group.
@@ -232,9 +239,9 @@ return {
 				-- Sets the name of unnamed buffers. By default format is "[Buffer X]"
 				-- where X is the buffer number. But only a static string is accepted here.
 				no_name_title = "New Buffer",
+
 			})
 		end,
-		version = "^1.0.x",
 	},
 	{
 		"utilyre/barbecue.nvim",
@@ -280,21 +287,21 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
 		"nvim-telescope/telescope.nvim",
-		branch = '0.1.x',
+		branch = "0.1.x",
 		-- or                            , branch = '0.1.x',
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
 	},
-	{ "vanya-robertson/telescope-media-files.nvim" },
+	-- { "vanya-robertson/telescope-media-files.nvim" },
 	{ "nvim-telescope/telescope-symbols.nvim" },
-	{ "nvim-telescope/telescope-file-browser.nvim" },
+	-- { "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-lua/popup.nvim" },
-	{ "ThePrimeagen/git-worktree.nvim" },
+	-- { "ThePrimeagen/git-worktree.nvim" },
 	{ "ThePrimeagen/harpoon" },
 	{ "nvim-telescope/telescope-dap.nvim" },
-	{ "gbrlsnchs/telescope-lsp-handlers.nvim" },
-	{ "lpoto/telescope-docker.nvim" },
+	-- { "gbrlsnchs/telescope-lsp-handlers.nvim" },
+	-- { "lpoto/telescope-docker.nvim" },
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	-- {
 	-- 	"jedrzejboczar/possession.nvim",
@@ -313,13 +320,13 @@ return {
 		},
 	},
 	{
-		'MeanderingProgrammer/markdown.nvim',
-		name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+		"MeanderingProgrammer/markdown.nvim",
+		name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
 		config = function()
-			require('render-markdown').setup({})
+			require("render-markdown").setup({})
 		end,
 	},
 	-- {
@@ -430,7 +437,7 @@ return {
 	-- 		"nvim-lua/plenary.nvim",
 	-- 	},
 	-- },
-	{ "rhysd/git-messenger.vim" },
+	-- { "rhysd/git-messenger.vim" },
 	-- { "rbong/vim-flog" },
 	{
 		"kdheepak/lazygit.nvim",
@@ -462,6 +469,9 @@ return {
 	{
 		"folke/trouble.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function ()
+			require("trouble").setup({})
+		end
 	},
 
 	--  ╭─────────────────────╮
@@ -526,21 +536,24 @@ return {
 			"rcarriga/nvim-notify",
 		},
 	},
+	{
+		"mbbill/undotree",
+	},
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		Translation                                          │
 	--  ╰──────────────────────────────────────────────────────────╯
 	-- { "aserowy/tmux.nvim" },
-	{
-		"https://git.sr.ht/~swaits/zellij-nav.nvim",
-		lazy = true,
-		event = "VeryLazy",
-		keys = {
-			{ "<c-h>", "<cmd>ZellijNavigateLeft<cr>",  { silent = true, desc = "navigate left" } },
-			{ "<c-j>", "<cmd>ZellijNavigateDown<cr>",  { silent = true, desc = "navigate down" } },
-			{ "<c-k>", "<cmd>ZellijNavigateUp<cr>",    { silent = true, desc = "navigate up" } },
-			{ "<c-l>", "<cmd>ZellijNavigateRight<cr>", { silent = true, desc = "navigate right" } },
-		},
-		opts = {},
-	},
+	-- {
+	-- 	"https://git.sr.ht/~swaits/zellij-nav.nvim",
+	-- 	lazy = true,
+	-- 	event = "VeryLazy",
+	-- 	keys = {
+	-- 		{ "<c-h>", "<cmd>ZellijNavigateLeft<cr>",  { silent = true, desc = "navigate left" } },
+	-- 		{ "<c-j>", "<cmd>ZellijNavigateDown<cr>",  { silent = true, desc = "navigate down" } },
+	-- 		{ "<c-k>", "<cmd>ZellijNavigateUp<cr>",    { silent = true, desc = "navigate up" } },
+	-- 		{ "<c-l>", "<cmd>ZellijNavigateRight<cr>", { silent = true, desc = "navigate right" } },
+	-- 	},
+	-- 	opts = {},
+	-- },
 }

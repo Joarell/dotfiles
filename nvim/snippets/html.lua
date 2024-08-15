@@ -22,7 +22,7 @@ local group = vim.api.nvim_create_augroup("LuaSnippets", { clear = true})
 local file_type = "*.html"
 
 ls.add_snippets("html", {
-	s("!", {
+	s("<!DOC", {
 	t({"<!DOCTYPE html>",
 		"<html lang=\"en\">",
 		"\t\t<head>",

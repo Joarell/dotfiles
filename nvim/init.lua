@@ -95,7 +95,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 	callback = function()
 		vim.cmd("colorscheme solarized-osaka")
 		require("lualine").setup()
-		require("bufferline").setup()
+		-- require("bufferline").setup()
 		set.shiftwidth = 2
 		set.softtabstop = 2
 		set.tabstop = 2
