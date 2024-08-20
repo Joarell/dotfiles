@@ -88,12 +88,31 @@ set.background = 'dark'
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
 local color_hl = vim.api.nvim_create_augroup("Dap_Set", {})
+local diag = vim.api.nvim_create_augroup("Troubles", {})
+local yaml = vim.api.nvim_create_augroup("YAML",{})
 
+
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = {"*.yml"},
+	callback = function()
+		set.shiftwidth = 2
+		set.softtabstop = 2
+		set.tabstop = 2
+	end,
+	group = yaml,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	callback = function()
+		vim.cmd("Trouble diagnostics")
+	end,
+	group = diag,
+})
 
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = {"*.html", "*.css" },
 	callback = function()
-		vim.cmd("colorscheme solarized-osaka")
+		-- vim.cmd("colorscheme solarized-osaka")
 		require("lualine").setup()
 		-- require("bufferline").setup()
 		set.shiftwidth = 2
@@ -168,6 +187,7 @@ vim.lsp.handlers["testDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 	border = "rounded",
 })
 
+vim.diagnostic.enable(false)
 vim.diagnostic.config({ float = { border = "rounded" } })
 
 vim.diagnostic.config({

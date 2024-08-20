@@ -149,6 +149,7 @@ return {
 					settings = {
 						gopls = {
 							analyses = {
+								fieldalignment = true,
 								nilness = true,
 								unusedparams = true,
 								unusedwrite = true,
@@ -161,12 +162,34 @@ return {
 								compositeLiteralTypes = true,
 								constantValues = true,
 								functionTypeParameters = true,
+								parameterNames = true,
 								useParameterNames = true,
 								rangeVariableTypes = true,
 							},
+							codelenses = {
+								gc_details = false,
+								generate = true,
+								regenerate_cgo = true,
+								run_govulncheck = true,
+								test = true,
+								tidy = true,
+								upgrade_dependency = true,
+								vender = true,
+							},
+							buildFlags = {"-tags=integration"},
+							completeUnimported = true,
+							semanticTokens = true,
 							gofumpt = true,
 							staticcheck = true,
 							usePlaceholders = true,
+							directoryFilters = {
+								"-.git",
+								"-.vscode",
+								"-.idea",
+								"-.vscode-test",
+								"-node_modules",
+								"-.nvim"
+							},
 						},
 					},
 				},
@@ -174,7 +197,7 @@ return {
 				html = {
 					filetypes = { "html", "twig", "hbs" },
 				},
-				dprint = {},
+				-- dprint = {},
 				jsonls = {},
 				luau_lsp = {},
 				lua_ls = {

@@ -99,15 +99,17 @@ return {
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						local ls = prequire("luasnip")
-						if not ls then
+						local ok = pcall(require, "luasnip")
+						if ok then
+							local ls = require("luasnip")
+							ls.lsp_expand(args.body)
+							ls.config.setup({
+								history = true,
+								update_events = "TextChanged, TextChangedI",
+							})
+						else
 							return vim.fn["vsnip#anonymous"](args.body)
 						end
-						ls.lsp_expand(args.body)
-						ls.config.setup({
-							history = true,
-							update_events = "TextChanged, TextChangedI",
-						})
 					end,
 				},
 				sources = {
@@ -179,11 +181,9 @@ return {
 					},
 				},
 				mapping = {
-					-- Moving between completion items.
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<Tab>"] = cmp.mapping.select_next_item(fallback),
-					["<S-Tab>"] = cmp.mapping.select_prev_item(fallback),
+					["<Tab>"] = cmp.mapping.select_next_item(),
+					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 					-- Scroll text in the documentation window.
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -223,6 +223,8 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
+					-- Moving between completion items.
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				},
 			})
 			cmp.setup.cmdline({ "/", "?" }, {

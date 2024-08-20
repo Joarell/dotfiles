@@ -1,9 +1,9 @@
 lastupdatecheck: 1723697607
 recentrepos:
     - /home/jev/dotfiles
+    - /home/jev/Otto/builder
     - /home/jev/Otto/main
     - /home/jev/OB
-    - /home/jev/Otto/builder
     - /home/jev/Otto/vite
     - /home/jev/Otto/typescript
     - /home/jev/Otto/Rust
@@ -14,6 +14,7 @@ lastversion: v0.43.1.a3560eb45
 customcommandshistory:
     - git merge builder
     - git rebase main
+    - ""
     - merge vite
     - rebase vite
     - git rebase builder

@@ -5,6 +5,7 @@ local ls = require("luasnip")
 vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
+local ssh_api = require('remote-sshfs.api')
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                     Main Bindings.                      │
@@ -25,7 +26,7 @@ keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<A-g>", ":G <cr>", opts)
 keymap("n", "<A-g>c", ":G commit<cr>", opts)
 keymap("n", "<A-P>", ":G push origin HEAD<cr>", opts)
-keymap("n", "<A-C>", ":G commit<cr>", opts)
+keymap("n", "<A-C>", ":CloakToggle<cr>", opts)
 keymap("n", "<Leader>gs", ":Gvdiffsplit HEAD~1<cr>", opts)
 keymap("n", "<Leader>gsp", ":Gsplit HEAD~1<cr>", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
@@ -130,7 +131,7 @@ keymap({ "n", "v" }, "<A-B>", ":CBalbox<CR>", opts)
 keymap("n", "<Leader>da", ":DiffviewOpen<CR>", opts)
 keymap("n", "<Leader>do", ":DiffviewClose<CR>", opts)
 keymap("n", "<A-g>", ":VGit project_diff_preview<cr>", opts)
-keymap("n", "<A-D>", ":VGit buffer_diff_preview<CR>", opts)
+-- keymap("n", "<A-D>", ":VGit buffer_diff_preview<CR>", opts)
 -- keymap("n", "<Leader>n", ":Navbuddy<CR>", opts)
 
 keymap("n", "<Leader>P", ":TypstPreviewToggle<CR>", opts)
@@ -139,6 +140,11 @@ keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
 keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
 keymap("n", "<Leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap("n", "<A-O>", ":ObsidianNew<CR>", opts)
+keymap("n", "<A-@>", ":RemoteSSHFSConnect jesscake@192.168.0.50 -p 61187<CR>", opts)
+keymap("n", "<A-D>", function ()
+	ssh_api.disconnect()
+	vim.notify("SSH DISCONNTED! 🔌", 3, {})
+end, opts)
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                       F function.                       │
