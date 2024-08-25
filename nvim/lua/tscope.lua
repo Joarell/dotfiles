@@ -89,8 +89,8 @@ local opts = { silent = true, noremap = true }
 keymap("n", "QF", builtin.quickfix, opts)
 keymap("n", "FH", builtin.quickfixhistory, opts)
 keymap("n", "ts", builtin.colorscheme, opts)
--- keymap("n", "fz", builtin.find_files, opts)
--- keymap("n", "lg", builtin.live_grep, opts)
+keymap("n", "fz", builtin.find_files, opts)
+keymap("n", "lg", builtin.live_grep, opts)
 keymap("n", "fb", builtin.buffers, opts)
 keymap("n", "fh", builtin.help_tags, opts)
 keymap("n", "tt", ":Telescope<CR>", opts)
@@ -104,26 +104,27 @@ keymap("n", "gr", builtin.lsp_references, opts)
 keymap("n", "td", builtin.lsp_type_definitions, opts)
 keymap("n", "tb", ":Telescope file_browser<CR>", opts)
 keymap("n", "tm", ":Telescope harpoon marks<CR>", opts)
-keymap("n", "fz", function ()
-	if connections.is_connected() then
-		ssh_api.find_files()
-	else
-		builtin.find_files()
-	end
-end, opts)
-keymap("n", "lg", function ()
-	if connections.is_connected() then
-		ssh_api.find_files()
-	else
-		builtin.live_grep()
-	end
-end, opts)
+-- keymap("n", "fz", function ()
+-- 	if connections.is_connected() then
+-- 		ssh_api.find_files()
+-- 	else
+-- 		builtin.find_files()
+-- 	end
+-- end, opts)
+-- keymap("n", "lg", function ()
+-- 	if connections.is_connected() then
+-- 		ssh_api.find_files()
+-- 	else
+-- 		builtin.live_grep()
+-- 	end
+-- end, opts)
 
 local ssh = vim.api.nvim_create_augroup("SSH", {})
 vim.api.nvim_create_autocmd("BufLeave", {
 	callback = function ()
 		if connections.is_connected() then
 			ssh_api.disconnect()
+			connections.unmount_host()
 			vim.notify("SSH DISCONNTED! 🔌", 3, {})
 		end
 	end,

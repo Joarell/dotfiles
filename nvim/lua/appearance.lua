@@ -1,7 +1,6 @@
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Appearance settings                    │
 --  ╰──────────────────────────────────────────────────────────╯
-
 -- This module contains a number of default definitions
 local rainbow_delimiters = require("rainbow-delimiters")
 
@@ -35,20 +34,20 @@ require("nightfox").setup({
 		-- Compiled file's destination location
 		compile_path = vim.fn.stdpath("cache") .. "/nightfox",
 		compile_file_suffix = "_compiled", -- Compiled file suffix
-		transparent = true, -- Disable setting background
-		terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-		dim_inactive = true, -- Non focused panes set to alternative background
-		module_default = false, -- Default enable value for modules
+		transparent = true,              -- Disable setting background
+		terminal_colors = true,          -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+		dim_inactive = true,             -- Non focused panes set to alternative background
+		module_default = false,          -- Default enable value for modules
 		colorblind = {
-			enable = false, -- Enable colorblind support
-			simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+			enable = false,                -- Enable colorblind support
+			simulate_only = false,         -- Only show simulated colorblind colors and not diff shifted
 			severity = {
-				protan = 0, -- Severity [0,1] for protan (red)
-				deutan = 0, -- Severity [0,1] for deutan (green)
-				tritan = 0, -- Severity [0,1] for tritan (blue)
+				protan = 0,                  -- Severity [0,1] for protan (red)
+				deutan = 0,                  -- Severity [0,1] for deutan (green)
+				tritan = 0,                  -- Severity [0,1] for tritan (blue)
 			},
 		},
-		styles = { -- Style to be applied to different syntax groups
+		styles = {          -- Style to be applied to different syntax groups
 			comments = "italic", -- Value is any valid attr-list value `:help attr-list`
 			conditionals = "NONE",
 			constants = "NONE",
@@ -166,7 +165,7 @@ require("nightfox").setup({
 require("solarized-osaka").setup({
 	-- your configuration comes here
 	-- or leave it empty to use the default settings
-	transparent = true, -- Enable this to disable setting the background color
+	transparent = true,    -- Enable this to disable setting the background color
 	terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
 	styles = {
 		-- Style to be applied to different syntax groups
@@ -176,14 +175,14 @@ require("solarized-osaka").setup({
 		functions = { bold = true },
 		variables = {},
 		-- Background styles. Can be "dark", "transparent" or "normal"
-		sidebars = "dark", -- style for sidebars, see below
-		floats = "dark", -- style for floating windows
+		sidebars = "dark",             -- style for sidebars, see below
+		floats = "dark",               -- style for floating windows
 	},
-	sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-	day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+	sidebars = { "qf", "help" },     -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+	day_brightness = 0.3,            -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
 	hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-	dim_inactive = false, -- dims inactive windows
-	lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
+	dim_inactive = false,            -- dims inactive windows
+	lualine_bold = true,             -- When `true`, section headers in the lualine theme will be bold
 
 	--- You can override specific color groups to use other groups or a hex color
 	--- function will be called with a ColorScheme table
@@ -200,9 +199,9 @@ require("solarized-osaka").setup({
 require("tokyonight").setup({
 	-- your configuration comes here
 	-- or leave it empty to use the default settings
-	style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-	light_style = "day", -- The theme is used when the background is set to light
-	transparent = false, -- Enable this to disable setting the background color
+	style = "storm",       -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+	light_style = "day",   -- The theme is used when the background is set to light
+	transparent = false,   -- Enable this to disable setting the background color
 	terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
 	styles = {
 		-- Style to be applied to different syntax groups
@@ -212,14 +211,14 @@ require("tokyonight").setup({
 		functions = {},
 		variables = {},
 		-- Background styles. Can be "dark", "transparent" or "normal"
-		sidebars = "dark", -- style for sidebars, see below
-		floats = "dark", -- style for floating windows
+		sidebars = "dark",             -- style for sidebars, see below
+		floats = "dark",               -- style for floating windows
 	},
-	sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-	day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+	sidebars = { "qf", "help" },     -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+	day_brightness = 0.3,            -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
 	hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-	dim_inactive = false, -- dims inactive windows
-	lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+	dim_inactive = false,            -- dims inactive windows
+	lualine_bold = false,            -- When `true`, section headers in the lualine theme will be bold
 
 	--- You can override specific color groups to use other groups or a hex color
 	--- function will be called with a ColorScheme table
@@ -235,17 +234,17 @@ require("tokyonight").setup({
 
 -- Default options:
 require("kanagawa").setup({
-	compile = true, -- enable compiling the colorscheme
+	compile = true,  -- enable compiling the colorscheme
 	undercurl = true, -- enable undercurls
 	commentStyle = { italic = true },
 	functionStyle = {},
 	keywordStyle = { italic = true },
 	statementStyle = { bold = true },
 	typeStyle = {},
-	transparent = false, -- do not set background color
-	dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+	transparent = false,  -- do not set background color
+	dimInactive = false,  -- dim inactive window `:h hl-NormalNC`
 	terminalColors = true, -- define vim.g.terminal_color_{0,17}
-	colors = { -- add/modify theme and palette colors
+	colors = {            -- add/modify theme and palette colors
 		palette = {},
 		theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
 	},
@@ -260,15 +259,14 @@ require("kanagawa").setup({
 })
 
 require("material").setup({
-
 	contrast = {
-		terminal = false, -- Enable contrast for the built-in terminal
-		sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
-		floating_windows = false, -- Enable contrast for floating windows
-		cursor_line = false, -- Enable darker background for the cursor line
-		lsp_virtual_text = false, -- Enable contrasted background for lsp virtual text
+		terminal = false,          -- Enable contrast for the built-in terminal
+		sidebars = false,          -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+		floating_windows = false,  -- Enable contrast for floating windows
+		cursor_line = false,       -- Enable darker background for the cursor line
+		lsp_virtual_text = false,  -- Enable contrasted background for lsp virtual text
 		non_current_windows = false, -- Enable contrasted background for non-current windows
-		filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
+		filetypes = {},            -- Specify which filetypes get the contrasted (darker) background
 	},
 
 	styles = { -- Give comments style such as bold, italic, underline etc.
@@ -318,10 +316,10 @@ require("material").setup({
 
 	disable = {
 		colored_cursor = false, -- Disable the colored cursor
-		borders = false, -- Disable borders between vertically split windows
-		background = false, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
-		term_colors = false, -- Prevent the theme from setting terminal colors
-		eob_lines = false, -- Hide the end-of-buffer lines
+		borders = false,      -- Disable borders between vertically split windows
+		background = false,   -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+		term_colors = false,  -- Prevent the theme from setting terminal colors
+		eob_lines = false,    -- Hide the end-of-buffer lines
 	},
 
 	high_visibility = {
@@ -331,16 +329,16 @@ require("material").setup({
 
 	lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
 
-	async_loading = true, -- Load parts of the theme asynchronously for faster startup (turned on by default)
+	async_loading = true,     -- Load parts of the theme asynchronously for faster startup (turned on by default)
 
-	custom_colors = nil, -- If you want to override the default colors, set this to a function
+	custom_colors = nil,      -- If you want to override the default colors, set this to a function
 
-	custom_highlights = {}, -- Overwrite highlights with your own
+	custom_highlights = {},   -- Overwrite highlights with your own
 })
 
-vim.cmd("colorscheme terafox")
+-- vim.cmd("colorscheme terafox")
 -- vim.cmd("colorscheme solarized-osaka")
--- vim.cmd("colorscheme retrobox")
+vim.cmd("colorscheme retrobox")
 -- vim.cmd("colorscheme kanagawa-dragon")
 
 --  ╭──────────────────────────────────────────────────────────╮
@@ -430,55 +428,53 @@ end
 --###########################################################################--
 --							Indent settings					 				 --
 --###########################################################################--
-require("virt-column").setup({})
-local set = vim.opt
-set.list = true
-set.listchars:append("eol:↴")
-set.listchars:append("space:·")
+-- require("virt-column").setup({})
+-- local set = vim.opt
+--
+-- local highlight = {
+-- 	"RainbowRed",
+-- 	"RainbowYellow",
+-- 	"RainbowBlue",
+-- 	"RainbowOrange",
+-- 	"RainbowGreen",
+-- 	"RainbowViolet",
+-- 	"RainbowCyan",
+-- }
 
-local highlight = {
-	"RainbowRed",
-	"RainbowYellow",
-	"RainbowBlue",
-	"RainbowOrange",
-	"RainbowGreen",
-	"RainbowViolet",
-	"RainbowCyan",
-}
-local hooks = require("ibl.hooks")
--- create the highlight groups in the highlight setup hook, so they are reset
--- every time the colorscheme changes
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-	vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-	vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-	vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-	vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-	vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-	vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-	vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-end)
-
+-- local hooks = require("ibl.hooks")
+-- -- create the highlight groups in the highlight setup hook, so they are reset
+-- -- every time the colorscheme changes
+-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+-- 	vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+-- 	vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+-- 	vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+-- 	vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+-- 	vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+-- 	vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+-- 	vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+-- end)
+--
 vim.g.rainbow_delimiters = { highlight = highlight }
-require("ibl").setup({
-	indent = {
-		tab_char = "▎",
-		priority = 1,
-	},
-	whitespace = {
-		highlight = { "Whitespace", "NonText" },
-		remove_blankline_trail = true,
-	},
-	scope = {
-		enabled = true,
-		show_start = true,
-		show_end = false,
-		injected_languages = false,
-		highlight = highlight,
-		priority = 500,
-	},
-})
-
-hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+-- require("ibl").setup({
+-- 	indent = {
+-- 		tab_char = "▎",
+-- 		priority = 1,
+-- 	},
+-- 	whitespace = {
+-- 		highlight = { "Whitespace", "NonText" },
+-- 		remove_blankline_trail = true,
+-- 	},
+-- 	scope = {
+-- 		enabled = true,
+-- 		show_start = true,
+-- 		show_end = false,
+-- 		injected_languages = false,
+-- 		highlight = highlight,
+-- 		priority = 500,
+-- 	},
+-- })
+--
+-- hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 --###########################################################################--
 --							Fold settings					 				 --
@@ -505,99 +501,3 @@ require("pretty-fold").setup({
 		},
 	},
 })
-
---###########################################################################--
---							Frame settings					 				 --
---###########################################################################--
--- require("nvim-comment-frame").setup({
--- 	languages = {
--- 		-- configuration for Lua programming language
--- 		-- @NOTE global configuration will be overridden by language level
--- 		-- configuration if provided
--- 		lua = {
--- 			-- start the comment with this string
--- 			start_str = "--[[",
--- 			-- end the comment line with this string
--- 			end_str = "]]--",
--- 			-- fill the comment frame border with this character
--- 			fill_char = "*",
--- 			-- width of the comment frame
--- 			frame_width = 80,
--- 			-- wrap the line after 'n' characters
--- 			line_wrap_len = 70,
--- 			-- automatically indent the comment frame based on the line
--- 			auto_indent = false,
--- 			-- add comment above the current line
--- 			add_comment_above = false,
--- 		},
--- 		javascript = {
--- 			-- start the comment with this string
--- 			start_str = "//|",
--- 			-- end the comment line with this string
--- 			end_str = "|//",
--- 			-- fill the comment frame border with this character
--- 			fill_char = "*",
--- 			-- width of the comment frame
--- 			frame_width = 80,
--- 			-- wrap the line after 'n' characters
--- 			line_wrap_len = 70,
--- 			-- automatically indent the comment frame based on the line
--- 			auto_indent = false,
--- 			-- add comment above the current line
--- 			add_comment_above = false,
--- 		},
--- 	},
--- 	-- if true, <leader>cf keymap will be disabled
--- 	disable_default_keymap = false,
--- 	-- start the comment with this string
--- 	start_str = "//",
--- 	-- end the comment line with this string
--- 	end_str = "//",
--- 	-- fill the comment frame border with this character
--- 	fill_char = "-",
--- 	-- width of the comment frame
--- 	frame_width = 80,
--- 	-- wrap the line after 'n' characters
--- 	line_wrap_len = 80,
--- 	-- automatically indent the comment frame based on the line
--- 	auto_indent = true,
--- 	-- add comment above the current line
--- 	add_comment_above = true,
--- 	-- configurations for individual language goes here
--- })
-
---[[************************************************************************]]
---[[                   Comment Pretty box design pluggin                    ]]
---[[                       Find some settings below.                        ]]
---[[************************************************************************]]
-local status, frame_box = pcall(require, "comment-box")
-
-if not status and frame_box then
-	vim.notify(res, vim.log.levels.ERROR)
-	return
-end
--- 	comment_box.setup({
--- 		doc_width = 80, -- width of the document
--- 		box_width = 60, -- width of the boxes
--- 		borders = { -- symbols used to draw a box
--- 			top = "─",
--- 			bottom = "─",
--- 			left = "│",
--- 			right = "│",
--- 			top_left = "╭",
--- 			top_right = "╮",
--- 			bottom_left = "╰",
--- 			bottom_right = "╯",
--- 		},
--- 		line_width = 70, -- width of the lines
--- 		line = { -- symbols used to draw a line
--- 			line = "─",
--- 			line_start = "─",
--- 			line_end = "─",
--- 		},
--- 		outer_blank_lines = false, -- insert a blank line above and below the box
--- 		inner_blank_lines = false, -- insert a blank line above and below the text
--- 		line_blank_line_above = false, -- insert a blank line above the line
--- 		line_blank_line_below = false, -- insert a blank line below the line
--- 	})
--- end

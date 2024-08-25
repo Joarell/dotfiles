@@ -27,7 +27,6 @@ return {
 						},
 					}),
 					null.formatting.codespell,
-					null.formatting.shellharden,
 					null.formatting.sqlfmt,
 					null.formatting.ktlint,
 					null.formatting.sql_formatter,

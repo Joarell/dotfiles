@@ -6,6 +6,7 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
 local ssh_api = require('remote-sshfs.api')
+local connections = require("remote-sshfs.connections")
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                     Main Bindings.                      │
@@ -55,6 +56,8 @@ keymap("n", "<Leader>af", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap({ "i", "v" }, "<C-c>", "<Esc>", opts)
 keymap("n", "cn", ":lua vim.lsp.buf.rename()<CR>", opts)
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
+keymap("n", "GL", ":diffget //2<cr>", opts)
+keymap("n", "GH", ":diffget //3<cr>", opts)
 
 keymap("n", "BL", function()
 	vim.cmd("set background=light")
@@ -140,10 +143,13 @@ keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
 keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
 keymap("n", "<Leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap("n", "<A-O>", ":ObsidianNew<CR>", opts)
-keymap("n", "<A-@>", ":RemoteSSHFSConnect jesscake@192.168.0.50 -p 61187<CR>", opts)
+keymap("n", "<A-@>", ssh_api.connect, opts)
 keymap("n", "<A-D>", function ()
-	ssh_api.disconnect()
-	vim.notify("SSH DISCONNTED! 🔌", 3, {})
+	if connections.is_connected then
+		ssh_api.disconnect()
+		connections.unmount_host()
+		vim.notify("SSH DISCONNTED! 🔌 ⛔", 3, {})
+	end
 end, opts)
 
 -- ╭─────────────────────────────────────────────────────────╮

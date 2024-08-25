@@ -8,8 +8,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
+		"https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
 		lazypath,
 	})
 end
@@ -41,7 +40,6 @@ local cursor = pcall(require, "cursor_style")
 if cursor then
 	require("cursor_style")
 end
-
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -50,6 +48,7 @@ vim.g.loaded_netrwPlugin = 1
 --  │                            Format settings                             │
 --  ╰────────────────────────────────────────────────────────────────────────╯
 local set = vim.opt
+
 
 set.cole = 1
 set.encoding = 'utf-8'
@@ -85,12 +84,14 @@ set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
 -- set.guifont = "CaskaydiaCove NF:h13"
 set.background = 'dark'
+set.list = true
+set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
+set.hi.colorcolumn = "white"
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
 local color_hl = vim.api.nvim_create_augroup("Dap_Set", {})
 local diag = vim.api.nvim_create_augroup("Troubles", {})
 local yaml = vim.api.nvim_create_augroup("YAML",{})
-
 
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = {"*.yml"},
@@ -98,6 +99,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 		set.shiftwidth = 2
 		set.softtabstop = 2
 		set.tabstop = 2
+		set.expandtab = true
 	end,
 	group = yaml,
 })
@@ -123,7 +125,6 @@ vim.api.nvim_create_autocmd("BufRead", {
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-	pattern = {"*"},
 	callback = function()
 		vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = "" })
 		vim.fn.sign_define("DapBreakpointCondition", { text = "󱫪 ", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
@@ -135,6 +136,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 -- vim.api.nvim_set_option("clipboard", "unnamed")
 vim.wo.colorcolumn = "80"
+vim.cmd("hi colorColumn guibg = #333333")
 vim.g.editorconfig = true
 vim.g.transparecey = 0.8
 vim.g["zoom#statustext"] = "Z"

@@ -84,11 +84,11 @@ dap.configurations.javascript = {
 	},
 }
 
-dap.adapters.cppdbg = {
-	id = "cppdbg",
-	type = "executable",
-	command = "/home/jev/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/",
-}
+-- dap.adapters.cppdbg = {
+-- 	id = "cppdbg",
+-- 	type = "executable",
+-- 	command = "/home/jev/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/",
+-- }
 
 dap.configurations.cpp = {
 	{

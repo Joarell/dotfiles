@@ -91,4 +91,3 @@ source ~/dotfiles/script.nu
 source ~/.local/share/atuin/init.nu
 
 $env.NU_PLUGIN_HIGHLIGHT_TRUE_COLORS = true
-$env.NU_PLUGIN_HIGHLIGHT_THEME = Coldark-Dark

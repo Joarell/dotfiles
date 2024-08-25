@@ -156,7 +156,7 @@ return {
 				highlight_alternate = false,
 
 				-- Disable highlighting file icons in inactive buffers
-				highlight_inactive_file_icons = false,
+				highlight_inactive_file_icons = true,
 
 				-- Enable highlighting visible buffers
 				highlight_visible = true,
@@ -164,7 +164,7 @@ return {
 				icons = {
 					-- Configure the base icons on the bufferline.
 					buffer_index = false,
-					buffer_number = true,
+					buffer_number = false,
 					button = "  ",
 					-- Enables / disables diagnostic symbols
 					diagnostics = {
@@ -173,11 +173,11 @@ return {
 						[vim.diagnostic.severity.INFO] = { enabled = true, icon = " " },
 						[vim.diagnostic.severity.HINT] = { enabled = true, icon = " " },
 					},
-					gitsigns = {
-						added = { enabled = false, icon = "+" },
-						changed = { enabled = false, icon = "~" },
-						deleted = { enabled = false, icon = "-" },
-					},
+					-- gitsigns = {
+					-- 	added = { enabled = false, icon = "+" },
+					-- 	changed = { enabled = false, icon = "~" },
+					-- 	deleted = { enabled = false, icon = "-" },
+					-- },
 					filetype = {
 						-- Sets the icon's highlight group.
 						-- If false, will use nvim-web-devicons colors
@@ -368,9 +368,35 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
+	{ 
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {},
+		config = function ()
+			require("ibl").setup({
+				indent = {
+					tab_char = "▎",
+					priority = 1,
+				},
+				whitespace = {
+					highlight = { "Whitespace", "NonText" },
+					remove_blankline_trail = true,
+				},
+				scope = {
+					enabled = true,
+					show_start = true,
+					show_end = false,
+					injected_languages = false,
+					highlight = highlight,
+					priority = 500,
+				},
+			})
+		end
+	},
 	{ "e-roux/pretty-fold.nvim" },
-	{ "lukas-reineke/virt-column.nvim" },
+	-- { "lukas-reineke/virt-column.nvim" },
 
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--NewScroll                                        │
