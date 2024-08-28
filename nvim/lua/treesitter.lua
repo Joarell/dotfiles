@@ -15,6 +15,7 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages supported. F
 		"tsx",
 		"css",
 		"html",
+		"go",
 		"http",
 		"rust",
 		"java",

@@ -85,8 +85,7 @@ set.inccommand = split --Shows replacements in a split screen, before applying t
 -- set.guifont = "CaskaydiaCove NF:h13"
 set.background = 'dark'
 set.list = true
-set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
-set.hi.colorcolumn = "white"
+-- set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
 local color_hl = vim.api.nvim_create_augroup("Dap_Set", {})
@@ -136,7 +135,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 -- vim.api.nvim_set_option("clipboard", "unnamed")
 vim.wo.colorcolumn = "80"
-vim.cmd("hi colorColumn guibg = #333333")
+vim.cmd("hi colorColumn guibg = #141E30")
 vim.g.editorconfig = true
 vim.g.transparecey = 0.8
 vim.g["zoom#statustext"] = "Z"

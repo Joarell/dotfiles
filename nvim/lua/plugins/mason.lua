@@ -153,12 +153,12 @@ return {
 								nilness = true,
 								unusedparams = true,
 								unusedwrite = true,
-								useanay = true,
+								useany = true,
 							},
 							experimentalPostfixCompletion = true,
 							hints = {
-								assingVariableTypes = true,
-								compositeLieteralFields = true,
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
 								compositeLiteralTypes = true,
 								constantValues = true,
 								functionTypeParameters = true,
@@ -174,7 +174,7 @@ return {
 								test = true,
 								tidy = true,
 								upgrade_dependency = true,
-								vender = true,
+								vendor = true,
 							},
 							buildFlags = {"-tags=integration"},
 							completeUnimported = true,
@@ -211,7 +211,10 @@ return {
 					},
 				},
 				marksman = {},
-				nginx_language_server = {},
+				nginx_language_server = {
+					cmd = {"nginx-language-server"},
+					filetypes = {"nginx"}
+				},
 				sqlls = {},
 				tsserver = {
 					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration

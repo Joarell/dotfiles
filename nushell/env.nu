@@ -81,6 +81,7 @@ $env.NU_PLUGIN_DIRS = [
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/nvim-discord/target/release/nvim-discord')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.moon/bin')
+$env.PATH = ($env.PATH | split row (char esep) | append '~/.config/mise/config.toml')
 
 neofetch
 source ~/.zoxide.nu
