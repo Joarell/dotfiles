@@ -111,7 +111,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 vim.api.nvim_create_autocmd("BufRead", {
-	pattern = {"*.html", "*.css" },
+	pattern = { "*.xml", "*.html", "*.css" },
 	callback = function()
 		-- vim.cmd("colorscheme solarized-osaka")
 		require("lualine").setup()
@@ -119,6 +119,8 @@ vim.api.nvim_create_autocmd("BufRead", {
 		set.shiftwidth = 2
 		set.softtabstop = 2
 		set.tabstop = 2
+		vim.wo.colorcolumn = "9999"
+		vim.cmd("hi colorColumn guibg = #000000")
 	end,
 	group = html_format_tab,
 })
@@ -145,6 +147,7 @@ vim.g["netrw_banner"] = 0
 vim.g["netrw_localcopydircmd"] = "cp -r"
 vim.g["load_netrw"] = 1
 vim.g["load_netrwPlugin"] = 1
+vim.g["gradle_path"] = "/usr/bin/"
 vim.o.incsearch = false
 vim.o.fcs = "eob: ,foldopen:▾,foldsep:│,foldclose:▸"
 

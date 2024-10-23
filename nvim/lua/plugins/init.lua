@@ -7,6 +7,7 @@ return {
 	--  │ 		Discord app monitor								   │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "ThePrimeagen/vim-be-good" },
+	{ "hsanson/vim-android" },
 	-- {
 	-- 	"rust-lang/rust.vim",
 	-- 	ft = "rust",
@@ -564,6 +565,9 @@ return {
 	},
 	{
 		"mbbill/undotree",
+	},
+	{
+		"udalov/kotlin-vim",
 	},
 
 	--  ╭──────────────────────────────────────────────────────────╮

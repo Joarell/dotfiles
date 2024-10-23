@@ -3,6 +3,7 @@ recentrepos:
     - /home/jev/dotfiles
     - /home/jev/Otto/main
     - /home/jev/Otto/builder
+    - /home/jev/Otto/go
     - /home/jev/OB
     - /home/jev/Otto/vite
     - /home/jev/Otto/typescript
@@ -10,9 +11,14 @@ recentrepos:
     - /home/jev/RUSTLINGS
     - /home/jev/rust_test/trait-test
 startuppopupversion: 5
-lastversion: v0.43.1.a3560eb45
+lastversion: v0.43.1.05ae0800c
 customcommandshistory:
     - git merge builder
+    - git push origin v0.1.1-beta
+    - git push origin main
+    - git push origin v0.1.0-beta
+    - 'git tag -s v0.1.1-beta -m "fix (home): corrections to the landing page"'
+    - git tag -s v0.1.0-beta -m "Done!"
     - git rebase main
     - ""
     - merge vite

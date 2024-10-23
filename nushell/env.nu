@@ -91,4 +91,5 @@ oh-my-posh init nu --config ~/oh-my-posh/themes/di4am0nd.omp.json
 source ~/dotfiles/script.nu
 source ~/.local/share/atuin/init.nu
 
+$env.ANDROID_HOME = '~/Android/Sdk/'
 $env.NU_PLUGIN_HIGHLIGHT_TRUE_COLORS = true

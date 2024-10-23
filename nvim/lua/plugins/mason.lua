@@ -1,5 +1,5 @@
 --  ╭──────────────────────────────────────────────────────────╮
---  │ 		--LSP and installer sever.                         │
+--  │ 		  --LSP and installer sever.                         │
 --  ╰──────────────────────────────────────────────────────────╯
 
 return {
@@ -12,14 +12,15 @@ return {
 			"kabouzeid/nvim-lspinstall",
 			"jay-babu/mason-nvim-dap.nvim",
 			"jay-babu/mason-null-ls.nvim",
+			-- "VonHeikemen/lsp-zero.nvim", branch = 'v4.x',
 		},
 		config = function()
 			require("nvim-lsp-installer").setup({
 				ui = {
 					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
+						package_installed = "",
+						package_pending = "",
+						package_uninstalled = "󰆤",
 					},
 					check_outdated_packages_on_open = true,
 					border = "rounded",
@@ -29,6 +30,7 @@ return {
 			require("mason-null-ls").setup({})
 			-- require("sg").setup({})
 			require("lazydev").setup({})
+			-- local lsp_zero = require("lsp-zero")
 			local dap_install = require("mason-nvim-dap")
 			local lspconfig = require("lspconfig")
 			local lsp_defaults = lspconfig.util.default_config
@@ -85,9 +87,9 @@ return {
 				},
 				ui = {
 					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
+						package_installed = "",
+						package_pending = "",
+						package_uninstalled = "󰆤",
 					},
 					check_outdated_packages_on_open = true,
 					border = "rounded",
@@ -145,52 +147,49 @@ return {
 				docker_compose_language_service = {},
 				-- "eslint",
 				kotlin_language_server = {},
+				gradle_ls = {},
 				gopls = {
-					settings = {
-						gopls = {
-							analyses = {
-								fieldalignment = true,
-								nilness = true,
-								unusedparams = true,
-								unusedwrite = true,
-								useany = true,
-							},
-							experimentalPostfixCompletion = true,
-							hints = {
-								assignVariableTypes = true,
-								compositeLiteralFields = true,
-								compositeLiteralTypes = true,
-								constantValues = true,
-								functionTypeParameters = true,
-								parameterNames = true,
-								useParameterNames = true,
-								rangeVariableTypes = true,
-							},
-							codelenses = {
-								gc_details = false,
-								generate = true,
-								regenerate_cgo = true,
-								run_govulncheck = true,
-								test = true,
-								tidy = true,
-								upgrade_dependency = true,
-								vendor = true,
-							},
-							buildFlags = {"-tags=integration"},
-							completeUnimported = true,
-							semanticTokens = true,
-							gofumpt = true,
-							staticcheck = true,
-							usePlaceholders = true,
-							directoryFilters = {
-								"-.git",
-								"-.vscode",
-								"-.idea",
-								"-.vscode-test",
-								"-node_modules",
-								"-.nvim"
-							},
-						},
+					analyses = {
+						fieldalignment = true,
+						nilness = true,
+						unusedparams = true,
+						unusedwrite = true,
+						useany = true,
+					},
+					experimentalPostfixCompletion = true,
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						useParameterNames = true,
+						rangeVariableTypes = true,
+					},
+					codelenses = {
+						gc_details = false,
+						generate = true,
+						regenerate_cgo = true,
+						run_govulncheck = true,
+						test = true,
+						tidy = true,
+						upgrade_dependency = true,
+						vendor = true,
+					},
+					buildFlags = { "-tags=integration" },
+					completeUnimported = true,
+					semanticTokens = true,
+					gofumpt = true,
+					staticcheck = true,
+					usePlaceholders = true,
+					directoryFilters = {
+						"-.git",
+						"-.vscode",
+						"-.idea",
+						"-.vscode-test",
+						"-node_modules",
+						"-.nvim",
 					},
 				},
 				-- ['htmx-lsp'] = {},
@@ -210,13 +209,14 @@ return {
 						hint = { enable = true },
 					},
 				},
+				lemminx = {},
 				marksman = {},
 				nginx_language_server = {
-					cmd = {"nginx-language-server"},
-					filetypes = {"nginx"}
+					cmd = { "nginx-language-server" },
+					filetypes = { "nginx" },
 				},
 				sqlls = {},
-				tsserver = {
+				ts_ls = {
 					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 					javascript = {
 						inlayHints = {
@@ -245,7 +245,7 @@ return {
 				typos_lsp = {},
 				yamlls = {},
 				jdtls = {},
-				zls =  {}
+				zls = {},
 			}
 
 			mason_lsp.setup({
@@ -263,6 +263,12 @@ return {
 					})
 				end,
 			})
+
+			-- lsp_zero.extend_lspconfig({
+			-- 	sign_text = true,
+			-- 	lsp_attach = on_attach,
+			-- 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			-- })
 
 			vim.g.rustaceanvim = {
 				tools = {
@@ -284,18 +290,18 @@ return {
 					},
 				},
 				server = {
-					on_attach = function (client, bufnr)
+					on_attach = function(client, bufnr)
 						if vim.lsp.inlay_hint then
 							vim.lsp.inlay_hint.enable(bufnr, true)
 						end
 					end,
 					standalone = true,
 					default_settings = {
-						cmd = {'rusup', 'run', 'nightly', 'rust_analyzer'},
+						cmd = { "rusup", "run", "nightly", "rust_analyzer" },
 						["rust-analyzer"] = {
 							assist = {
 								importEnforceGranualrity = true,
-								importPrefix = "crate",
+								importPrefix = "create",
 							},
 							diagnostics = { enable = true },
 							inlayHints = {
@@ -320,7 +326,7 @@ return {
 							standalone = false,
 							procMacro = { enable = true },
 						},
-					}
+					},
 				},
 				dap = {
 					adapter = {
@@ -328,7 +334,7 @@ return {
 						command = "lldb-vscode",
 						name = "rt_lldb",
 					},
-				}
+				},
 			}
 		end,
 

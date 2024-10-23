@@ -1,0 +1,26 @@
+return {
+	{
+		"dart-lang/dart-vim-plugin",
+		event = "VeryLazy",
+	},
+	{
+		"thosakwe/vim-flutter",
+		event = "VeryLazy",
+	},
+	{
+		"natebosch/vim-lsc",
+		event = "VeryLazy",
+	},
+	{
+		"natebosch/vim-lsc-dart",
+		event = "VeryLazy",
+	},
+	{
+		"akinsho/flutter-tools.nvim",
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'stevearc/dressing.nvim'
+		},
+		event = "VeryLazy",
+	},
+}
