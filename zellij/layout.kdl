@@ -42,6 +42,12 @@ layout {
 			}
 			pane split_direction="horizontal" {
 				pane borderless=true
+				pane split_direction="vertical" size=30 {
+					pane cwd="$HOME/rust_test/100-solutions/exercises/" borderless=true name="resolution" split_direction="horizontal" {
+						command "yazi" close_on_exit=true
+					}
+					pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" borderless=true name="resolution" split_direction="horizontal"
+				}
 				pane borderless=true name="cava" size=10 {
 					command "cava" close_on_exit=true
 				}
@@ -56,16 +62,19 @@ layout {
 				}
 			}
 		}
-		floating_panes split_direction="vertical" size=10 {
-			pane cwd="$HOME/Otto/go"  name="Support" {
-				// command "docker" close_on_exit=true start_suspended=true
-				// args "compose" "up" "--build" "--remove-orphans"
-			}
-			pane cwd="$HOME/Otto/go/docker"  name="Docker " {
-				command "docker" close_on_exit=true start_suspended=true
-				args "compose" "up" "--build" "--remove-orphans"
-			}
-		}
+		// floating_panes split_direction="vertical" size=10 {
+		// 	pane  name="Docker Monitor " {
+		// 		command "dry" close_on_exit=true start_suspended=true
+		// 	}
+		// 	pane cwd="$HOME/Otto/go"  name="Support" {
+		// 		// command "docker" close_on_exit=true start_suspended=true
+		// 		// args "compose" "up" "--build" "--remove-orphans"
+		// 	}
+		// 	pane cwd="$HOME/Otto/builder/docker"  name="Docker " {
+		// 		command "docker" close_on_exit=true start_suspended=true
+		// 		args "compose" "up" "--build" "--remove-orphans"
+		// 	}
+		// }
 	}
 	tab name="EXTAB" {
 		pane size=1 borderless=true {
@@ -98,11 +107,59 @@ layout {
 				// first_start	"true"
 			}
 		}
+		pane split_direction="vertical" borderless=true
+	}
+	tab name="LAB" {
+		pane size=1 borderless=true {
+			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+				// format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
+				format_left  "  #[fg=#89B4FA,bold] {session}  {tabs} 󰋘   "
+				format_right " {command_git_branch} {mode} #[italic] 󰃭 {datetime}󰔟"
+				format_space ""
+
+				// border_enabled	"true"
+				// border_char		"-"
+				// border_format	"#[fg=#6C7086]"
+				// border_position	"top"
+
+				mode_locked	"#[bg=#B80056] {name}"
+				mode_normal	"#[bg=#333] {name}"
+				mode_tmux	"#[bg=#ffc387] {name}"
+
+				tab_normal	"#[fg=#6C7086] {name} "
+				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+				
+				datetime	"#[fg=#6C7086,bold] {format} "
+				datetime_format "%A, %d %b %Y %H:%M"
+				datetime_timezone "America/Sao_Paulo"
+
+				command_git_branch_command		"git rev-parse --abbrev-ref HEAD"
+				command_git_branch_format		"[fg=cyan] {stdout} "
+				command_git_branch_interval		"10"
+				command_git_branch_rendermode	"static"
+				// first_start	"true"
+			}
+		}
 		pane split_direction="vertical" {
-		// 	pane borderless=false split_direction="vertical" size=40 {
-		// 		plugin location="zellij:strider"
-		// 	}
-			pane name="ExPane" split_direction="vertical"
+			pane split_direction="horizontal" {
+				pane  name="Docker Monitor " size=30 {
+					command "dry" close_on_exit=true start_suspended=true
+				}
+				pane cwd="$HOME/Otto/builder/docker"  name="Docker " {
+					command "docker" close_on_exit=true start_suspended=true
+					args "compose" "up" "--build" "--remove-orphans"
+				}
+			}
+			pane split_direction="horizontal" {
+				pane cwd="$HOME/Otto/builder"  name="Support" {
+					// command "docker" close_on_exit=true start_suspended=true
+					// args "compose" "up" "--build" "--remove-orphans"
+				}
+				pane cwd="$HOME/Otto/builder/otto"  name="Support" size=20{
+					command "yarn" close_on_exit=true start_suspended=true
+					args "build"
+				}
+			}
 		}
 	}
 }

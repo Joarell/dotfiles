@@ -11,7 +11,7 @@ recentrepos:
     - /home/jev/RUSTLINGS
     - /home/jev/rust_test/trait-test
 startuppopupversion: 5
-lastversion: v0.43.1.05ae0800c
+lastversion: v0.44.1.095eb130e
 customcommandshistory:
     - git merge builder
     - git push origin v0.1.1-beta
