@@ -226,8 +226,8 @@ $env.config = {
 
     cursor_shape: {
         emacs: blink_underscore # block, underscore, line, blink_block, blink_underscore, blink_line (line is the default)
-        vi_insert: line # block, underscore, line , blink_block, blink_underscore, blink_line (block is the default)
-        vi_normal: blink_underscore # block, underscore, line, blink_block, blink_underscore, blink_line (underscore is the default)
+        vi_insert: blink_underscore # block, underscore, line , blink_block, blink_underscore, blink_line (block is the default)
+        vi_normal: blink_block # block, underscore, line, blink_block, blink_underscore, blink_line (underscore is the default)
     }
 
     color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
@@ -236,7 +236,7 @@ $env.config = {
     buffer_editor: "" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
     use_ansi_coloring: true
     bracketed_paste: true # enable bracketed paste, currently useless on windows
-    edit_mode: emacs # emacs, vi
+    edit_mode: vi # emacs, vi
     shell_integration: {
         # osc2 abbreviates the path if in the home_dir, sets the tab/window title, shows the running command in the tab/window title
         osc2: true
@@ -819,8 +819,8 @@ alias update = sudo pacman -Syyu
 alias clrcache = sudo pacman -Scc 
 alias akring = sudo pacman -Sy archlinux-keyring --noconfirm 
 alias rr = ranger
-alias zjs = zellij -l strider
-alias zjc = zellij -l compact
+alias zjs = zellij -n ~/.config/zellij/layout.kdl -s Crate
+alias zjc = zellij -n ~/.config/zellij/standard.kdl -s STD
 alias weather = zellij plugin -- https://github.com/imsnif/weather-pal/releases/latest/download/weather-pal.wasm
 
 # Paru/Yay stuff
@@ -842,4 +842,7 @@ alias grubup = sudo grub-mkconfig -o /boot/grub/grub.cfg
 #our experimental - best option for the moment
 alias mirrorx = sudo reflector --age 6 --latest 20  --fastest 20 --threads 5 --sort rate --protocol https --save /etc/pacman.d/mirrorlist 
 alias mirrorxx = sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist 
-source ~/.oh-my-posh.nu
+
+# source ~/.oh-my-posh.nu
+source ~/.cache/starship/init.nu
+source ~/.cache/carapace/init.nu

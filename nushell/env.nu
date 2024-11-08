@@ -51,6 +51,18 @@ $env.PROMPT_INDICATOR = {|| "> " }
 $env.PROMPT_INDICATOR_VI_INSERT = {|| ": " }
 $env.PROMPT_INDICATOR_VI_NORMAL = {|| "> " }
 $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+mkdir ~/.cache/carapace/
+carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+
+$env.EDITOR = 'nvim'
+$env.NUPM_HOME = '~/nupm/nupm/'
+$env.NUPM_HOME = ($env.NUPM_HOME | path join "nupm")
+$env.NU_LIB_DIRS = [
+    ...
+    ($env.NUPM_HOME | path join "modules")
+]
+
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)

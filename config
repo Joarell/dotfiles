@@ -158,16 +158,21 @@ foreground = default
 # Gradient mode, only hex defined colors are supported,
 # background must also be defined in hex or remain commented out. 1 = on, 0 = off.
 # You can define as many as 8 different colors. They range from bottom to top of screen
-gradient = 8
-gradient_count = 8
-gradient_color_1 = '#1ca9c9'
-gradient_color_2 = '#32b1ce'
-gradient_color_3 = '#49bad3'
-gradient_color_4 = '#a4dce9'
-gradient_color_5 = '#ff8b41'
-gradient_color_6 = '#ff6e12'
-gradient_color_7 = '#cc580e'
-gradient_color_8 = '#bb0000'
+gradient = 6
+gradient_count = 6
+gradient_color_1 = '#000000'
+gradient_color_2 = '#1ca9c9'
+gradient_color_3 = '#4E627A'
+gradient_color_4 = '#483674'
+gradient_color_5 = '#bb0000'
+gradient_color_6 = '#FF69B4'
+# gradient_color_2 = '#32b1ce'
+# gradient_color_3 = '#49bad3'
+# gradient_color_4 = '#a4dce9'
+# gradient_color_5 = '#ff8b41'
+# gradient_color_6 = '#ff6e12'
+# gradient_color_7 = '#cc580e'
+# gradient_color_8 = '#bb0000'
 
 
 
