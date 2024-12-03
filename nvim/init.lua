@@ -1,3 +1,45 @@
+--  ╭────────────────────────────────────────────────────────────────────────╮
+--  │                            Format settings                             │
+--  ╰────────────────────────────────────────────────────────────────────────╯
+local set = vim.opt
+
+set.cole = 1
+set.encoding = 'utf-8'
+set.spell = true
+set.number = true
+set.relativenumber = true
+set.sps = "best"
+set.updatetime = 200
+set.signcolumn = "yes"
+set.completeopt = { "menu", "menuone", "noselect" }
+set.pumheight = 20
+set.showmode = false
+set.timeoutlen = 150
+set.shiftwidth = 4
+set.softtabstop = 4
+set.tabstop = 4
+set.expandtab = false
+set.mouse = "a"
+set.ignorecase = true
+set.smartcase = true
+set.wrap = true
+set.cursorline = true
+set.autoindent = true
+set.smartindent = true
+set.autowrite = true
+set.swapfile = false
+set.undofile = true
+-- set.undodir = vim.fn.stdpath("config") .. "/.undo"
+set.termguicolors = true
+set.winblend = 30
+set.clipboard = ""
+set.wildmenu = true
+set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
+-- set.guifont = "CaskaydiaCove NF:h13"
+set.background = 'dark'
+set.list = true
+-- set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
+
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                         Settings                         │
 --  ╰──────────────────────────────────────────────────────────╯
@@ -43,49 +85,6 @@ end
 -- Disable netrw at the very start of init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
---  ╭────────────────────────────────────────────────────────────────────────╮
---  │                            Format settings                             │
---  ╰────────────────────────────────────────────────────────────────────────╯
-local set = vim.opt
-
-
-set.cole = 1
-set.encoding = 'utf-8'
-set.spell = true
-set.number = true
-set.relativenumber = true
-set.sps = "best"
-set.updatetime = 200
-set.signcolumn = "yes"
-set.completeopt = { "menu", "menuone", "noselect" }
-set.pumheight = 20
-set.showmode = false
-set.timeoutlen = 150
-set.shiftwidth = 4
-set.softtabstop = 4
-set.tabstop = 4
-set.expandtab = false
-set.mouse = "a"
-set.ignorecase = true
-set.smartcase = true
-set.wrap = true
-set.cursorline = true
-set.autoindent = true
-set.smartindent = true
-set.autowrite = true
-set.swapfile = false
-set.undofile = true
--- set.undodir = vim.fn.stdpath("config") .. "/.undo"
-set.tgc = true
-set.winblend = 30
-set.clipboard = ""
-set.wildmenu = true
-set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
--- set.guifont = "CaskaydiaCove NF:h13"
-set.background = 'dark'
-set.list = true
--- set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
 
 local html_format_tab = vim.api.nvim_create_augroup("Format", {})
 local color_hl = vim.api.nvim_create_augroup("Dap_Set", {})
@@ -151,6 +150,9 @@ vim.g["gradle_path"] = "/usr/bin/"
 vim.o.incsearch = false
 vim.o.fcs = "eob: ,foldopen:▾,foldsep:│,foldclose:▸"
 
+vim.filetype.add({
+	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" }
+})
 --  ╭─────────────────────────────────────────────────────────────────────────╮
 --  │                             Commands setup                              │
 --  ╰─────────────────────────────────────────────────────────────────────────╯

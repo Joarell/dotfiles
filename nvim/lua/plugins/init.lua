@@ -46,6 +46,7 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			{"nushell/tree-sitter-nu", build = ":TSUpdate nu"},
+			{"tree-sitter-grammars/tree-sitter-hyprlang", build = ":TSUpdate hyprlang"},
 			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-refactor",
 			-- "nvim-treesitter/nvim-treesitter-textobjects",

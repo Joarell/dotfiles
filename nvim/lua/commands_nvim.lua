@@ -33,13 +33,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = vim.api.nvim_create_augroup("Transpiler", { clear = true }),
-	pattern = { "*.ts" },
-	callback = function()
-		print("Transpiled! 😎")
-		local file = vim.fn.expand("%")
-
-		vim.fn.jobstart({ "tsc", file})
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+-- 	group = vim.api.nvim_create_augroup("Transpiler", { clear = true }),
+-- 	pattern = { "*.ts" },
+-- 	callback = function()
+-- 		print("Transpiled! 😎")
+-- 		local file = vim.fn.expand("%")
+--
+-- 		vim.fn.jobstart({ "tsc", file})
+-- 	end,
+-- })

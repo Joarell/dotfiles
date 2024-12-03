@@ -143,7 +143,7 @@ keymap("n", "<Leader>a", ':lua require("harpoon.mark").add_file()<CR>', opts)
 keymap("n", "<Leader>fe", ':lua require("harpoon.ui").nav_file()', opts)
 keymap("n", "<Leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap("n", "<A-O>", ":ObsidianNew<CR>", opts)
-keymap("n", "<A-@>", ssh_api.connect, opts)
+keymap("n", "<A-S>", ssh_api.connect, opts)
 keymap("n", "<A-D>", function ()
 	if connections.is_connected then
 		ssh_api.disconnect()

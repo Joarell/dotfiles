@@ -216,7 +216,7 @@ general.live_config_reload = true
 
 [cursor]
   # Cursor style
-  style = { shape = "Underline", blinking = "Always" }
+  style = { shape = "Underline", blinking = "On" }
     # Cursor shape
     #
     # Values for `shape`:
@@ -224,7 +224,7 @@ general.live_config_reload = true
     #   - _ Underline
     #   - | Beam
 
-    # vi_mode_style:
+    vi_mode_style = { shape = "Underline" }
     #   shape: Underline
     # Cursor blinking state
     #
@@ -245,7 +245,7 @@ general.live_config_reload = true
   # See `cursor.style` for available options.
   #vi_mode_style: None
   # Cursor blinking interval in milliseconds.
-  blink_interval = 150
+  blink_interval = 100
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.

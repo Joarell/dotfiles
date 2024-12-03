@@ -1,7 +1,9 @@
 lastupdatecheck: 1723697607
 recentrepos:
+    - /home/jev/Otto-Home/main
     - /home/jev/dotfiles
     - /home/jev/Otto/main
+    - /home/jev/Otto/CloudFlare
     - /home/jev/Otto/builder
     - /home/jev/rust_test/100-exercises-to-learn-rust
     - /home/jev/Otto/go

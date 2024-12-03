@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Signature</title>
+	<meta name="viwport" content="width=device-width, initial-scale-1" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://www.nerdfonts.com" crossorigin>
+	<style>
+		@import "https://www.nerdfonts.com/assets/css/webfont.css";
+
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+		}
+
+		:root {
+			color-scheme: light dark;
+			--color1: #03e9f4;
+			--color2: #162789;
+			--color3: #FC007A;
+			--color4: #FFFFFF30;
+			--color5: #333;
+			--color6: #00ff00;
+			--color7: #6B3A00;
+			--color8: #B80056;
+			--color9: #141E30;
+			--color10: #243B55;
+			--color11: #B8005670;
+			--color12: #F5DEB3;
+			--box: #57420C;
+			--pure-red: #FF0000;
+			--light-blue1: #CCDBDC;
+			--light-blue2: #9AD1D4;
+			--light-blue3: #80CED7;
+			--dark-blue: #00547A;
+			--dark-blue1: #003852;
+			--dark-blue2: #002A3D;
+			--dark-blue3: #002A3D50;
+			--fairs-qt: 17;
+		}
+
+		body {
+			font-family: Saira Semi Condensed, Mitr, sans-serif;
+			box-sizing: border-box;
+			width: 30%;
+			height: 10rem;
+			background-color: white;
+		}
+
+		.signature {
+			display: grid;
+			grid-template-columns: .3fr 20rem 2rem;
+			column-gap: 1rem;
+			row-gap: 1rem;
+			height: auto;
+			position: relative;
+			inset: 0;
+		}
+
+		svg {
+			aspect-ratio: 1 / 1;
+			inset: 0;
+			position: relative;
+		}
+
+		.linkedin {
+			padding: 0;
+			margin: 0;
+			inset: 0;
+			width: 1.5rem;
+			height: 1.5rem;
+			x: 0px;
+			y: 0px;
+		}
+
+		.logo {
+			place-self: left;
+			border-right: .5px solid var(--color3);
+			inset: 0;
+			position: relative;
+			transition-timing-function: animation 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+		}
+
+		.logo > h1 {
+			display: flex;
+			justify-content: center;
+		}
+
+		.logo-svg {
+			width: 8rem;
+			height: 8rem;
+			filter: drop-shadow(0 0 .01rem var(--color3));
+		}
+
+		.svg__logo--eye {
+			-webkit-animation: 800ms ease-in-out infinite alternate eye-blink;
+			animation: 800ms ease-in-out infinite alternate eye-blink;
+			transition-timing-function: animation 300ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+		}
+
+		h1, h2 {
+			color: var(--color1);
+			line-height: 1ch;
+		}
+
+		h1 {
+			font-size: 1rem;
+			inset: 0;
+			position: relative;
+		}
+
+		h2 {
+			font-size: .8rem;
+			padding-bottom: .7rem;
+			margin: 0;
+			border-bottom: .5px solid var(--color3);
+		}
+
+		p {
+			line-height: 0;
+			color: #131113;
+			font-size: .7rem;
+			/*font-weight: 200;*/
+		}
+
+		a {
+			text-decoration: unset;
+			font-weight: 300;
+		}
+
+		/* Made by Kailoyan Todorov - from https://uiverse.io/bociKond/wise-bat-13 */
+		.spinner {
+			width: 1rem;
+			height: 1rem;
+			--clr: var(--color1);
+			--clr-alpha: var(--gradient);
+			animation: spinner 3.6s infinite ease;
+			transform-style: preserve-3d;
+			background-color: var(--color3);
+		}
+
+		.spinner:hover {
+			animation-play-state: paused;
+			cursor: pointer;
+		}
+
+		.spinner>* {
+			display: grid;
+			place-items: center;
+		}
+
+		.spinner>div {
+			background-color: var(--clr-alpha);
+			height: 100%;
+			position: absolute;
+			width: 100%;
+			border: .1rem solid var(--color1);
+		}
+
+		.face-1 {
+			transform: translateZ(-.5rem) rotateY(180deg);
+		}
+
+		.face-2 {
+			transform: rotateY(-270deg) translateX(50%);
+			transform-origin: top right;
+		}
+
+		.face-3 {
+			transform: rotateY(270deg) translateX(-50%);
+			transform-origin: center left;
+		}
+
+		.face-4 {
+			transform: rotateX(90deg) translateY(-50%);
+			transform-origin: top center;
+		}
+
+		.face-5 {
+			transform: rotateX(-90deg) translateY(50%);
+			transform-origin: bottom center;
+		}
+
+		.face-6 {
+			transform: translateZ(.5rem);
+		}
+
+		.art__fairs {
+			height: 2rem;
+			width: 30rem;
+			overflow: clip;
+			mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
+			margin: 0;
+			padding: 0;
+			counter-reset: fair 0;
+		}
+
+		.art__fairs .list {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+			min-width: calc(5rem * var(--fairs-qt));
+			align-content: center;
+			position: relative;
+		}
+
+		.list > p:nth-child(even) {
+			background-color: black;
+			color: white;
+			padding: .5rem;
+			font-weight: 700;
+			font-style: italic;
+			box-shadow: 4px 3px 5px var(--color5);
+			clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+			clip-path: polygon(0 12%, 100% 0, 100% 80%, 0 100%);
+		}
+
+		.list > p:nth-child(odd) {
+			font-weight: 700;
+			font-style: italic;
+			padding: .5rem;
+		}
+
+
+		.art__fairs .list .fairs {
+			height: 1ch;
+			width: auto;
+			left: 100%;
+			position: absolute;
+			animation: autoRun 45.5s infinite linear;
+			animation-delay: calc((96.5s / var(--fairs-qt)) * (var(--position) - 1) - 30s);
+		}
+
+		.art__fairs:hover .fairs {
+			animation-play-state: paused;
+			cursor: wait;
+		}
+
+		@keyframes autoRun {
+			from {
+				left: 100%;
+			}
+
+			to {
+				left: calc(5rem * -1);
+			}
+		}
+
+		@-webkit-keyframes spinner {
+			0% {
+				transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+			}
+			50% {
+				transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+			}
+			100% {
+				transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+			}
+		}
+
+		@-moz-keyframes spinner {
+			0% {
+				transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+			}
+			50% {
+				transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+			}
+			100% {
+				transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+			}
+		}
+
+		@keyframes spinner {
+			0% {
+				transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+			}
+			50% {
+				transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+			}
+			100% {
+				transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+			}
+		}
+
+		@keyframes eye-blink {
+			0% {
+				fill: none;
+			}
+
+			50% {
+				fill-opacity: .5;
+			}
+
+			100% {
+				fill: var(--color3);
+				fill-opacity: 1;
+				filter: drop-shadow(0 0 4rem crimson);
+				box-shadow: 15px 13px 6px var(--color3);
+			}
+		}
+	</style>
+</head>
+
+<html>
+
+<body>
+	<p>Warmest regards!</p>
+	<div class="signature" style="display: grid; grid-template-columns: .3fr 20rem 2rem; column-gap: 1rem; row-gap: 1rem; height: auto; position: relative; inset: 0;">
+		<div class="logo" style="place-self: left; border-right: .5px solid #FC007A">
+			<img src="https://mcusercontent.com/ef51896fa96332cb74fcd8bcf/images/e171730c-43ed-f77e-6f61-ec06a24836ac.png">
+			<!--<svg class="logo-svg" style="aspect-ratio: 1 / 1; inset: 0; position: relative; width: 8rem; height: 8rem; filter: drop-shadow(0 0 .01rem #FC007A">-->
+			<!--	<use xlink:href="#nav-logo"></use>-->
+			<!--</svg>-->
+			<h1 style="display: flex; justify-content: center;">OTTO</h1>
+		</div>
+		<div class="contact">
+			<h1 style="color: #03E9F4; inset: 0; position: relative; font-size: 1rem;">Jévesson Souza</h1>
+			<h2 style="font-size: .8rem; padding-bottom: .7rem; color: #03E9F4; margin: 0; border-bottom: .5px solid #FC007A;">Tech Sales.</h2>
+			<p><b>Phone:</b> +55 (11) 987 427 669</p>
+			<p><b>Email: </b><a href="mailto:josephjoarell@gmail.com">j.souza@ottocs.com</a></p>
+			<p><b>Site:</b> <a href="https://ottocratesolver.com/home/">Otto crate solver.</a> </p>
+			<a href="https://www.linkedin.com/in/souza5b74a121/">
+				<svg class="linkedin">
+					<use xlink:href="#linkedin"></use>
+				</svg>
+			</a>
+		</div>
+		<!--<div>-->
+		<!--	<!-- Made by Kaloyan Todorov - from https://uiverse.io/bociKond/wise-bat-13 -->-->
+		<!--	<div class="spinner">-->
+		<!--		<div class="face-1"></div>-->
+		<!--		<div class="face-2"></div>-->
+		<!--		<div class="face-3"></div>-->
+		<!--		<div class="face-4"></div>-->
+		<!--		<div class="face-5"></div>-->
+		<!--		<div class="face-6"></div>-->
+		<!--	</div>-->
+		<!--</div>-->
+		</div>
+	</main>
+	<div class="art__fairs">
+		<div class="list">
+			<p class="fairs" style="--position: 1">Art Basel Miami: 12/02 - 12/08</p>
+			<p class="fairs" style="--position: 2">Enter Art Fair: 29/08 - 09/01 </p>
+			<p class="fairs" style="--position: 3"> Art-O-Rama: 08/30 - 09/01 </p>
+			<p class="fairs" style="--position: 4"> Salon Zürcher: 09/02 - 09/08 </p>
+			<p class="fairs" style="--position: 5"> NADA House: 09/03 - 10/27 </p>
+			<p class="fairs" style="--position: 6"> FRIEZE-Seoul: 09/04 - 09/07 </p>
+			<p class="fairs" style="--position: 7"> Volta New York: 09/04 - 09/08</p>
+			<p class="fairs" style="--position: 8">Art on Paper NY: 09/05 - 09/08</p>
+		</div>
+	</div>
+</body>
+<svg class="signature-logo" display="none" preserveAspectRatio="none">
+	<symbol id="nav-logo" viewBox="0 0 647 731" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<g clip-path="url(#clip0_77_190)">
+			<path class="svg__logo--eye" d="M294.749 205H246.749V293H294.749V205Z" />
+			<path
+				d="M616.48 204V294.4H567.68V548C567.68 600 553.814 637.067 526.08 659.2C498.08 681.067 451.947 692 387.68 692C379.147 692 371.413 691.733 364.48 691.2C357.547 690.667 350.88 689.6 344.48 688V602.4C352.747 602.4 360.214 602.533 366.88 602.8C373.547 603.067 380.48 603.2 387.68 603.2C408.48 603.2 423.28 600.533 432.08 595.2C440.88 589.6 445.28 578.667 445.28 562.4V68H567.68V204H616.48Z"
+				fill="#03E9F4" />
+			<path d="M404.48 204V294.4H353.28V204H404.48Z" fill="#03E9F4" />
+			<path
+				d="M33.4241 294.6V204.2H82.2241V68.2H204.624V562.6C204.624 578.867 209.024 589.8 217.824 595.4C226.624 600.733 241.424 603.4 262.224 603.4C269.424 603.4 276.357 603.267 283.024 603C289.691 602.733 297.157 602.6 305.424 602.6V688.2C299.024 689.8 292.357 690.867 285.424 691.4C278.491 691.933 270.757 692.2 262.224 692.2C197.957 692.2 151.824 681.267 123.824 659.4C96.0908 637.267 82.2241 600.2 82.2241 548.2V294.6H33.4241ZM245.424 294.6V204.2H296.624V294.6H245.424Z"
+				stroke="#03E9F4" stroke-width="3" />
+			<path d="M295.171 205.2H247.171V293.2H295.171V205.2Z" stroke="#03E9F4" stroke-width="3" />
+			<path
+				d="M616.902 204.2V294.6H568.102V548.2C568.102 600.2 554.235 637.267 526.502 659.4C498.502 681.267 452.369 692.2 388.102 692.2C379.569 692.2 371.835 691.933 364.902 691.4C357.969 690.867 351.302 689.8 344.902 688.2V602.6C353.169 602.6 360.635 602.733 367.302 603C373.969 603.267 380.902 603.4 388.102 603.4C408.902 603.4 423.702 600.733 432.502 595.4C441.302 589.8 445.702 578.867 445.702 562.6V68.2H568.102V204.2H616.902Z"
+				stroke="#03E9F4" stroke-width="3" />
+			<path d="M404.902 204.2V294.6H353.702V204.2H404.902Z" stroke="#03E9F4" stroke-width="3" />
+		</g>
+		<defs>
+			<clipPath id="clip0_77_190">
+				<rect width="647" height="731" fill="white" />
+			</clipPath>
+		</defs>
+	</symbol>
+
+	<symbol>
+		<svg id="linkedin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+			<linearGradient id="SVGID_1__GIpl4LX6E2xe_gr1" x1="39.328" x2="8.672" y1="8.672" y2="39.328"
+				gradientUnits="userSpaceOnUse">
+				<stop offset="0" stop-color="#60e8fe"></stop>
+				<stop offset=".033" stop-color="#6ae9fe"></stop>
+				<stop offset=".197" stop-color="#97f0fe"></stop>
+				<stop offset=".362" stop-color="#bdf5ff"></stop>
+				<stop offset=".525" stop-color="#dafaff"></stop>
+				<stop offset=".687" stop-color="#eefdff"></stop>
+				<stop offset=".846" stop-color="#fbfeff"></stop>
+				<stop offset="1" stop-color="#fff"></stop>
+			</linearGradient>
+			<path fill="url(#SVGID_1__GIpl4LX6E2xe_gr1)"
+				d="M36.5,40.5h-25c-2.209,0-4-1.791-4-4v-25c0-2.209,1.791-4,4-4h25c2.209,0,4,1.791,4,4v25	C40.5,38.709,38.709,40.5,36.5,40.5z">
+			</path>
+			<path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+				stroke-width="3" d="M40.5,31.723V36.5c0,2.209-1.791,4-4,4h-25c-2.209,0-4-1.791-4-4V24.915"></path>
+			<path fill="none" stroke="#10cfe3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+				stroke-width="3" d="M7.5,19.213V11.5c0-2.209,1.791-4,4-4h25c2.209,0,4,1.791,4,4v14"></path>
+			<circle cx="15.5" cy="15.5" r="2.5" fill="#10cfe3"></circle>
+			<path fill="#10cfe3"
+				d="M17,35h-3c-0.553,0-1-0.447-1-1V21c0-0.553,0.447-1,1-1h3c0.553,0,1,0.447,1,1v13C18,34.553,17.553,35,17,35z">
+			</path>
+			<path fill="#10cfe3"
+				d="M29,20c-1.538,0-2.937,0.586-4,1.541V21c0-0.553-0.447-1-1-1h-3c-0.553,0-1,0.447-1,1v13c0,0.553,0.447,1,1,1	h3c0.553,0,1-0.447,1-1v-7.5c0-1.379,1.121-2.5,2.5-2.5s2.5,1.121,2.5,2.5V34c0,0.553,0.447,1,1,1h3c0.553,0,1-0.447,1-1v-8	C35,22.691,32.309,20,29,20z">
+			</path>
+		</svg>
+	</symbol>
+</svg>
+</html>
