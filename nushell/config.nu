@@ -798,10 +798,11 @@ alias vim = ~/Downloads/nvim-linux64/bin/nvim
 # alias up = source ~/.config/nushell/config.nu
 alias c = clear
 alias val = valgrind -q --leak-check=full --show-leak-kinds=all -s --error-exitcode=1 --track-origins=yes --tool=memcheck --vgdb=yes --vgdb-error=0 ./test
-alias l = eza -lah --color=always --group-directories-first --icons  # tree listing
-alias lt = eza -aT --color=always --group-directories-first --icons  # tree listing
-alias ll = eza -l --color=always --group-directories-first --icons   # long format
-alias la = eza -a --color=always --group-directories-first --icons   # all files and dirs
+alias l = eza -lah --color=always --group-directories-first --icons				# tree listing
+alias lt = eza -aT --color=always --group-directories-first --icons  			# tree listing
+alias ll = eza -l --color=always --group-directories-first --icons   			# long format
+alias la = eza -a --color=always --group-directories-first --icons   			# all files and dirs
+alias lta = eza -aT --color=always --group-directories-first --icons --long		# all files and dirs with a tree visualizatio
 alias zj = zellij options --simplified-ui true --pane-frames false
 
 

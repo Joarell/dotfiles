@@ -1,5 +1,5 @@
 --  ╭──────────────────────────────────────────────────────────╮
---  │ 		  --LSP and installer sever.                         │
+--  │ 		  --LSP and installer sever.                       │
 --  ╰──────────────────────────────────────────────────────────╯
 
 return {
@@ -146,7 +146,6 @@ return {
 				dockerls = {},
 				docker_compose_language_service = {},
 				-- "eslint",
-				kotlin_language_server = {},
 				gradle_ls = {},
 				gopls = {
 					settings = {
@@ -197,12 +196,16 @@ return {
 						},
 					},
 				},
+				harper_ls = {
+					userDictPath = "~/dotfiles/dict.txt"
+				},
 				-- ['htmx-lsp'] = {},
 				html = {
 					filetypes = { "html", "twig", "hbs" },
 				},
 				-- dprint = {},
 				jsonls = {},
+				kotlin_language_server = {},
 				luau_lsp = {},
 				lua_ls = {
 					Lua = {
@@ -246,7 +249,7 @@ return {
 						},
 					},
 				},
-				typst_lsp = {},
+				tinymist = {},
 				typos_lsp = {},
 				yamlls = {},
 				jdtls = {},

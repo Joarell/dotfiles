@@ -298,6 +298,10 @@ return {
 	},
 	-- { "vanya-robertson/telescope-media-files.nvim" },
 	{ "nvim-telescope/telescope-symbols.nvim" },
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release; cmake --build build --config Release'
+	},
 	-- { "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-lua/popup.nvim" },
 	-- { "ThePrimeagen/git-worktree.nvim" },

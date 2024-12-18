@@ -198,7 +198,9 @@ vim.diagnostic.config({ float = { border = "rounded" } })
 
 vim.diagnostic.config({
 	virtual_text = {
-		prefix = " 󱠇",
+		prefix = "󰛁 ",
+		-- prefix = " ",
+		-- prefix = "󱠇" ,
 	},
 })
 --

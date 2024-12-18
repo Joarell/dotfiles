@@ -1,6 +1,7 @@
 return {
 	{
 		"vyfor/cord.nvim",
+		-- "mealter/cord.nvim",
 		build = './build',
 		event = 'VeryLazy',
 		opts = {},

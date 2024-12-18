@@ -45,6 +45,13 @@ telescope.setup({
 			},
 			find_cmd = "rg",
 		},
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+			case_mode = "smart_case",
+		},
+		require("telescope").load_extension("fzf"),
 	},
 	pickers = {
 		find_files = {
@@ -130,3 +137,4 @@ vim.api.nvim_create_autocmd("BufLeave", {
 	end,
 	group = ssh,
 })
+

@@ -52,9 +52,9 @@ layout {
 				// 	}
 				// 	pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" borderless=true name="resolution" split_direction="horizontal"
 				// }
-				// pane borderless=true name="cava" size=10 {
-				// 	command "cava" close_on_exit=true
-				// }
+				pane borderless=true name="cava" size=10 {
+					command "cava" close_on_exit=true
+				}
 			}
 			pane split_direction="horizontal" size=80 {
 				pane borderless=true name="󰌘" {
