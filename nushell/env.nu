@@ -122,7 +122,7 @@ export-env {
 def --env add-hook [field: cell-path new_hook: any] {
 	let old_config = $env.config? | default {}
 	let old_hooks = $old_config | get $field --ignore-errors | default []
-	$env.config = ($old_config | upsert $field ($old_hooks ++ $new_hook))
+	# $env.config = ($old_config | upsert $field ($old_hooks ++ $new_hook))
 }
 
 def "parse vars" [] {
@@ -179,6 +179,8 @@ if (not ($env | default false __zoxide_hooked | get __zoxide_hooked)) {
 		zoxide add -- $dir
 	}))
 }
+
+$env.config.filesize.unit
 
 # =============================================================================
 #

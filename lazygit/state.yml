@@ -1,18 +1,17 @@
 lastupdatecheck: 1723697607
 recentrepos:
-    - /home/jev/rust_test/100-exercises-to-learn-rust
-    - /home/jev/Otto/CloudFlare
-    - /home/jev/Otto-Home/main
     - /home/jev/dotfiles
+    - /home/jev/Otto/CloudFlare
+    - /home/jev/OB
+    - /home/jev/rust_test/100-exercises-to-learn-rust
+    - /home/jev/Otto-Home/main
     - /home/jev/Otto/main
     - /home/jev/Otto/builder
     - /home/jev/Otto/go
-    - /home/jev/OB
     - /home/jev/Otto/vite
     - /home/jev/Otto/typescript
     - /home/jev/Otto/Rust
     - /home/jev/RUSTLINGS
-    - /home/jev/rust_test/trait-test
 startuppopupversion: 5
 lastversion: v0.44.1.3a4422fc6
 customcommandshistory:

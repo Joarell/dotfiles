@@ -112,12 +112,12 @@ layout {
 			}
 		}
 		pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" split_direction="vertical" borderless=true
-		floating_panes split_direction="horizontal" {
-			pane cwd="$HOME/rust_test/100-solutions/exercises/" borderless=true name="resolution" {
-				command "yazi" close_on_exit=true
-			}
-			pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" borderless=true name="resolution"
-		}
+		// floating_panes split_direction="horizontal" {
+		// 	pane cwd="$HOME/rust_test/100-solutions/exercises/" borderless=true name="resolution" {
+		// 		command "yazi" close_on_exit=true
+		// 	}
+		// 	pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" borderless=true name="resolution"
+		// }
 	}
 	// tab name="LAB" {
 	// 	pane size=1 borderless=true {
