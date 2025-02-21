@@ -260,6 +260,18 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	{ "folke/tokyonight.nvim" },
+	{ "cordx56/rustowl",
+		dependencies = { "neovim/nvim-lspconfig" },
+		config = function ()
+			local lspconfig = require('lspconfig')
+			lspconfig.rustowl.setup{
+				trigger = {
+					hover = true
+				}
+			}
+		end,
+		event = "VeryLazy",
+	},
 	{ "rebelot/kanagawa.nvim" },
 	{ "marko-cerovac/material.nvim" },
 	-- {"tomasiser/vim-code-dark"},
@@ -429,13 +441,7 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup({
-				-- your configuration comes here
-				-- or leave it empty to h, default settings
-				-- refer to the configuration section below
-			})
-		end,
+		opts = {},
 	},
 	-- {
 	-- 	"s1n7ax/nvim-comment-frame",

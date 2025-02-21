@@ -102,12 +102,12 @@ vim.api.nvim_create_autocmd("BufRead", {
 	group = yaml,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-	callback = function()
-		vim.cmd("Trouble diagnostics")
-	end,
-	group = diag,
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+-- 	callback = function()
+-- 		vim.cmd("Trouble diagnostics")
+-- 	end,
+-- 	group = diag,
+-- })
 
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = { "*.xml", "*.html", "*.css" },

@@ -77,7 +77,7 @@ end, opts)
 
 if vim.lsp.inlay_hint then
 	--- @return boolean inlay hints ON or OFF.
-	keymap("n", "<A-T>",function()
+	keymap("n", "<D-h>",function()
 		if vim.lsp.inlay_hint.is_enabled() then
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 		else
@@ -151,6 +151,7 @@ keymap("n", "<A-D>", function ()
 		vim.notify("SSH DISCONNTED! 🔌 ⛔", 3, {})
 	end
 end, opts)
+keymap("n", "<Leader>o", ':lua require("rustowl").rustowl_cursor()<CR>', opts)
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                       F function.                       │

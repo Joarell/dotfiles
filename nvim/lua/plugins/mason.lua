@@ -135,6 +135,30 @@ return {
 				group = swift_lsp,
 			})
 
+			-- require("rustowl").setup()
+			-- local owl_lsp = vim.api.nvim_create_augroup("rust_owl", { clear = true })
+			-- vim.api.nvim_create_autocmd("FileType", {
+			-- 	pattern = "rust",
+			-- 	callback = function ()
+			-- 		local root_dir = vim.fs.dirname(
+			-- 			vim.fs.find({ "cargo-owlsp" }, { upward = true })[1]
+			-- 		)
+			-- 		local client = vim.lsp.start({
+			-- 			autostart = true,
+			-- 			name = 'rustowlsp',
+			-- 			cmd = { 'cargo-owlsp' },
+			-- 			root_dir = root_dir,
+			-- 		})
+			-- 		vim.lsp.buf_attach_client(0, client)
+			-- 	end,
+			-- 	group = owl_lsp,
+			-- })
+			-- lspconfig.rustowl.setup({
+			-- 	trigger = {
+			-- 		hover = false
+			-- 	}
+			-- })
+
 			local servers = {
 				astro = {},
 				asm_lsp = {},
