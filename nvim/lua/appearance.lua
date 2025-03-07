@@ -282,7 +282,7 @@ require("material").setup({
 	custom_highlights = {},   -- Overwrite highlights with your own
 })
 
-vim.cmd("colorscheme nightfox")
+vim.cmd("colorscheme nordfox")
 -- vim.cmd("colorscheme solarized-osaka")
 -- vim.cmd("colorscheme retrobox")
 -- vim.cmd("colorscheme kanagawa-dragon")

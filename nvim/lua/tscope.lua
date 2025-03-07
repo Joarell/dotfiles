@@ -51,7 +51,6 @@ telescope.setup({
 			override_file_sorter = true,
 			case_mode = "smart_case",
 		},
-		require("telescope").load_extension("fzf"),
 	},
 	pickers = {
 		find_files = {
@@ -93,6 +92,8 @@ local keymap = vim.keymap.set
 local builtin = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
 
+telescope.load_extension("fzf")
+
 keymap("n", "QF", builtin.quickfix, opts)
 keymap("n", "FH", builtin.quickfixhistory, opts)
 keymap("n", "ts", builtin.colorscheme, opts)
@@ -102,7 +103,6 @@ keymap("n", "fb", builtin.buffers, opts)
 keymap("n", "fh", builtin.help_tags, opts)
 keymap("n", "tt", ":Telescope<CR>", opts)
 keymap("n", "tk", ":Telescope keymaps<CR>", opts)
-keymap("n", "TM", ":Telescope media_files<CR>", opts)
 keymap("n", "tn", ":Telescope notify<CR>", opts)
 keymap("n", "to", ":Telescope oldfiles<CR>", opts)
 keymap("n", "th", builtin.help_tags, opts)
@@ -111,6 +111,7 @@ keymap("n", "gr", builtin.lsp_references, opts)
 keymap("n", "td", builtin.lsp_type_definitions, opts)
 keymap("n", "tb", ":Telescope file_browser<CR>", opts)
 keymap("n", "tm", ":Telescope harpoon marks<CR>", opts)
+keymap("n", "TM", ":Telescope marks<CR>", opts)
 -- keymap("n", "fz", function ()
 -- 	if connections.is_connected() then
 -- 		ssh_api.find_files()

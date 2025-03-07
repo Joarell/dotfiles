@@ -17,8 +17,8 @@ return {
 	-- },
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^4",
-		ft = { "rust" },
+		version = "^5",
+		lazy = false,
 	},
 	-- {
 	-- 	"lpturmel/discord.nvim",
@@ -261,16 +261,13 @@ return {
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	{ "folke/tokyonight.nvim" },
 	{ "cordx56/rustowl",
+		-- event = "VeryLazy",
 		dependencies = { "neovim/nvim-lspconfig" },
+		ft = { "rust" },
 		config = function ()
 			local lspconfig = require('lspconfig')
-			lspconfig.rustowl.setup{
-				trigger = {
-					hover = true
-				}
-			}
+			lspconfig.rustowl.setup({})
 		end,
-		event = "VeryLazy",
 	},
 	{ "rebelot/kanagawa.nvim" },
 	{ "marko-cerovac/material.nvim" },
@@ -537,7 +534,7 @@ return {
 	--  │ 		--Window animations                                │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
-		"anuvyklack/windows.nvim",
+		"d7omdev/windows.nvim",
 		dependencies = {
 			"anuvyklack/middleclass",
 			"anuvyklack/animation.nvim",

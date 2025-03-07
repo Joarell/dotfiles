@@ -28,6 +28,7 @@ return {
 			})
 
 			require("mason-null-ls").setup({})
+			require("rustowl")
 			-- require("sg").setup({})
 			require("lazydev").setup({})
 			-- local lsp_zero = require("lsp-zero")
@@ -60,9 +61,9 @@ return {
 				end
 				-- vim.lsp.completion.enable(true, client, 0, { autotrigger = true })
 
-				if vim.lsp.inlay_hint then
-					vim.lsp.inlay_hint.enable()
-				end
+				-- if vim.lsp.inlay_hint then
+				-- 	vim.lsp.inlay_hint.enable()
+				-- end
 			end
 
 			-- local codelldb = mason_registry.get_package("codelldb")
@@ -220,8 +221,11 @@ return {
 						},
 					},
 				},
+				-- grammarly = {},
 				harper_ls = {
-					userDictPath = "~/dotfiles/dict.txt"
+					["harper-ls"] = {
+						userDictPath = "~/dotfiles/dict.txt"
+					}
 				},
 				-- ['htmx-lsp'] = {},
 				html = {
@@ -242,11 +246,6 @@ return {
 					},
 				},
 				lemminx = {},
-				marksman = {},
-				nginx_language_server = {
-					cmd = { "nginx-language-server" },
-					filetypes = { "nginx" },
-				},
 				sqlls = {},
 				ts_ls = {
 					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
@@ -278,12 +277,14 @@ return {
 				yamlls = {},
 				jdtls = {},
 				zls = {},
+				zk = {},
 			}
 
 			mason_lsp.setup({
 				automatic_installation = true,
 				ensure_installed = vim.tbl_keys(servers),
 			})
+
 
 			mason_lsp.setup_handlers({
 				function(server_name)

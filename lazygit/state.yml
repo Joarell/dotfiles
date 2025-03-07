@@ -3,7 +3,6 @@ recentrepos:
     - /home/jev/dotfiles
     - /home/jev/Otto/CloudFlare
     - /home/jev/OB
-    - /home/jev/rust_test/100-exercises-to-learn-rust
     - /home/jev/Otto-Home/main
     - /home/jev/Otto/main
     - /home/jev/Otto/builder
@@ -11,9 +10,8 @@ recentrepos:
     - /home/jev/Otto/vite
     - /home/jev/Otto/typescript
     - /home/jev/Otto/Rust
-    - /home/jev/RUSTLINGS
 startuppopupversion: 5
-lastversion: v0.44.1.3a4422fc6
+lastversion: v0.48.0.1b571f9e6
 customcommandshistory:
     - git merge builder
     - git push origin v0.1.1-beta

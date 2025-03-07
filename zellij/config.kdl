@@ -11,8 +11,11 @@ keybinds clear-defaults=true {
 		// bind "Alt c" { Copy; }
 	}
 	locked {
-		unbind "Ctrl g" { SwitchToMode "Normal"; }
-		bind "Ctrl b" { SwitchToMode "Normal"; }
+		// unbind "Ctrl g" { SwitchToMode "Normal"; }
+		bind "Ctrl b" {
+			// MessagePlugin "autolock" { payload "disable"; };
+			SwitchToMode "Normal";
+		};
 	}
 	resize {
 		bind "Ctrl n" { SwitchToMode "Normal"; }
@@ -152,6 +155,12 @@ keybinds clear-defaults=true {
 		bind "Space" { NextSwapLayout; }
 		bind "x" { CloseFocus; SwitchToMode "Normal"; }
 	}
+	shared {
+		bind "Alt Ctrl b" {
+			MessagePlugin "autolock" { payload "enable"; };
+			SwitchToMode "Normal";
+		}
+	}
 	shared_except "locked" {
 		bind "Ctrl g" { SwitchToMode "Locked"; }
 		bind "Ctrl q" { Quit; }
@@ -198,10 +207,9 @@ plugins {
 	compact-bar { path "compact-bar"; }
 	session-manager { path "session-manager"; }
 	zjstatus { path "$HOME/.config/zellij/zjstatus.wasm"; }
-	autolock location="https://github.com/fresh2dev/zellij-autolock/releases/latest/download/zellij-autolock.wasm" {
-		triggers "nvim|vim|v"  // Lock when any open these programs open. They are expected to unlock themselves when closed (e.g., using zellij.vim plugin).
-			watch_triggers "fzf|zoxide|atuin"  // Lock when any of these open and monitor until closed.
-			watch_interval "1.0"  // When monitoring, check every X seconds.
+	autolock location="https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm" {
+		triggers "fzf|zoxide|atuin|git|vim|nvim|lazygit|lg"  // Lock when any of these open and monitor until closed.
+		reaction_seconds "0.5"  // When monitoring, check every X seconds.
 	}
 }
 

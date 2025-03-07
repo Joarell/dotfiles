@@ -111,7 +111,8 @@ layout {
 				// first_start	"true"
 			}
 		}
-		pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" split_direction="vertical" borderless=true
+		// pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" split_direction="vertical" borderless=true
+		pane cwd="$HOME/OB/Obsidian/Joarell/" split_direction="vertical" borderless=true
 		// floating_panes split_direction="horizontal" {
 		// 	pane cwd="$HOME/rust_test/100-solutions/exercises/" borderless=true name="resolution" {
 		// 		command "yazi" close_on_exit=true

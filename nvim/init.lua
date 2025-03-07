@@ -38,6 +38,7 @@ set.inccommand = split --Shows replacements in a split screen, before applying t
 -- set.guifont = "CaskaydiaCove NF:h13"
 set.background = 'dark'
 set.list = true
+set.scs = true
 -- set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
 
 --  ╭──────────────────────────────────────────────────────────╮
