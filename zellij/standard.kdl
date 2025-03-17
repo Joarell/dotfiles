@@ -1,7 +1,7 @@
 layout {
-	tab name="EXTAB" {
+	tab name="STD" {
 		pane size=1 borderless=true {
-			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+			plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
 				format_left  "  #[fg=#89B4FA,bold] {session} {mode} {tabs} 󰋘  "
 				format_right "󰃭 {datetime}󰔟"
 
@@ -10,7 +10,7 @@ layout {
 				mode_tmux	"#[bg=#ffc387] {name}"
 
 				tab_normal	"#[fg=#6C7086] {name} "
-				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+				tab_active	"#[fg=#80CED7,bold,italic] {name} {floating_indicator}"
 
 				datetime	"#[fg=#6C7086,bold] {format} "
 				datetime_format "%A, %d %b %Y %H:%M"
@@ -18,6 +18,27 @@ layout {
 
 				hide_frame_for_single_pane "true"
 				first_start	"true"
+				// indicators
+				tab_sync_indicator       "<> "
+				tab_fullscreen_indicator "[] "
+				tab_floating_indicator   "   󰨦"
+
+				// formatting for inactive tabs
+				tab_normal_fullscreen   "#[fg=#6C7086] :: {name} [] "
+				tab_normal_sync         "#[fg=#6C7086] :: {name} <> "
+
+				// formatting for the current active tab
+				tab_active_fullscreen   "#[fg=#9399B2,bold,italic] {name} {fullscreen_indicator}"
+				tab_active_sync         "#[fg=#9399B2,bold,italic] {name} {sync_indicator}"
+
+				// format when renaming a tab
+				tab_rename              "#[fg=#eba0ac,bg=#181825] {index} {name} {floating_indicator} "
+
+
+				// limit tab display count
+				tab_display_count         "3"  // limit to showing 3 tabs
+				tab_truncate_start_format "#[fg=red,bg=#181825] < +{count} ..."
+				tab_truncate_end_format   "#[fg=red,bg=#181825] ... +{count} >"
 			}
 			// plugin location="zellij:tab-bar"
 		}
@@ -26,6 +47,115 @@ layout {
 			// 	plugin location="zellij:strider"
 			// }
 			pane name="TAB" borderless=true
+		}
+	}
+	tab name="AUX" {
+		pane size=1 borderless=true {
+			plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+				format_left  "  #[fg=#89B4FA,bold] {session} {mode} {tabs} 󰋘  "
+				format_right "󰃭 {datetime}󰔟"
+
+				mode_locked	"#[bg=#B80056] {name}"
+				mode_normal	"#[bg=#333] {name}"
+				mode_tmux	"#[bg=#ffc387] {name}"
+
+				tab_normal	"#[fg=#6C7086] {name} "
+				tab_active	"#[fg=#80CED7,bold,italic] {name} {floating_indicator}"
+
+				datetime	"#[fg=#6C7086,bold] {format} "
+				datetime_format "%A, %d %b %Y %H:%M"
+				datetime_timezone "America/Sao_Paulo"
+
+				hide_frame_for_single_pane "true"
+				first_start	"true"
+				// indicators
+				tab_sync_indicator       "<> "
+				tab_fullscreen_indicator "[] "
+				tab_floating_indicator   "   󰨦"
+
+				// formatting for inactive tabs
+				tab_normal_fullscreen   "#[fg=#6C7086] :: {name} [] "
+				tab_normal_sync         "#[fg=#6C7086] :: {name} <> "
+
+				// formatting for the current active tab
+				tab_active_fullscreen   "#[fg=#9399B2,bold,italic] {name} {fullscreen_indicator}"
+				tab_active_sync         "#[fg=#9399B2,bold,italic] {name} {sync_indicator}"
+
+				// format when renaming a tab
+				tab_rename              "#[fg=#eba0ac,bg=#181825] {name} {floating_indicator} "
+
+
+				// limit tab display count
+				tab_display_count         "3"  // limit to showing 3 tabs
+				tab_truncate_start_format "#[fg=red,bg=#181825] < +{count} ..."
+				tab_truncate_end_format   "#[fg=red,bg=#181825] ... +{count} >"
+			}
+			// plugin location="zellij:tab-bar"
+		}
+		pane split_direction="vertical" {
+			// pane split_direction="vertical" size=40 {
+			// 	plugin location="zellij:strider"
+			// }
+			pane name="TAB" borderless=true
+		}
+	}
+    swap_floating_layout {
+        floating_panes max_panes=1 {
+            pane
+        }
+        floating_panes max_panes=2 {
+            pane x=0
+            pane x="50%"
+        }
+        floating_panes max_panes=3 {
+            pane x=0 width="25%"
+            pane x="25%" width="25%"
+            pane x="50%"
+        }
+    }
+	swap_tiled_layout name="stacked" {
+		tab min_panes=5 {
+			pane split_direction="vertical" {
+				pane
+				pane stacked=true { children; }
+			}
+		}
+	}
+	swap_floating_layout name="staggered" {
+		floating_panes
+	}
+	swap_floating_layout name="enlarged" {
+		floating_panes max_panes=10 {
+			pane { x "5%"; y 1; width "90%"; height "90%"; }
+			pane { x "5%"; y 2; width "90%"; height "90%"; }
+			pane { x "5%"; y 3; width "90%"; height "90%"; }
+			pane { x "5%"; y 4; width "90%"; height "90%"; }
+			pane { x "5%"; y 5; width "90%"; height "90%"; }
+			pane { x "5%"; y 6; width "90%"; height "90%"; }
+			pane { x "5%"; y 7; width "90%"; height "90%"; }
+			pane { x "5%"; y 8; width "90%"; height "90%"; }
+			pane { x "5%"; y 9; width "90%"; height "90%"; }
+			pane { x 10; y 10; width "90%"; height "90%"; }
+		}
+	}
+	swap_floating_layout name="spread" {
+		floating_panes max_panes=1 {
+			pane {y "50%"; x "50%"; }
+		}
+		floating_panes max_panes=2 {
+			pane { x "1%"; y "25%"; width "45%"; }
+			pane { x "50%"; y "25%"; width "45%"; }
+		}
+		floating_panes max_panes=3 {
+			pane { y "55%"; width "45%"; height "45%"; }
+			pane { x "1%"; y "1%"; width "45%"; }
+			pane { x "50%"; y "1%"; width "45%"; }
+		}
+		floating_panes max_panes=4 {
+			pane { x "1%"; y "55%"; width "45%"; height "45%"; }
+			pane { x "50%"; y "55%"; width "45%"; height "45%"; }
+			pane { x "1%"; y "1%"; width "45%"; height "45%"; }
+			pane { x "50%"; y "1%"; width "45%"; height "45%"; }
 		}
 	}
 }

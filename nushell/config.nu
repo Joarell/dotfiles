@@ -795,16 +795,16 @@ $env.config = {
 }
 
 alias vim = ~/Downloads/nvim-linux64/bin/nvim
-# alias up = source ~/.config/nushell/config.nu
+# alias up = source ~/.config/nushell/config.nu; source ~/.config/nushell/env.nu
 alias c = clear
 alias val = valgrind -q --leak-check=full --show-leak-kinds=all -s --error-exitcode=1 --track-origins=yes --tool=memcheck --vgdb=yes --vgdb-error=0 ./test
 alias l = eza -lah --color=always --group-directories-first --icons				# tree listing
 alias lt = eza -aT --color=always --group-directories-first --icons  			# tree listing
 alias ll = eza -l --color=always --group-directories-first --icons   			# long format
 alias la = eza -a --color=always --group-directories-first --icons   			# all files and dirs
-alias lta = eza -aT --color=always --group-directories-first --icons --long		# all files and dirs with a tree visualizatio
+alias lat = eza -aT --color=always --group-directories-first --icons --long		# all files and dirs with a tree visualizatio
 alias zj = zellij options --simplified-ui true --pane-frames false
-
+alias za = zoxide add .
 
 alias lg = lazygit
 alias yz = yazi
@@ -825,10 +825,10 @@ alias zjc = zellij -n ~/.config/zellij/standard.kdl -s STD
 alias weather = zellij plugin -- https://github.com/imsnif/weather-pal/releases/latest/download/weather-pal.wasm
 
 # Paru/Yay stuff
-alias pget = paru -S  
-alias yget = yay -S  
-alias yrem = yay -R  
-alias prem = paru -R  
+alias pget = paru -S
+alias yget = yay -S
+alias yrem = yay -R
+alias prem = paru -R
 
 #Flatpak Update
 alias fpup = flatpak update 

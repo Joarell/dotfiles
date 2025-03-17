@@ -95,15 +95,30 @@ $env.PATH = ($env.PATH | split row (char esep) | append '~/nvim-discord/target/r
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.moon/bin')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.config/mise/config.toml')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.cargo/bin')
+$env.PATH = ($env.PATH | split row (char esep) | append '~/.local/bin/')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.local/share/mise/installs/node/latest/bin')
 
 neofetch
 source ~/.zoxide.nu
-ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
-ssh-add ~/.ssh/id_jev
+# ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
+# ssh-add ~/.ssh/otto_back_jev
+# ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
+# ssh-add ~/.ssh/rsa_home_jev
+# ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
+# ssh-add ~/.ssh/id_jev
+
 # oh-my-posh init nu --config ~/oh-my-posh/themes/di4am0nd.omp.json
 # source ~/dotfiles/script.nu
 # source ~/.local/share/atuin/init.nu
+
+keychain --eval --quiet ~/.ssh/id_jev ~/.ssh/rsa_home_jev ~/.ssh/otto_back_jev ~/.ssh/jev_otto_app
+    | lines
+    | where not ($it | is-empty)
+    | parse "{k}={v}; export {k2};"
+    | select k v
+    | transpose --header-row
+    | into record
+    | load-env
 
 $env.ANDROID_HOME = '~/Android/Sdk/'
 $env.NU_PLUGIN_HIGHLIGHT_TRUE_COLORS = true

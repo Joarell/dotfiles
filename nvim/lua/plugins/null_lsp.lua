@@ -35,6 +35,7 @@ return {
 					null.formatting.gofumpt,
 					null.formatting.goimports,
 					null.formatting.golines,
+					null.formatting.prettierd,
 					null.formatting.typstfmt,
 					----------------------------------------
 					-- null.diagnostics.eslint,

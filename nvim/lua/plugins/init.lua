@@ -260,15 +260,6 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	{ "folke/tokyonight.nvim" },
-	{ "cordx56/rustowl",
-		-- event = "VeryLazy",
-		dependencies = { "neovim/nvim-lspconfig" },
-		ft = { "rust" },
-		config = function ()
-			local lspconfig = require('lspconfig')
-			lspconfig.rustowl.setup({})
-		end,
-	},
 	{ "rebelot/kanagawa.nvim" },
 	{ "marko-cerovac/material.nvim" },
 	-- {"tomasiser/vim-code-dark"},
@@ -469,7 +460,7 @@ return {
 	{ "tveskag/nvim-blame-line" },
 	{ 
 		"f-person/git-blame.nvim",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
 		config = function ()
 			require("gitblame").setup({})
 		end,

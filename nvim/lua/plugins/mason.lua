@@ -13,6 +13,14 @@ return {
 			"jay-babu/mason-nvim-dap.nvim",
 			"jay-babu/mason-null-ls.nvim",
 			-- "VonHeikemen/lsp-zero.nvim", branch = 'v4.x',
+			"cordx56/rustowl",
+			-- event = "VeryLazy",
+			-- dependencies = { "neovim/nvim-lspconfig" },
+			-- ft = { "rust" },
+			-- config = function ()
+			-- 	local lspconfig = require('lspconfig')
+			-- 	lspconfig.rustowl.setup({})
+			-- end,
 		},
 		config = function()
 			require("nvim-lsp-installer").setup({
@@ -28,8 +36,6 @@ return {
 			})
 
 			require("mason-null-ls").setup({})
-			require("rustowl")
-			-- require("sg").setup({})
 			require("lazydev").setup({})
 			-- local lsp_zero = require("lsp-zero")
 			local dap_install = require("mason-nvim-dap")
@@ -46,6 +52,7 @@ return {
 				Break = "",
 			}
 
+			lspconfig.rustowl.setup({})
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -170,7 +177,7 @@ return {
 				cssls = {},
 				dockerls = {},
 				docker_compose_language_service = {},
-				-- "eslint",
+				-- eslint = {},
 				gradle_ls = {},
 				gopls = {
 					settings = {
@@ -217,7 +224,6 @@ return {
 								"-node_modules",
 								"-.nvim",
 							},
-
 						},
 					},
 				},
@@ -247,6 +253,7 @@ return {
 				},
 				lemminx = {},
 				sqlls = {},
+				vale_ls = {},
 				ts_ls = {
 					-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 					javascript = {
@@ -296,6 +303,8 @@ return {
 					})
 				end,
 			})
+
+			-- mason_lsp.setup_handlers(lspconfig.rustowl.setup({}))
 
 			-- lsp_zero.extend_lspconfig({
 			-- 	sign_text = true,
@@ -356,8 +365,16 @@ return {
 							check = {
 								command = "clippy",
 							},
+							checkOnSave = true,
 							standalone = false,
-							procMacro = { enable = true },
+							procMacro = {
+								enable = true,
+								ignored = {
+									["async-trait"] = { "async_trait" },
+									["napi-derive"] = { "napi" },
+									["async-recursion"] = { "async_recursion" },
+								},
+							},
 						},
 					},
 				},

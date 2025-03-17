@@ -1,0 +1,62 @@
+return {
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = { "cordx56/rustowl" },
+		lazy = false,
+		config = function(_, opts)
+			for server, server_opts in pairs(opts.servers) do
+				require("lspconfig")[server].setup(server_opts) -- You may select only rustowl and rust_analyzer
+			end
+		end,
+		opts = {
+			servers = {
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							assist = {
+								importEnforceGranualrity = true,
+								importPrefix = "create",
+							},
+							diagnostics = { enable = true },
+							inlayHints = {
+								lifetimeElisionHints = {
+									enable = true,
+									useParameterNames = true,
+								},
+							},
+							imports = {
+								granularity = {
+									group = "module",
+								},
+								prefix = "self",
+							},
+							cargo = {
+								allFeatures = true,
+								loadOutDirsFromCheck = true,
+								buildScripts = {
+									enable = true,
+								},
+							},
+							check = {
+								command = "clippy",
+							},
+							checkOnSave = true,
+							standalone = true,
+							procMacro = {
+								enable = true,
+								ignored = {
+									["async-trait"] = { "async_trait" },
+									["napi-derive"] = { "napi" },
+									["async-recursion"] = { "async_recursion" },
+								},
+							},
+							-- rustc = { source = "discover" },
+						},
+					},
+				},
+				rustowl = {},
+			},
+		},
+		-- stylua: ignore
+	},
+}

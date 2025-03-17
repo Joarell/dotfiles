@@ -1,9 +1,11 @@
 lastupdatecheck: 1723697607
 recentrepos:
     - /home/jev/dotfiles
+    - /home/jev/CF-OttoBack
+    - /home/jev/otto-app
+    - /home/jev/otto-home
     - /home/jev/Otto/CloudFlare
     - /home/jev/OB
-    - /home/jev/Otto-Home/main
     - /home/jev/Otto/main
     - /home/jev/Otto/builder
     - /home/jev/Otto/go
