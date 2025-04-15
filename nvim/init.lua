@@ -176,6 +176,7 @@ vim.g["load_netrwPlugin"] = 1
 vim.g["gradle_path"] = "/usr/bin/"
 vim.o.incsearch = false
 vim.o.fcs = "eob: ,foldopen:▾,foldsep:│,foldclose:▸"
+vim.diagnostic.config({ virtual_text = true })
 
 vim.filetype.add({
 	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" }
@@ -253,10 +254,10 @@ end
 
 -- vim.g.neovide_floating_blur_amount_x = 2.0
 -- vim.g.neovide_floating_blur_amount_y = 2.0
-vim.g.neovide_transparency = 0.899
+vim.g.neovide_opacity = 0.965
 -- vim.g.neovide_background_color = "#0F1117" .. alpha()
 vim.g.neovide_no_idle = true
-vim.g.neovide_cursor_vfx_mode = "ripple"
+vim.g.neovide_cursor_vfx_mode = { "pixiedust"  }
 vim.g.neovide_refresh_rate = 40
 vim.g.neovide_scroll_animation_length = 0.3
 vim.g.neovide_cursor_trail_size = 0.8

@@ -30,7 +30,7 @@ return {
 				min_chars = 2,
 			},
 			-- Optional, customize how note file names are generated given the ID, target directory, and title.
-			---@param spec { id: string, dir: obsidian.Path, title: string, theme: string, tag: string|? }
+			---@param spec { id: string, dir: obsidian.Path, title: string }
 			---@return string|obsidian.Path The full path to the new note.
 			note_path_func = function(spec)
 				-- This is equivalent to the default behavior.
@@ -64,7 +64,14 @@ return {
 					note:add_alias(note.title)
 				end
 
-				local out = { id = note.id, aliases = note.aliases, tags = note.tags, theme = note.title }
+				local out = {
+					id =		note.id,
+					aliases =	note.aliases,
+					tags =		note.tags,
+					theme =		note.title,
+					page =		note.page,
+					link =		note.link
+				}
 
 				-- `note.metadata` contains any manually added fields in the frontmatter.
 				-- So here we just make sure those fields are kept in the frontmatter.

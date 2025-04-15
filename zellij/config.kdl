@@ -219,7 +219,6 @@ plugins {
 
 load_plugins {
 	"https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
-	"https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm"
 }
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
@@ -312,10 +311,131 @@ themes {
 	}
 }
 
+themes {
+    blade-runner {
+        text_unselected {
+            base 255 255 255
+            background 0 0 0
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 0 255 0
+            emphasis_3 255 0 255
+        }
+        text_selected {
+            base 255 255 255
+            background 26 26 26
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 0 255 0
+            emphasis_3 255 0 255
+        }
+        ribbon_selected {
+            base 0 0 0
+            background 0 255 0
+            emphasis_0 255 53 94
+            emphasis_1 255 140 13
+            emphasis_2 255 0 255
+            emphasis_3 0 217 227
+        }
+        ribbon_unselected {
+            base 0 0 0
+            background 43 191 244
+            emphasis_0 255 53 94
+            emphasis_1 255 255 255
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        table_title {
+            base 0 255 0
+            background 0
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 0 255 0
+            emphasis_3 255 0 255
+        }
+        table_cell_selected {
+            base 255 255 255
+            background 26 26 26
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 0 255 0
+            emphasis_3 255 0 255
+        }
+        table_cell_unselected {
+            base 255 255 255
+            background 0 0 0
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 0 255 0
+            emphasis_3 255 0 255
+        }
+        list_selected {
+            base 255 255 255
+            background 26 26 26
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 0 255 0
+            emphasis_3 255 0 255
+        }
+        list_unselected {
+            base 255 255 255
+            background 0 0 0
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 0 255 0
+            emphasis_3 255 0 255
+        }
+        frame_selected {
+            base 0 255 0
+            background 0
+            emphasis_0 255 140 13
+            emphasis_1 0 229 229
+            emphasis_2 255 0 255
+            emphasis_3 0
+        }
+        frame_highlight {
+            base 255 140 13
+            background 0
+            emphasis_0 255 140 13
+            emphasis_1 255 140 13
+            emphasis_2 255 140 13
+            emphasis_3 255 140 13
+        }
+        exit_code_success {
+            base 0 255 0
+            background 0
+            emphasis_0 0 229 229
+            emphasis_1 0 0 0
+            emphasis_2 255 0 255
+            emphasis_3 0 217 227
+        }
+        exit_code_error {
+            base 255 53 94
+            background 0
+            emphasis_0 255 230 0
+            emphasis_1 0
+            emphasis_2 0
+            emphasis_3 0
+        }
+        multiplayer_user_colors {
+            player_1 255 0 255
+            player_2 0 217 227
+            player_3 0
+            player_4 255 230 0
+            player_5 0 229 229
+            player_6 0
+            player_7 255 53 94
+            player_8 0
+            player_9 0
+            player_10 0
+        }
+    }
+}
+
 // Choose the theme that is specified in the themes section.
 // Default: default
-//
-theme "default"
+
+theme "iceberg-dark"
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -350,27 +470,30 @@ scroll_buffer_size 10000
 // that will be used by default if this option is not set.
 // Examples:
 //
-copy_command "wl-copy" // x11
-										  // copy_command "wl-copy"                    // wayland
-										  // copy_command "pbcopy"                     // osx
+copy_command "wl-copy" 
+// x11
+// copy_command "wl-copy"
+// wayland
+// copy_command "pbcopy"
+// osx
 
-										  // Choose the destination for copied text
-										  // Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
-										  // Does not apply when using copy_command.
-										  // Options:
-										  //   - system (default)
-										  //   - primary
-										  //
-										  // copy_clipboard "primary"
+// Choose the destination for copied text
+// Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
+// Does not apply when using copy_command.
+// Options:
+//   - system (default)
+//   - primary
+//
+// copy_clipboard "primary"
 
-										  // Enable or disable automatic copy (and clear) of selection when releasing mouse
-										  // Default: true
-										  //
-										  // copy_on_select false
+// Enable or disable automatic copy (and clear) of selection when releasing mouse
+// Default: true
+//
+// copy_on_select false
 
-										  // Path to the default editor to use to edit pane scrollbuffer
-										  // Default: $EDITOR or $VISUAL
-										  //
+// Path to the default editor to use to edit pane scrollbuffer
+// Default: $EDITOR or $VISUAL
+//
 scrollback_editor "/usr/bin/nvim"
 session_serialization false
 copy_on_select false

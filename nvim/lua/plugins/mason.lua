@@ -13,14 +13,6 @@ return {
 			"jay-babu/mason-nvim-dap.nvim",
 			"jay-babu/mason-null-ls.nvim",
 			-- "VonHeikemen/lsp-zero.nvim", branch = 'v4.x',
-			"cordx56/rustowl",
-			-- event = "VeryLazy",
-			-- dependencies = { "neovim/nvim-lspconfig" },
-			-- ft = { "rust" },
-			-- config = function ()
-			-- 	local lspconfig = require('lspconfig')
-			-- 	lspconfig.rustowl.setup({})
-			-- end,
 		},
 		config = function()
 			require("nvim-lsp-installer").setup({
@@ -52,7 +44,6 @@ return {
 				Break = "",
 			}
 
-			lspconfig.rustowl.setup({})
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

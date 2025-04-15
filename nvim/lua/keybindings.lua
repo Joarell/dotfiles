@@ -153,7 +153,10 @@ keymap("n", "<A-D>", function ()
 		vim.notify("SSH DISCONNTED! 🔌 ⛔", 3, {})
 	end
 end, opts)
-keymap("n", "<C-D>l", require("rustowl").rustowl_cursor, opts)
+keymap("n", "<A-t>", ":lua require('neotest').run.run({ vim.fn.expand('%'), vitestCommand = 'yarn test' })<CR>", opts)
+keymap("n", "<A-t>w", ":lua require('neotest').watch.toggle({ vim.fn.expand('%'), vitestCommand = 'yarn test' })<CR>", opts)
+keymap("n", "<A-T>", ":lua require('neotest').output_panel.toggle()<CR>", opts)
+keymap("n", "<A-S>", require('neotest').summary.toggle, opts)
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                       F function.                       │
@@ -189,7 +192,6 @@ keymap("n", "<Leader>f", function()
 	vim.opt.foldmethod = "expr"
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 	vim.opt.foldcolumn = "8"
-	print("This key binding folds all indentation lines to protect your code! Your Welcome!😎")
 end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! 😎" })
 
 -- ╭─────────────────────────────────────────────────────────╮

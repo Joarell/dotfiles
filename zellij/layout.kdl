@@ -120,6 +120,24 @@ layout {
 		// 	pane cwd="$HOME/rust_test/100-exercises-to-learn-rust/exercises/" borderless=true name="resolution"
 		// }
 	}
+	//swap_tiled_layout {
+	//	tab max_panes=8 {
+	//		pane
+	//		pane
+	//	}
+	//	tab {
+	//		pane split_direction"vertical" {
+	//			pane
+	//			pane
+	//			pane
+	//			pane
+	//			pane
+	//			pane
+	//			pane
+	//			pane
+	//		}
+	//	}
+	//}
     swap_floating_layout {
         floating_panes max_panes=1 {
             pane

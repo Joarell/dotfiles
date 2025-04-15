@@ -99,6 +99,19 @@ layout {
 			pane name="TAB" borderless=true
 		}
 	}
+	// swap_tiled_layout {
+	// 	tab max_panes=2 {
+	// 		pane
+	// 		pane
+	// 	}
+	// 	tab {
+	// 		pane split_direction="vertical" {
+	// 			pane
+	// 			pane
+	// 			pane
+	// 		}
+	// 	}
+	// }
     swap_floating_layout {
         floating_panes max_panes=1 {
             pane
