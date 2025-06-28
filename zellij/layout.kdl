@@ -41,7 +41,7 @@ layout {
 				}
 			}
 			pane split_direction="horizontal" {
-				pane borderless=true name="pipes" size=5 {
+				pane borderless=true name="pipes" size=2 {
 					command "pipes.sh" close_on_exit=true
 					args "-p" "4" "-r" "7000000"
 				}
