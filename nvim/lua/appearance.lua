@@ -29,6 +29,65 @@ vim.g.rainbow_delimiters = {
 	},
 }
 
+require("catppuccin").setup({
+    flavour = "auto", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "macchiato",
+    },
+    transparent_background = false, -- disables setting the background color.
+    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    no_underline = true, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = { "bold", "italic" },
+        keywords = { "bold" },
+        strings = {},
+        variables = { "italic" },
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = { "italic" },
+        operators = { "bold" },
+        -- miscs = {}, -- Uncomment to turn off hard-coded styles
+    },
+    color_overrides = {
+		latte = {
+			base = "#FBF1C7",
+		},
+		macchiato = {
+			base = "#171A1F",
+			mantle = "#000000",
+			crust = "#242121"
+		}
+	},
+	custom_highlights = {},
+    default_integrations = true,
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
+
+
 require("nightfox").setup({
 	options = {
 		-- Compiled file's destination location
@@ -171,11 +230,11 @@ require("kanagawa").setup({
 	compile = true,  -- enable compiling the colorscheme
 	undercurl = true, -- enable undercurls
 	commentStyle = { italic = true },
-	functionStyle = {},
+	functionStyle = { italic = true, bold = true },
 	keywordStyle = { italic = true },
 	statementStyle = { bold = true },
 	typeStyle = {},
-	transparent = true,  -- do not set background color
+	transparent = false,  -- do not set background color
 	dimInactive = false,  -- dim inactive window `:h hl-NormalNC`
 	terminalColors = true, -- define vim.g.terminal_color_{0,17}
 	colors = {            -- add/modify theme and palette colors
@@ -282,10 +341,11 @@ require("material").setup({
 	custom_highlights = {},   -- Overwrite highlights with your own
 })
 
-vim.cmd("colorscheme nordfox")
+-- vim.cmd("colorscheme nordfox")
 -- vim.cmd("colorscheme solarized-osaka")
 -- vim.cmd("colorscheme retrobox")
 -- vim.cmd("colorscheme kanagawa-dragon")
+vim.cmd("colorscheme catppuccin")
 
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Bufferline settings:                   │

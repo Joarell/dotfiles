@@ -212,7 +212,7 @@ plugins {
 	session-manager { path "session-manager"; }
 	zjstatus location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
 	autolock location="https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm" {
-		triggers "fzf|zoxide|atuin|git|vim|nvim|lazygit|lg|posting|Posting"  // Lock when any of these open and monitor until closed.
+		triggers "fzf|zoxide|atuin|git|vim|nvim|lazygit|lg|posting|Posting|jj"  // Lock when any of these open and monitor until closed.
 		reaction_seconds "0.5"  // When monitoring, check every X seconds.
 	}
 }
