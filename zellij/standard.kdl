@@ -18,6 +18,7 @@ layout {
 
 				hide_frame_for_single_pane "true"
 				first_start	"true"
+
 				// indicators
 				tab_sync_indicator       "<> "
 				tab_fullscreen_indicator "[] "

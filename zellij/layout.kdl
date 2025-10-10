@@ -2,11 +2,12 @@ layout {
 	tab name="DEV" focus=true {
 		pane size=1 borderless=true {
 			// plugin location="zellij:compact-bar"
-			plugin location="file:$HOME/.config/zellij/zjstatus.wasm" {
+			plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
 				// format_left  "  #[fg=#89B4FA,bold] {session} {mode}  {tabs} 󰋘   "
 				format_left  "  #[fg=#89B4FA,bold] {session}  {tabs} 󰋘   "
 				format_right " {command_git_branch} {mode} #[italic] 󰃭 {datetime}󰔟"
 				format_space ""
+				first_start	"true"
 
 				// border_enabled	"true"
 				// border_char		"-"
@@ -19,15 +20,32 @@ layout {
 
 				tab_normal	"#[fg=#6C7086] {name} "
 				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+
+				// indicators
+				tab_sync_indicator       "<> "
+				tab_fullscreen_indicator "[] "
+				tab_floating_indicator   "   󰨦"
+
+				// formatting for inactive tabs
+				tab_normal_fullscreen   "#[fg=#6C7086] :: {name} [] "
+				tab_normal_sync         "#[fg=#6C7086] :: {name} <> "
+
+				// formatting for the current active tab
+				tab_active_fullscreen   "#[fg=#9399B2,bold,italic] {name} {fullscreen_indicator}"
+				tab_active_sync         "#[fg=#9399B2,bold,italic] {name} {sync_indicator}"
+
+				// format when renaming a tab
+				tab_rename              "#[fg=#eba0ac,bg=#181825] {index} {name} {floating_indicator} "
+
+				// limit tab display count
+				tab_display_count         "3"  // limit to showing 3 tabs
+				tab_truncate_start_format "#[fg=red,bg=#181825] < +{count} ..."
+				tab_truncate_end_format   "#[fg=red,bg=#181825] ... +{count} >"
 				
 				datetime	"#[fg=#6C7086,bold] {format} "
 				datetime_format "%A, %d %b %Y %H:%M"
 				datetime_timezone "America/Sao_Paulo"
 
-				command_git_branch_command		"git rev-parse --abbrev-ref HEAD"
-				command_git_branch_format		"[fg=cyan] {stdout} "
-				command_git_branch_interval		"10"
-				command_git_branch_rendermode	"static"
 				// first_start	"true"
 			}
 		}
@@ -45,7 +63,12 @@ layout {
 					command "pipes.sh" close_on_exit=true
 					args "-p" "4" "-r" "7000000"
 				}
-				pane borderless=true
+				pane split_direction="vertical" {
+					pane borderless=true
+					// pane cwd="$HOME/otto-app/newLayout" name="AI" borderless=true {
+					// 	command "crush" close_on_exit=true
+					// }
+				}
 				// pane split_direction="vertical" size=30 {
 				// 	pane cwd="$HOME/rust_test/100-solutions/exercises/" borderless=true name="resolution" split_direction="horizontal" {
 				// 		command "yazi" close_on_exit=true
@@ -66,19 +89,22 @@ layout {
 				}
 			}
 		}
-		// floating_panes split_direction="vertical" size=10 {
-		// 	pane  name="Docker Monitor " {
-		// 		command "dry" close_on_exit=true start_suspended=true
-		// 	}
-		// 	pane cwd="$HOME/Otto/go"  name="Support" {
-		// 		// command "docker" close_on_exit=true start_suspended=true
-		// 		// args "compose" "up" "--build" "--remove-orphans"
-		// 	}
-		// 	pane cwd="$HOME/Otto/builder/docker"  name="Docker " {
-		// 		command "docker" close_on_exit=true start_suspended=true
-		// 		args "compose" "up" "--build" "--remove-orphans"
-		// 	}
-		// }
+		floating_panes split_direction="vertical" {
+			// pane name="AI 🤖" cwd="$HOME/otto-app/newLayout" name="AI" borderless=true {
+			// 	command "crush" close_on_exit=true
+			// }
+			// pane  name="Docker Monitor " {
+			// 	command "dry" close_on_exit=true start_suspended=true
+			// }
+			// pane cwd="$HOME/Otto/go"  name="Support" {
+			// 	// command "docker" close_on_exit=true start_suspended=true
+			// 	// args "compose" "up" "--build" "--remove-orphans"
+			// }
+			// pane cwd="$HOME/Otto/builder/docker"  name="Docker " {
+			// 	command "docker" close_on_exit=true start_suspended=true
+			// 	args "compose" "up" "--build" "--remove-orphans"
+			// }
+		}
 	}
 	tab name="LAB" {
 		pane size=1 borderless=true {
@@ -87,6 +113,9 @@ layout {
 				format_left  "  #[fg=#89B4FA,bold] {session}  {tabs} 󰋘   "
 				format_right " {command_git_branch} {mode} #[italic] 󰃭 {datetime}󰔟"
 				format_space ""
+
+				hide_frame_for_single_pane "true"
+				first_start	"true"
 
 				// border_enabled	"true"
 				// border_char		"-"
@@ -99,6 +128,7 @@ layout {
 
 				tab_normal	"#[fg=#6C7086] {name} "
 				tab_active	"#[fg=#80CED7,bold,italic] {name} "
+				tab_floating_indicator   "   󰨦"
 				
 				datetime	"#[fg=#6C7086,bold] {format} "
 				datetime_format "%A, %d %b %Y %H:%M"

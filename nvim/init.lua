@@ -64,6 +64,9 @@ local opts = {
 	ui = {
 		border = "rounded",
 	},
+	git = {
+		timeout = 10000,
+	}
 }
 
 require("lazy").setup("plugins", opts)

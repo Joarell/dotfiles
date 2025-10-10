@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plotly.js Rotated Rectangle</title>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<div id="myDiv" style="width: 600px; height: 500px;"><!-- Plotly chart will be drawn here --></div>
+
+<script>
+// Function to rotate a point (x, y) around a center (cx, cy) by a given angle in degrees
+function rotatePoint(x, y, cx, cy, angle) {
+  const radians = (Math.PI / 180) * angle;
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  const nx = (cos * (x - cx)) + (sin * (y - cy)) + cx;
+  const ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+  return { x: nx, y: ny };
+}
+
+// 1. Define the original rectangle's properties
+const rect = {
+  x0: 1,
+  y0: 1,
+  x1: 3,
+  y1: 2
+};
+
+// 2. Calculate its center
+const centerX = (rect.x0 + rect.x1) / 2;
+const centerY = (rect.y0 + rect.y1) / 2;
+
+// Define the corners of the original rectangle
+const corners = [
+  { x: rect.x0, y: rect.y0 }, // Bottom-left
+  { x: rect.x1, y: rect.y0 }, // Bottom-right
+  { x: rect.x1, y: rect.y1 }, // Top-right
+  { x: rect.x0, y: rect.y1 }  // Top-left
+];
+
+// 3. Apply the 90-degree rotation to each corner
+const rotatedCorners = corners.map(corner => rotatePoint(corner.x, corner.y, centerX, centerY, 90));
+
+// 4. Construct the SVG path string from the rotated corners
+// M = Move to the first point
+// L = Line to the next point
+// Z = Close the path
+const path = 'M ' + rotatedCorners[0].x + ',' + rotatedCorners[0].y +
+             ' L ' + rotatedCorners[1].x + ',' + rotatedCorners[1].y +
+             ' L ' + rotatedCorners[2].x + ',' + rotatedCorners[2].y +
+             ' L ' + rotatedCorners[3].x + ',' + rotatedCorners[3].y +
+             ' Z';
+
+// Define the layout for the plot
+const layout = {
+  title: 'Rotating a Rectangle in Plotly.js',
+  xaxis: { range: [0, 5] },
+  yaxis: { range: [0, 5] },
+  shapes: [
+    // The original, axis-aligned rectangle for comparison
+    {
+      type: 'rect',
+      x0: rect.x0,
+      y0: rect.y0,
+      x1: rect.x1,
+      y1: rect.y1,
+      line: {
+        color: 'rgba(50, 171, 96, 1)',
+        width: 2,
+      },
+      fillcolor: 'rgba(50, 171, 96, 0.7)',
+    },
+    // The new, rotated rectangle drawn as a path
+    {
+      type: 'path',
+      path: path,
+      line: {
+        color: 'rgba(255, 140, 0, 1)',
+        width: 2,
+      },
+      fillcolor: 'rgba(255, 140, 0, 0.7)',
+    }
+  ]
+};
+
+// Draw the plot
+Plotly.newPlot('myDiv', [], layout);
+
+</script>
+
+</body>
+</html>
+

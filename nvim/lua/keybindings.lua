@@ -157,6 +157,8 @@ keymap("n", "<A-t>", ":lua require('neotest').run.run({ vim.fn.expand('%'), vite
 keymap("n", "<A-t>w", ":lua require('neotest').watch.toggle({ vim.fn.expand('%'), vitestCommand = 'yarn test' })<CR>", opts)
 keymap("n", "<A-T>", ":lua require('neotest').output_panel.toggle()<CR>", opts)
 keymap("n", "<A-S>", require('neotest').summary.toggle, opts)
+keymap("n", "<Leader>v", ":AvanteToggle<CR>", opts)
+keymap("n", "<Leader-e>", ":AvanteClear<CR>", opts)
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                       F function.                       │

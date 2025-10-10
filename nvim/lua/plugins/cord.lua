@@ -1,9 +1,9 @@
 return {
 	{
-		"vyfor/cord.nvim",
-		-- "mealter/cord.nvim",
-		build = ':Cord update',
-		event = 'VeryLazy',
+		-- "vyfor/cord.nvim",
+		-- -- "mealter/cord.nvim",
+		-- build = ':Cord update',
+		-- event = 'VeryLazy',
 	-- 	opts = {},
 	-- 	config = function ()
 	-- 		require('cord').setup {

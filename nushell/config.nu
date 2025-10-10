@@ -806,6 +806,7 @@ alias lat = eza -aT --color=always --group-directories-first --icons --long		# a
 alias zj = zellij options --simplified-ui true --pane-frames false
 alias za = zoxide add .
 
+alias sudo = sudo-rs
 alias lg = lazygit
 alias yz = yazi
 alias vide = neovide
@@ -827,8 +828,12 @@ alias weather = zellij plugin -- https://github.com/imsnif/weather-pal/releases/
 # Paru/Yay stuff
 alias pget = paru -S
 alias yget = yay -S
-alias yrem = yay -R
+alias yrem = yay -Rnsc
 alias prem = paru -R
+alias d1+ = ddcutil -d 1 setvcp 10 + 60
+alias d1- = ddcutil -d 1 setvcp 10 - 60
+alias d2+ = ddcutil -d 2 setvcp 10 + 60
+alias d2- = ddcutil -d 2 setvcp 10 - 60
 
 #Flatpak Update
 alias fpup = flatpak update 

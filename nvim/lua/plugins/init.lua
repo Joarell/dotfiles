@@ -45,8 +45,45 @@ return {
 		-- end,
 		build = ":TSUpdate",
 		dependencies = {
-			{"nushell/tree-sitter-nu", build = ":TSUpdate nu"},
-			{"tree-sitter-grammars/tree-sitter-hyprlang", build = ":TSUpdate hyprlang"},
+			{
+				"nvim-treesitter/nvim-treesitter",
+				config = function()
+					require("nvim-treesitter.configs").setup {
+						ensure_installed = { "nu" }, -- Ensure the "nu" parser is installed
+						highlight = {
+							enable = true, -- Enable syntax highlighting
+						},
+						-- OPTIONAL!! These enable ts-specific textobjects.
+						-- So you can hit `yaf` to copy the closest function,
+						-- `dif` to clear the content of the closest function,
+						-- or whatever keys you map to what query.
+						textobjects = {
+							select = {
+								enable = true,
+								keymaps = {
+									-- You can use the capture groups defined in textobjects.scm
+									-- For example:
+									-- Nushell only
+									["aP"] = "@pipeline.outer",
+									["iP"] = "@pipeline.inner",
+
+									-- supported in other languages as well
+									["af"] = "@function.outer",
+									["if"] = "@function.inner",
+									["al"] = "@loop.outer",
+									["il"] = "@loop.inner",
+									["aC"] = "@conditional.outer",
+									["iC"] = "@conditional.inner",
+									["iS"] = "@statement.inner",
+									["aS"] = "@statement.outer",
+								}, -- keymaps
+							}, -- select
+						}, -- textobjects
+					}
+				end,
+				build = ":TSUpdate",
+			},
+			{ "tree-sitter-grammars/tree-sitter-hyprlang", build = ":TSUpdate hyprlang" },
 			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-refactor",
 			-- "nvim-treesitter/nvim-treesitter-textobjects",
@@ -375,13 +412,13 @@ return {
 	--  ╭──────────────────────────────────────────────────────────╮
 	--  │ 		--IndentBlankline/Fold                             │
 	--  ╰──────────────────────────────────────────────────────────╯
-	{ 
+	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		---@module "ibl"
 		---@type ibl.config
 		opts = {},
-		config = function ()
+		config = function()
 			require("ibl").setup({
 				indent = {
 					tab_char = "▎",
@@ -458,19 +495,19 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	{ "tpope/vim-fugitive" },
 	{ "tveskag/nvim-blame-line" },
-	{ 
+	{
 		"f-person/git-blame.nvim",
 		-- event = "VeryLazy",
-		config = function ()
+		config = function()
 			require("gitblame").setup({})
 		end,
 		opts = {
 			-- your configuration comes here
 			-- for example
-			enabled = true,  -- if you want to enable the plugin
+			enabled = true, -- if you want to enable the plugin
 			message_template = " <summary> • <date> • <author> • <<sha>>", -- template for the blame message, check the Message template section for more options
 			date_format = "%m-%d-%Y %H:%M:%S", -- template for the date, check Date format section for more options
-			virtual_text_column = 1,  -- virtual text start column, check Start virtual text at column section for more options
+			virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
 		},
 	},
 	-- {
@@ -511,7 +548,7 @@ return {
 	{
 		"folke/trouble.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function ()
+		config = function()
 			require("trouble").setup({})
 		end
 	},
@@ -554,7 +591,7 @@ return {
 	{
 		"craftzdog/solarized-osaka.nvim",
 	},
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{ "catppuccin/nvim",        name = "catppuccin",                   priority = 1000 },
 	-- { "projekt0n/github-nvim-theme" },
 	-- {
 	-- 	"liuchengxu/vista.vim",

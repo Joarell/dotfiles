@@ -16,6 +16,15 @@ return {
 		end,
 	},
 	{
+		"klepp0/nvim-baml-syntax",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			-- This ensures lua/baml_syntax/init.lua is run,
+			-- which registers the "baml" parser and configures Tree-sitter:
+			require("baml_syntax").setup()
+		end,
+	},
+	{
 		"https://github.com/L3MON4D3/LuaSnip",
 		version = "1.2.1.*",
 		build = "make install_jsregexp",
@@ -75,11 +84,20 @@ return {
 			"windwp/nvim-ts-autotag",
 			"https://github.com/onsails/lspkind.nvim",
 			"uga-rosa/cmp-dictionary",
+			"SirVer/ultisnips",
+			"a-lipson/cmp-nvim-ultisnips",
 		},
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_snipmate").lazy_load()
 			require("crates").setup()
+			require("cmp_nvim_ultisnips").setup {
+				filetype_source = "ultisnips_default",
+				show_snippets = "all",
+				documentation = function(snippet)
+					return snippet.description .. "\n\n" .. snippet.value
+				end
+			}
 			vim.o.completeopt = "menuone,noinsert,noselect"
 
 			local lspkind = require("lspkind")
@@ -100,6 +118,7 @@ return {
 				snippet = {
 					expand = function(args)
 						local ok = pcall(require, "luasnip")
+						local ultisnips = require("cmp_nvim_ultisnips.mappings")
 						if ok then
 							local ls = require("luasnip")
 							ls.lsp_expand(args.body)
@@ -108,23 +127,23 @@ return {
 								update_events = "TextChanged, TextChangedI",
 							})
 						else
-							return vim.fn["vsnip#anonymous"](args.body)
+							return vim.fn["UltiSnips#Anon"](args.body)
 						end
 					end,
 				},
 				sources = {
-					{ name = "nvim_lsp", keyword_length = 1 },
-					{ name = "nvim_lua", keyword_length = 3 },
+					{ name = "nvim_lsp",               keyword_length = 1 },
+					{ name = "nvim_lua",               keyword_length = 3 },
 					{ name = "nvim_lsp_signature_help" },
-					{ name = "buffer", keyword_length = 3, group_index = 1 },
-					{ name = "luasnip", keyword_length = 2 },
-					{ name = "vsnip", keyword_length = 2 },
-					-- { name = "utisnips",              keyword_length = 2 },
-					{ name = "cmdline", keyword_length = 3, group_index = 2 },
-					{ name = "path", keyword_length = 3 },
-					{ name = "emoji", option = { insert = false } },
+					{ name = "buffer",                 keyword_length = 3,         group_index = 1 },
+					{ name = "luasnip",                keyword_length = 2 },
+					{ name = "vsnip",                  keyword_length = 2 },
+					{ name = "ultisnips",              keyword_length = 2 },
+					{ name = "cmdline",                keyword_length = 3,         group_index = 2 },
+					{ name = "path",                   keyword_length = 3 },
+					{ name = "emoji",                  option = { insert = false } },
 					{ name = "vim-dadbod-completion" },
-					{ name = "dictionary", keyword_length = 3 },
+					{ name = "dictionary",             keyword_length = 3 },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -142,8 +161,8 @@ return {
 							nvim_lsp = "    ",
 							nvim_lsp_signature_help = "  ",
 							vsnip = "    ",
-							DB = "DATA",
-							-- utisnips = " ",
+							DB = "DATA ",
+							utisnips = " ",
 							nvim_lua = "   ",
 							luasnip = "   ",
 							buffer = "   ",
@@ -158,6 +177,17 @@ return {
 						-- end
 						before = function(_, vim_item)
 							return vim_item
+						end,
+						format = function(entry, item)
+							local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+							item = require("lspkind").cmp_format({
+								-- any lspkind format settings here
+							})(entry, item)
+							if color_item.abbr_hl_group then
+								item.kind_hl_group = color_item.abbr_hl_group
+								item.kind = color_item.abbr
+							end
+							return item
 						end,
 					}),
 				},
@@ -238,9 +268,12 @@ return {
 				sources = cmp.config.sources({
 					{ name = "path" },
 				}, {
-					{ name = "cmdline", option = {
-						ignore_cmds = { "Man", "!" },
-					} },
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						}
+					},
 				}),
 			})
 		end,

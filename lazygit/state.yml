@@ -1,6 +1,7 @@
 lastupdatecheck: 1723697607
 recentrepos:
-    - /home/jev/otto-app/newLayout
+    - /home/jev/otto-app/main
+    - /home/jev/otto-app/graphics
     - /home/jev/dotfiles
     - /home/jev/CF-OttoBack
     - /home/jev/otto-home
@@ -15,6 +16,7 @@ recentrepos:
 startuppopupversion: 5
 lastversion: v0.48.0.1b571f9e6
 customcommandshistory:
+    - git merge newLayout
     - git merge builder
     - git push origin v0.1.1-beta
     - git push origin main
