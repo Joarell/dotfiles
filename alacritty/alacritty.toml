@@ -13,7 +13,10 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-general.live_config_reload = true
+# general.live_config_reload = true
+[general]
+ live_config_reload = true
+ import = ["./themes/github-dark.toml"]
 
 [env]
   WINIT_X11_SCALE_FACTOR = "1.0"
@@ -82,7 +85,6 @@ general.live_config_reload = true
   #instance: Alacritty
   # General application class
   #general: Alacritty
-
 # GTK theme variant (Linux/BSD only)
 #
 # Override the variant of the GTK theme. Commonly supported values are `dark`
@@ -180,23 +182,24 @@ general.live_config_reload = true
 [colors]
   # name: 3024 (dark)
   # author: Chris Kempson
-  [colors.primary]
-    foreground = "#a5a2a2"
-    background = "#000000"
-	dim_foreground = "#a5a2a2"
+	#  [colors.primary]
+	#    foreground = "#a5a2a2"
+	#    background = "#000000"
+	# dim_foreground = "#a5a2a2"
     # background: "#090300"
- # cursor = { text = "#090300", cursor = "#2EA2A9" }
+ cursor = { text = "#090300", cursor = "#2EA2A9" }
     # cursor: "#ff0000"
     # cursor: "#a5a2a2"
-[colors.normal]
-    black = "#090300"
-    red = "#db2d20"
-    green = "#01a252"
-    yellow = "#fded02"
-    blue = "#01a0e4"
-    magenta = "#a16a94"
-    cyan = "#b5e4f4"
-    white = "#a5a2a2"
+# [colors.normal]
+#     black = "#090300"
+#     red = "#db2d20"
+#     green = "#01a252"
+#     yellow = "#fded02"
+#     blue = "#01a0e4"
+#     magenta = "#a16a94"
+#     cyan = "#b5e4f4"
+#     white = "#a5a2a2"
+#     import = [ "./github-dark.toml" ]
   # bright:
     # black = "#5c5855"
     # red = "#db2d20"
@@ -214,9 +217,20 @@ general.live_config_reload = true
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
+[seltools]
+enabled = true
+parse_json = true
+hint_width = 40
+
 [cursor]
   # Cursor style
-  style = { shape = "Underline", blinking = "On" }
+  style = { shape = "underline", blinking = "Never" }
+smooth_motion = true
+smooth_motion_factor = 1
+smooth_motion_spring = 0.8
+smooth_motion_max_stretch_x = 2.0
+smooth_motion_max_stretch_y = 2.0
+# block_replace_shape = "underline"
     # Cursor shape
     #
     # Values for `shape`:
@@ -252,7 +266,7 @@ general.live_config_reload = true
 
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
-  thickness = 0.15
+  thickness = 0.1
   # Live config reload (changes require restart)
   #live_config_reload: true
   # Shell

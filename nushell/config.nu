@@ -805,6 +805,7 @@ alias la = eza -a --color=always --group-directories-first --icons   			# all fi
 alias lat = eza -aT --color=always --group-directories-first --icons --long		# all files and dirs with a tree visualizatio
 alias zj = zellij options --simplified-ui true --pane-frames false
 alias za = zoxide add .
+alias uf = job unfreeze
 
 alias sudo = sudo-rs
 alias lg = lazygit
@@ -834,6 +835,7 @@ alias d1+ = ddcutil -d 1 setvcp 10 + 60
 alias d1- = ddcutil -d 1 setvcp 10 - 60
 alias d2+ = ddcutil -d 2 setvcp 10 + 60
 alias d2- = ddcutil -d 2 setvcp 10 - 60
+alias bun = mise exec -- bun
 
 #Flatpak Update
 alias fpup = flatpak update 

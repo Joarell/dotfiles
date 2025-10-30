@@ -43,6 +43,8 @@ return {
 		-- 	local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 		-- 	ts_update()
 		-- end,
+		branch = master,
+		lazy = false,
 		build = ":TSUpdate",
 		dependencies = {
 			{
@@ -89,6 +91,7 @@ return {
 			-- "nvim-treesitter/nvim-treesitter-textobjects",
 			"HiPhish/rainbow-delimiters.nvim",
 			"windwp/nvim-ts-autotag",
+			{ "bezhermoso/tree-sitter-ghostty", build = "make nvim_install", },
 		},
 	},
 	-- { "nvim-treesitter/playground" },
@@ -588,6 +591,14 @@ return {
 	--  ╭─────────────────────────────────────────────────╮
 	--  │      Themes Install without configuration       │
 	--  ╰─────────────────────────────────────────────────╯
+	{
+		"tahayvr/matteblack.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme "matteblack"
+		end,
+	},
 	{
 		"craftzdog/solarized-osaka.nvim",
 	},

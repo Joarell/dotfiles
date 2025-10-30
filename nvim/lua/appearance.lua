@@ -35,7 +35,7 @@ require("catppuccin").setup({
         light = "latte",
         dark = "macchiato",
     },
-    transparent_background = false, -- disables setting the background color.
+    transparent_background = true, -- disables setting the background color.
     show_end_of_buffer = false,     -- shows the '~' characters after the end of buffers
     term_colors = true,             -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
@@ -234,7 +234,7 @@ require("kanagawa").setup({
     keywordStyle = { italic = true },
     statementStyle = { bold = true },
     typeStyle = {},
-    transparent = false,   -- do not set background color
+    transparent = true,   -- do not set background color
     dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
     terminalColors = true, -- define vim.g.terminal_color_{0,17}
     colors = {             -- add/modify theme and palette colors
@@ -340,7 +340,7 @@ require("material").setup({
 
     custom_highlights = {},    -- Overwrite highlights with your own
 })
-
+require('matteblack').colorscheme()
 -- vim.cmd("colorscheme nordfox")
 -- vim.cmd("colorscheme solarized-osaka")
 -- vim.cmd("colorscheme retrobox")

@@ -36,6 +36,7 @@ return {
                     null.formatting.gofumpt,
                     null.formatting.goimports,
                     null.formatting.golines,
+                    null.formatting.goimports_reviser,
                     null.formatting.prettierd,
                     null.formatting.typstfmt,
                     ----------------------------------------
@@ -51,11 +52,9 @@ return {
                     null.diagnostics.markdownlint,
                     null.diagnostics.write_good,
                     null.diagnostics.swiftlint,
-                    null.diagnostics.biome,
                     ----------------------------------------
                     -- null.completion.spell,
                     ----------------------------------------
-                    null.code_actions.biome,
                     null.code_actions.gomodifytags,
                     null.code_actions.impl,
                     -- null.code_actions.eslint_d,
