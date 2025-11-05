@@ -101,7 +101,7 @@ $env.PATH = ($env.PATH | split row (char esep) | append '~/.local/share/mise/ins
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.local/share/mise/installs/bun/latest/bin')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.config/ghostty/ghostty-lsp/target/release')
 
-neofetch
+fastfetch
 source ~/.zoxide.nu
 # ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
 # ssh-add ~/.ssh/otto_back_jev
@@ -114,7 +114,7 @@ source ~/.zoxide.nu
 # source ~/dotfiles/script.nu
 # source ~/.local/share/atuin/init.nu
 
-keychain --eval --quiet ~/.ssh/id_jev ~/.ssh/rsa_home_jev ~/.ssh/otto_back_jev ~/.ssh/jev_otto_app
+keychain --eval --quiet ~/.ssh/id_jev ~/.ssh/rsa_home_jev ~/.ssh/otto_back_jev ~/.ssh/jev_otto_app ~/.ssh/id_rsa
     | lines
     | where not ($it | is-empty)
     | parse "{k}={v}; export {k2};"

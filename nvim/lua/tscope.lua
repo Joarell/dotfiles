@@ -92,7 +92,7 @@ local keymap = vim.keymap.set
 local builtin = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
 
-telescope.load_extension("fzf")
+-- telescope.load_extension("fzf")
 
 keymap("n", "QF", builtin.quickfix, opts)
 keymap("n", "FH", builtin.quickfixhistory, opts)
