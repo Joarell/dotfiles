@@ -2,11 +2,11 @@
 --  │                   Treesitter Settings.                   │
 --  ╰──────────────────────────────────────────────────────────╯
 
-require("nvim-treesitter.configs").setup({ -- Here is all languages supported. Feel free to update it.
-	auto_install = true,
-	ensure_installed = {
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = {
 		"bash",
 		"c",
+		"cpp",
 		"baml",
 		"javascript",
 		"typescript",
@@ -14,10 +14,10 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages supported. F
 		"lua",
 		"python",
 		"typescript",
-		"tsx",
 		"css",
+		"csv",
+		"hyprlang",
 		"html",
-		"go",
 		"http",
 		"rust",
 		"java",
@@ -27,9 +27,23 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages supported. F
 		"yaml",
 		"rust",
 		"cmake",
-		"vim",
 		"regex",
+		"gotmpl"
 	},
+	callback = function()
+		-- syntax highlighting, provided by Neovim
+		vim.treesitter.start()
+		-- folds, provided by Neovim
+		vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+		vim.wo.foldmethod = 'expr'
+		vim.opt.foldcolumn = "8"
+		-- indentation, provided by nvim-treesitter
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
+})
+
+require("nvim-treesitter").setup({ -- Here is all languages supported. Feel free to update it.
+	auto_install = true,
 	sync_install = true,
 	indent = { enable = true },
 	ignore_install = { "cpp" },
@@ -109,27 +123,27 @@ require("nvim-treesitter.configs").setup({ -- Here is all languages supported. F
 	},
 })
 
-require'treesitter-context'.setup {
-  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  multiwindow = false, -- Enable multiwindow support.
-  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-  min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-  line_numbers = true,
-  multiline_threshold = 20, -- Maximum number of lines to show for a single context
-  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-  mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-  -- Separator between context and content. Should be a single character string, like '-'.
-  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-  separator = nil,
-  zindex = 20, -- The Z-index of the context window
-  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+require 'treesitter-context'.setup {
+	enable = true,          -- Enable this plugin (Can be enabled/disabled later via commands)
+	multiwindow = false,    -- Enable multiwindow support.
+	max_lines = 0,          -- How many lines the window should span. Values <= 0 mean no limit.
+	min_window_height = 0,  -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+	line_numbers = true,
+	multiline_threshold = 20, -- Maximum number of lines to show for a single context
+	trim_scope = 'outer',   -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+	mode = 'cursor',        -- Line used to calculate context. Choices: 'cursor', 'topline'
+	-- Separator between context and content. Should be a single character string, like '-'.
+	-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+	separator = nil,
+	zindex = 20,   -- The Z-index of the context window
+	on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
 require("nvim-ts-autotag").setup({
 	opts = {
 		-- Defaults
-		enable_close = true, -- Auto close tags
-		enable_rename = true, -- Auto rename pairs of tags
+		enable_close = true,     -- Auto close tags
+		enable_rename = true,    -- Auto rename pairs of tags
 		enable_close_on_slash = false, -- Auto close on trailing </
 	},
 	-- Also override individual filetype configs, these take priority.
@@ -142,68 +156,8 @@ require("nvim-ts-autotag").setup({
 	},
 })
 
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.zimbu = {
-	install_info = {
-		url = "~/projects/tree-sitter-zimbu", -- local path or git repo
-		files = { "src/parser.c" },
-		-- optional entries:
-		branch = "main", -- default branch in case of git repo if different from master
-		generate_requires_npm = true, -- if stand-alone parser without npm dependencies
-		requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
-	},
-	filetype = "zu", -- if filetype does not match the parser name
-}
-
---###########################################################################--
---							Regex Settings		 							 --
---###########################################################################--
-require("regexplainer").show({ display = "popup" })
-require("regexplainer").setup({
-	-- 'narrative'
-	mode = "narrative", -- TODO: 'ascii', 'graphical'
-
-	-- automatically show the explainer when the cursor enters a regexp
-	auto = true,
-
-	-- filetypes (i.e. extensions) in which to run the autocommand
-	filetypes = {
-		"lua",
-		"html",
-		"js",
-		"cjs",
-		"mjs",
-		"ts",
-		"jsx",
-		"tsx",
-		"cjsx",
-		"mjsx",
-		"sh",
-		"yml",
-		"markdown",
-	},
-
-	-- Whether to log debug messages
-	debug = true,
-
-	display = "popup",
-	popup = {
-		border = {
-			padding = { 1, 2 },
-			style = "rounded",
-		},
-	},
-
-	mappings = {
-		-- toggle = "gR",
-		-- examples, not defaults:
-		-- show = 'gS',
-		-- hide = 'gH',
-		-- show_split = 'gP',
-		-- show_popup = 'gU',
-	},
-
-	narrative = {
-		separator = "\n",
-	},
+vim.filetype.add({
+	extension = {
+		templ = 'templ'
+	}
 })

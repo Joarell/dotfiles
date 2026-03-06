@@ -59,12 +59,15 @@ layout {
 				}
 			}
 			pane split_direction="horizontal" {
-				// pane borderless=true name="pipes" size=2 {
-				// 	command "pipes.sh" close_on_exit=true
-				// 	args "-p" "4" "-r" "7000000"
+				// pane borderless=true name="pipes" size=3 {
+				// 	command "pipes-rs" close_on_exit=true
+				// 	args "-p" "4"
+				// 	// args "-p" "4" "-r" "1.0"
+				// 	// args "-p" "4" "-r" "7000000"
 				// }
 				pane split_direction="vertical" {
-					pane borderless=true
+					pane size=140 // borderless=true
+					pane
 					// pane cwd="$HOME/otto-app/newLayout" name="AI" borderless=true {
 					// 	command "crush" close_on_exit=true
 					// }

@@ -6,7 +6,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
-			"folke/lazydev.nvim",
+			-- "folke/lazydev.nvim",
 			"williamboman/nvim-lsp-installer",
 			"williamboman/mason-lspconfig.nvim",
 			"kabouzeid/nvim-lspinstall",
@@ -29,7 +29,7 @@ return {
 			})
 			require("detekt").setup()
 			require("mason-null-ls").setup({})
-			require("lazydev").setup({})
+			-- require("lazydev").setup({})
 			-- local lsp_zero = require("lsp-zero")
 			local dap_install = require("mason-nvim-dap")
 			local lspconfig = require("lspconfig")
@@ -99,7 +99,6 @@ return {
 				-- ast_grep = {},
 				bashls = {},
 				biome = {},
-				bacon_ls = {},
 				clangd = {},
 				cssls = {},
 				dockerls = {},

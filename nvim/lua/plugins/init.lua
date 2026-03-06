@@ -15,11 +15,11 @@ return {
 	-- 		vim.g.rustfmt_autosave = 1
 	-- 	end
 	-- },
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^5",
-		lazy = false,
-	},
+	-- {
+	-- 	"mrcjkb/rustaceanvim",
+	-- 	version = "^6",
+	-- 	lazy = false,
+	-- },
 	-- {
 	-- 	"lpturmel/discord.nvim",
 	-- 	config = function()
@@ -47,51 +47,14 @@ return {
 		lazy = false,
 		build = ":TSUpdate",
 		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter",
-				config = function()
-					require("nvim-treesitter.configs").setup {
-						ensure_installed = { "nu" }, -- Ensure the "nu" parser is installed
-						highlight = {
-							enable = true, -- Enable syntax highlighting
-						},
-						-- OPTIONAL!! These enable ts-specific textobjects.
-						-- So you can hit `yaf` to copy the closest function,
-						-- `dif` to clear the content of the closest function,
-						-- or whatever keys you map to what query.
-						textobjects = {
-							select = {
-								enable = true,
-								keymaps = {
-									-- You can use the capture groups defined in textobjects.scm
-									-- For example:
-									-- Nushell only
-									["aP"] = "@pipeline.outer",
-									["iP"] = "@pipeline.inner",
-
-									-- supported in other languages as well
-									["af"] = "@function.outer",
-									["if"] = "@function.inner",
-									["al"] = "@loop.outer",
-									["il"] = "@loop.inner",
-									["aC"] = "@conditional.outer",
-									["iC"] = "@conditional.inner",
-									["iS"] = "@statement.inner",
-									["aS"] = "@statement.outer",
-								}, -- keymaps
-							}, -- select
-						}, -- textobjects
-					}
-				end,
-				build = ":TSUpdate",
-			},
-			{ "tree-sitter-grammars/tree-sitter-hyprlang", build = ":TSUpdate hyprlang" },
+			-- { "tree-sitter-grammars/tree-sitter-hyprlang", build = ":TSUpdate hyprlang" },
 			"nvim-treesitter/nvim-treesitter-context",
-			"nvim-treesitter/nvim-treesitter-refactor",
+			-- "nvim-treesitter/nvim-treesitter-refactor",
 			-- "nvim-treesitter/nvim-treesitter-textobjects",
 			"HiPhish/rainbow-delimiters.nvim",
 			"windwp/nvim-ts-autotag",
-			{ "bezhermoso/tree-sitter-ghostty", build = "make nvim_install", },
+			"bezhermoso/tree-sitter-ghostty",
+			build = "make nvim_install",
 		},
 	},
 	-- { "nvim-treesitter/playground" },
@@ -282,7 +245,6 @@ return {
 				-- Sets the name of unnamed buffers. By default format is "[Buffer X]"
 				-- where X is the buffer number. But only a static string is accepted here.
 				no_name_title = "New Buffer",
-
 			})
 		end,
 	},
@@ -292,6 +254,7 @@ return {
 			"smiteshp/nvim-navic",
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
+		lazy = false,
 	},
 	-- { 'Bekaboo/dropbar.nvim' },
 
@@ -330,17 +293,20 @@ return {
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
 		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
-		-- or                            , branch = '0.1.x',
+		version = '*',
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				build = 'make',
+			},
 		},
 	},
 	-- { "vanya-robertson/telescope-media-files.nvim" },
 	{ "nvim-telescope/telescope-symbols.nvim" },
 	{
 		'nvim-telescope/telescope-fzf-native.nvim',
-		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release; cmake --build build --config Release'
+		build = 'make',
 	},
 	-- { "nvim-telescope/telescope-file-browser.nvim" },
 	{ "nvim-lua/popup.nvim" },
@@ -440,7 +406,7 @@ return {
 					priority = 500,
 				},
 			})
-		end
+		end,
 	},
 	{ "e-roux/pretty-fold.nvim" },
 	-- { "lukas-reineke/virt-column.nvim" },
@@ -553,7 +519,7 @@ return {
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({})
-		end
+		end,
 	},
 
 	--  ╭─────────────────────╮
@@ -596,7 +562,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme "matteblack"
+			vim.cmd.colorscheme("matteblack")
 		end,
 	},
 	{

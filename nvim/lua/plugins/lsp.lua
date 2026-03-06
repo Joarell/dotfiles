@@ -56,18 +56,19 @@ return {
 		-- 	require("clangd_extensions.inlay_hints").set_inlay_hints()
 		-- end,
 	},
-	{
-		"bennypowers/nvim-regexplainer",
-		config = function()
-			require("regexplainer").setup()
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"MunifTanjim/nui.nvim",
-		},
-	},
+	-- {
+	-- 	"bennypowers/nvim-regexplainer",
+	-- 	config = function()
+	-- 		require("regexplainer").setup()
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 	},
+	-- },
 	{
 		"hrsh7th/nvim-cmp",
+		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/vim-vsnip",
@@ -118,7 +119,7 @@ return {
 				snippet = {
 					expand = function(args)
 						local ok = pcall(require, "luasnip")
-						local ultisnips = require("cmp_nvim_ultisnips.mappings")
+						-- local ultisnips = require("cmp_nvim_ultisnips.mappings")
 						if ok then
 							local ls = require("luasnip")
 							ls.lsp_expand(args.body)
@@ -146,8 +147,14 @@ return {
 					{ name = "dictionary",             keyword_length = 3 },
 				},
 				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered({
+						border = 'rounded',
+						winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:None,FloatBorder:CmpPmenuBorder',
+					}),
+					documentation = cmp.config.window.bordered({
+						border = 'rounded',
+						winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:None,FloatBorder:CmpPmenuBorder',
+					}),
 				},
 				formatting = {
 					expandable_indicator = true,
@@ -222,33 +229,33 @@ return {
 					["<C-e>"] = cmp.mapping.abort(),
 
 					["<C-l>"] = cmp.mapping(function(fallback)
-						local ls = pcall(require, "luasnip")
-						if not ls then
+						local LS = pcall(require, "luasnip")
+						if not LS then
 							return
 						end
-						local ls = require("luasnip")
+						LS = require("luasnip")
 
 						if cmp.visible() then
 							cmp.select_next_item()
-						elseif ls.expand_or_jumpable() then
-							ls.expand_or_jump()
-						elseif ls.has_words_before() then
+						elseif LS.expand_or_jumpable() then
+							LS.expand_or_jump()
+						elseif LS.has_words_before() then
 							cmp.complete()
 						else
 							fallback()
 						end
 					end, { "i", "s" }),
 					["<C-h>"] = cmp.mapping(function(fallback)
-						local ls = pcall(require, "luasnip")
-						if not ls then
+						local LS = pcall(require, "luasnip")
+						if not LS then
 							return
 						end
-						local ls = require("luasnip")
+						LS = require("luasnip")
 
 						if cmp.visible() then
 							cmp.select_prev_item()
-						elseif ls.jumpable(-1) then
-							ls.jump(-1)
+						elseif LS.jumpable(-1) then
+							LS.jump(-1)
 						else
 							fallback()
 						end

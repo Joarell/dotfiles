@@ -41,7 +41,7 @@ keymap("v", "<A-k>", "<Esc>:m .-2<CR>==g", opts)
 keymap("v", "<PageUp>", ":m '<-2<CR>gv-gv", opts)
 keymap("v", "<PageDown>", ":m '>+1<CR>gv-gv", opts)
 keymap("n", "pv", "<C-w>v", opts)
-keymap("n", "ps", "<C-w>s", opts)
+keymap("n", "ph", "<C-w>s", opts)
 keymap("n", "<Leader>ac", ":lua vim.lsp.buf.code_action()<CR>", opts)
 -- keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
 keymap("n", "gi", vim.lsp.buf.implementation, opts)
@@ -60,21 +60,21 @@ keymap("n", "cn", ":lua vim.lsp.buf.rename()<CR>", opts)
 keymap("v", "<C-s>", ":SnipRun<cr>", opts)
 keymap("n", "GH", ":diffget //2<cr>", opts)
 keymap("n", "GL", ":diffget //3<cr>", opts)
-
+keymap("n", "<Leader>F", vim.lsp.buf.format, opts)
 keymap("n", "BL", function()
-    vim.cmd("set background=light")
+	vim.cmd("set background=light")
 end, opts)
 
 keymap("n", "BD", function()
-    vim.cmd("set background=dark")
+	vim.cmd("set background=dark")
 end, opts)
 
 keymap("n", "vu", function()
-    vim.diagnostic.enable(false)
+	vim.diagnostic.enable(false)
 end, opts)
 
 keymap("n", "vs", function()
-    vim.diagnostic.enable(true)
+	vim.diagnostic.enable(true)
 end, opts)
 
 keymap("n", "<Leader>hi", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", opts)
@@ -83,14 +83,14 @@ keymap("n", "<Leader>hi", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint
 -- │                        Lua Snips                        │
 -- ╰─────────────────────────────────────────────────────────╯
 keymap({ "i" }, "<C-n>", function()
-    if ls.choice_active() then
-        ls.change_choice(1)
-    end
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
 end, opts)
 keymap({ "i" }, "<C-p>", function()
-    if ls.choice_active() then
-        ls.change_choice(-1)
-    end
+	if ls.choice_active() then
+		ls.change_choice(-1)
+	end
 end, opts)
 
 -- ╭─────────────────────────────────────────────────────────╮
@@ -115,8 +115,8 @@ keymap("n", "<Leader>b", ":ToggleBlameLine<CR>", opts)
 keymap("n", "<C-w>-", ":WindowsMaximizeVertically<CR>", opts)
 keymap("n", "<C-w>|", ":WindowsMaximizeHorizontally<CR>", opts)
 keymap("n", "<Leader>hl", ":TSHighlightCapturesUnderCursor<CR>", opts)
-keymap({ "n", "v" }, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
-keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
+-- keymap({ "n", "v" }, "<Leader>x", ":RegexplainerShowPopup<CR>", opts)
+-- keymap({ "n", "v" }, "<Leader>xh", ":RegexplainerHide<CR>", opts)
 -- keymap({ "n", "i" }, "<Leader>ac", ':lua require("nvim-comment-frame").add_comment()<CR>', opts)
 keymap({ "n", "i" }, "<Leader>C", ':lua require("nvim-comment-frame").add_multiline_comment()<CR>', opts)
 keymap({ "n", "v" }, "cm", ":CBacbox<CR>", opts)    -- left alignment adaptable
@@ -136,21 +136,24 @@ keymap("n", "<Leader>a", require("harpoon.mark").add_file, opts)
 keymap("n", "<Leader>fe", require("harpoon.ui").nav_file, opts)
 keymap("n", "<Leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap("n", "<A-O>", ":ObsidianNew<CR>", opts)
+keymap("n", "<Leader>tp", ":ObsidianTemplate<CR>", opts)
 keymap("n", "<A-S>", ssh_api.connect, opts)
 keymap("n", "<A-D>", function()
-    if connections.is_connected then
-        ssh_api.disconnect()
-        connections.unmount_host()
-        vim.notify("SSH DISCONNTED! 🔌 ⛔", 3, {})
-    end
+	if connections.is_connected then
+		ssh_api.disconnect()
+		connections.unmount_host()
+		vim.notify("SSH DISCONNTED! 🔌 ⛔", 3, {})
+	end
 end, opts)
 keymap("n", "<A-t>", ":lua require('neotest').run.run({ vim.fn.expand('%'), vitestCommand = 'yarn test' })<CR>", opts)
+keymap("n", "<A-t>b", ":lua require('neotest').run.run({ vim.fn.expand('%'), vitestCommand = 'bun test' })<CR>", opts)
 keymap("n", "<A-t>w", ":lua require('neotest').watch.toggle({ vim.fn.expand('%'), vitestCommand = 'yarn test' })<CR>",
-    opts)
+	opts)
 keymap("n", "<A-T>", ":lua require('neotest').output_panel.toggle()<CR>", opts)
 keymap("n", "<A-S>", require('neotest').summary.toggle, opts)
 keymap("n", "<Leader>v", ":AvanteToggle<CR>", opts)
 keymap("n", "<Leader-e>", ":AvanteClear<CR>", opts)
+-- keymap("n", "<A-X>", require('xplr').toggle, opts)
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                       F function.                       │
@@ -169,7 +172,7 @@ keymap("n", "<F8>", ":Trouble symbols<CR>", opts)
 keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", opts)
 keymap("n", "<F10>", ":DapStepInto<CR>", opts)
 keymap("n", "<F11>", ":DapContinue<CR>", opts)
-keymap("n", "<F12>", vim.lsp.buf.format, opts)
+-- keymap("n", "<F12>", vim.lsp.buf.format, opts)
 
 --Trouble
 keymap("n", "<Leader>tr", ':lua require("trouble").next({ skip_groups = true, jump = true })<CR>', opts)
@@ -183,19 +186,18 @@ keymap("n", "<Leader>gr", ":Trouble lsp_references<cr>", opts)
 -- │                     Folder function                     │
 -- ╰─────────────────────────────────────────────────────────╯
 keymap("n", "<Leader>f", function()
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.opt.foldcolumn = "8"
+	vim.opt.foldmethod = "expr"
+	vim.opt.foldcolumn = "8"
 end, { desc = "This key binding folds all indentation lines to protect your code! Your Welcome! 😎" })
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                   Neovide clipboard.                    │
 -- ╰─────────────────────────────────────────────────────────╯
 if vim.g.neovide then
-    keymap("v", "<D-c>", '"+y')          -- Copy
-    keymap({ "n", "v" }, "<D-v>", '"+P') -- Paste normal mode
-    keymap("c", "<D-v>", "<C-R>+")       -- Paste command mode
-    keymap("i", "<D-v>", '<ESC>l"+Pli')  -- Paste insert mode
+	keymap("v", "<D-c>", '"+y')          -- Copy
+	keymap({ "n", "v" }, "<D-v>", '"+P') -- Paste normal mode
+	keymap("c", "<D-v>", "<C-R>+")       -- Paste command mode
+	keymap("i", "<D-v>", '<ESC>l"+Pli')  -- Paste insert mode
 end
 keymap({ "n", "i" }, "<D-v>", "+p<CR>", opts)
 keymap("!", "<D-v>", "<C-R>+", opts)
@@ -203,11 +205,11 @@ keymap("t", "<D-v>", "<C-R>+", opts)
 keymap("v", "<D-v>", "<C-R>+", opts)
 vim.g.neovide_scale_factor = 1.0
 local change_scale_factor = function(delta)
-    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
 end
 keymap("n", "<C-=>", function()
-    change_scale_factor(1.25)
+	change_scale_factor(1.25)
 end)
 keymap("n", "<C-->", function()
-    change_scale_factor(1 / 1.25)
+	change_scale_factor(1 / 1.25)
 end)

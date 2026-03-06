@@ -9,6 +9,7 @@ function setup_ghostty_lsp()
     end
 end
 
+vim.diagnostic.Opts = { update_in_insert = true }
 vim.api.nvim_create_autocmd("BufRead", { pattern = "*", callback = setup_ghostty_lsp })
 return {
 	vim.lsp.config('*', {
@@ -48,17 +49,20 @@ return {
 			},
 		},
 	}),
+	
+	-- vim.lsp.config('bacon-ls', {
+	-- 	init_options = {
+	-- 		updateOnSave = true,
+	-- 		updateOnSaveWaitMillis = 1000,
+	-- 	}
+	-- }),
 
 	vim.lsp.config("lua_ls", {
 		settings = {
 			Lua = {
-				completion = {
-					autoRequire = true,
-					callSnippet = "Replace",
-					displayContext = 1,
+				workspace = {
+					library = vim.api.nvim_get_runtime_file("", true),
 				},
-				workspace = { checkThirdParty = false },
-				telemetry = { enable = false },
 				hint = {
 					enable = true,
 					arrayIndex = 'Enable',
@@ -117,6 +121,22 @@ return {
 		},
 	}),
 
+	vim.lsp.config('pylsp', {
+		cmd = { 'pylsp' },
+		settings = {
+			pylsp = {
+				configurationSources = { "flake8" },
+				plugins = {
+					flake8 = { enabled = true },
+					isort = { enabled = true },
+					jedi_completion = { enabled = true, fuzzy = true },
+				},
+			},
+		},
+	}),
+	vim.lsp.enable('pylsp'),
+
+
 	vim.lsp.enable('rustowlsp'),
 	vim.lsp.enable('rustowl'),
 	vim.lsp.config('rustowl', {
@@ -153,6 +173,8 @@ return {
 		},
 	}),
 
+	vim.lsp.enable('rustowlsp'),
+
 	vim.lsp.config('harper_ls', {
 		settings = {
 			userDictPath = "~/dotfiles/dict.txt"
@@ -161,6 +183,12 @@ return {
 		-- 	userDictPath = "~/dotfiles/dict.txt"
 		-- }
 	}),
+
+	vim.lsp.enable('tailwindcss'),
+
+	vim.lsp.enable('templ'),
+
+	vim.lsp.enable('just_lsp'),
 
 	vim.lsp.config('html', {
 		filetypes = { "html", "twig", "hbs" },
@@ -179,6 +207,7 @@ return {
 						enable = true,
 						useParameterNames = true,
 					},
+					enable = true,
 				},
 				imports = {
 					granularity = {

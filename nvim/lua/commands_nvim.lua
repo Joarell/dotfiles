@@ -7,28 +7,29 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	callback = function()
 		print("Test successful run!")
 		local file = vim.fn.expand("%")
-		vim.fn.jobstart({ "node", "--test", file }, {
-			stdout_buffered = true,
-			on_stdout = function(_, data)
-				if not data then
-					return
-				end
-				if session == 0 then
-					NEWBUF = vim.api.nvim_create_buf({}, {})
-				end
-				vim.api.nvim_buf_set_lines(NEWBUF, 0, -1, false, data)
-				if session == 0 then
-					vim.cmd.vsplit()
-					session = 1
-					vim.cmd("BufferNext")
-				end
-			end,
-			on_stderr = function(_, data)
-				if data then
-					vim.api.nvim_buf_set_lines(NEWBUF, -1, -1, false, data)
-				end
-			end,
-		})
+		-- vim.fn.jobstart({ "node", "--test", file }, {
+		-- vim.fn.jobstart({ "bun", "test", file }, {
+		-- 	stdout_buffered = true,
+		-- 	on_stdout = function(_, data)
+		-- 		if not data then
+		-- 			return
+		-- 		end
+		-- 		if session == 0 then
+		-- 			NEWBUF = vim.api.nvim_create_buf({}, {})
+		-- 		end
+		-- 		vim.api.nvim_buf_set_lines(NEWBUF, 0, -1, false, data)
+		-- 		if session == 0 then
+		-- 			vim.cmd.vsplit()
+		-- 			session = 1
+		-- 			vim.cmd("BufferNext")
+		-- 		end
+		-- 	end,
+		-- 	on_stderr = function(_, data)
+		-- 		if data then
+		-- 			vim.api.nvim_buf_set_lines(NEWBUF, -1, -1, false, data)
+		-- 		end
+		-- 	end,
+		-- })
 	end,
 	group = TestRunnerJS,
 })

@@ -69,10 +69,14 @@ return {
 					aliases =	note.aliases,
 					tags =		note.tags,
 					theme =		note.title,
-					page =		note.page,
-					link =		note.link
 				}
 
+				if note.metadata == nil then
+					note.metadata = {
+						link_prev = '',
+						link_next = '',
+					}
+				end
 				-- `note.metadata` contains any manually added fields in the frontmatter.
 				-- So here we just make sure those fields are kept in the frontmatter.
 				if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
@@ -100,7 +104,7 @@ return {
 				vim.fn.jobstart({"open", url})  -- Mac OS
 				-- vim.fn.jobstart({"xdg-open", url})  -- linux
 				-- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
-				-- vim.ui.open(url) -- need Neovim 0.10.0+
+				vim.ui.open(url) -- need Neovim 0.10.0+
 			end,
 
 			-- Optional, by default when you use `:ObsidianFollowLink` on a link to an image

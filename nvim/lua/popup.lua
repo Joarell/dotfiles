@@ -36,7 +36,7 @@ require("noice").setup({
 	popupmenu = {
 		enabled = true, -- enables the Noice popupmenu UI
 		---@type 'nui'|'cmp'
-		backend = "nui", -- backend to use to show regular cmdline completions
+		backend = "cmp", -- backend to use to show regular cmdline completions
 		---@type NoicePopupmenuItemKind|false
 		-- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
 		kind_icons = {}, -- set to `false` to disable icons
@@ -88,6 +88,11 @@ require("noice").setup({
 			filter = { error = true },
 			filter_opts = { reverse = true },
 		},
+		all = {
+			view = "split",
+			opts = { enter = true, format = "details" },
+			filter = {},
+		},
 	},
 	notify = {
 		-- Noice can be used as `vim.notify` so you can route any notification like other messages
@@ -100,7 +105,7 @@ require("noice").setup({
 	},
 	lsp = {
 		progress = {
-			enabled = false,
+			enabled = true,
 			-- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
 			-- See the section on formatting for more details on how to customize.
 			--- @type NoiceFormat|string
@@ -151,7 +156,14 @@ require("noice").setup({
 				replace = true,
 				render = "plain",
 				format = { "{message}" },
-				win_options = { concealcursor = "n", conceallevel = 3 },
+				win_options = { 
+					winhighlight = {
+						Normal = "NormalFloat",
+						FloatBorder = "FloatBorder",
+					},
+					concealcursor = "n",
+					conceallevel = 3
+				},
 			},
 		},
 	},

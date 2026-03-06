@@ -45,31 +45,10 @@ set.scs = true
 --  │                         Settings                         │
 --  ╰──────────────────────────────────────────────────────────╯
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
-		lazypath,
-	})
-end
-vim.opt.rtp:prepend(lazypath)
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local opts = {
-	ui = {
-		border = "rounded",
-	},
-	git = {
-		timeout = 10000,
-	}
-}
-
-require("lazy").setup("plugins", opts)
+require("config.lazy")
 require("luasnip_config")
 require("popup")
 require("tscope")
@@ -107,12 +86,38 @@ vim.api.nvim_create_autocmd("BufRead", {
 	group = yaml,
 })
 
+-- vim.pack.add({
+-- 	'https://github.com/MeanderingProgrammer/render-markdown.nvim',
+-- })
+--
+-- require('render-markdown').setup({
+-- 	"MeanderingProgrammer/markdown.nvim",
+-- 	name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+-- 	dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+-- 	-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+-- 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+-- })
+
 -- vim.api.nvim_create_autocmd("BufWritePost", {
 -- 	callback = function()
 -- 		vim.cmd("Trouble diagnostics")
 -- 	end,
 -- 	group = diag,
 -- })
+-- Inside your on_attach function
+
+local groupHigh = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true }) 
+vim.api.nvim_create_autocmd("CursorHold", {
+	group = groupHigh,
+	buffer = bufnr,
+	callback = vim.lsp.buf.document_highlight, --
+})
+
+vim.api.nvim_create_autocmd("CursorMoved", {
+	group = groupHigh,
+	buffer = bufnr,
+	callback = vim.lsp.buf.clear_references, --
+})
 
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = { "*.xml", "*.html", "*.css" },
@@ -212,20 +217,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.api.nvim_create_user_command("AutoRun", function()
-	print("Running...")
-end, {})
+
+vim.lsp.handlers["textDocument/completion"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = "rounded",
+})
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	border = "rounded",
 })
 
-vim.lsp.handlers["testDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+vim.lsp.handlers["textDocument/SignatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = "rounded",
 })
 
 vim.diagnostic.enable(false)
-vim.diagnostic.config({ float = { border = "rounded" } })
 
 vim.diagnostic.config({
 	virtual_text = {
@@ -233,6 +238,7 @@ vim.diagnostic.config({
 		-- prefix = " ",
 		-- prefix = "󱠇" ,
 	},
+	float = { border = "rounded" },
 })
 --
 -- TODO: - open a terminal without number column nativily.

@@ -41,7 +41,7 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
-background-opacity = .79
+background-opacity = .95
 background-blur-radius = 19
 window-decoration = false
 # theme = dark:Glacier, light:Belafonte Day
@@ -52,6 +52,7 @@ font-size = 9
 
 shell-integration = zsh
 cursor-style-blink = true
+# cursor-color = #000000
 cursor-color = #ff0078
 
 confirm-close-surface = false

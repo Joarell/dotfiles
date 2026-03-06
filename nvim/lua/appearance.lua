@@ -265,10 +265,10 @@ require("kanagawa").setup({
 
 require("material").setup({
     contrast = {
-        terminal = false,            -- Enable contrast for the built-in terminal
-        sidebars = false,            -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
-        floating_windows = false,    -- Enable contrast for floating windows
-        cursor_line = false,         -- Enable darker background for the cursor line
+        terminal = true,            -- Enable contrast for the built-in terminal
+        sidebars = true,            -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+        floating_windows = true,    -- Enable contrast for floating windows
+        cursor_line = true,         -- Enable darker background for the cursor line
         lsp_virtual_text = false,    -- Enable contrasted background for lsp virtual text
         non_current_windows = false, -- Enable contrasted background for non-current windows
         filetypes = {},              -- Specify which filetypes get the contrasted (darker) background
@@ -276,15 +276,18 @@ require("material").setup({
 
     styles = { -- Give comments style such as bold, italic, underline etc.
         comments = { --[[ italic = true ]]
+			italic = true,
         },
         strings = { --[[ bold = true ]]
+			bold = true,
         },
         keywords = { --[[ underline = true ]]
+			underline = true,
         },
         functions = { --[[ bold = true, undercurl = true ]]
         },
         variables = {},
-        operators = {},
+        operators = { italic = true, bold = true },
         types = {},
     },
 
@@ -345,8 +348,8 @@ require('matteblack').colorscheme()
 -- vim.cmd("colorscheme solarized-osaka")
 -- vim.cmd("colorscheme retrobox")
 -- vim.cmd("colorscheme kanagawa-dragon")
--- vim.cmd("colorscheme catppuccin")
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme catppuccin")
+-- vim.cmd("colorscheme material-deep-ocean")
 
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                   Bufferline settings:                   │
@@ -486,25 +489,15 @@ vim.g.rainbow_delimiters = { highlight = highlight }
 --###########################################################################--
 --							Fold settings					 				 --
 --###########################################################################--
-require("pretty-fold").setup({
-    keep_indentation = false,
-    fill_char = "━",
-    sections = {
-        left = {
-            "━ ",
-            function()
-                return string.rep("*", vim.v.foldlevel)
-            end,
-            " ━┫",
-            "content",
-            "┣",
-        },
-        right = {
-            "┫ ",
-            "number_of_folded_lines",
-            ": ",
-            "percentage",
-            " ┣━━",
-        },
-    },
-})
+require('pretty-fold').setup{
+   keep_indentation = false,
+   fill_char = '━',
+   sections = {
+      left = {
+         '━ ', function() return string.rep('*', vim.v.foldlevel) end, ' ━┫', 'content', '┣'
+      },
+      right = {
+         '┫ ', 'number_of_folded_lines', ': ', 'percentage', ' ┣━━',
+      }
+   }
+}

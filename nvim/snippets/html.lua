@@ -19,9 +19,29 @@ local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
  
 local group = vim.api.nvim_create_augroup("LuaSnippets", { clear = true})
-local file_type = "*.html"
 
 ls.add_snippets("html", {
+	s("<!DOC", {
+	t({"<!DOCTYPE html>",
+		"<html lang=\"en\">",
+		"\t\t<head>",
+		"\t\t\t<meta charset=\"utf-8\">",
+		"\t\t\t<title>Untitle</title>",
+		"\t\t\t<meta name=\"viwport\" content=\"width=device-width, initial-scale-1\">",
+		"\t\t\t<link rel=\"stylesheet\" href=\"index.cssh\">",
+		"\t\t</head>",
+		"\t\t<body>",
+			"\t\t<main>",
+				"\t\t\t<h1>",
+					"\t\t\t\t",
+				"\t\t\t</h1>",
+			"\t\t</main>",
+		"\t\t</body>",
+		"<html>",
+	}) }),
+})
+
+ls.add_snippets("tmpl", {
 	s("<!DOC", {
 	t({"<!DOCTYPE html>",
 		"<html lang=\"en\">",

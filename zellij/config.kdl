@@ -246,7 +246,7 @@ plugins {
     about location="zellij:about"
     autolock location="https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm" {
         reaction_seconds "0.5"
-        triggers "fzf|zoxide|atuin|git|vim|nvim|lazygit|lg|posting|Posting|jj|yazi|yz|crush"
+        triggers "fzf|zoxide|atuin|git|vim|nvim|lazygit|lg|posting|Posting|jj|yazi|yz|crush|xplr"
     }
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
