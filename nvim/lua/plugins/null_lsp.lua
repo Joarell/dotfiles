@@ -12,21 +12,6 @@ return {
             null_ls.setup({
                 sources = {
                     null.formatting.stylua,
-                    -- null.formatting.prettierd,
-                    -- null.formatting.prettier.with({
-                    --     filetypes = {
-                    --         "html",
-                    --         "css",
-                    --         "json",
-                    --         "go",
-                    --         "yaml",
-                    --         "markdown",
-                    --         "javascript",
-                    --         "js",
-                    --         "rust",
-                    --         "lua",
-                    --     },
-                    -- }),
                     null.formatting.biome,
                     null.formatting.codespell,
                     null.formatting.sqlfmt,
@@ -38,11 +23,9 @@ return {
                     null.formatting.golines,
                     null.formatting.goimports_reviser,
                     null.formatting.prettierd,
-                    null.formatting.typstfmt,
                     ----------------------------------------
                     -- null.diagnostics.eslint,
                     null.diagnostics.checkmake,
-                    null.diagnostics.cmake_lint,
                     null.diagnostics.selene,
                     null.diagnostics.golangci_lint,
                     null.diagnostics.revive,

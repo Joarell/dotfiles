@@ -65,7 +65,7 @@ require("nvim-treesitter").setup({ -- Here is all languages supported. Feel free
 			clear_on_cursor_move = true,
 			timeoutlen = 0,
 		},
-		-- highlight_current_scope = { enable = true, timeout = 100 },
+		highlight_current_scope = { enable = true, timeout = 100 },
 		smart_rename = {
 			enable = true,
 			-- keymaps = {

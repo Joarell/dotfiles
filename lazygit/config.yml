@@ -55,11 +55,11 @@ gui:
   animateExplosion: true # shows an explosion animation when nuking the working tree
   portraitMode: "auto" # one of 'auto' | 'never' | 'always'
 git:
-  paging:
-    colorArg: always
-    useConfig: false
-    externalDiffCommand: difft --color=always
-    # pager: delta --dark --paging=never
+  pagers:
+    - colorArg: always
+      useConfig: false
+      externalDiffCommand: difft --color=always
+      # pager: delta --dark --paging=never
   commit:
     signOff: false
   merging:
@@ -85,10 +85,11 @@ git:
   autoRefresh: true
   fetchAll: true # Pass --all flag when running git fetch. Set to false to fetch only origin (or the current branch's upstream remote if there is one)
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
-  allBranchesLogCmd: "git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium"
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
   parseEmoji: false
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
 os:
   copyToClipboardCmd: "" # See 'Custom Command for Copying to Clipboard' section
   editPreset: "" # see 'Configuring File Editing' section
@@ -191,7 +192,7 @@ keybinding:
     viewResetOptions: "D"
     fetch: "f"
     toggleTreeView: "`"
-    openMergeTool: "M"
+    openMergeOptions: "M"
     openStatusFilter: "<c-b>"
   branches:
     createPullRequest: "o"

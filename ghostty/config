@@ -50,7 +50,7 @@ window-decoration = false
 theme = dark:Citruszest,light:Belafonte Day
 font-size = 9
 
-shell-integration = zsh
+shell-integration = bash
 cursor-style-blink = true
 # cursor-color = #000000
 cursor-color = #ff0078

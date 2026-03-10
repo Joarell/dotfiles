@@ -92,6 +92,22 @@ return {
 				group = swift_lsp,
 			})
 
+			local on_attach = function(client, bufnr)
+				-- 1. Setup CursorHold to highlight symbol under cursor
+				if client.server_capabilities.documentHighlightProvider then
+					vim.api.nvim_create_autocmd("CursorHold", {
+						buffer = bufnr,
+						callback = vim.lsp.buf.document_highlight,
+					})
+
+					-- 2. Setup CursorMoved to clear highlights
+					vim.api.nvim_create_autocmd("CursorMoved", {
+						buffer = bufnr,
+						callback = vim.lsp.buf.clear_references,
+					})
+				end
+			end
+
 			local servers = {
 				astro = {},
 				asm_lsp = {},
@@ -156,8 +172,8 @@ return {
 				-- grammarly = {},
 				harper_ls = {
 					["harper-ls"] = {
-						userDictPath = "~/dotfiles/dict.txt"
-					}
+						userDictPath = "~/dotfiles/dict.txt",
+					},
 				},
 				-- ['htmx-lsp'] = {},
 				html = {
@@ -179,7 +195,7 @@ return {
 						telemetry = { enable = false },
 						hint = {
 							enable = true,
-							arrayIndex = 'Enable',
+							arrayIndex = "Enable",
 							setType = true,
 						},
 					},
@@ -229,9 +245,11 @@ return {
 				automatic_enable = true,
 				automatic_installation = true,
 				ensure_installed = vim.tbl_keys(servers),
+				on_attach = on_attach,
 			})
 
-			vim.g.rustaceanvim = {
+			vim.g.rustaceanvim =
+				{
 					tools = {
 						autoSetHints = true,
 						hover_with_actions = true,
@@ -263,13 +281,11 @@ return {
 							name = "rt_lldb",
 						},
 					},
-				},
-
-				vim.api.nvim_create_autocmd('LspAttach', {
+				}, vim.api.nvim_create_autocmd("LspAttach", {
 					callback = function(args)
 						local bufnr = args.buf ---@type number
 						local client = vim.lsp.get_client_by_id(args.data.client_id)
-						if client.supports_method('textDocument/inlayHint') then
+						if client.supports_method("textDocument/inlayHint") then
 							vim.lsp.inlay_hint.enable()
 						end
 					end,

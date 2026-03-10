@@ -66,7 +66,7 @@ layout {
 				// 	// args "-p" "4" "-r" "7000000"
 				// }
 				pane split_direction="vertical" {
-					pane size=140 // borderless=true
+					pane size=110 // borderless=true
 					pane
 					// pane cwd="$HOME/otto-app/newLayout" name="AI" borderless=true {
 					// 	command "crush" close_on_exit=true

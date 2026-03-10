@@ -20,12 +20,13 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local trouble = require("trouble.sources.telescope").open
 local connections = require("remote-sshfs.connections")
-local ssh_api = require('remote-sshfs.api')
+local ssh_api = require("remote-sshfs.api")
 
 telescope.setup({
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}), },
+			require("telescope.themes").get_dropdown({}),
+		},
 		docker = {
 			theme = "dropdown",
 			binary = "docker",
@@ -41,7 +42,7 @@ telescope.setup({
 				"jpg",
 				"jpeg",
 				"pdf",
-				"epub"
+				"epub",
 			},
 			find_cmd = "rg",
 		},
@@ -96,7 +97,7 @@ local opts = { silent = true, noremap = true }
 
 keymap("n", "QF", builtin.quickfix, opts)
 keymap("n", "FH", builtin.quickfixhistory, opts)
-keymap("n", "ts", builtin.colorscheme, opts)
+keymap("n", "cs", builtin.colorscheme, opts)
 keymap("n", "fz", builtin.find_files, opts)
 keymap("n", "lg", builtin.live_grep, opts)
 keymap("n", "fb", builtin.buffers, opts)
@@ -129,7 +130,7 @@ keymap("n", "TM", ":Telescope marks<CR>", opts)
 
 local ssh = vim.api.nvim_create_augroup("SSH", {})
 vim.api.nvim_create_autocmd("BufLeave", {
-	callback = function ()
+	callback = function()
 		if connections.is_connected() then
 			ssh_api.disconnect()
 			connections.unmount_host()
@@ -139,3 +140,23 @@ vim.api.nvim_create_autocmd("BufLeave", {
 	group = ssh,
 })
 
+-- local actions = require("telescope.actions")
+-- local action_state = require("telescope.actions.state")
+--
+-- local open_after_tree = function(prompt_bufnr)
+-- 	local entry = action_state.get_selected_entry()
+-- 	actions.close(prompt_bufnr)
+--
+-- 	vim.defer_fn(function()
+-- 		vim.cmd("edit " .. vim.fn.fnameescape(entry.path or entry.value))
+-- 	end, 100) -- Delay allows filetype and plugins to settle before opening
+-- end
+--
+-- require("telescope").setup({
+-- 	defaults = {
+-- 		mappings = {
+-- 			i = { ["<CR>"] = open_after_tree },
+-- 			n = { ["<CR>"] = open_after_tree },
+-- 		},
+-- 	},
+-- })

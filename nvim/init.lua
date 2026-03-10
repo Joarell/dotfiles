@@ -35,11 +35,11 @@ set.winblend = 30
 set.clipboard = { "unnamed", "unnamedplus" }
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
--- set.guifont = "CaskaydiaCove NF:h13"
+set.guifont = "CaskaydiaCove NF:h13"
 set.background = 'dark'
 set.list = true
 set.scs = true
--- set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
+set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
 
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                         Settings                         │
@@ -74,6 +74,7 @@ local html_format_tab = vim.api.nvim_create_augroup("Format", {})
 local color_hl = vim.api.nvim_create_augroup("Dap_Set", {})
 local diag = vim.api.nvim_create_augroup("Troubles", {})
 local yaml = vim.api.nvim_create_augroup("YAML", {})
+local groupHigh = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
 
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = { "*.yml" },
@@ -104,19 +105,17 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- 	end,
 -- 	group = diag,
 -- })
--- Inside your on_attach function
 
-local groupHigh = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true }) 
 vim.api.nvim_create_autocmd("CursorHold", {
 	group = groupHigh,
 	buffer = bufnr,
-	callback = vim.lsp.buf.document_highlight, --
+	callback = vim.lsp.buf.document_highlight,
 })
 
 vim.api.nvim_create_autocmd("CursorMoved", {
 	group = groupHigh,
 	buffer = bufnr,
-	callback = vim.lsp.buf.clear_references, --
+	callback = vim.lsp.buf.clear_references,
 })
 
 vim.api.nvim_create_autocmd("BufRead", {

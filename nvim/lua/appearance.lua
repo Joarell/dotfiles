@@ -56,7 +56,7 @@ require("catppuccin").setup({
         variables = {},
         numbers = {},
         booleans = {},
-        properties = { "bold", "italic", "underline" },
+        properties = { "bold", "italic" },
         types = { "bold" },
         operators = { "bold" },
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
