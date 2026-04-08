@@ -35,7 +35,8 @@ set.winblend = 30
 set.clipboard = { "unnamed", "unnamedplus" }
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "CaskaydiaCove NF:h13"
+set.guifont = "FantasqueSansM Nerd Font Propo:h13"
+-- set.guifont = "CaskaydiaCove NF:h13"
 set.background = 'dark'
 set.list = true
 set.scs = true
@@ -47,6 +48,9 @@ set.lcs:append({space = "·", eol = "↴", tab = "▎  "})
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+vim.g.virtcolumn_char = '▕' -- char to display the line
+vim.g.virtcolumn_priority = 10 -- priority of extmark
 
 require("config.lazy")
 require("luasnip_config")
@@ -87,6 +91,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 	group = yaml,
 })
 
+
 -- vim.pack.add({
 -- 	'https://github.com/MeanderingProgrammer/render-markdown.nvim',
 -- })
@@ -106,16 +111,36 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- 	group = diag,
 -- })
 
-vim.api.nvim_create_autocmd("CursorHold", {
-	group = groupHigh,
-	buffer = bufnr,
-	callback = vim.lsp.buf.document_highlight,
-})
+vim.api.nvim_create_augroup("lsp_document_hightlight", { clear = true })
 
-vim.api.nvim_create_autocmd("CursorMoved", {
-	group = groupHigh,
-	buffer = bufnr,
-	callback = vim.lsp.buf.clear_references,
+vim.api.nvim_create_autocmd('LspAttach', {
+	desc = 'LSP actions',
+	callback = function(event)
+		local bufnr = event.buf
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if client and client.server_capabilities.documentHighlightProvider then
+			vim.api.nvim_create_autocmd("CursorHold", {
+				callback = function()
+					vim.defer_fn(function()
+						vim.lsp.buf.document_highlight()
+					end, 100)
+				end,
+				buffer = bufnr,
+				group = "lsp_document_hightlight",
+				desc = "highlight lsp document highlight"
+			})
+			vim.api.nvim_create_autocmd("CursorMoved", {
+				callback = function()
+					vim.defer_fn(function()
+						vim.lsp.buf.clear_references()
+					end, 100)
+				end,
+				buffer = bufnr,
+				group = "lsp_document_hightlight",
+				desc = "clear lsp document hightlight"
+			})
+		end
+	end
 })
 
 vim.api.nvim_create_autocmd("BufRead", {

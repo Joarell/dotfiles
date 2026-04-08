@@ -98,7 +98,6 @@ $env.PATH = ($env.PATH | split row (char esep) | append '~/.config/mise/config.t
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.cargo/bin')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.local/bin/')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.config/nushell/vendor/autoload/wt.nu')
-# $env.PATH = ($env.PATH | split row (char esep) | append '~/.local/share/mise/installs/**')
 $env.PATH = ($env.PATH | split row (char esep) | append '~/.config/ghostty/ghostty-ls/target/release')
 
 fastfetch

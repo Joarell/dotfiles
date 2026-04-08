@@ -48,6 +48,7 @@ window-decoration = false
 # theme = dark:Synthwave,light:Belafonte Day
 # theme = dark:Dark Modern,light:Belafonte Day
 theme = dark:Citruszest,light:Belafonte Day
+font-family = FantasqueSansM Nerd Font Propo
 font-size = 9
 
 shell-integration = bash

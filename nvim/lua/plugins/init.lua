@@ -85,6 +85,9 @@ return {
 		-- 	})
 		-- end,
 	},
+	{
+		"xiyaowong/virtcolumn.nvim",
+	},
 	-- {
 	-- 	{
 	-- 		"sourcegraph/sg.nvim",

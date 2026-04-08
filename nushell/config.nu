@@ -856,3 +856,5 @@ source ~/.cache/starship/init.nu
 source ~/.cache/carapace/init.nu
 
 use ($nu.default-config-dir | path join mise.nu)
+
+use ($nu.default-config-dir | path join mise.nu)
