@@ -534,7 +534,7 @@ return {
 	--  │ 		--Window animations                                │
 	--  ╰──────────────────────────────────────────────────────────╯
 	{
-		"d7omdev/windows.nvim",
+		"ml653/windows.nvim",
 		dependencies = {
 			"anuvyklack/middleclass",
 			"anuvyklack/animation.nvim",

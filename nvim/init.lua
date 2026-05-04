@@ -35,8 +35,8 @@ set.winblend = 30
 set.clipboard = { "unnamed", "unnamedplus" }
 set.wildmenu = true
 set.inccommand = split --Shows replacements in a split screen, before applying to the fileset.scroll = 10
-set.guifont = "FantasqueSansM Nerd Font Propo:h13"
--- set.guifont = "CaskaydiaCove NF:h13"
+-- set.guifont = "FantasqueSansM Nerd Font Propo:h11"
+set.guifont = "CaskaydiaCove NF:h9.5"
 set.background = 'dark'
 set.list = true
 set.scs = true
@@ -182,6 +182,31 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.diagnostic.config({
+			signs = {
+				text = {
+					-- [vim.diagnostic.severity.ERR󰨰OR] = "",
+					-- [vim.diagnostic.severity.ERROR] = "󰃤",
+					-- [vim.diagnostic.severity.WARN] = " ",
+					-- [vim.diagnostic.severity.INFO] = " ",
+					[vim.diagnostic.severity.ERROR] = "󰯪",
+					[vim.diagnostic.severity.WARN] = "󱐌 ",
+					[vim.diagnostic.severity.HINT] = "󰛩 ",
+					[vim.diagnostic.severity.INFO] = " ",
+				},
+			},
+			linehl = {
+				[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+			},
+			numhl = {
+				[vim.diagnostic.severity.WARN] = "WarningMsg",
+			},
+		})
+	end,
+})
+
 vim.api.nvim_set_option("clipboard", "unnamed")
 -- vim.g.clipboard = {
 -- 	name = 'OSC 52',
@@ -208,6 +233,7 @@ vim.g["load_netrwPlugin"] = 1
 vim.g["gradle_path"] = "/usr/bin/"
 vim.o.incsearch = false
 vim.o.fcs = "eob: ,foldopen:▾,foldsep:│,foldclose:▸"
+-- vim.o.autocomplete = true;
 vim.diagnostic.config({ virtual_text = true })
 
 vim.filetype.add({

@@ -836,6 +836,7 @@ alias d2+ = ddcutil -d 2 setvcp 10 + 60
 alias d2- = ddcutil -d 2 setvcp 10 - 60
 alias bun = mise exec -- bun
 alias yarn = mise exec -- yarn
+alias air = mise exec -- air
 
 #Flatpak Update
 alias fpup = flatpak update 
@@ -854,7 +855,5 @@ alias mirrorxx = sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 -
 # source ~/.oh-my-posh.nu
 source ~/.cache/starship/init.nu
 source ~/.cache/carapace/init.nu
-
-use ($nu.default-config-dir | path join mise.nu)
 
 use ($nu.default-config-dir | path join mise.nu)

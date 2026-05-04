@@ -10,6 +10,8 @@ function setup_ghostty_lsp()
 		})
 	end
 end
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 vim.diagnostic.Opts = { update_in_insert = true }
 vim.api.nvim_create_autocmd("BufRead", { pattern = "*", callback = setup_ghostty_lsp })
@@ -140,7 +142,11 @@ return {
 
 	vim.lsp.enable("rustowlsp"),
 
-	vim.lsp.enable("htmx_lsp"),
+	vim.lsp.config("htmx", {
+		on_attach = on_attach,
+		capabilities = capabilities,
+		filetypes = {"html" },
+	}),
 
 	vim.lsp.config("tailwindcss", {
 		filetypes = {
@@ -290,7 +296,7 @@ return {
 	vim.lsp.enable("just_lsp"),
 
 	vim.lsp.config("html", {
-		filetypes = { "html", "twig", "hbs" },
+		filetypes = { "html", "twig", "hbs", },
 	}),
 
 	vim.lsp.config("rust-analyzer", {
